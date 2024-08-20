@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>六元一次方程组</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/about-style.css">
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../js/color-thief.min.js"></script>
+</head>
+<body>
+    <div class="header jumbotron">
+        <div class="text-center">
+            <img src="../img/logo.gif" class="header-img" id="header-img">
+        </div>
+    </div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1><br>关于我们</br></h1>
+                <div class="head1">
+                    <p><br>我们是一群对计算机科学充满热情并且具有创造力的大二学生，每个人都带着自己的专业技能和独特的想法加入到这个项目中来。</br></p>
+                    <p>在我们的团队中，组员有着算法竞赛，游戏制作，多种编程语言的基础。我们深知交互式故事的设计需要有良好的玩家体验和技术实现的结合，因此从项目的初期，我们就注重平衡这两方面的考量。在这次任务中，我们将利用我们的编程技能和创新思维，设计和开发一个引人入胜的交互式故事。我们希望通过故事情节的选择、角色互动以及不同结局的展示来吸引体验者，同时，我们也将采用隐藏内容、彩蛋、多结局的方式，来增强故事的沉浸感和趣味性。最终，我们希望打造一个令人印象深刻且充满创意的交互式故事——《梦境逆旅》。我们相信，通过团队的努力和共同合作，我们定能创造出亮眼的作品。</p>
+                </div>
+			</div>
+		</div>
+	</div>
+
+    <div class="container member">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="./mjt/index.html"><img src="../img/zyh.jpg" class="member-img"></a>
+                <div class="member-info">
+                    <p>李泽群</p>
+                    <p>组长，项目经理，剧本编剧</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <a href="./zyh/index.html"><img src="../img/zyh.jpg" class="member-img"></a>
+                <div class="member-info">
+                    <p>钟元浩</p>
+                    <p>程序员，项目管理，剪辑</p>
+                </div>
+            </div>
+			<div class="col-md-4">
+                <a href="./mjt/index.html"><img src="../img/zyh.jpg" class="member-img"></a>
+                <div class="member-info">
+                    <p>项俊杰</p>
+                    <p>程序员</p>
+                </div>
+            </div>
+			<div class="col-md-4">
+                <a href="./mjt/index.html"><img src="../img/zyh.jpg" class="member-img"></a>
+                <div class="member-info">
+                    <p>赵劲博</p>
+                    <p>程序员，CIO</p>
+                </div>
+            </div>
+			<div class="col-md-4">
+                <a href="./mjt/index.html"><img src="../img/zyh.jpg" class="member-img"></a>
+                <div class="member-info">
+                    <p>林芷欣</p>
+                    <p>程序员，编剧，美工</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <a href="./qyy/index.html"><img src="../img/zyh.jpg" class="member-img"></a>
+                <div class="member-info">
+                    <p>付饶</p>
+                    <p>剧情设计，美工，小游戏制作</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var img = document.getElementById("header-img");
+            var colorThief = new ColorThief();
+            img.addEventListener("load", function() {
+                var color = colorThief.getColor(img);
+                document.querySelector(".header").style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+            });
+        });
+    </script>
+</body>
+</html>
