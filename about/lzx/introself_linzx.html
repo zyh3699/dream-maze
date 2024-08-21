@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- 需要改图片路径的地方：2处 -->
+ <!-- 关注我们：返回小组介绍页面 -->
+  <!-- 返回首页：返回首页 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林芷欣的个人花园</title>
+    <style>
+        header {
+            background-color: none;
+            height: 80px;
+            width: 100%;
+        }
+        header ul {
+            position: absolute;
+            right: 1vw;
+            top: 0;
+            line-height: 80px;
+        }
+        header li {
+            display: inline;
+            margin-right: 3vw;
+        }
+        header a {
+            color: rgb(5, 46, 181);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        header a:hover {
+            text-decoration: underline;
+            border-bottom: #acacac;
+        }
+        body {
+            background-image: url(bg_lin.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+            background-position: top;
+        }
+        .self_intro {
+            display: flex;
+            margin: 40px;
+        }
+        .self_intro img {
+            width: 45%;
+        }
+        .self_info {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            h1 {
+                font-weight: bold;
+            }
+            h2 {
+                font-weight: bold;
+            }
+            p {
+                font-size: larger;
+                font-family: 楷体;
+                line-height: 40px;
+            }
+        }
+        footer {
+            background-color: none;
+            color: #111212;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+        <ul>
+            <li><a href="#">关注我们</a></li>
+            <li><a href="#">返回首页</a></li>
+            <li><a id="contact" onclick="toggleText()">联系方式</a></li>
+            <!-- 预计留一个神秘方式 -->
+        </ul>
+        </nav>
+    </header>
+    <main>
+    <section class="self_intro">
+        <img src="./selfcart.jpg" alt="cartoon~">
+        <div class="self_info">
+            <h1>欢迎来到我的个人花园！</h1>
+            <p>
+                这是一个双鱼座的女生～<br>
+                喜欢所有<strong>浪漫</strong>，热爱<strong>自由</strong>，喜欢做能够自己<strong>创造</strong>的事情。<br>
+                所以，设计游戏对我来说真是一件非常有<strong>乐趣</strong>的事情！<br>
+                这次有机会和大家一起打造这个游戏，真的超级开心！<br>
+                喜欢吃冰淇淋，喜欢玩乐器，也喜欢打游戏。<br>
+            </p>   
+            <p>作为<strong><em>《潜梦迷踪》(The Dream Maze)</em></strong>的<em><strong>程序员、美工、编剧，</strong></em></p>
+            <h2>希望你们在探索游戏的过程中能感受到满满的<strong>乐趣</strong>!</h2>
+            <h2>在享受通关的同时，还有许许多多的<strong>小彩蛋</strong>等你发现~</h2>     
+        </div>
+    </section>
+    </main>
+    <footer>
+        <p>Copyright &copy; 2024 Linzx All Rights Reserved.</p>
+    </footer>
+    <script>
+        function toggleText() {
+            var contactLink = document.getElementById("contact");
+            if (contactLink.innerHTML === "联系方式") {
+                contactLink.innerHTML = "&lt;Secret&gt;Key?";
+            } else {
+                contactLink.innerHTML = "联系方式";
+            }
+        }
+    </script>
+</body>
+</html>
