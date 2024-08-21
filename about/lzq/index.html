@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李泽群-个人介绍</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        h2 {
+            font-family: 微软雅黑;
+            font-size: xx-large;
+            font-weight: bolder;
+            text-align:justify;
+            color: #ae0c0c;
+            
+        }
+    </style>
+</head>
+<body>
+    <section class="banner text-center">
+        <div class="container">
+            <h2 style="font-family: 微软雅黑;color: antiquewhite;">- 岁月悠悠，衰微只及肌肤 -</h2>
+            <h2 style="font-family: 微软雅黑;color: antiquewhite;">- 热忱抛却，颓废必致灵魂 -</h2>
+          
+        </div>
+    </section>
+    <div class="container">
+        <nav class="navbar">
+            <button onclick="updateTextBox('home')">主页</button>
+            <button onclick="updateTextBox('about')">个人介绍</button>
+            <button onclick="updateTextBox('hobbies')">兴趣爱好</button>
+            <button onclick="updateTextBox('contact')">联系方式</button>
+        </nav>
+        <div class="text-box" id="text-box">
+            <h1 style="color: #84d6d5; font-size: 45px;">欢迎来到我的个人主页！</h1>
+            <img src="img/lzq.jpg" alt="Home Image" style="position: absolute; top: 30px; right: 30px; width: 300px; height: auto;">
+            <p style="font-size: 25px;text-indent:2em;font-family:楷体;">在这里你可以了解我的个人介绍、兴<br />趣爱好以及联系方式。</p>
+        </div>
+        
+       
+        <section id="hobbies" class="content">
+            <h1>兴趣爱好</h1>
+            <p>我喜欢[兴趣1]、[兴趣2]和[兴趣3]。</p>
+        </section>
+        <section id="contact" class="content">
+            <h1 align="center">联系方式</h1>
+            <p>你可以通过以下方式联系我：</p>
+            <ul>
+                <li>电子邮件: your.email@example.com</li>
+                <li>电话: +123 456 7890</li>
+                <li>社交媒体: [你的社交媒体链接]</li>
+            </ul>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人介绍</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #a2c2e3, #f2f5f7);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .container:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .profile-img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border: 4px solid #007bff;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            margin: 0 0 15px;
+            font-size: 2.2em;
+            color: #333;
+        }
+        p {
+            margin: 0 0 20px;
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1em;
+            max-height: 100px;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            opacity: 1;
+        }
+        .expanded {
+            max-height: 500px;
+            opacity: 1;
+        }
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .social-links a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 1.5em;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #0056b3;
+            transform: scale(1.1);
+        }
+        .toggle-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .toggle-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .additional-info {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #333;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .additional-info.show {
+            display: block;
+            opacity: 1;
+        }
+        .background-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .background-shapes div {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            pointer-events: none;
+        }
+        .background-shapes .shape1 {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -150px;
+            opacity: 0.4;
+        }
+        .background-shapes .shape2 {
+            width: 250px;
+            height: 250px;
+            bottom: -100px;
+            right: -100px;
+            opacity: 0.3;
+        }
+        .breadcrumb {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 0.9em;
+            color: #007bff;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-shapes">
+    <div class="shape1"></div>
+    <div class="shape2"></div>
+</div>
+
+<div class="container">
+    <div class="breadcrumb">
+        <a >主页</a> &gt; <a href="../index.html">小组成员</a> &gt; <a href="index.html">赵劲博</a> 
+    </div>
+    <img src="./image/ohmyson.png" alt="赵劲博" class="profile-img">
+    <h1>赵劲博</h1>
+    <p id="intro-text" class="collapsed">
+        赵劲博是北京理工大学计算机科学与技术（徐特立英才班）专业的学生，拥有广泛的学术兴趣，特别专注于前沿技术的应用与创新。
+        <br><br>
+        在小学期的互联网开发应用工程实践中，他担任程序员和首席信息官（CIO），负责项目的技术架构设计与信息管理工作。
+        <br><br>
+        作为“六元一次方程组”的一员，他与团队成员们从零基础开始，快速掌握了前端开发技术，并积极参与到《梦境迷途》这个互动式故事游戏的开发中。
+        <br><br>
+        赵劲博在项目中展现了出色的领导能力和技术实力，他带领团队探索游戏中的隐藏线索，力求在技术实现和故事创意上达到完美结合。这个项目不仅是他在互联网开发应用课程中的一次重要实践，也是他展示自己在技术创新与团队合作方面能力的舞台。
+    </p>
+    <button class="toggle-button" onclick="toggleContent()">显示更多</button>
+    <div class="social-links">
+        <a href="#" onclick="displayText('QQ:1349067998')">QQ</a>
+        <a href="#" onclick="displayText('微信号:clearwinding')">微信</a>
+    </div>
+    <div id="display-text" class="additional-info"></div>
+</div>
+
+<script>
+    function toggleContent() {
+        const introText = document.getElementById('intro-text');
+        const button = document.querySelector('.toggle-button');
+        
+        if (introText.classList.contains('expanded')) {
+            introText.classList.remove('expanded');
+            button.textContent = '显示更多';
+        } else {
+            introText.classList.add('expanded');
+            button.textContent = '收起';
+        }
+    }
+
+    function displayText(text) {
+        const displayTextDiv = document.getElementById('display-text');
+        displayTextDiv.textContent = text;
+        displayTextDiv.classList.add('show');
+    }
+</script>
+
+</body>
+</html>
