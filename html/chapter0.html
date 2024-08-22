@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Move and Fill</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+    #intro {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../img/bgr/chapter1_background.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      color: white;
+      font-size: 24px;
+      padding: 20px;
+      box-sizing: border-box;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+    #dialogue {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 80%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="intro">
+    <div id="dialogue"></div>
+  </div>
+  <canvas id="gameCanvas" style="display: none;"></canvas>
+  <script src="../js/map.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/player.js"></script>
+  <script>
+
+    const dialogues = [
+      "玩家将进入一个被称为“梦境迷途”的虚拟世界，这是一个由多层梦境组成的复杂迷宫，每一层梦境都有独特的规则和环境。",
+      "玩家将扮演一位被称为“编梦者”的角色，拥有进入他人梦境并操控梦境结构的能力。",
+      "你的任务是从这些梦境中获取隐藏的机密信息，同时揭开一场潜伏在意识深处的巨大阴谋。"
+    ];
+    let currentDialogue = 0;
+    let charIndex = 0;
+    const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+    function typeDialogue() {
+      if (charIndex < dialogues[currentDialogue].length) {
+        document.getElementById('dialogue').innerText += dialogues[currentDialogue].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeDialogue, typingSpeed);
+      } else {
+        currentDialogue++;
+        charIndex = 0;
+      }
+    }
+
+    function showNextDialogue() {
+      if (currentDialogue < dialogues.length) {
+        document.getElementById('dialogue').innerText = '';
+        typeDialogue();
+      } else {
+        document.getElementById('intro').style.opacity = 0;
+        setTimeout(() => {
+          document.getElementById('intro').style.display = 'none';
+          document.getElementById('gameCanvas').style.display = 'block';
+          requestAnimationFrame(mainLoop);
+        }, 1000); // 等待1秒以完成淡出效果
+      }
+    }
+
+    document.getElementById('intro').addEventListener('click', showNextDialogue);
+    showNextDialogue();
+  </script>
+</body>
+</html>

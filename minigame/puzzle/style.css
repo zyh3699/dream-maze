@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#puzzle-container {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-template-rows: repeat(5, 60px);
+    gap: 5px;
+}
+
+.puzzle-piece {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    background-image: url('game.png'); /* 使用实际的拼图图像 */
+    background-size: 300px 300px; /* 根据拼图的实际大小调整 */
+}
+
+#piece1 { background-position: 0 0; }
+#piece2 { background-position: -60px 0; }
+#piece3 { background-position: -120px 0; }
+#piece4 { background-position: -180px 0; }
+#piece5 { background-position: -240px 0; }
+#piece6 { background-position: 0 -60px; }
+#piece7 { background-position: -60px -60px; }
+#piece8 { background-position: -120px -60px; }
+#piece9 { background-position: -180px -60px; }
+#piece10 { background-position: -240px -60px; }
+#piece11 { background-position: 0 -120px; }
+#piece12 { background-position: -60px -120px; }
+#piece13 { background-position: -120px -120px; }
+#piece14 { background-position: -180px -120px; }
+#piece15 { background-position: -240px -120px; }
+#piece16 { background-position: 0 -180px; }
+#piece17 { background-position: -60px -180px; }
+#piece18 { background-position: -120px -180px; }
+#piece19 { background-position: -180px -180px; }
+#piece20 { background-position: -240px -180px; }
+#piece21 { background-position: 0 -240px; }
+#piece22 { background-position: -60px -240px; }
+#piece23 { background-position: -120px -240px; }
+#piece24 { background-position: -180px -240px; }
+#piece25 { background-position: -240px -240px; }
+
+#message {
+    margin-top: 20px;
+    font-size: 24px;
+    color: green;
+}

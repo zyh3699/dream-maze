@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        h2 {
+               font-family: 仿宋;
+               font-size: xx-large;
+               font-weight: bolder;
+               text-align:center;
+           }
+       </style>
+</head>
+<body>
+    <div class="container">
+        <h2>注册</h2>
+        <form id="registerForm">
+            <div class="input-group">
+            <label for="newUsername">用户名:</label>
+            <input type="text" id="newUsername" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+            <label for="newPassword">密码:</label>
+            <input type="password" id="newPassword" placeholder="Password" required>
+            </div>
+            <div class="input-group">
+            <label for="confirmPassword">确认密码:</label>
+            <input type="password" id="confirmPassword" placeholder="Password" required>
+            </div>
+            <div class="button-group">
+                <button type="submit">注册</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var username = document.getElementById('newUsername').value;
+            var password = document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('两次输入的密码不一致！');
+                return;
+            }
+            // 将用户名和密码存储到 localStorage
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            // 模拟注册成功
+            alert('注册成功！');
+            window.location.href = 'index.html'; // 注册完成后跳转回登录页面
+        });
+    </script>
+</body>
+</html>

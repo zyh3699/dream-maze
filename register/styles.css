@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../img/menuBox/main_page.jpg'); /* 背景图片 */
+    background-size: cover; /* 图片大小覆盖整个页面 */
+    background-position: center; /* 图片居中对齐 */
+    background-repeat: no-repeat; /* 图片不重复 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景，使内容易读 */
+    background-image: url('../img/menuBox/menu_backgroud.png'); /* 背景图片 */
+    background-position: center; /* 图片居中对齐 */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.input-group {
+    display: grid;
+    grid-template-columns: 100px 1fr; /* 设置标签和输入框的网格布局 */
+    gap: 10px; /* 设置标签与输入框之间的间距 */
+    margin-bottom: 15px;
+    align-items: center; /* 垂直对齐 */
+}
+h2 {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%; /* 输入框宽度100%填充网格 */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box; /* 确保输入框包括内边距和边框的宽度 */  
+}
+label {
+    margin-right: 10px;
+    white-space: nowrap;
+    text-align: right;
+    font-weight: bold;
+    font-size: large;
+}
+button {
+    width: 80%;
+    padding: 10px;
+    background-color:  #28a745;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 仿宋;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px auto;
+    display: block;
+}
+button:hover {
+    background-color: #0056b3;
+}
+#registerBtn {
+    background-color: #28a745;
+}
+
+#registerBtn:hover {
+    background-color: #0056b3
+}
+
+p {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
