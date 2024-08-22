@@ -1,9 +1,9 @@
 class Player {
   constructor() {
     this.image = new Image();
-    this.image.src = "../img/charactor/main_character.jpg"; // 替换为你的图片路径
-    this.width = 41;
-    this.height = 76;
+    this.image.src = "../img/charactor/main_character.jpg";
+    this.width = 10;
+    this.height = 10;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
   }
@@ -12,10 +12,28 @@ class Player {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 
-  move(dx, dy) {
-    this.x += dx;
-    this.y += dy;
-    window.map.move(-dx, -dy); // 反向移动背景图
+  move(dx, dy, collisionMap) {
+    if (!this.isCollision(dx, dy, collisionMap)) {
+      window.map.move(dx, dy); // 移动背景图
+    }
+  }
+
+  isCollision(dx, dy, collisionMap) {
+    const playerCenterX = 950;
+    const playerCenterY = 550;
+
+    const offsetX = window.map.offsetX;
+    const offsetY = window.map.offsetY;
+
+    const newX = Math.floor(playerCenterX + offsetX + dx);
+    const newY = Math.floor(playerCenterY + offsetY + dy);
+
+    // 碰撞检测
+    if (collisionMap[newY][newX] === 1) {
+      return true; // 碰撞检测
+    }
+
+    return false;
   }
 }
 

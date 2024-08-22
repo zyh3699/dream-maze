@@ -5,6 +5,16 @@ let ctx = canvas.getContext("2d");
 
 let keysPressed = {};
 
+let collisionMap = [];
+
+fetch("../other/collision_map.json")
+  .then((response) => response.json())
+  .then((data) => {
+    collisionMap = data;
+    requestAnimationFrame(mainLoop);
+  })
+  .catch((error) => console.error("Error loading collision map:", error));
+
 function handleKeyDown(event) {
   keysPressed[event.key] = true;
 }
@@ -18,46 +28,34 @@ document.addEventListener("keyup", handleKeyUp);
 
 // 定义物品
 let item = {
-  x: 300,
-  y: 300,
+  x: 30,
+  y: 30,
   width: 50,
   height: 50,
-  draw: function(ctx) {
+  draw: function (ctx) {
     ctx.fillStyle = "red";
     ctx.fillRect(this.x, this.y, this.width, this.height);
   },
-  interact: function() {
+  interact: function () {
     alert("你捡到了一个物品！");
-  }
+  },
 };
 
 function update(deltatime) {
-  const moveSpeed = 200;
+  const moveSpeed = 500;
   const moveAmount = (moveSpeed * deltatime) / 1000;
 
   if (keysPressed["ArrowUp"]) {
-    if (window.player.y - moveAmount >= 0) {
-      window.map.move(0, -moveAmount);
-      window.player.y -= moveAmount;
-    }
+    window.player.move(0, -moveAmount, collisionMap);
   }
   if (keysPressed["ArrowDown"]) {
-    if (window.player.y + window.player.height + moveAmount <= window.map.image.height) {
-      window.map.move(0, moveAmount);
-      window.player.y += moveAmount;
-    }
+    window.player.move(0, moveAmount, collisionMap);
   }
   if (keysPressed["ArrowLeft"]) {
-    if (window.player.x - moveAmount >= 0) {
-      window.map.move(-moveAmount, 0);
-      window.player.x -= moveAmount;
-    }
+    window.player.move(-moveAmount, 0, collisionMap);
   }
   if (keysPressed["ArrowRight"]) {
-    if (window.player.x + window.player.width + moveAmount <= window.map.image.width) {
-      window.map.move(moveAmount, 0);
-      window.player.x += moveAmount;
-    }
+    window.player.move(moveAmount, 0, collisionMap);
   }
 
   // 检测玩家是否接触到物品
