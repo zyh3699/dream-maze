@@ -19,8 +19,8 @@ class Player {
   }
 
   isCollision(dx, dy, collisionMap) {
-    const playerCenterX = map.image.width / 2;
-    const playerCenterY = map.image.height / 2;
+    const playerCenterX = 950;
+    const playerCenterY = 550;
 
     const offsetX = window.map.offsetX;
     const offsetY = window.map.offsetY;
