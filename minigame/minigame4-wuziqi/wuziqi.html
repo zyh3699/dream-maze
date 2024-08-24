@@ -1,0 +1,883 @@
+ 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css">
+        body {
+            margin: 250px;
+			/* background-image: url('bg.jpg');
+            background-size: cover; 
+			background-repeat: no-repeat;  */
+        }
+    </style>
+    <script type="text/javascript">
+        var canvas,canvas2,context,contextW; 
+        var round = 0; //回合，黑白各下一颗子为一回合
+		var stepCount = 0; //步数，每下一颗子为一步
+		
+		var begin = false;  //对局是否开始，如果开始且没结束则不让更改棋盘大小
+        var gameOver = false;//该局棋盘是否结束，如果结束了就不能再走了
+        var isWhite = false;//是否该轮到白棋
+		
+        var interactive = true;//人机模式
+        var computerIsWhite = true;//人机棋子颜色，true为白色
+        var openDebug = true;  //人机功能调试
+		
+        var img_b = new Image();
+        img_b.src = "https://pic002.cnblogs.com/images/2012/391736/2012120921374013.png";//黑棋图片
+        var img_w = new Image();
+        img_w.src = "https://pic002.cnblogs.com/images/2012/391736/2012120921375271.png";//白棋图片
+		
+		var length = 15;
+		
+		// chessData 棋盘的二维数组用来保存棋盘信息，初始化0为没有走过的，1为白棋走的，2为黑棋走的
+		// chessData2 反转颜色值的备份，人机模式时当人先走时，使用这个当做计算权值的棋盘 
+		// allDirections 计算机权值计算棋盘
+		// weightLog 计算机权值计算日志
+        var chessData,chessData2,allDirections,weightLog; 
+        // 步骤记录，用于悔棋
+		var stepsLog = new Map(); 
+		
+		function loadDown(){
+			begin=false; 
+			gameOver = false;
+			isWhite = false;
+			stepCount = 0;
+			round = 0;
+			initArray();
+			drawRect();
+			if(interactive&&!computerIsWhite){
+				var x = parseInt(length / 2);
+				var y = parseInt(length / 2); 
+				drawChessJudge(x, y);
+			} 
+		} 
+				
+		function initArray(){
+			// 初始化棋盘数组 
+			chessData = new Array(length);
+			for (var x = 0; x < length; x++) {
+				chessData[x] = new Array(length);
+				for (var y = 0; y < length; y++) {
+					chessData[x][y] = 0;
+				}
+			}
+			
+			// 反转颜色值的备份，人机模式时当人先走时，使用这个当做计算权值的棋盘 
+			chessData2 = new Array(length);
+			for (var x = 0; x < length; x++) {
+				chessData2[x] = new Array(length);
+				for (var y = 0; y < length; y++) {
+					chessData2[x][y] = 0;
+				}
+			}
+			
+			//初始化计算机权值计算棋盘
+			allDirections = new Array(length);
+			for (var x = 0; x < length; x++) {
+				allDirections[x] = new Array(length);
+				for (var y = 0; y < length; y++) {
+					allDirections[x][y] = -1;
+				}
+			}
+			
+			//初始化计算机权值计算日志
+			weightLog = new Array(length);
+			for (var x = 0; x < length; x++) {
+				weightLog[x] = new Array(length);
+				for (var y = 0; y < length; y++) {
+					weightLog[x][y] = "";
+				}
+			} 
+		} 	
+ 
+        function drawRect() {//页面加载完毕调用函数，初始化棋盘 
+            canvas2 = document.getElementById("canvas2");
+            contextW = canvas2.getContext("2d"); 
+			contextW.clearRect(0,0,2000,2000);  
+			contextW.globalAlpha = 1;
+			contextW.fillStyle="#FFFFFF";  
+			contextW.strokeStyle="#FF0000"; 
+			contextW.font="bold 10px 粗体";
+ 
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+			context.clearRect(0,0,2000,2000); 
+			context.globalAlpha = 1;
+            for (var i = 0; i <= (length+1)*40; i += 40) {//绘制棋盘的线
+                context.beginPath();
+                context.moveTo(0, i);
+                context.lineTo((length+1)*40, i);
+                context.closePath();
+				context.stroke();  
+				
+                context.beginPath();
+                context.moveTo(i, 0);
+                context.lineTo(i, (length+1)*40);
+                context.closePath();
+				context.stroke();
+            }
+			//绘制五个圆点
+			var r = 2
+			context.lineWidth = 4; 
+			//棋盘中间点坐标 intermediatePointCoordinates
+			var iPC = length/2+0.5; 
+            context.beginPath();
+			context.arc(iPC*40,iPC*40,r,0,r*Math.PI); 
+            context.closePath();
+            context.stroke(); 
+			//其它四个点
+			var halfLength = length-iPC;
+			var iPCLU = Math.floor(halfLength/2+0.5); 
+			var iPCRD = Math.ceil(iPC+halfLength/2+0.5); 
+			//左上
+            context.beginPath();
+			context.arc(iPCLU*40,iPCLU*40,r,0,r*Math.PI); 
+            context.closePath();
+            context.stroke();
+			//右上
+            context.beginPath();
+			context.arc(iPCRD*40,iPCLU*40,r,0,r*Math.PI); 
+            context.closePath();
+            context.stroke();
+			//左下
+            context.beginPath();
+			context.arc(iPCLU*40,iPCRD*40,r,0,r*Math.PI); 
+            context.closePath();
+            context.stroke(); 
+			//右下
+            context.beginPath();
+			context.arc(iPCRD*40,iPCRD*40,r,0,r*Math.PI); 
+            context.closePath();
+            context.stroke();
+			
+			context.lineWidth = 1;   
+			context.globalAlpha = 0.7; 
+        }
+		
+		//下棋
+        function play(e) {//鼠标点击时发生		
+			//console.log(e);
+			//var x = parseInt((e.clientX - 20) / 40);//计算鼠标点击的区域，如果点击了（65，65），那么就是点击了（1，1）的位置
+			//var y = parseInt((e.clientY - 20) / 40);
+			var x = parseInt((e.layerX - 20) / 40);//计算鼠标点击的区域，如果点击了（65，65），那么就是点击了（1，1）的位置
+			var y = parseInt((e.layerY - 20) / 40);  
+			if(x>length||y>length) return false;
+			
+			var btnNum = e.button; 
+			if (btnNum==2){ 
+				//alert("您点击了鼠标右键！");
+				if(openDebug&&x<length&&y<length){
+					lookWeightLog(x,y);
+					//console.dir(weightLog);
+				} 
+			}else if(btnNum==0){	 
+				if(drawChessJudge(x, y)&&interactive&&(isWhite==computerIsWhite)&&!gameOver) computerIsChess(x, y); 
+			}else if(btnNum==1){
+				//alert("您点击了鼠标中键！");
+				//console.dir(chessData);
+				//console.dir(allDirections);
+			}else{
+				alert("您点击了" + btnNum+ "号键，我不能确定它的名称。");
+			} 
+			return false;
+        }
+		
+		/* 权值集合（2为白棋，1为黑棋） */
+		var map =  new Map(); 
+		//被堵住
+		map.set("01", 15);//眠1连
+		map.set("02", 10);//眠1连
+		map.set("001", 15);//眠1连
+		map.set("002", 10);//眠1连
+		map.set("0001", 15);//眠1连
+		map.set("0002", 10);//眠1连
+		
+		map.set("0102",17);//眠1连，15
+		map.set("0201",12);//眠1连，10
+		map.set("0012",15);//眠1连，15
+		map.set("0021",10);//眠1连，10
+		map.set("01002",19);//眠1连，15
+		map.set("02001",14);//眠1连，10
+		map.set("00102",17);//眠1连，15
+		map.set("00201",12);//眠1连，10
+		map.set("00012",15);//眠1连，15
+		map.set("00021",10);//眠1连，10
+		map.set("01020",17);//眠1连
+		
+		//被堵住
+		map.set("010",17);//活1连
+		map.set("020",12);//活1连
+		map.set("0100",21);//活1连
+		map.set("0200",16);//活1连
+		map.set("0010",15);//活1连
+		map.set("0020",10);//活1连
+		map.set("01000",21);//活1连，15
+		map.set("02000",16);//活1连，10
+		map.set("00100",19);//活1连，15
+		map.set("00200",14);//活1连，10
+		map.set("00010",17);//活1连，15
+		map.set("00020",12);//活1连，10
+		map.set("00001",15);//活1连，15
+		map.set("00002",10);//活1连，10
+ 
+		//被堵住
+		map.set("0101",65);//眠2连，40
+		map.set("0202",60);//眠2连，30
+		map.set("0110",65);//眠2连，40
+		map.set("0220",60);//眠2连，30
+		map.set("011",65);//眠2连，40
+		map.set("022",60);//眠2连，30
+		map.set("0011",65);//眠2连，40
+		map.set("0022",60);//眠2连，30
+		
+		map.set("01012",65);//眠2连，40
+		map.set("02021",60);//眠2连，30
+		map.set("00112",65);//眠2连，40
+		map.set("00221",60);//眠2连，30 
+		
+		map.set("01102",75);//眠2连，40
+		map.set("02201",70);//眠2连，30
+ 
+		map.set("01010",75);//活2连，40
+		map.set("02020",70);//活2连，30
+		map.set("01100",75);//活2连，40
+		map.set("02200",70);//活2连，30
+		map.set("00110",75);//活2连，40
+		map.set("00220",70);//活2连，30
+		map.set("00011",70);//活2连，40
+		map.set("00022",65);//活2连，30
+		
+		//被堵住
+		map.set("0111",75);//眠3连，100
+		map.set("0222",70);//眠3连，80
+		
+		map.set("01112",75);//眠3连，100
+		map.set("02221",70);//眠3连，80
+		 
+		/* 这种情况无法判断是眠还是活，所以权值给小点 */
+		map.set("01101",130);//3连，130
+		map.set("01011",130);//3连，130 
+		map.set("00111",130);//3连，130 
+		map.set("02202",110);//3连，110
+		map.set("02022",110);//3连，110
+		map.set("00222",110);//3连，110
+		
+		map.set("01110",4000);//活3连
+		map.set("02220",3000);//活3连
+		
+		//map.set("01111",3000);//4连，300
+		map.set("01111",8000);//4连，300
+		map.set("02222",10000);//4连，280 
+ 
+		/* 直线方向联合计算权值方法 */
+		function unionWeight(a, b,typeA,typeB){  
+			//判断a,b两个数值是不是null
+			if(a==null||b==null) return 0;
+			
+			/* 特定顺序处理 */
+			/*if((typeA.indexOf("010")==0&&typeB.indexOf("010")==0)||
+			   (typeA.indexOf("010")==0&&typeB.indexOf("0010")==0)||
+			   (typeA.indexOf("0010")==0&&typeB.indexOf("010")==0)||
+			   (typeA=="01010"&&typeB.indexOf("0")==0)||
+			   (typeB=="01010"&&typeA.indexOf("0")==0))
+			return 75;
+			if((typeA.indexOf("020")==0&&typeB.indexOf("020")==0)||
+			   (typeA.indexOf("020")==0&&typeB.indexOf("0020")==0)||
+			   (typeA.indexOf("0020")==0&&typeB.indexOf("020")==0)||
+			   (typeA=="02020"&&typeB.indexOf("0")==0)||
+			   (typeB=="02020"&&typeA.indexOf("0")==0))
+			return 60; */
+			
+			if(typeA.indexOf("011")==0&&typeB.indexOf("011")==0) return 5000;
+			if((typeA.indexOf("01")==0&&typeB.indexOf("0111")==0)||
+			   (typeB.indexOf("01")==0&&typeA.indexOf("0111")==0))
+			return 5000;  
+			/* 10000为己方必赢棋子，直接下就行 */
+			if(typeA.indexOf("022")==0&&typeB.indexOf("022")==0) return 10000;
+			if((typeA.indexOf("02")==0&&typeB.indexOf("0222")==0)||
+			   (typeB.indexOf("02")==0&&typeA.indexOf("0222")==0))
+			return 10000;  
+			
+			// 判断两个方向的首颗棋子是否相同  
+			var tempChar = "0";
+			for(let item of typeA){
+				if(item!="0"){
+					tempChar = item;
+					break;
+				} 
+			} 
+			if(tempChar!=0){ 
+				for(let item of typeB){
+					if(item!="0"){
+						if(item!=tempChar)  return -Math.min(a, b);
+						break;
+					} 
+				}  
+			} 
+			  
+			//一一
+			if((a>=10)&&(a<=25)&&(b>=10)&&(b<=25)) return 60;
+			//一二、二一
+			else if(((a>=10)&&(a<=25)&&(b>=60)&&(b<=80))||((a>=60)&&(a<=80)&&(b>=10)&&(b<=25))) return 820;
+			//一三、三一、二二
+			else if(((a>=10)&&(a<=25)&&(b>=140)&&(b<=1000))||((a>=140)&&(a<=1000)&&(b>=10)&&(b<=25))||((a>=60)&&(a<=80)&&(b>=60)&&(b<=80)))
+				return 3000;
+			//二三、三二
+			else if(((a>=60)&&(a<=80)&&(b>=140)&&(b<=1000))||((a>=140)&&(a<=1000)&&(b>=60)&&(b<=80))) return 3000;
+			else return 0; 
+		}
+		
+		// csq  20211201  联合多个方向计算特定必堵或必赢点位，输入每两个数据在一同行，成对数据
+		function unionWeightAny(connectTypeArray){
+			var count1 = 0; //必堵，否则必输
+			var count2 = 0;	//必赢
+			var tempW = 0; 
+			for (var i = 0; i < connectTypeArray.length; i++) { 
+				/*var countLine1 = 0;
+				var countLine2 = 0;
+				var tempW1 = 0;
+				var tempW2 = 0;*/
+				var tempWArray = new Array();  
+				var tempColorArray = new Array(); 
+				for(let item of connectTypeArray[i]){ 
+					// 取第一个棋子颜色 
+					var tempColor = 0; 
+					for(let itemC of item){
+						if(itemC!="0"){
+							tempColor = itemC;
+							break;
+						} 
+					}
+					tempColorArray.push(tempColor);
+					
+					//取权值 
+					tempW = map.get(item);
+					//console.log(tempW);
+					/*if(tempW!=null&&tempW>74){ // 大于74说明如果同色棋子的一方在往这里下一颗棋子，那面另一方必须在这一行上采取措施，否则会输 
+						if (tempColor==1) tempW1+=tempW;
+						if (tempColor==2) tempW2+=tempW; 
+					} else {
+						tempW1 = 0;
+						tempW2 = 0; ;
+					}*/
+					if(tempW!=null) tempWArray.push(tempW); else tempWArray.push(0);
+				} 
+				// 判断这一行是不是 即将必堵 
+				//  （如果同色棋子的一方再往这里下一颗棋子，那面另一方必须在这一行上采取措施，否则会输）  
+				//console.log(tempColorArray,tempWArray,connectTypeArray[i]); 
+				if ( (tempColorArray[0]==1&&tempColorArray[1]!=2&&tempWArray[0]>74) || (tempColorArray[0]!=2&&tempColorArray[1]==1&&tempWArray[1]>74) )count1++; 
+				if ( (tempColorArray[0]==2&&tempColorArray[1]!=1&&tempWArray[0]>69) || (tempColorArray[0]!=1&&tempColorArray[1]==2&&tempWArray[1]>69) )count2++;  
+				if (tempColorArray[0]!=0&&tempColorArray[1]!=0){
+					var typeA = connectTypeArray[i][0];
+					var typeB = connectTypeArray[i][1];
+					tempW = unionWeight(tempWArray[0], tempWArray[1],typeA,typeB);
+					if (tempW>800){
+						if (tempColorArray[0]==1||tempColorArray[1]==1)count1++; 
+						if (tempColorArray[0]==2||tempColorArray[1]==2)count2++;
+					} else {
+						if((typeA.indexOf("010")==0&&typeB.indexOf("010")==0)||
+						   (typeA.indexOf("010")==0&&typeB.indexOf("0010")==0)||
+						   (typeA.indexOf("0010")==0&&typeB.indexOf("010")==0)||
+						   (typeA=="01010"&&typeB.indexOf("0")==0)||
+						   (typeB=="01010"&&typeA.indexOf("0")==0))
+							count1++;
+						if((typeA.indexOf("020")==0&&typeB.indexOf("020")==0)||
+						   (typeA.indexOf("020")==0&&typeB.indexOf("0020")==0)||
+						   (typeA.indexOf("0020")==0&&typeB.indexOf("020")==0)||
+						   (typeA=="02020"&&typeB.indexOf("0")==0)||
+						   (typeB=="02020"&&typeA.indexOf("0")==0))
+							count2++; 
+					} 
+					/*if ((tempColorArray[0]==1||tempColorArray[1]==1)&&tempW>449)count1++; 
+					if ((tempColorArray[0]==2||tempColorArray[1]==2)&&tempW>399)count2++; */
+					//console.log("###",tempWArray[0], tempWArray[1],connectTypeArray[i][0],connectTypeArray[i][1],tempW );
+				}
+			}
+			//只有一个不算 
+			if (count1==1) count1--;
+			if (count2==1) count2--;
+			return Math.max(1600*count1, 2000*count2);
+		} 
+		
+		
+		function computerIsChess(x, y){
+			if(gameOver) return false;
+			var cx = x,cy = y+1; 
+			if(!begin){
+				cx = parseInt(length / 2);
+				cy = parseInt(length / 2);  
+			}else{
+				/* 清空有子位置权值 */
+				//allDirections[x][y] = 0;
+				/* 重置权值 */
+				for (var i = 0; i < length; i++) { 
+					for (var j = 0; j < length; j++) {
+						allDirections[i][j] = -1;
+					}
+				} 
+				/* 重置权值日志 */
+				if (openDebug){
+					for (var i = 0; i < length; i++) { 
+						for (var j = 0; j < length; j++) {
+							weightLog[i][j] = " ";
+						}
+					} 			
+				} 
+				
+				/* 计算权值 */
+				calculatedWeight(x, y); 
+				contextW.clearRect(0,0,(length+1)*40,(length+1)*40); 
+				
+				/* 描绘权值数字 */
+				if (openDebug) drawWeightText();
+				
+				//console.log(allDirections);
+				/* 找出权值最大位置 */
+				var weightValue = null;
+				for (var xi = 0; xi < length; xi++) { 
+					for (var yi = 0; yi < length; yi++) {
+						if (weightValue==null||allDirections[xi][yi] > weightValue){
+							weightValue = allDirections[xi][yi];
+							cx=xi;
+							cy=yi; 
+						}
+					}
+				} 
+			} 
+			if(drawChessJudge(cx, cy)){
+				contextW.strokeRect(cx * 40 + 20, cy * 40 + 20,36,36);//绘制红框 
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		function drawWeightText() { 
+            for (var i = 0; i < length*40; i += 40) {j
+				for (var j = 0; j < length*40; j += 40) { 
+					contextW.fillText(allDirections[i/40][j/40],i+40,j+40); 
+				}  
+            } 
+        }
+		
+		function calculatedWeight(x, y){
+			var calculatedWeightLog;
+			var chessDataForWgh;
+			if (computerIsWhite){
+				chessDataForWgh = chessData2;
+			}else{
+				chessDataForWgh = chessData;
+			}
+			//机器落子
+			//先计算出各个位置的权值
+			for(var i=0;i<length;i++) {
+				for(var j=0;j<length;j++) {
+					calculatedWeightLog = "";
+					//首先判断当前位置是否为空
+					if(chessDataForWgh[i][j]==0) {
+						allDirections[i][j] = 0;
+						//往左延伸
+						var ConnectType1="0";
+						var imin=Math.max(0, i-4);
+						for(var positioni=i-1;positioni>=imin;positioni--) {
+							//依次加上前面的棋子
+								ConnectType1=ConnectType1+chessDataForWgh[positioni][j];
+								//ConnectType1=ConnectType1+chessDataForWgh[j][positioni];
+						}
+						//从数组中取出相应的权值，加到权值数组的当前位置中
+						var valueleft=map.get(ConnectType1);
+						if(valueleft!=null) allDirections[i][j]+=valueleft;
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"左:ConnectType1:"+ConnectType1+";valueleft:"+valueleft+"\n"; 
+						//往右延伸
+						var ConnectType2="0";
+						var imax=Math.min(length-1, i+4);
+						for(var positioni=i+1;positioni<=imax;positioni++) {
+							//依次加上前面的棋子
+								ConnectType2=ConnectType2+chessDataForWgh[positioni][j];
+								//ConnectType2=ConnectType2+chessDataForWgh[j][positioni];
+						}
+						//从数组中取出相应的权值，加到权值数组的当前位置中
+						var valueright=map.get(ConnectType2);
+						if(valueright!=null) allDirections[i][j]+=valueright;
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"右:ConnectType2:"+ConnectType2+";valueright:"+valueright+"\n"; 
+						//联合判断，判断行 
+						allDirections[i][j]+=unionWeight(valueleft,valueright,ConnectType1,ConnectType2);
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"左右:"+unionWeight(valueleft,valueright,ConnectType1,ConnectType2)+"\n";
+						
+						//往上延伸
+						var ConnectType3="0";
+						var jmin=Math.max(0, j-4);
+						for(var positionj=j-1;positionj>=jmin;positionj--) {
+							//依次加上前面的棋子
+								ConnectType3=ConnectType3+chessDataForWgh[i][positionj];
+								//ConnectType3=ConnectType3+chessDataForWgh[positionj][i];
+						}
+						//从数组中取出相应的权值，加到权值数组的当前位置中 
+						var valueup=map.get(ConnectType3);
+						if(valueup!=null) allDirections[i][j]+=valueup;
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"上:ConnectType3:"+ConnectType3+";valueup:"+valueup+"\n"; 
+						//往下延伸
+						var ConnectType4="0";
+						var jmax=Math.min(length-1, j+4);
+						for(var positionj=j+1;positionj<=jmax;positionj++) {
+							//依次加上前面的棋子
+								ConnectType4=ConnectType4+chessDataForWgh[i][positionj];
+								//ConnectType4=ConnectType4+chessDataForWgh[positionj][i];
+						}
+						//从数组中取出相应的权值，加到权值数组的当前位置中
+						var valuedown=map.get(ConnectType4);
+						if(valuedown!=null) allDirections[i][j]+=valuedown;
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"下:ConnectType4:"+ConnectType4+";valuedown:"+valuedown+"\n"; 
+						//联合判断，判断列
+						allDirections[i][j]+=unionWeight(valueup,valuedown,ConnectType3,ConnectType4);
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"上下:"+unionWeight(valueup,valuedown,ConnectType3,ConnectType4)+"\n";
+						
+						//往左上方延伸,i,j,都减去相同的数
+						var ConnectType5="0";
+						for(var position=-1;position>=-4;position--) {
+							if((i+position>=0)&&(i+position<=length-1)&&(j+position>=0)&&(j+position<=length-1))
+								ConnectType5=ConnectType5+chessDataForWgh[i+position][j+position];
+								//ConnectType5=ConnectType5+chessDataForWgh[j+position][i+position];
+						}
+						//从数组中取出相应的权值，加到权值数组的当前位置
+						var valueLeftUp=map.get(ConnectType5);
+						if(valueLeftUp!=null) allDirections[i][j]+=valueLeftUp;
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"左上:ConnectType5:"+ConnectType5+";valueLeftUp:"+valueLeftUp+"\n"; 
+						//往右下方延伸,i,j,都加上相同的数
+						var ConnectType6="0";
+						for(var position=1;position<=4;position++) {
+							if((i+position>=0)&&(i+position<=length-1)&&(j+position>=0)&&(j+position<=length-1))
+								ConnectType6=ConnectType6+chessDataForWgh[i+position][j+position];
+								//ConnectType6=ConnectType6+chessDataForWgh[j+position][i+position];
+						}
+						//从数组中取出相应的权值，加到权值数组的当前位置
+						var valueRightDown=map.get(ConnectType6);
+						if(valueRightDown!=null) allDirections[i][j]+=valueRightDown;
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"右下:ConnectType6:"+ConnectType6+";valueRightDown:"+valueRightDown+"\n"; 
+						//联合判断，判断行
+						allDirections[i][j]+=unionWeight(valueLeftUp,valueRightDown,ConnectType5,ConnectType6);
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"左上右下:"+unionWeight(valueLeftUp,valueRightDown,ConnectType5,ConnectType6)+"\n";
+						
+						//往左下方延伸,i加,j减
+						var ConnectType7="0";
+						for(var position=1;position<=4;position++) {
+							if((i-position>=0)&&(i-position<=length-1)&&(j+position>=0)&&(j+position<=length-1))
+								ConnectType7=ConnectType7+chessDataForWgh[i-position][j+position];
+								//ConnectType7=ConnectType7+chessDataForWgh[j-position][i+position];
+						}
+						//从数组中取出相应的权值，加到权值数组的当前位置
+						var valueLeftDown=map.get(ConnectType7);
+						if(valueLeftDown!=null) allDirections[i][j]+=valueLeftDown;
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"左下:ConnectType7:"+ConnectType7+";valueLeftDown:"+valueLeftDown+"\n"; 
+						//往右上方延伸,i减,j加
+						var ConnectType8="0";
+						for(var position=1;position<=4;position++) {
+							if((i+position>=0)&&(i+position<=length-1)&&(j-position>=0)&&(j-position<=length-1))
+								ConnectType8=ConnectType8+chessDataForWgh[i+position][j-position];
+								//ConnectType8=ConnectType8+chessDataForWgh[j+position][i-position];
+						}
+						//从数组中取出相应的权值，加到权值数组的当前位置
+						var valueRightUp=map.get(ConnectType8);
+						if(valueRightUp!=null) allDirections[i][j]+=valueRightUp;
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"右上:ConnectType8:"+ConnectType8+";valueRightUp:"+valueRightUp+"\n"; 
+						//联合判断，判断行
+						allDirections[i][j]+=unionWeight(valueLeftDown,valueRightUp,ConnectType7,ConnectType8);
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"下左右上:"+unionWeight(valueLeftDown,valueRightUp,ConnectType7,ConnectType8)+"\n";
+						
+						// 联合8个方向一起判断
+						allDirections[i][j]+=unionWeightAny([[ConnectType1,ConnectType2],[ConnectType3,ConnectType4],[ConnectType5,ConnectType6],[ConnectType7,ConnectType8]]);
+						if (openDebug) calculatedWeightLog=calculatedWeightLog+"unionWeightAny:"+unionWeightAny([[ConnectType1,ConnectType2],[ConnectType3,ConnectType4],[ConnectType5,ConnectType6],[ConnectType7,ConnectType8]])+"\n";
+						
+						weightLog[i][j]=calculatedWeightLog;
+					}else if (openDebug) { 
+						weightLog[i][j]="未计算";
+					} 
+				}
+			}
+		}
+		
+		function lookWeightLog(x,y){
+			alert(x+","+y+":\n"+weightLog[x][y]);
+		}
+		
+		
+		function drawChessJudge(x, y){
+			if (isWhite) {
+                //isWhite = false;
+                return drawChess(1, x, y);
+            }
+            else {
+                //isWhite = true;
+                return drawChess(2, x, y);
+            }
+		}
+		 
+        function drawChess(chess, xdc, ydc) {//参数为，棋（1为白棋，2为黑棋），数组位置
+			//x = x+0;
+			//console.log(length);
+			//console.log("drawChess("+chess+","+xdc+","+ydc+")"); 
+            if (gameOver == true) {
+                alert("已经结束了，如果需要重新玩，请刷新");
+                return false;
+            } 
+			//alert(chess+"，"+ xdc+"，"+ydc+"，"+chessData[xdc][ydc]);
+            if (xdc >= 0 && xdc < length && ydc >= 0 && ydc < length && chessData[xdc][ydc] == 0) {
+                if (chess == 1) {
+					//console.log("绘制白棋");
+                    context.drawImage(img_w, xdc * 40 + 20, ydc * 40 + 20);//绘制白棋
+                    chessData[xdc][ydc] = 1;
+					chessData2[xdc][ydc] = 2;
+					round++;
+					isWhite = false;
+                }
+                else {
+					//console.log("绘制黑棋");
+                    context.drawImage(img_b, xdc * 40 + 20, ydc * 40 + 20);//绘制黑棋
+                    chessData[xdc][ydc] = 2;
+					chessData2[xdc][ydc] = 1;
+					isWhite = true;
+                }  
+				//console.log(chessData);
+				if(!begin) begin = true;
+				stepCount++;
+				stepsLog.set(stepCount,new Array(chess,xdc,ydc));
+                judgeAll(xdc, ydc, chess);  
+				return true;
+            }else{
+				//console.log(chess+"，"+ xdc+"，"+ydc+"，"+chessData[xdc][ydc]); 
+				if (openDebug&&xdc<length&&ydc<length) {
+					//alert(chess+"，"+ xdc+"，"+ydc);
+					lookWeightLog(xdc,ydc);
+				}else{
+					alert("你不能在这个位置下棋");
+				}
+                return false;
+			}
+        }
+		
+		//判断单个点位是否胜利，运算量少，但是必须等棋盘下满才算平局
+        function judge(x, y, chess,chess1) {//判断该局棋盘是否赢了
+			/* 5回合以下不可能有任意方赢，直接退出就行了 */
+			if(round<5){
+				return false;
+			}
+			//console.log("judge("+x+","+y+","+chess+")");
+            var count1 = 0;
+            var count2 = 0;
+            var count3 = 0;
+            var count4 = 0;
+ 
+            //左右判断
+            for (var i = x; i >= 0; i--) {
+                if (chessData[i][y] != chess&&chessData[i][y] != chess1) {
+                    break;
+                }
+                count1++;
+				if(count1>5) return judgeSub0(chess,chess1);
+            }
+            for (var i = x; i < length; i++) {
+                if (chessData[i][y] != chess&&chessData[i][y] != chess1) {
+                    break;
+                }
+                count1++;
+				if(count1>5) return judgeSub0(chess,chess1);
+            }
+            //上下判断
+            for (var i = y; i >= 0; i--) {
+                if (chessData[x][i] != chess&&chessData[x][i] != chess1) {
+                    break;
+                }
+                count2++;
+				if(count2>5) return judgeSub0(chess,chess1);
+            }
+            for (var i = y; i < length; i++) {
+                if (chessData[x][i] != chess&&chessData[x][i] != chess1) {
+                    break;
+                }
+                count2++;
+				if(count2>5) return judgeSub0(chess,chess1);
+            }
+            //左上右下判断
+            for (var i = 0; true; i++) {
+                if (x-i<0||y-i<0||(chessData[x-i][y-i] != chess&&chessData[x-i][y-i] != chess1)) {
+                    break;
+                }
+                count3++;
+				if(count3>5) return judgeSub0(chess,chess1);
+            }
+			for (var i = 0; true; i++) {
+				if (x+i>length-1||y+i>length-1||(chessData[x+i][y+i] != chess&&chessData[x+i][y+i] != chess1)) {
+                    break;
+                }
+                count3++;
+				if(count3>5) return judgeSub0(chess,chess1);
+            }
+            //右上左下判断
+			for (var i = 0; true; i++) {
+                if (x-i<0||y+i>length-1||(chessData[x-i][y+i] != chess&&chessData[x-i][y+i] != chess1)) {
+                    break;
+                }
+                count4++;
+				if(count4>5) return judgeSub0(chess,chess1);
+            }
+			for (var i = 0; true; i++) {
+				if (x+i>length-1||y-i<0||(chessData[x+i][y-i] != chess&&chessData[x+i][y-i] != chess1)) {
+                    break;
+                }
+                count4++;
+				if(count4>5) return judgeSub0(chess,chess1);
+            }   
+			if(stepCount==length*length){
+                alert("平局");
+                gameOver = true;//设置该局棋盘已经赢了，不可以再走了
+				return true; 
+			}
+			return false;
+        }
+		function judgeSub0(chess,chess1){
+			if (chess1 == null) {
+				if (chess == 1) {
+					alert("白棋赢了");
+				}
+				else {
+					alert("黑棋赢了");
+				}
+				gameOver = true;//设置该局棋盘已经赢了，不可以再走了
+			}
+			return true; 
+		}
+		
+		
+		//判断所有点位，运算量大，可提前发觉平局
+		function judgeAll(x, y, chess) { 
+			/* 5回合以下不可能有任意方赢，直接退出就行了 */
+			if(round<5){
+				return;
+			}
+			if(!judge(x, y, chess)){ 
+				for(var i=0;i<length;i++) {
+					for(var j=0;j<length;j++) { 
+						if(chessData[i][j]!=0&&judge(i, j, chessData[i][j],0)) {
+							return;
+						}
+					}
+				} 
+				alert("平局");
+				gameOver = true;//设置该局棋盘已经赢了，不可以再走了 
+			}
+		}
+ 
+		function openRobotBrain() {
+		    interactive = !interactive; 
+		}
+		
+		function robotBrainInitiative() { 
+			computerIsWhite = !computerIsWhite;
+			if(interactive&&(isWhite==computerIsWhite)&&!gameOver){
+				var x=0,y=0; 
+				if(stepCount!=0){
+					var tempArray = stepsLog.get(stepCount);
+					x=tempArray[0];
+					y=tempArray[1];
+				}
+				computerIsChess(x, y); 
+			}
+			//console.log(stepCount,length*length);
+		}
+		
+		function openOrCloseDebug() { 
+			openDebug = !openDebug;
+		}
+		
+		function undo() { 
+			if(stepsLog<2)return;
+			round--;
+			/* 回退两步 */
+			stepsLog.delete(stepCount);
+			stepsLog.delete(stepCount--);
+			stepCount--; 
+			
+			/*重绘图棋盘*/ 
+			drawRect();
+			gameOver = false;
+			
+			/* 清空棋盘 */
+			for (var i = 0; i < length; i++) { 
+				for (var j = 0; j < length; j++) {
+					chessData[i][j] = 0;
+					chessData2[i][j] = 0;
+				}
+			} 	
+			
+			/* 还原剩余步骤 */
+			var stepCountBK = stepCount;
+			round=0;
+			stepCount=0;
+			for (var i = 1; i <= stepCountBK; i ++){ 
+				var tempArray = stepsLog.get(i);  
+				drawChess(tempArray[0], tempArray[1], tempArray[2]); 
+			}
+		}
+		
+		var closeFCb = true;
+		function closeFC() { 
+			if(closeFCb){
+				//document.getElementById("controlPanel").style.display = "none";
+				document.getElementById("controlPanel2").style.display = "none"; 
+			}else{
+				//document.getElementById("controlPanel").style.display = "block";
+				document.getElementById("controlPanel2").style.display = "block";
+			}
+			closeFCb=!closeFCb;
+		}
+		
+		function setLength(l) {   
+			if(begin&&!gameOver){
+				alert("对局已经开始，不能修改");
+				return;
+			}
+			length = l; 
+			loadDown(); 
+		} 
+		
+		function automaticPlayingChess() {   
+			var interactiveTemp = interactive;//人机模式
+			var computerIsWhiteTemp = computerIsWhite;//人机棋子颜色，true为白色
+			while (!gameOver){ 
+				robotBrainInitiative();   
+			} 
+			interactive = interactiveTemp;
+			computerIsWhite = computerIsWhiteTemp;
+		}
+		
+		
+		
+    </script>
+</head>
+<body onload="loadDown()">
+    <div>
+		<div  style = "height:24px;left:0%;top:0px;position:fixed;z-index:9000;border:3px solid #DDD">  <button  type="button" onClick="closeFC()">关闭/打开菜单栏</button><br/> </div> 
+		<div id = "controlPanel" style = "height:24px;left:10%;top:0px;position:fixed;z-index:9000;border:3px solid #DDD"> 
+			<button type="button" onClick="undo()">悔棋</button><br/> 
+		</div> 
+		<div  style = "height:24px;left:20%;top:0px;position:fixed;z-index:9000;border:3px solid #DDD">  <button  type="button" onClick="loadDown()">重新开始</button><br/> </div> 
+		<h1 style="left:40%">五子棋</h1>
+		<div id = "controlPanel2" style = "height:193px;left:90%;top:0px;position:fixed;z-index:9000;border:3px solid #DDD">   
+			<button type="button" onClick="setLength(13)">棋盘大小13*13</button><br/> 
+			<button type="button" onClick="setLength(15)">棋盘大小15*15</button><br/> 
+			<button type="button" onClick="setLength(31)">棋盘大小31*31</button><br/> 
+			<button type="button" onClick="openRobotBrain()">开启/关闭人机</button><br/>  
+			<button type="button" onClick="robotBrainInitiative()">让电脑先/后走</button><br/> 
+			<button type="button" onClick="openOrCloseDebug()">开启/关闭调试</button><br/>   
+			<button type="button" onClick="automaticPlayingChess()">电脑对战电脑</button><br/> 
+			<button type="button" onClick="">菜单栏在左边关闭</button><br/>    
+		</div> 
+        <canvas id="canvas" onmousedown="play(event)" height="2000"  width="2000" style = "position:absolute;z-index:8000">你的浏览器不支持HTML5 canvas  ，请使用 google chrome 浏览器 打开.</canvas>
+        <canvas id="canvas2" height="2000" width="2000" style = "position:absolute;z-index:7000"></canvas> 
+        <canvas id="canvas2" height="2000" width="2000" style = "position:absolute;z-index:7000"></canvas> 
+    </div> 
+</body>
+</html>
