@@ -1,0 +1,69 @@
+/* styles.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #333;
+    
+    flex-direction: column; /* 将主轴方向设置为垂直方向 */
+        background: url("img/back.jpg");
+        background-size: 100%;
+        height: 850px;
+    
+    
+}
+.maze-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.maze-title {
+    font-size: 48px;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transform: translateY(10px);
+}
+
+
+.maze-container {
+    position: relative;
+    margin-bottom: -100px;
+    width: 900px;
+    height: 900px;
+    background-image: url('img/maze.png'); /* 替换为你的迷宫图片路径 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    opacity: 0.9; /* 设置透明度为 70% */
+    
+}
+#fog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+   
+    background:  repeat; /* 你可以使用带有烟雾效果的图片 */
+    background-size: 80px 80px; /* 调整图标的大小以创建覆盖效果 */
+    background-position: -20px -20px; /* 调整位置使图标相互覆盖 */
+    opacity: 1; /* 初始的烟雾浓度 */
+    transition: opacity 0.5s ease;
+}
+
+#player {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    top: 10px;
+    left: 10px;
+    transition: top 0.1s linear, left 0.1s linear; /* 平滑移动 */
+}
