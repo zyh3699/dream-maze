@@ -50,12 +50,12 @@ body {
     width: 100%;
     height: 100%;
     
-   
+    z-index: 2;
     background:  repeat; /* 你可以使用带有烟雾效果的图片 */
     background-size: 80px 80px; /* 调整图标的大小以创建覆盖效果 */
     background-position: -20px -20px; /* 调整位置使图标相互覆盖 */
     opacity: 1; /* 初始的烟雾浓度 */
-    transition: opacity 0.5s ease;
+    animation: fog 5s infinite; /* 无限循环动画 */
 }
 
 #player {
@@ -63,7 +63,8 @@ body {
     width: 20px;
     height: 20px;
     background-color: red;
-    top: 10px;
-    left: 10px;
+    top: 800px;
+    left: 800px;
+    z-index: 3; /* 确保玩家层级在烟雾层之上 */
     transition: top 0.1s linear, left 0.1s linear; /* 平滑移动 */
 }
