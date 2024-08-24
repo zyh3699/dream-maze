@@ -43,7 +43,7 @@ body {
     opacity: 0.9; /* 设置透明度为 70% */
     
 }
-#fog {
+/* #fog {
     position: absolute;
     top: 0;
     left: 0;
@@ -52,19 +52,46 @@ body {
     
     z-index: 2;
     background:  repeat; /* 你可以使用带有烟雾效果的图片 */
-    background-size: 80px 80px; /* 调整图标的大小以创建覆盖效果 */
-    background-position: -20px -20px; /* 调整位置使图标相互覆盖 */
-    opacity: 1; /* 初始的烟雾浓度 */
-    animation: fog 5s infinite; /* 无限循环动画 */
+    /* background-size: 80px 80px; 调整图标的大小以创建覆盖效果
+    background-position: -20px -20px; 调整位置使图标相互覆盖 */
+    /* opacity: 1; /* 初始的烟雾浓度 */
+    /* transition: none; */ 
+/* } */ 
+@keyframes fogAnimation {
+    0% {
+        background-image: url('img/Smoke/0000.png');
+        background-position: 0px 0px;
+    }
+    50% {
+        background-image: url('img/Smoke/0065.png');
+        background-position: 50px 50px;
+    }
+    100% {
+        background-image: url('img/Smoke/0000.png');
+        background-position: 100px 100px;
+    }
 }
 
+#fog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 80px 80px;
+    animation: fogAnimation 10s linear infinite;
+}
+
+
+
 #player {
+    will-change: transform;
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: red;
-    top: 800px;
-    left: 800px;
+    background-color: rgb(102, 145, 27);
+    top: 780px;
+    left: 330px;
     z-index: 3; /* 确保玩家层级在烟雾层之上 */
     transition: top 0.1s linear, left 0.1s linear; /* 平滑移动 */
 }
