@@ -2,8 +2,8 @@ class Player {
   constructor() {
     this.image = new Image();
     this.image.src = "../img/charactor/main_character.jpg";
-    this.width = 10;
-    this.height = 10;
+    this.width = 40;
+    this.height = 40;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
   }
@@ -34,6 +34,25 @@ class Player {
     }
 
     return false;
+  }
+
+  updateImage(direction) {
+    switch (direction) {
+      case "up":
+        this.image.src = "../minigame/maze/img/player/up.png";
+        break;
+      case "down":
+        this.image.src = "../minigame/maze/img/player/down.png";
+        break;
+      case "left":
+        this.image.src = "../minigame/maze/img/player/left.png";
+        break;
+      case "right":
+        this.image.src = "../minigame/maze/img/player/right.png";
+        break;
+      default:
+        this.image.src = "../img/charactor/main_character.jpg";
+    }
   }
 
   interact(collisionMap) {

@@ -16,8 +16,8 @@ let map = {
       this.height,
       0,
       0,
-      this.width * 2,
-      this.height * 2
+      this.width * 5,
+      this.height * 5
     );
   },
   move: function (dx, dy) {
@@ -29,12 +29,12 @@ let map = {
   },
 };
 
-map.image.src = "../img/bgr/chapter1_background.png"; // 替换为你的图片路径
+map.image.src = "../img/bgr/chapter0_background.png"; // 替换为你的图片路径
 map.image.onload = function () {
   window.map = map;
 
-  map.startX = (map.image.width - map.width / 2) / 2;
-  map.startY = (map.image.height - map.height / 2) / 2;
+  map.startX = (map.image.width - map.width / 5) / 2;
+  map.startY = (map.image.height - map.height / 5) / 2;
 
   map.draw(ctx);
 };

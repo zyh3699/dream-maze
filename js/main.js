@@ -27,20 +27,24 @@ document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
 
 function update(deltatime) {
-  const moveSpeed = 500;
+  const moveSpeed = 100;
   const moveAmount = (moveSpeed * deltatime) / 1000;
 
   if (keysPressed["ArrowUp"]) {
     window.player.move(0, -moveAmount, collisionMap);
+    player.updateImage("up");
   }
   if (keysPressed["ArrowDown"]) {
     window.player.move(0, moveAmount, collisionMap);
+    player.updateImage("down");
   }
   if (keysPressed["ArrowLeft"]) {
     window.player.move(-moveAmount, 0, collisionMap);
+    player.updateImage("left");
   }
   if (keysPressed["ArrowRight"]) {
     window.player.move(moveAmount, 0, collisionMap);
+    player.updateImage("right");
   }
   if (keysPressed["e"] || keysPressed["E"]) {
     window.player.interact(collisionMap);
