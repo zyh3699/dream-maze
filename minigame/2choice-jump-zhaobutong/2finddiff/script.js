@@ -153,7 +153,7 @@ restartButton.addEventListener('click', function () {
 
 // Skip the game
 skipButton.addEventListener('click', function () {
-    window.location.href = 'index.html'; // Redirects to index.html
+    window.location.href = '../../../html/chapter2.html'; // Redirects to index.html
 });
 
 // Reveal the correct points
@@ -193,7 +193,7 @@ function gameOver(won) {
     clearInterval(timer); // 停止计时器
     if (won) {
         alert('恭喜你找到所有不同处！按确认自动跳转。');
-        window.location.href = 'index.html';
+        window.location.href = '../../../html/chapter2.html';
     } else {
         alert('游戏结束，你没有找到所有不同处。你可以选择重新开始，也可以选择跳过游戏。');
     }

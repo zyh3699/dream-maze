@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Move and Fill</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+    #intro {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../img/bgr/chapter1_background.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      color: white;
+      font-size: 24px;
+      padding: 20px;
+      box-sizing: border-box;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+    #dialogue {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 80%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="intro">
+    <div id="dialogue"></div>
+  </div>
+  <canvas id="gameCanvas" style="display: none;"></canvas>
+  <script src="../js/map1.js"></script>
+  <script src="../js/main1.js"></script>
+  <script src="../js/player1.js"></script>
+  <script>
+
+    const dialogues = [
+      "从“钢铁都市”回到现实，莱拉对文件中的内容充满了疑惑,她决定追查文件中提到的神秘组织。",
+      "她的研究显示，这个组织与全球多家大型企业和政府机构有着千丝万缕的联系，表面上他们是合法的商业或科研机构，但背地里却在利用梦境技术操控人们的意识，改变他们的记忆和行为。",
+      "为了进一步了解这个组织的真面目，莱拉与艾德里安再度联手，进入了一次更加危险的多层梦境探险。"
+    ];
+    let currentDialogue = 0;
+    let charIndex = 0;
+    const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+    function typeDialogue() {
+      if (charIndex < dialogues[currentDialogue].length) {
+        document.getElementById('dialogue').innerText += dialogues[currentDialogue].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeDialogue, typingSpeed);
+      } else {
+        currentDialogue++;
+        charIndex = 0;
+      }
+    }
+
+    function showNextDialogue() {
+      if (currentDialogue < dialogues.length) {
+        document.getElementById('dialogue').innerText = '';
+        typeDialogue();
+      } else {
+        document.getElementById('intro').style.opacity = 0;
+        setTimeout(() => {
+          document.getElementById('intro').style.display = 'none';
+          document.getElementById('gameCanvas').style.display = 'block';
+          requestAnimationFrame(mainLoop);
+        }, 1000); // 等待1秒以完成淡出效果
+      }
+    }
+
+    document.getElementById('intro').addEventListener('click', showNextDialogue);
+    showNextDialogue();
+  </script>
+</body>
+</html>
