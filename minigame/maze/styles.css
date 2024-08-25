@@ -85,8 +85,8 @@ body {
 
 #countdown {
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 100px;
+    left: 400px;
     font-size: 24px;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.5);
@@ -127,4 +127,15 @@ body {
     left: 330px;
     z-index: 3; /* 确保玩家层级在烟雾层之上 */
     transition: top 0.1s linear, left 0.1s linear; /* 平滑移动 */
+}
+#target-area {
+    position: absolute;
+    top: 920px; /* 目标区域的顶部坐标 */
+    left: 920px; /* 目标区域的左边坐标 */
+    width: 100px; /* 目标区域的宽度 */
+    height: 100px; /* 目标区域的高度 */
+    background-color: rgba(0, 255, 0, 0.5); /* 半透明绿色表示目标区域 */
+    border: 2px solid #0f0; /* 绿色边框 */
+    border-radius: 5px; /* 圆角边框（可选） */
+    z-index: 10; /* 确保目标区域显示在其他元素之上 */
 }

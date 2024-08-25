@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Intro</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .intro-container {
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .intro-container h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .intro-container p {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .start-button {
+            padding: 10px 50px;
+            font-size: 28px;
+            font-family: 黑体;
+            color: #fff;
+           background-color: #70c7b0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px; /* 设置按钮与容器之间的间隔 */
+        }
+
+        .start-button:hover {
+             background-color: #8d5c8f;
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-container">
+        <h1>欢迎来到迷宫挑战</h1>
+        <p>
+            还有2分钟迷宫就坍塌了！！
+        </p>
+        
+        <p>
+            你能否帮助莱拉迅速找到前成员的潜意识中心？
+        </p>
+        <p style="font-size: 20px;text-align: left;font-family: 楷体;">
+                  操作说明：  <br \>1、使用键盘的方向键控制角色移动，尽快到达终点！
+                  <br \>
+                  2、由于有些道路过于狭窄，你可能需要上下移动才能顺利通过岔路口。
+         </p>
+    </div><a href="maze.html" class="start-button">开始游戏</a>
+</body>
+</html>

@@ -5,7 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const mazeCanvas = document.getElementById('mazeCanvas');
     const mazeContext = mazeCanvas.getContext('2d');
     const step = 10;
-    const radius = 30; // 定义圆形区域的半径
+    const radius = 30;
+    const targetArea = {
+        top: 94,  // 替换为你设定的目标区域顶部的 y 坐标
+        left: 94, // 替换为你设定的目标区域左边的 x 坐标
+        width: 50, // 替换为目标区域的宽度
+        height: 50 // 替换为目标区域的高度
+    };
     // 烟雾图片数组
     // const smokeImages = [
     //     'img/Smoke/0000.png',
@@ -46,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // // 设置每隔 3 秒切换一次背景图片
     // setInterval(changeFogImage, 200);
  // 将迷宫图片绘制到 canvas 上
- let timeLeft = 60; // 总时间，单位为秒
+ let timeLeft = 120; // 总时间，单位为秒
 const totalTime = timeLeft; // 用于计算进度条的初始宽度
 
 const timerElement = document.getElementById('timer');
@@ -116,10 +122,25 @@ document.addEventListener('keydown', (e) => {
         if (!isCollision(centerX, centerY)) {
             player.style.top = `${newTop}px`;
             player.style.left = `${newLeft}px`;
-
+            console.log(`Player Top: ${newTop}, Left: ${newLeft}`);
+            console.log(`Target Top: ${targetArea.top}, Bottom: ${targetArea.top + targetArea.height}`);
+            console.log(`Target Left: ${targetArea.left}, Right: ${targetArea.left + targetArea.width}`);
             const fogX = newLeft + player.clientWidth / 2;
             const fogY = newTop + player.clientHeight / 2;
-
+            if (newTop >= targetArea.top && newTop <= targetArea.top + targetArea.height &&
+                newLeft >= targetArea.left && newLeft <= targetArea.left + targetArea.width) {
+            
+                clearInterval(countdownInterval);
+                    // var index = window.localStorage.userid;
+					// var array = JSON.parse(window.localStorage.userArr);
+					
+					// if (totalScore2 == 2) 
+					// 	array[index].achi2 = 1;
+						
+					
+                alert('获得成就“迷宫大师”');
+                window.location.href = "next_page.html"; // 跳转到下一个页面
+                }
             // fog.style.clipPath = `circle(${radius}px at ${fogX}px ${fogY}px)`;
         }
     }
