@@ -12,7 +12,7 @@ def generate_collision_map(image_path):
         for x in range(width):
             r, g, b = image.getpixel((x, y))
             # 如果是白色像素，则标记为1，否则为0
-            row.append(1 if r == 255 and g == 255 and b == 255 else 0)
+            row.append(1 if (r == 255 and g == 255 and b == 255) else (2 if (r == 0 and g == 0 and b == 0) else 0))
         collision_map.append(row)
 
     return collision_map, image
@@ -24,6 +24,8 @@ def mark_collision_map(collision_map, image):
         for x in range(width):
             if collision_map[y][x] == 1:
                 image.putpixel((x, y), (255, 0, 0))  # 标记为红色
+            elif collision_map[y][x] == 2:
+                image.putpixel((x, y), (0, 255, 0))
 
     return image
 
@@ -33,7 +35,7 @@ def save_collision_map_to_json(collision_map, json_path):
 
 # 示例用法
 if __name__ == "__main__":
-    image_path = './img/bgr/chapter1_background.png'  
+    image_path = './img/bgr/About.png'  
     json_path = './other/collision_map.json'  # 保存的JSON文件路径
 
     collision_map, image = generate_collision_map(image_path)
