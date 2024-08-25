@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       message.textContent = "恭喜你，拼图完成了！";
       animatePuzzleCompletion();
       setTimeout(() => {
-        window.location.href = "../../chapter1.html"; // 跳转到上级目录的上级目录中的chapter0.html
+        window.location.href = "../../html/chapter1.html"; // 跳转到上级目录的上级目录中的chapter0.html
       }, 4000); // 等待4秒以完成动画效果
     }
   }
