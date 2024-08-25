@@ -30,19 +30,19 @@ function update(deltatime) {
   const moveSpeed = 100;
   const moveAmount = (moveSpeed * deltatime) / 1000;
 
-  if (keysPressed["ArrowUp"]) {
+  if (keysPressed["ArrowUp"] || keysPressed["w"] || keysPressed["W"]) {
     window.player.move(0, -moveAmount, collisionMap);
     player.updateImage("up");
   }
-  if (keysPressed["ArrowDown"]) {
+  if (keysPressed["ArrowDown"] || keysPressed["s"] || keysPressed["S"]) {
     window.player.move(0, moveAmount, collisionMap);
     player.updateImage("down");
   }
-  if (keysPressed["ArrowLeft"]) {
+  if (keysPressed["ArrowLeft"] || keysPressed["a"] || keysPressed["A"]) {
     window.player.move(-moveAmount, 0, collisionMap);
     player.updateImage("left");
   }
-  if (keysPressed["ArrowRight"]) {
+  if (keysPressed["ArrowRight"] || keysPressed["d"] || keysPressed["D"]) {
     window.player.move(moveAmount, 0, collisionMap);
     player.updateImage("right");
   }
