@@ -26,21 +26,6 @@ function handleKeyUp(event) {
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
 
-// 定义物品
-let item = {
-  x: 30,
-  y: 30,
-  width: 50,
-  height: 50,
-  draw: function (ctx) {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-  },
-  interact: function () {
-    alert("你捡到了一个物品！");
-  },
-};
-
 function update(deltatime) {
   const moveSpeed = 500;
   const moveAmount = (moveSpeed * deltatime) / 1000;
@@ -57,15 +42,8 @@ function update(deltatime) {
   if (keysPressed["ArrowRight"]) {
     window.player.move(moveAmount, 0, collisionMap);
   }
-
-  // 检测玩家是否接触到物品
-  if (
-    window.player.x < item.x + item.width &&
-    window.player.x + window.player.width > item.x &&
-    window.player.y < item.y + item.height &&
-    window.player.y + window.player.height > item.y
-  ) {
-    item.interact();
+  if (keysPressed["e"] || keysPressed["E"]) {
+    window.player.interact(collisionMap);
   }
 }
 
@@ -77,7 +55,6 @@ function draw(ctx) {
   if (window.player) {
     window.player.draw(ctx);
   }
-  item.draw(ctx); // 绘制物品
 }
 
 let lastRender = 0;

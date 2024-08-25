@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url(iback3.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 1px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .navbar a {
+            text-decoration: underline;
+            color: #000000;
+            font-size: 18px;
+            font-family: sans-serif;
+        }
+        .menu-container {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 50px;
+            width: 60%;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 20%;
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;                    
+        }
+        .menu-container:hover {
+            background-color: rgba(0, 0, 0, 0.4); /* 鼠标悬停时背景变为完全透明 */
+        }
+        .menu a {
+            width: 500px;
+            height: 60px;
+            display: block;
+            margin: 20px 0;
+            text-align: center;
+            line-height: 60px;
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            font-family: sans-serif;
+            box-sizing: border-box;
+            background: linear-gradient(90deg, #03a9f4,#f441a5,#ffeb3b,#03a9f4);
+            border-radius: 30px;
+            background-size: 400%;
+            z-index: 1;
+            position: relative;
+        }
+        a:hover {
+            animation: animate 8s linear infinite;
+        }
+        @keyframes animate {
+            from {
+                background-position: 0%;
+            }
+            to {
+                background-position: 400%;
+            }
+        }
+        a::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            z-index: -1;
+            background: linear-gradient(90deg, #03a9f4,#f441a5,#ffeb3b,#03a9f4);
+            background-size: 400%;
+            border-radius: 40px;
+            opacity: 0;
+            animation: animate 8s linear infinite;
+        }
+        a:hover::before {
+            filter: blur(20px);
+            opacity: 1;
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;                    
+        }
+        .menu h2 {
+            color: antiquewhite;
+        }
+        .menu p {
+            color: #d7651e;
+            font-size: larger;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <p>所在位置>><a href="index.html">minigame首页</a></p>
+    </div>
+    <div class="menu-container">
+        <div class="menu">
+            <h2>欢迎来到，ALPHA的梦境世界......</h2>
+            <p>作为潜梦者，你不得不继续探索...<br>哪怕前面就是深渊，哪怕再走一步，一切都会破碎...</p>
+            <h2>请作出你的选择：</h2>
+            <a href="1jumping/playround2.html">逃离光怪陆离的梦境（Mid-跳跃）</a>
+            <a href="2finddiff/playround1.html">识破梦境与现实的混淆（Pro-找不同）</a>
+            <p>注意：选择会影响成就和剧情走向......<br>但是谁又知道哪个更好呢？<br>听从自己的内心就对了！<br>进入小游戏后可点击上方导航栏返回minigame首页再做选择，游戏一旦结束，就回不来咯</p>
+        </div>
+    </div>
+</body>
+</html>

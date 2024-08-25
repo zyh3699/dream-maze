@@ -35,6 +35,55 @@ class Player {
 
     return false;
   }
+
+  interact(collisionMap) {
+    const playerCenterX = map.image.width / 2;
+    const playerCenterY = map.image.height / 2;
+
+    const offsetX = window.map.offsetX;
+    const offsetY = window.map.offsetY;
+
+    const interactX = Math.floor(playerCenterX + offsetX);
+    const interactY = Math.floor(playerCenterY + offsetY);
+
+    // 检测是否有物品
+    if (collisionMap[interactY][interactX] === 2) {
+      this.showMessage("你捡到了一个物品！");
+      this.fadeOutAndRedirect();
+      collisionMap[interactY][interactX] = 0;
+    }
+  }
+
+  fadeOutAndRedirect() {
+    const bodyElement = document.body;
+    bodyElement.style.transition = "opacity 1s ease-out";
+    bodyElement.style.opacity = 0;
+  }
+
+  showMessage(message) {
+    const messageElement = document.createElement("div");
+    messageElement.id = "message";
+    messageElement.style.position = "absolute";
+    messageElement.style.top = "20px";
+    messageElement.style.left = "50%";
+    messageElement.style.transform = "translateX(-50%)";
+    messageElement.style.background = "rgba(0, 0, 0, 0.7)";
+    messageElement.style.color = "white";
+    messageElement.style.padding = "10px 20px";
+    messageElement.style.borderRadius = "5px";
+    messageElement.style.opacity = 1;
+    messageElement.style.transition = "opacity 1s ease-out";
+    messageElement.innerText = message;
+    document.body.appendChild(messageElement);
+
+    setTimeout(() => {
+      messageElement.style.opacity = 0;
+      setTimeout(() => {
+        document.body.removeChild(messageElement);
+        window.location.href = "chapter0.html";
+      }, 1000); // 等待1秒以完成淡出效果
+    }, 2000); // 2秒后开始淡出
+  }
 }
 
 const player = new Player();
