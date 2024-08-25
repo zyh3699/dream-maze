@@ -83,13 +83,46 @@ body {
 }
 
 
+#countdown {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    font-size: 24px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    width: 200px;
+}
+
+#time-bar {
+    margin-top: 10px;
+    width: 100%;
+    height: 10px;
+    background-color: #555;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+#time-bar-progress {
+    height: 100%;
+    background-color: #f00;
+    width: 100%;
+    transition: width 1s linear;
+    border-radius: 5px;
+}
+
 
 #player {
     will-change: transform;
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: rgb(102, 145, 27);
+    width: 32px;
+    height: 66px;
+    background-image: url('img/player/up.png'); /* 替换为你的玩家图片路径 */
+    background-size: cover; /* 让图片适应元素大小 */
+
     top: 780px;
     left: 330px;
     z-index: 3; /* 确保玩家层级在烟雾层之上 */

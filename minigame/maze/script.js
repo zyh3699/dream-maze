@@ -46,6 +46,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // // 设置每隔 3 秒切换一次背景图片
     // setInterval(changeFogImage, 200);
  // 将迷宫图片绘制到 canvas 上
+ let timeLeft = 60; // 总时间，单位为秒
+const totalTime = timeLeft; // 用于计算进度条的初始宽度
+
+const timerElement = document.getElementById('timer');
+const progressBar = document.getElementById('time-bar-progress');
+
+const countdownInterval = setInterval(() => {
+    if (timeLeft > 0) {
+        timeLeft--;
+        timerElement.textContent = timeLeft;
+
+        // 计算进度条的宽度
+        const progressWidth = (timeLeft / totalTime) * 100;
+        progressBar.style.width = `${progressWidth}%`;
+    } else {
+        clearInterval(countdownInterval);
+        alert('Time is up! Game over!');
+        // 你可以在这里添加更多逻辑来处理游戏结束
+    }
+}, 1000);
+
  const mazeImage = new Image();
  mazeImage.src = 'img/mazered.jpg'; // 替换为你的迷宫图片路径
  mazeImage.onload = () => {
@@ -69,15 +90,19 @@ document.addEventListener('keydown', (e) => {
     switch (e.key) {
         case 'ArrowUp':
             newTop -= step;
+            player.style.backgroundImage = "url('img/player/up.png')";  // 显示向上的图标
             break;
         case 'ArrowDown':
             newTop += step;
+            player.style.backgroundImage = "url('img/player/down.png')";  // 显示向下的图标
             break;
         case 'ArrowLeft':
             newLeft -= step;
+            player.style.backgroundImage = "url('img/player/left.png')";  // 显示向左的图标
             break;
         case 'ArrowRight':
             newLeft += step;
+            player.style.backgroundImage = "url('img/player/right.png')";  // 显示向右的图标
             break;
     }
 
@@ -85,11 +110,10 @@ document.addEventListener('keydown', (e) => {
         newLeft >= 0 && newLeft <= fog.clientWidth - player.clientWidth) {
 
         // 检查新位置的中心点是否是红色
-        const centerX = newLeft + 10;
-        const centerY = newTop + 10;
-        const centerX1 = newLeft -10;
-        const centerY1 = newTop - 10;
-        if (!isCollision(centerX, centerY)&&!isCollision(centerX, centerY)) {
+        const centerX = newLeft+8 ;
+        const centerY = newTop +16;
+   
+        if (!isCollision(centerX, centerY)) {
             player.style.top = `${newTop}px`;
             player.style.left = `${newLeft}px`;
 
