@@ -92,21 +92,60 @@ document.addEventListener("DOMContentLoaded", () => {
     let isComplete = true;
 
     pieces.forEach((piece, index) => {
-        const position = index + 1;
-        if (piece.getAttribute("data-position") != position) {
-            isComplete = false;
-        }
+      const position = index + 1;
+      if (piece.getAttribute("data-position") != position) {
+        isComplete = false;
+      }
     });
 
     const message = document.getElementById("message");
     if (isComplete) {
-        message.textContent = "恭喜你，拼图完成了！";
-        document.body.classList.add("fade-out"); // 添加淡出效果
-        setTimeout(() => {
-            window.location.href = "../../html/chapter0.html"; // 跳转到上级目录的上级目录中的chapter0.html
-        }, 1000); // 等待1秒以完成淡出效果
+      message.textContent = "恭喜你，拼图完成了！";
+      animatePuzzleCompletion();
+      setTimeout(() => {
+        window.location.href = "../../chapter1.html"; // 跳转到上级目录的上级目录中的chapter0.html
+      }, 4000); // 等待4秒以完成动画效果
     }
-}
+  }
+
+  function animatePuzzleCompletion() {
+    const pieces = document.querySelectorAll(".puzzle-piece");
+    const container = document.getElementById("puzzle-container");
+    const containerRect = container.getBoundingClientRect();
+    const centerX = containerRect.left + containerRect.width / 2;
+    const centerY = containerRect.top + containerRect.height / 2;
+
+    pieces.forEach((piece) => {
+      const pieceRect = piece.getBoundingClientRect();
+      const offsetX = centerX - (pieceRect.left + pieceRect.width / 2);
+      const offsetY = centerY - (pieceRect.top + pieceRect.height / 2);
+
+      piece.style.transition = "transform 2s ease, opacity 2s ease";
+      piece.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(2)`;
+      piece.style.opacity = "0";
+    });
+
+    // 在动画结束后显示完整图片
+    setTimeout(() => {
+      container.innerHTML = ""; // 清空容器内容
+      const img = document.createElement("img");
+      img.src = "test.png"; // 设置完整图片的路径
+      img.style.width = "330px"; // 设置图片宽度为拼图容器的宽度
+      img.style.height = "330px"; // 设置图片高度为拼图容器的高度
+      img.style.position = "absolute";
+      img.style.top = "50%";
+      img.style.left = "50%";
+      img.style.transform = "translate(-50%, -50%)"; // 将图片居中
+      img.style.opacity = "0";
+      img.style.transition = "opacity 2s ease";
+      container.appendChild(img);
+
+      // 触发淡入效果
+      setTimeout(() => {
+        img.style.opacity = "1";
+      }, 50);
+    }, 2000); // 等待2秒以完成拼图移动和淡化动画
+  }
 
 function shufflePieces() {
     const pieces = document.querySelectorAll(".puzzle-piece");
