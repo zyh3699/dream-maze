@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const draggableElement = document.getElementById(id);
     const dropzone = event.target;
 
-    if (dropzone.classList.contains("puzzle-piece")) {
+    if (dropzone.classList.contains("puzzle-piece") && dropzone !== draggableElement) {
       const temp = document.createElement("div");
       container.replaceChild(temp, draggableElement);
       container.replaceChild(draggableElement, dropzone);
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       piece.style.top = "";
       const touch = event.changedTouches[0];
       const dropzone = document.elementFromPoint(touch.clientX, touch.clientY);
-      if (dropzone && dropzone.classList.contains("puzzle-piece")) {
+      if (dropzone && dropzone.classList.contains("puzzle-piece") && dropzone !== piece) {
         const temp = document.createElement("div");
         container.replaceChild(temp, piece);
         container.replaceChild(piece, dropzone);
@@ -92,22 +92,27 @@ document.addEventListener("DOMContentLoaded", () => {
     let isComplete = true;
 
     pieces.forEach((piece, index) => {
-      const position = index + 1;
-      if (piece.getAttribute("data-position") != position) {
-        isComplete = false;
-      }
+        const position = index + 1;
+        if (piece.getAttribute("data-position") != position) {
+            isComplete = false;
+        }
     });
 
+    const message = document.getElementById("message");
     if (isComplete) {
-      message.textContent = "恭喜你，拼图完成了！";
+        message.textContent = "恭喜你，拼图完成了！";
+        document.body.classList.add("fade-out"); // 添加淡出效果
     }
-  }
+}
 
-  function shufflePieces() {
+function shufflePieces() {
+    const pieces = document.querySelectorAll(".puzzle-piece");
+    const container = document.getElementById("puzzle-container");
     const piecesArray = Array.from(pieces);
     for (let i = piecesArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      container.appendChild(piecesArray[j]);
+        const j = Math.floor(Math.random() * (i + 1));
+        container.appendChild(piecesArray[j]);
     }
-  }
+}
+
 });
