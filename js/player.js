@@ -67,8 +67,12 @@ class Player {
 
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 2) {
-      this.showMessage("你捡到了一个物品！");
       this.fadeOutAndRedirect();
+      collisionMap[interactY][interactX] = 0;
+    }
+
+    if (collisionMap[interactY][interactX] === 3) {
+      this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
     }
   }
@@ -77,6 +81,9 @@ class Player {
     const bodyElement = document.body;
     bodyElement.style.transition = "opacity 1s ease-out";
     bodyElement.style.opacity = 0;
+    setTimeout(() => {
+      window.location.href = "../minigame/puzzle/try.html";
+    }, 1000); // 等待1秒以完成淡出效果
   }
 
   showMessage(message) {
@@ -99,7 +106,6 @@ class Player {
       messageElement.style.opacity = 0;
       setTimeout(() => {
         document.body.removeChild(messageElement);
-        window.location.href = "chapter0.html";
       }, 1000); // 等待1秒以完成淡出效果
     }, 2000); // 2秒后开始淡出
   }

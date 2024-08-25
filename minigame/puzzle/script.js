@@ -102,6 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isComplete) {
         message.textContent = "恭喜你，拼图完成了！";
         document.body.classList.add("fade-out"); // 添加淡出效果
+        setTimeout(() => {
+            window.location.href = "../../html/chapter0.html"; // 跳转到上级目录的上级目录中的chapter0.html
+        }, 1000); // 等待1秒以完成淡出效果
     }
 }
 
