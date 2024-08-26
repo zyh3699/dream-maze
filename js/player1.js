@@ -82,7 +82,7 @@ class Player {
     bodyElement.style.transition = "opacity 1s ease-out";
     bodyElement.style.opacity = 0;
     setTimeout(() => {
-      window.location.href = "../minigame/2choice-jump-zhaobutong/index.html";
+      window.location.href = "../minigame/maze/intro.html";
     }, 1000); // 等待1秒以完成淡出效果
   }
 
