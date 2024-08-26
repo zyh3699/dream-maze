@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="navbar">
+        <p>当前任务>>在梦境坍塌前快速 <em><strong>逃离</strong></em> 迷宫>>进入前员工的潜意识>>获取 <em>关键</em> 记忆</p>
+    </div>
+    
     <div class="maze-wrapper">
         <h1 class="maze-title">Maze</h1>
         <div class="maze-container">
@@ -23,9 +27,8 @@
             <div id="time-bar-progress"></div>
         </div>
     </div>
+    <button id="skip-button" onclick="window.location.href='next.html'">Skip</button>
 
-    <button id="skipButton" style="position: fixed; bottom: 10px; right: 10px; padding: 10px 20px; background-color: #f00; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Skip</button>
-    <!-- <div id="target-area"></div> 目标区域 -->
     <script src="script.js"></script>
 
     <script>
