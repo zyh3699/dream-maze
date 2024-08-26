@@ -16,12 +16,11 @@ body {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.2);
     padding: 1px;
-    text-align: center;
+    text-align: left;
     position: fixed;
     top: 0;
     left: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
 }
 .navbar a {
     text-decoration: underline;

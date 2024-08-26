@@ -65,7 +65,11 @@ imageRight1.addEventListener('click', function (e) {
             foundAnyDifference = true;
             
             createHighlight(x, y, 'blue', 20, 3); // 创建蓝色的空心圆圈
-            alert("你找到了！");
+            // alert("你找到了！");
+            if (foundDifferences==7) {
+                alert('恭喜你找到所有不同处！达成成就：前无古人，后无来者。按确认自动跳转。');
+                gameOver(foundDifferences);
+            }
             break; // 找到一个后退出循环
         }
     }
@@ -78,6 +82,7 @@ imageRight1.addEventListener('click', function (e) {
         createHighlight(x, y, 'red', 20, 3, 1000); // 创建红色的空心圆圈，1秒后消失
     }
 });
+
 
 function createHighlight(x, y, color, radius, thickness, duration) {
     const highlight = document.createElement('div');
@@ -153,7 +158,7 @@ restartButton.addEventListener('click', function () {
 
 // Skip the game
 skipButton.addEventListener('click', function () {
-    window.location.href = '../../../html/chapter2.html'; // Redirects to index.html
+    window.location.href = 'index.html'; // Redirects to index.html
 });
 
 // Reveal the correct points
@@ -192,8 +197,8 @@ function gameOver(won) {
     // 实现游戏结束逻辑，比如显示结果、禁用进一步点击等
     clearInterval(timer); // 停止计时器
     if (won) {
-        alert('恭喜你找到所有不同处！按确认自动跳转。');
-        window.location.href = '../../../html/chapter2.html';
+        // alert('恭喜你找到所有不同处！按确认自动跳转。');
+        window.location.href = 'index.html';
     } else {
         alert('游戏结束，你没有找到所有不同处。你可以选择重新开始，也可以选择跳过游戏。');
     }

@@ -2,8 +2,8 @@ class Player {
   constructor() {
     this.image = new Image();
     this.image.src = "../minigame/maze/img/player/up.png";
-    this.width = 40;
-    this.height = 40;
+    this.width = 32;
+    this.height = 66;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
   }
@@ -82,7 +82,7 @@ class Player {
     bodyElement.style.transition = "opacity 1s ease-out";
     bodyElement.style.opacity = 0;
     setTimeout(() => {
-      window.location.href = "../minigame/2choice-jump-zhaobutong/index.html";
+      window.location.href = "../minigame/maze/intro.html";
     }, 1000); // 等待1秒以完成淡出效果
   }
 
