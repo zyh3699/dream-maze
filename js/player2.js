@@ -2,8 +2,8 @@ class Player {
   constructor() {
     this.image = new Image();
     this.image.src = "../minigame/maze/img/player/up.png";
-    this.width = 32;
-    this.height = 66;
+    this.width = 40;
+    this.height = 40;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
   }
@@ -55,6 +55,23 @@ class Player {
     }
   }
 
+  show(collisionMap) {
+    const playerCenterX = map.image.width / 2;
+    const playerCenterY = map.image.height / 2;
+
+    const offsetX = window.map.offsetX;
+    const offsetY = window.map.offsetY;
+
+    const interactX = Math.floor(playerCenterX + offsetX);
+    const interactY = Math.floor(playerCenterY + offsetY);
+
+    // 检测是否有物品
+    if (collisionMap[interactY][interactX] === 4) {
+      this.showMessage("这里怎么有个骷髅");
+      collisionMap[interactY][interactX] = 0;
+    }
+  }
+
   interact(collisionMap) {
     const playerCenterX = map.image.width / 2;
     const playerCenterY = map.image.height / 2;
@@ -82,7 +99,7 @@ class Player {
     bodyElement.style.transition = "opacity 1s ease-out";
     bodyElement.style.opacity = 0;
     setTimeout(() => {
-      window.location.href = "../minigame/puzzle/try.html";
+      window.location.href = "../minigame/2choice-jump-zhaobutong/index.html";
     }, 1000); // 等待1秒以完成淡出效果
   }
 
