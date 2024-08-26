@@ -102,18 +102,51 @@ class Player {
           let charIndex = 0;
           const typingSpeed = 50; // 每个字符的打印速度（毫秒）
 
-          const dialogBox = document.createElement("div");
-          dialogBox.style.position = "fixed";
-          dialogBox.style.bottom = "10%";
-          dialogBox.style.left = "50%";
-          dialogBox.style.transform = "translateX(-50%)";
-          dialogBox.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-          dialogBox.style.color = "white";
-          dialogBox.style.padding = "10px";
-          dialogBox.style.borderRadius = "5px";
-          dialogBox.style.zIndex = "1000";
+          // 添加CSS样式
+          const style = document.createElement("style");
+          style.innerHTML = `
+        #dialogue {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%; /* 设置为80%宽度 */
+            height: 100px; /* 固定高度 */
+            text-align: center;
+            position: fixed; /* 固定位置 */
+            bottom: 20px; /* 固定在底部 */
+            left: 50%; /* 水平居中 */
+            transform: translateX(-50%); /* 水平居中 */
+            margin: 0; /* 移除水平居中 */
+            color: white; /* 字体颜色 */
+            font-size: 24px; /* 字体大小 */
+            display: flex;
+            justify-content: center;
+            align-items: center; /* 垂直居中 */
+            box-sizing: border-box;
+        }
+    #dialogue img {
+      position: absolute; /* 绝对定位 */
+      top: -100px; /* 距离顶部10px */
+      left: 10px; /* 距离左侧10px */
+      width: 100px; /* 图片宽度 */
+      height: 100px; /* 图片高度 */
+    }
+    `;
+          document.head.appendChild(style);
 
-          const dialogText = document.createElement("p");
+          // 创建对话框元素
+          const dialogBox = document.createElement("div");
+          dialogBox.id = "dialogue";
+
+          // 插入莱拉的图片
+          const lailaImage = document.createElement("img");
+          lailaImage.src = "../img/charactor/莱拉/laila down.png";
+          lailaImage.alt = "Image Description";
+          dialogBox.appendChild(lailaImage);
+
+          // 创建对话文本元素
+          const dialogText = document.createElement("span");
+          dialogText.id = "dialogueText";
           dialogBox.appendChild(dialogText);
           document.body.appendChild(dialogBox);
 
