@@ -2722,7 +2722,7 @@ function gameOver() {
     if (lifeCount <= 0) {
         alert('生命值已耗尽...您成功逃离了梦境！！！');
         // Optionally redirect to another page or restart the game
-        window.location.href = 'next.html';
+        window.location.href = '../../../html/chapter3.html';
     } else {
         // Restart the game or perform necessary actions after game over
     }
