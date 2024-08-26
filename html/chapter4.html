@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Move and Fill</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+    #intro {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../img/bgr/chapter4_background.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      color: white;
+      font-size: 24px;
+      padding: 20px;
+      box-sizing: border-box;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+    #dialogue {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 80%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="intro">
+    <div id="dialogue"></div>
+  </div>
+  <canvas id="gameCanvas" style="display: none;"></canvas>
+  <script src="../js/map4.js"></script>
+  <script src="../js/main4.js"></script>
+  <script src="../js/player4.js"></script>
+  <script>
+
+    const dialogues = [
+      "当莱拉和卡尔终于接近阿尔法梦境的核心时，他们发现整个梦境开始变得极其不稳定。",
+      "梦境的各个部分开始迅速崩塌，仿佛有一股不可抗拒的力量正在撕裂梦境的结构。",
+      "莱拉明白，如果她无法在梦境完全崩溃之前到达核心，他们将永远被困在梦境之中，无法再回到现实。"
+    ];
+    let currentDialogue = 0;
+    let charIndex = 0;
+    const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+    function typeDialogue() {
+      if (charIndex < dialogues[currentDialogue].length) {
+        document.getElementById('dialogue').innerText += dialogues[currentDialogue].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeDialogue, typingSpeed);
+      } else {
+        currentDialogue++;
+        charIndex = 0;
+      }
+    }
+
+    function showNextDialogue() {
+      if (currentDialogue < dialogues.length) {
+        document.getElementById('dialogue').innerText = '';
+        typeDialogue();
+      } else {
+        document.getElementById('intro').style.opacity = 0;
+        setTimeout(() => {
+          document.getElementById('intro').style.display = 'none';
+          document.getElementById('gameCanvas').style.display = 'block';
+          requestAnimationFrame(mainLoop);
+        }, 1000); // 等待1秒以完成淡出效果
+      }
+    }
+
+    document.getElementById('intro').addEventListener('click', showNextDialogue);
+    showNextDialogue();
+  </script>
+</body>
+</html>
