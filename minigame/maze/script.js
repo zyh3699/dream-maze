@@ -70,6 +70,7 @@ const countdownInterval = setInterval(() => {
         clearInterval(countdownInterval);
         alert('Time is up! Game over!');
         // 你可以在这里添加更多逻辑来处理游戏结束
+        window.location.href = "../../html/chapter2.html"; // 跳转到首页
     }
 }, 1000);
 
