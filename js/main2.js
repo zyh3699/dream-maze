@@ -27,7 +27,7 @@ document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
 
 function update(deltatime) {
-  const moveSpeed = 100;
+  const moveSpeed = 200;
   const moveAmount = (moveSpeed * deltatime) / 1000;
 
   if (keysPressed["ArrowUp"] || keysPressed["w"] || keysPressed["W"]) {
