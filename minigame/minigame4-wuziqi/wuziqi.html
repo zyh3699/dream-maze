@@ -7,9 +7,9 @@
     <style type="text/css">
         body {
             margin: 250px;
-			/* background-image: url('bg.jpg');
+			/* background-image: url('bg1.jpg');
             background-size: cover; 
-			background-repeat: no-repeat;  */
+			background-repeat: no-repeat;   */
         }
     </style>
     <script type="text/javascript">
@@ -26,9 +26,9 @@
         var openDebug = true;  //人机功能调试
 		
         var img_b = new Image();
-        img_b.src = "https://pic002.cnblogs.com/images/2012/391736/2012120921374013.png";//黑棋图片
+        img_b.src = "heiqi.png";//黑棋图片
         var img_w = new Image();
-        img_w.src = "https://pic002.cnblogs.com/images/2012/391736/2012120921375271.png";//白棋图片
+        img_w.src = "baiqi.png";//白棋图片
 		
 		var length = 15;
 		
@@ -432,7 +432,7 @@
 				contextW.clearRect(0,0,(length+1)*40,(length+1)*40); 
 				
 				/* 描绘权值数字 */
-				if (openDebug) drawWeightText();
+				if (openDebug) //drawWeightText();
 				
 				//console.log(allDirections);
 				/* 找出权值最大位置 */
@@ -743,7 +743,8 @@
 					alert("白棋赢了");
 				}
 				else {
-					alert("黑棋赢了");
+					alert("黑棋赢了，按确定键跳转下一层梦境");
+					window.location.href = '../../../html/chapter4.html';
 				}
 				gameOver = true;//设置该局棋盘已经赢了，不可以再走了
 			}
