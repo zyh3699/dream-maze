@@ -101,50 +101,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const message = document.getElementById("message");
     if (isComplete) {
       message.textContent = "恭喜你，拼图完成了！";
-      animatePuzzleCompletion();
-      setTimeout(() => {
-        window.location.href = "../../html/chapter1.html"; // 跳转到上级目录的上级目录中的chapter0.html
-      }, 4000); // 等待4秒以完成动画效果
+      animatePuzzleCompletion().then(() => {
+        var index = window.localStorage.userid;
+        var array = JSON.parse(window.localStorage.userArr);
+        array[index].achi1 = 1;
+        console.log("index:", index); // 确认index的值
+        console.log("array:", array); // 确认array是否被正确解析
+        console.log("array[index]:", array[index]); // 确认 array[index] 是否有效
+        console.log("array[index].achi1:", array[index].achi1);
+
+        window.localStorage.userArr = JSON.stringify(array);
+        alert("你已解锁成就");
+        window.location.href = "../../html/chapter1.html"; // 跳转到上级目录的上级目录中的chapter1.html
+      });
     }
   }
 
   function animatePuzzleCompletion() {
-    const pieces = document.querySelectorAll(".puzzle-piece");
-    const container = document.getElementById("puzzle-container");
-    const containerRect = container.getBoundingClientRect();
-    const centerX = containerRect.left + containerRect.width / 2;
-    const centerY = containerRect.top + containerRect.height / 2;
+    return new Promise((resolve) => {
+      const pieces = document.querySelectorAll(".puzzle-piece");
+      const container = document.getElementById("puzzle-container");
+      const containerRect = container.getBoundingClientRect();
+      const centerX = containerRect.left + containerRect.width / 2;
+      const centerY = containerRect.top + containerRect.height / 2;
 
-    pieces.forEach((piece) => {
-      const pieceRect = piece.getBoundingClientRect();
-      const offsetX = centerX - (pieceRect.left + pieceRect.width / 2);
-      const offsetY = centerY - (pieceRect.top + pieceRect.height / 2);
+      pieces.forEach((piece) => {
+        const pieceRect = piece.getBoundingClientRect();
+        const offsetX = centerX - (pieceRect.left + pieceRect.width / 2);
+        const offsetY = centerY - (pieceRect.top + pieceRect.height / 2);
 
-      piece.style.transition = "transform 2s ease, opacity 2s ease";
-      piece.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(2)`;
-      piece.style.opacity = "0";
-    });
+        piece.style.transition = "transform 2s ease, opacity 2s ease";
+        piece.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(2)`;
+        piece.style.opacity = "0";
+      });
 
-    // 在动画结束后显示完整图片
-    setTimeout(() => {
-      container.innerHTML = ""; // 清空容器内容
-      // const img = document.createElement("img");
-      // img.src = "test.png"; // 设置完整图片的路径
-      // img.style.width = "330px"; // 设置图片宽度为拼图容器的宽度
-      // img.style.height = "330px"; // 设置图片高度为拼图容器的高度
-      // img.style.position = "absolute";
-      // img.style.top = "50%";
-      // img.style.left = "50%";
-      // img.style.transform = "translate(-50%, -50%)"; // 将图片居中
-      // img.style.opacity = "0";
-      // img.style.transition = "opacity 2s ease";
-      // container.appendChild(img);
-
-      // 触发淡入效果
+      // 在动画完成后解析 Promise
       setTimeout(() => {
-        img.style.opacity = "1";
-      }, 100);
-    }, 2000); // 等待2秒以完成拼图移动和淡化动画
+        resolve();
+      }, 2000); // 等待2秒以完成动画
+    });
   }
 
 function shufflePieces() {
