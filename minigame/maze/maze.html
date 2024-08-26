@@ -23,6 +23,16 @@
             <div id="time-bar-progress"></div>
         </div>
     </div>
+    <button id="skipButton" style="position: fixed; bottom: 10px; right: 10px; padding: 10px 20px; background-color: #f00; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Skip</button>
+    <!-- <div id="target-area"></div> 目标区域 -->
+    <script src="script.js"></script>
+
+    <script>
+        document.getElementById('skipButton').addEventListener('click', function() {
+            window.location.href = '../../html/chapter2.html'; 
+        });
+    </script>
+
     <!-- <div id="target-area"></div> 目标区域 -->
     <script src="script.js"></script>
 </body>

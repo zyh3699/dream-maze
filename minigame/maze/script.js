@@ -68,7 +68,12 @@ const countdownInterval = setInterval(() => {
         progressBar.style.width = `${progressWidth}%`;
     } else {
         clearInterval(countdownInterval);
-        alert('Time is up! Game over!');
+        alert('Time is up! Game over!<br />获得成就“梦境守卫者”');
+        var index = window.localStorage.userid;
+					var array = JSON.parse(window.localStorage.userArr);
+                    array[index].achi3 = 1;
+                    window.localStorage.userArr = JSON.stringify(array);
+                    window.location.href = "../../achievement/achievement.html"; 
         // 你可以在这里添加更多逻辑来处理游戏结束
     }
 }, 1000);
@@ -129,17 +134,23 @@ document.addEventListener('keydown', (e) => {
             const fogY = newTop + player.clientHeight / 2;
             if (newTop >= targetArea.top && newTop <= targetArea.top + targetArea.height &&
                 newLeft >= targetArea.left && newLeft <= targetArea.left + targetArea.width) {
-            
-                clearInterval(countdownInterval);
-                    // var index = window.localStorage.userid;
-					// var array = JSON.parse(window.localStorage.userArr);
-					
-					// if (totalScore2 == 2) 
-					// 	array[index].achi2 = 1;
-						
-					
                 alert('获得成就“迷宫大师”');
-                window.location.href = "next_page.html"; // 跳转到下一个页面
+                clearInterval(countdownInterval);
+               
+                    var index = window.localStorage.userid;
+					var array = JSON.parse(window.localStorage.userArr);
+                    array[index].achi2 = 1;
+					console.log('index:', index);  // 确认index的值
+console.log('array:', array);  // 确认array是否被正确解析
+console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
+              console.log('array[index].achi2:', array[index].achi2); 
+
+					
+              window.localStorage.userArr = JSON.stringify(array);
+						
+					 window.location.href = "next_page.html"; // 跳转到下一个页面
+               
+                
                 }
             // fog.style.clipPath = `circle(${radius}px at ${fogX}px ${fogY}px)`;
         }
