@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Move and Fill</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+    #intro {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../img/bgr/chapter3_background.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      color: white;
+      font-size: 24px;
+      padding: 20px;
+      box-sizing: border-box;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+    #dialogue {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 80%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="intro">
+    <div id="dialogue"></div>
+  </div>
+  <canvas id="gameCanvas" style="display: none;"></canvas>
+  <script src="../js/map3.js"></script>
+  <script src="../js/main3.js"></script>
+  <script src="../js/player3.js"></script>
+  <script>
+
+    const dialogues = [
+      "经过层层梦境的探查，莱拉终于在一个极其隐秘的梦境层中找到了卡尔。",
+      "他被困在一个由组织设计的特殊梦境中，这个梦境层与之前的所有梦境都截然不同：",
+      "它看似平静祥和，但隐藏着极为危险的心灵陷阱。"
+    ];
+    let currentDialogue = 0;
+    let charIndex = 0;
+    const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+    function typeDialogue() {
+      if (charIndex < dialogues[currentDialogue].length) {
+        document.getElementById('dialogue').innerText += dialogues[currentDialogue].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeDialogue, typingSpeed);
+      } else {
+        currentDialogue++;
+        charIndex = 0;
+      }
+    }
+
+    function showNextDialogue() {
+      if (currentDialogue < dialogues.length) {
+        document.getElementById('dialogue').innerText = '';
+        typeDialogue();
+      } else {
+        document.getElementById('intro').style.opacity = 0;
+        setTimeout(() => {
+          document.getElementById('intro').style.display = 'none';
+          document.getElementById('gameCanvas').style.display = 'block';
+          requestAnimationFrame(mainLoop);
+        }, 1000); // 等待1秒以完成淡出效果
+      }
+    }
+
+    document.getElementById('intro').addEventListener('click', showNextDialogue);
+    showNextDialogue();
+  </script>
+</body>
+</html>
