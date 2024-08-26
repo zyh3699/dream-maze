@@ -13,13 +13,13 @@ body {
     background-repeat: no-repeat;
 }
 .mescontainer{
-    background-color: rgba(0,0,0, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 40px;
     width:200px;
     margin: 10px;text-align: center;
 }
 .mescontainer:hover {
-    background-color: rgba(0,0,0, 0.2); /* 鼠标悬停时背景变为完全透明 */
+    background-color: rgba(255, 255, 255, 0.6); /* 鼠标悬停时背景变为完全透明 */
 }
 h2 {
     margin-bottom: 20px;
