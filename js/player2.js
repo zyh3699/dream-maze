@@ -1,7 +1,7 @@
 class Player {
   constructor() {
     this.image = new Image();
-    this.image.src = "../minigame/maze/img/player/up.png";
+    this.image.src = "../img/charactor/莱拉/laila down.png";
     this.width = 32;
     this.height = 66;
     this.x = (window.innerWidth - this.width) / 2;
@@ -39,19 +39,19 @@ class Player {
   updateImage(direction) {
     switch (direction) {
       case "up":
-        this.image.src = "../minigame/maze/img/player/up.png";
+        this.image.src = "../img/charactor/莱拉/laila up.png";
         break;
       case "down":
-        this.image.src = "../minigame/maze/img/player/down.png";
+        this.image.src = "../img/charactor/莱拉/laila down.png";
         break;
       case "left":
-        this.image.src = "../minigame/maze/img/player/left.png";
+        this.image.src = "../img/charactor/莱拉/laila left.png";
         break;
       case "right":
-        this.image.src = "../minigame/maze/img/player/right.png";
+        this.image.src = "../img/charactor/莱拉/laila right.png";
         break;
       default:
-        this.image.src = "../img/charactor/main_character.jpg";
+        this.image.src = "../img/charactor/莱拉/laila down.png";
     }
   }
 
