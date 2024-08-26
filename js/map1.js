@@ -4,8 +4,8 @@ let map = {
   startY: 0,
   width: window.innerWidth,
   height: window.innerHeight,
-  offsetX: 0,
-  offsetY: 0,
+  offsetX: -120,
+  offsetY: -105,
   draw: function (ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(
@@ -33,8 +33,8 @@ map.image.src = "../img/bgr/chapter1_background.png"; // 替换为你的图片�
 map.image.onload = function () {
   window.map = map;
 
-  map.startX = (map.image.width - map.width / 5) / 2;
-  map.startY = (map.image.height - map.height / 5) / 2;
+  map.startX = -120+(map.image.width - map.width / 5) / 2;
+  map.startY = -105+(map.image.height - map.height / 5) / 2;
 
   map.draw(ctx);
 };
