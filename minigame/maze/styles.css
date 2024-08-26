@@ -132,8 +132,8 @@ body {
     background-image: url('img/player/up.png'); /* 替换为你的玩家图片路径 */
     background-size: cover; /* 让图片适应元素大小 */
 
-    top: 700px;
-    left: 300px;
+    top: 600px;
+    left: 310px;
     z-index: 3; /* 确保玩家层级在烟雾层之上 */
     transition: top 0.1s linear, left 0.1s linear; /* 平滑移动 */
 }

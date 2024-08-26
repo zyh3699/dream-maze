@@ -112,12 +112,13 @@ document.addEventListener('keydown', (e) => {
             break;
     }
 
-    if (newTop >= 0 && newTop <= fog.clientHeight - player.clientHeight &&
-        newLeft >= 0 && newLeft <= fog.clientWidth - player.clientWidth) {
+     if (newTop >= 0 && newTop <= fog.clientHeight - player.clientHeight &&
+         newLeft >= 50 && newLeft <= 800) 
+    {
 
         // 检查新位置的中心点是否是红色
         const centerX = newLeft+8 ;
-        const centerY = newTop +16;
+        const centerY = newTop +30;
    
         if (!isCollision(centerX, centerY)) {
             player.style.top = `${newTop}px`;
