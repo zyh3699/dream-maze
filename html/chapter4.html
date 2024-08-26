@@ -35,21 +35,35 @@
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
       border-radius: 10px;
-      max-width: 80%;
+      width: 80%; /* 设置为80%宽度 */
       text-align: center;
+      position: fixed; /* 固定位置 */
+      bottom: 20px; /* 固定在底部 */
+      left: 50%; /* 水平居中 */
+      transform: translateX(-50%); /* 水平居中 */
+      margin: 0; /* 移除水平居中 */
+    }
+    #dialogue img {
+      position: absolute; /* 绝对定位 */
+      top: -100px; /* 距离顶部10px */
+      left: 10px; /* 距离左侧10px */
+      width: 100px; /* 图片宽度 */
+      height: 100px; /* 图片高度 */
     }
   </style>
 </head>
 <body>
   <div id="intro">
-    <div id="dialogue"></div>
+    <div id="dialogue">
+      <img src="../img/charactor/莱拉/laila down.png" alt="Image Description"> <!-- 插入图片 -->
+      <span id="dialogueText"></span> <!-- 用于显示对话文本 -->
+    </div>
   </div>
   <canvas id="gameCanvas" style="display: none;"></canvas>
   <script src="../js/map4.js"></script>
   <script src="../js/main4.js"></script>
   <script src="../js/player4.js"></script>
   <script>
-
     const dialogues = [
       "当莱拉和卡尔终于接近阿尔法梦境的核心时，他们发现整个梦境开始变得极其不稳定。",
       "梦境的各个部分开始迅速崩塌，仿佛有一股不可抗拒的力量正在撕裂梦境的结构。",
@@ -61,20 +75,19 @@
 
     function typeDialogue() {
       if (charIndex < dialogues[currentDialogue].length) {
-        document.getElementById('dialogue').innerText += dialogues[currentDialogue].charAt(charIndex);
+        document.getElementById('dialogueText').innerText += dialogues[currentDialogue].charAt(charIndex);
         charIndex++;
         setTimeout(typeDialogue, typingSpeed);
-      } else {
-        currentDialogue++;
-        charIndex = 0;
       }
     }
 
     function showNextDialogue() {
-      if (currentDialogue < dialogues.length) {
-        document.getElementById('dialogue').innerText = '';
+      if (currentDialogue < dialogues.length - 1) {
+        currentDialogue++;
+        charIndex = 0;
+        document.getElementById('dialogueText').innerText = '';
         typeDialogue();
-      } else {
+      }else {
         document.getElementById('intro').style.opacity = 0;
         setTimeout(() => {
           document.getElementById('intro').style.display = 'none';
@@ -84,8 +97,10 @@
       }
     }
 
-    document.getElementById('intro').addEventListener('click', showNextDialogue);
-    showNextDialogue();
+    document.addEventListener('DOMContentLoaded', (event) => {
+      typeDialogue();
+      document.getElementById('dialogue').addEventListener('click', showNextDialogue);
+    });
   </script>
 </body>
 </html>
