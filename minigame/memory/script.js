@@ -80,14 +80,18 @@ const startGame = () => {
         selectors.timer.innerText = `Time: ${state.remainingTime} sec`
 
         if (state.remainingTime === 0) {
-            clearInterval(state.loop)
-            selectors.boardContainer.classList.add('flipped')
-            selectors.win.innerHTML = `
+          clearInterval(state.loop);
+          selectors.boardContainer.classList.add("flipped");
+          selectors.win.innerHTML = `
                 <span class="win-text">
                     You lose!<br />
                     with <span class="highlight">${state.totalFlips}</span> moves
                 </span>
-            `
+            `;
+          clearInterval(state.loop);
+          setTimeout(() => {
+            window.location.href = "../../html/final.html"; // 将 'main.js' 替换为你想跳转的页面路径
+          }, 4000); // 等待2秒后跳转
         }
     }, 1000)
 }
@@ -126,15 +130,18 @@ const flipCard = card => {
     }
     if (!document.querySelectorAll('.card:not(.flipped)').length) {
         setTimeout(() => {
-            selectors.boardContainer.classList.add('flipped')
-            selectors.win.innerHTML = `
+          selectors.boardContainer.classList.add("flipped");
+          selectors.win.innerHTML = `
                 <span class="win-text">
                     You won!<br />
                     with <span class="highlight">${state.totalFlips}</span> moves<br />
                     under <span class="highlight">${state.remainingTime}</span> seconds
                 </span>
-            `
-            clearInterval(state.loop)
+            `;
+          clearInterval(state.loop);
+          setTimeout(() => {
+            window.location.href = "../../html/final.html"; // 将 'main.js' 替换为你想跳转的页面路径
+          }, 4000); // 等待2秒后跳转
         }, 1000)
     }
 }
