@@ -2,8 +2,8 @@ class Player {
   constructor() {
     this.image = new Image();
     this.image.src = "../minigame/maze/img/player/up.png";
-    this.width = 40;
-    this.height = 40;
+    this.width = 32;
+    this.height = 66;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
   }
