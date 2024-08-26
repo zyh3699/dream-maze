@@ -148,7 +148,7 @@ console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
 						
 					
                
-                window.location.href = "next_page.html"; // 跳转到下一个页面
+                window.location.href = "../../html/chapter2.html"; // 跳转到下一个页面
                 }
             // fog.style.clipPath = `circle(${radius}px at ${fogX}px ${fogY}px)`;
         }
