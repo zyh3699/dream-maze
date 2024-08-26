@@ -35,21 +35,35 @@
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
       border-radius: 10px;
-      max-width: 80%;
+      width: 80%; /* 设置为80%宽度 */
       text-align: center;
+      position: fixed; /* 固定位置 */
+      bottom: 20px; /* 固定在底部 */
+      left: 50%; /* 水平居中 */
+      transform: translateX(-50%); /* 水平居中 */
+      margin: 0; /* 移除水平居中 */
+    }
+    #dialogue img {
+      position: absolute; /* 绝对定位 */
+      top: -100px; /* 距离顶部10px */
+      left: 10px; /* 距离左侧10px */
+      width: 100px; /* 图片宽度 */
+      height: 100px; /* 图片高度 */
     }
   </style>
 </head>
 <body>
   <div id="intro">
-    <div id="dialogue"></div>
+    <div id="dialogue">
+      <img src="../img/charactor/莱拉/laila down.png" alt="Image Description"> <!-- 插入图片 -->
+      <span id="dialogueText"></span> <!-- 用于显示对话文本 -->
+    </div>
   </div>
   <canvas id="gameCanvas" style="display: none;"></canvas>
   <script src="../js/map.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/player.js"></script>
   <script>
-
     const dialogues = [
       "玩家将进入一个被称为“梦境迷途”的虚拟世界，这是一个由多层梦境组成的复杂迷宫，每一层梦境都有独特的规则和环境。",
       "玩家将扮演一位被称为“编梦者”的角色，拥有进入他人梦境并操控梦境结构的能力。",
@@ -61,20 +75,19 @@
 
     function typeDialogue() {
       if (charIndex < dialogues[currentDialogue].length) {
-        document.getElementById('dialogue').innerText += dialogues[currentDialogue].charAt(charIndex);
+        document.getElementById('dialogueText').innerText += dialogues[currentDialogue].charAt(charIndex);
         charIndex++;
         setTimeout(typeDialogue, typingSpeed);
-      } else {
-        currentDialogue++;
-        charIndex = 0;
       }
     }
 
     function showNextDialogue() {
-      if (currentDialogue < dialogues.length) {
-        document.getElementById('dialogue').innerText = '';
+      if (currentDialogue < dialogues.length - 1) {
+        currentDialogue++;
+        charIndex = 0;
+        document.getElementById('dialogueText').innerText = '';
         typeDialogue();
-      } else {
+      }else {
         document.getElementById('intro').style.opacity = 0;
         setTimeout(() => {
           document.getElementById('intro').style.display = 'none';
@@ -84,8 +97,10 @@
       }
     }
 
-    document.getElementById('intro').addEventListener('click', showNextDialogue);
-    showNextDialogue();
+    document.addEventListener('DOMContentLoaded', (event) => {
+      typeDialogue();
+      document.getElementById('dialogue').addEventListener('click', showNextDialogue);
+    });
   </script>
 </body>
 </html>
