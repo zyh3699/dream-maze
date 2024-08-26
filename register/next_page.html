@@ -17,7 +17,17 @@
 <body>
     <div class="container">
         <div class="button-group">
-           
+            <h2 id="logintitle"></h2>
+            <script>
+                var array = JSON.parse(window.localStorage.userArr);
+                var index = window.localStorage.userid;
+                document.getElementById("logintitle").innerHTML = "欢迎，" + array[index].username;
+                console.log('index:', index);  // 确认index的值
+console.log('array:', array);  // 确认array是否被正确解析
+console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
+console.log('array[index].achi2:', array[index].achi2);
+                // document.getElementById("logintitle").innerHTML = "欢迎，" + window.localStorage.username;
+            </script>
                     <form action="../html/chapter0.html">
                         <button type="submit">新游戏</button>
                     </form>
@@ -26,9 +36,10 @@
                     </form>
                     <form action="index.html">
                         <button type="submit">退出登录</button>
-                    </form>
-              
-           </div>
+                   
+
+
+                    </div>
      
     </div>
 

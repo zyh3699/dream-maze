@@ -13,8 +13,75 @@
                text-align:center;
            }
        </style>
+       <script type="text/javascript">
+
+
+		// 字母和数字的验证
+		jQuery.validator.addMethod("chrnum", function (value, element) {
+			var chrnum = /^([a-zA-Z0-9]+)$/;
+			return this.optional(element) || (chrnum.test(value));
+		}, "只能输入数字和字母(字符A-Z, a-z, 0-9)");
+
+		//下面是表单拦截提示，可取消，否则无法跳转
+		/*
+		$.validator.setDefaults({
+			submitHandler: function() {
+				//alert("提交事件!");
+			}
+		});*/
+		$().ready(function () {
+			// 在键盘按下并释放及提交后验证提交表单
+			$("#loginform").validate({
+				rules: {
+					name: "required",//用户名
+					//密码是6位以上
+					password: {
+						required: true,
+						minlength: 6,
+						maxlength: 10,
+						chrnum: true
+					},
+					//验证密码
+					repassword: {
+						required: true,
+						chrnum: true,
+						equalTo: "#password"
+					},
+					//手机号
+					phone: {
+						required: true,
+						mobile: true
+					},
+				},
+				messages: {
+					name: "请输入您的用户名",
+					password: {
+						required: "请输入密码",
+						minlength: "请输入6~10位密码",
+						maxlength: "请输入6~10位密码"
+					},
+					repassword: {
+						required: "请输入密码",
+						equalTo: "两次密码输入不一致"
+					}
+				}
+			});
+		});
+
+	</script>
+     <script>
+        function goTologin() {
+                       window.location.href = 'index.html';
+                   }
+                   </script>
+	<style>
+		.error {
+			color: red;
+		}
+	</style>
+
 </head>
-<body>
+<!-- <body>
     <div class="container">
         <h2>注册</h2>
         <form id="registerForm">
@@ -57,4 +124,75 @@
         });
     </script>
 </body>
+</html> -->
+<body>
+	<section>
+		<!-- 登录框 -->
+		<div class="container">
+			<div class="form">
+				<h2>注册</h2>
+				<form id="loginform" method="post" name="form1">
+					<div class="inputBox">
+						<input type="text" placeholder="账户" name="id" id="id">
+					</div>
+					<div class="inputBox">
+						<input type="password" placeholder="请输入密码" name="password" id="password">
+					</div>
+					<div class="inputBox">
+						<input type="password" placeholder="再次输入密码" name="password" id="repassword">
+					</div>
+					<div class="inputBox">
+						<input type="reset" value="注册" onclick="save_data()" id="input1">
+					</div>
+					<script>
+						function save_data() {
+							var username = document.getElementById("id").value;
+							var password = document.getElementById("password").value;
+                            var repassword = document.getElementById("repassword").value;
+							/* ------------- */
+							if (window.localStorage.userArr != "undefined" && window.localStorage.userArr != undefined) {//判断是否存在
+								var array = JSON.parse(window.localStorage.userArr);
+							} else {
+								array = [];//创建一个新数组
+							}
+                            if (password !== repassword) {
+                            alert('两次输入的密码不一致！');
+                               return;
+                                   }
+							for (var i = 0; i < array.length; i++) {
+								if (username == array[i].username) {//判断是否有相同账号
+									alert("该账号已存在");
+									return;
+								}
+							}
+							var obj = { // 用户结构体
+								username: username,
+								password: password,
+								
+							}
+							array.push(obj);
+							window.localStorage.userArr = JSON.stringify(array);
+							window.alert("注册成功！");
+							window.localStorage.username = username;
+							window.localStorage.password = password;
+							// localStorage.setItem("username",username);
+							// localStorage.setItem("password",password);
+							window.location.assign("index.html");
+						}
+					</script>
+                    <div class="inputbox">
+                        <button type="button" onclick="goTologin()">登录</button>
+						<!-- <input type="reset" value="登录" onclick="find_date()" id="input1"> -->
+					</div>
+					<!-- <p class="forget">已有账户?<a href="index.html">
+							点击登录
+						</a></p> -->
+				</form>
+			</div>
+		</div>
+		</div>
+		</div>
+	</section>
+</body>
+
 </html>
