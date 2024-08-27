@@ -54,7 +54,24 @@ class Player {
         this.image.src = "../img/charactor/莱拉/laila down.png";
     }
   }
+updateAdjacentPieces(x, y) {
+    // 检查边界条件
+    if (x < 0 || y < 0 || x >= collisionMap[0].length || y >= collisionMap.length) {
+      return;
+    }
 
+    // 如果当前位置是3，则将其更新为100
+    if (collisionMap[y][x] === 3||collisionMap[y][x] === 6) {
+      collisionMap[y][x] = 100;
+
+      // 递归更新相邻的格子
+      this.updateAdjacentPieces(x + 1, y);
+      this.updateAdjacentPieces(x - 1, y);
+      this.updateAdjacentPieces(x, y + 1);
+      this.updateAdjacentPieces(x, y - 1);
+    }
+    else { return; }
+  }
   interact(collisionMap) {
     const playerCenterX = map.image.width / 2;
     const playerCenterY = map.image.height / 2;
@@ -75,68 +92,70 @@ class Player {
       this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
       }
-      if (collisionMap[interactY][interactX] === 5) {
+      if (collisionMap[interactY][interactX] === 6) {
         const dialogues = [
-          "经过层层梦境的探查，莱拉终于在一个极其隐秘的梦境层中找到了卡尔。",
-          "他被困在一个由组织设计的特殊梦境中，这个梦境层与之前的所有梦境都截然不同：",
-          "它看似平静祥和，但隐藏着极为危险的心灵陷阱。",
+          {
+            text: "这些组织的线索指向了全球各地的多家企业和政府机构……它们表面上合法，背地里却在利用梦境技术操控人们的意识。这不可能只是偶然。",
+            image: "../img/charactor/莱拉/laila down.png", // 对应的图片路径
+          },
+          {
+            text: "这与我之前的一些研究相吻合。梦境技术本就有极大的潜在风险，一旦被滥用，后果不堪设想。",
+            image: "../img/charactor/艾德里安/Wizard down.png", // 另一张图片
+          },
+          {
+            text: "只有一条路可走——继续深入。下一个目标是一位组织的前成员，他或许知道更多。",
+            image: "../img/charactor/莱拉/laila down.png",
+          },
+          {
+            text: "为了进一步探究组织的真面目，莱拉与艾德里安再次联手，进入了一次更加危险的多层梦境探险。他们的目标是一名知晓组织内情的前成员。",
+           
+          },
+          {
+            text: "我们必须找到他，他知道的可能是打破这个阴谋的关键。",
+            image: "../img/charactor/莱拉/laila down.png", // 另一张图片
+          },
+          {
+            text: "准备好面对更多的危险了吗？每层梦境都比上一层更加复杂和危险。",
+            image: "../img/charactor/艾德里安/Wizard down.png", // 另一张图片
+          },
+          {
+            text: "你该知道，我从不惧怕挑战。",
+            image: "../img/charactor/莱拉/laila down.png", // 另一张图片
+          },
+          
         ];
         let currentDialogue = 0;
         let charIndex = 0;
         const typingSpeed = 50; // 每个字符的打印速度（毫秒）
-
+  
         // 添加CSS样式
         const style = document.createElement("style");
-        style.innerHTML = `
-        #dialogue {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%; /* 设置为80%宽度 */
-            height: 100px; /* 固定高度 */
-            text-align: center;
-            position: fixed; /* 固定位置 */
-            bottom: 20px; /* 固定在底部 */
-            left: 50%; /* 水平居中 */
-            transform: translateX(-50%); /* 水平居中 */
-            margin: 0; /* 移除水平居中 */
-            color: white; /* 字体颜色 */
-            font-size: 24px; /* 字体大小 */
-            display: flex;
-            justify-content: center;
-            align-items: center; /* 垂直居中 */
-            box-sizing: border-box;
-        }
-    #dialogue img {
-      position: absolute; /* 绝对定位 */
-      top: -100px; /* 距离顶部10px */
-      left: 10px; /* 距离左侧10px */
-      width: 100px; /* 图片宽度 */
-      height: 100px; /* 图片高度 */
-    }
-    `;
         document.head.appendChild(style);
-
+  
         // 创建对话框元素
         const dialogBox = document.createElement("div");
         dialogBox.id = "dialogue";
-
+  
         // 插入莱拉的图片
         const lailaImage = document.createElement("img");
-        lailaImage.src = "../img/charactor/莱拉/laila down.png";
-        lailaImage.alt = "Image Description";
+        lailaImage.style.width = "100px"; // 将宽度设置为200像素
+        lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
         dialogBox.appendChild(lailaImage);
-
+  
         // 创建对话文本元素
         const dialogText = document.createElement("span");
         dialogText.id = "dialogueText";
         dialogBox.appendChild(dialogText);
         document.body.appendChild(dialogBox);
-
+        dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+        dialogText.style.fontSize = "20px"; // 字体大小
+        dialogText.style.color = "#FFFFFF"; // 字体颜色
+        dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+        dialogText.style.lineHeight = "1.5"; // 行高
         function typeDialogue() {
-          if (charIndex < dialogues[currentDialogue].length) {
-            dialogText.innerText +=
-              dialogues[currentDialogue].charAt(charIndex);
+          
+          if (charIndex < dialogues[currentDialogue].text.length) {
+            dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
             charIndex++;
             setTimeout(typeDialogue, typingSpeed);
           } else {
@@ -144,10 +163,11 @@ class Player {
             charIndex = 0;
           }
         }
-
+  
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
             dialogText.innerText = "";
+            lailaImage.src = dialogues[currentDialogue].image;
             typeDialogue();
           } else {
             document.body.removeChild(dialogBox);
@@ -155,11 +175,12 @@ class Player {
             requestAnimationFrame(mainLoop);
           }
         }
-
+  
         dialogBox.addEventListener("click", showNextDialogue);
         showNextDialogue();
-
-        collisionMap[interactY][interactX] = 0;
+  
+        this.updateAdjacentPieces(interactX, interactY);
+        
       }
   }
 

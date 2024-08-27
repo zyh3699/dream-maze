@@ -14,7 +14,8 @@ def generate_collision_map(image_path):
             # 如果是白色像素，则标记为1，否则为0
             row.append(1 if (r == 255 and g == 255 and b == 255) else 
  (2 if (r == 0 and g == 0 and b == 0) else 
-  (3 if (r == 239 and g == 55 and b == 58) else 0)))
+  (3 if (r == 239 and g == 55 and b == 58) else
+   (6 if (r == 62 and g == 204 and b == 253)else 0))))
         collision_map.append(row)
 
     return collision_map, image
@@ -30,6 +31,8 @@ def mark_collision_map(collision_map, image):
                 image.putpixel((x, y), (0, 255, 0))
             elif collision_map[y][x] == 3:
                 image.putpixel((x, y), (0, 0, 255))
+            elif collision_map[y][x] == 6:
+                image.putpixel((x, y), (255, 255, 255))
 
     return image
 
