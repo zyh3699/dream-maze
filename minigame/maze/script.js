@@ -69,6 +69,18 @@ const countdownInterval = setInterval(() => {
     } else {
         clearInterval(countdownInterval);
         alert('Time is up! Game over!');
+        alert("获得成就“梦境守卫者”");
+        clearInterval(countdownInterval);
+
+        var index = window.localStorage.userid;
+        var array = JSON.parse(window.localStorage.userArr);
+        array[index].achi3 = 1;
+        console.log("index:", index); // 确认index的值
+        console.log("array:", array); // 确认array是否被正确解析
+        console.log("array[index]:", array[index]); // 确认 array[index] 是否有效
+        console.log("array[index].achi3:", array[index].achi3);
+
+        window.localStorage.userArr = JSON.stringify(array);
         // 你可以在这里添加更多逻辑来处理游戏结束
         window.location.href = "../../html/chapter2.html"; // 跳转到首页
     }
@@ -148,7 +160,7 @@ console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
 						
 					
                
-                window.location.href = "next_page.html"; // 跳转到下一个页面
+                window.location.href = "../../html/chapter2.html"; // 跳转到下一个页面
                 }
             // fog.style.clipPath = `circle(${radius}px at ${fogX}px ${fogY}px)`;
         }

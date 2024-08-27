@@ -70,9 +70,9 @@ class Player {
       this.fadeOutAndRedirect();
       collisionMap[interactY][interactX] = 0;
     }
-
+ 
     if (collisionMap[interactY][interactX] === 3) {
-      this.showMessage("你捡到了一个物品！");
+      this.showMessage("你捡到了4块拼图，一共有16块！");
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 5) {
