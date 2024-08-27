@@ -64,7 +64,7 @@ class Player {
     }
 
     // 如果当前位置是3，则将其更新为100
-    if (collisionMap[y][x] === 3) {
+    if (collisionMap[y][x] === 3||collisionMap[y][x] === 6) {
       collisionMap[y][x] = 100;
 
       // 递归更新相邻的格子
@@ -195,7 +195,7 @@ class Player {
       dialogBox.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
-      collisionMap[interactY][interactX] = 100;
+      this.updateAdjacentPieces(interactX, interactY);
     }
   }
 
