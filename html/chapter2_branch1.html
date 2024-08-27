@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Move and Fill</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+    #intro {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../img/bgr/chapter2_branch1.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      color: white;
+      font-size: 24px;
+      padding: 20px;
+      box-sizing: border-box;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+    
+    #dialogue img {
+      position: absolute; /* 绝对定位 */
+      top: -100px; /* 距离顶部10px */
+      left: 10px; /* 距离左侧10px */
+      width: 100px; /* 图片宽度 */
+      height: 100px; /* 图片高度 */
+    }
+  </style>
+</head>
+<body>
+  <div id="intro">
+    <div id="dialogue">
+      <img src="../img/charactor/莱拉/laila down.png" alt="Image Description"> <!-- 插入图片 --> <!-- 用于显示对话文本 -->
+    </div>
+  </div>
+  <canvas id="gameCanvas" style="display: none;"></canvas>
+  <script src="../js/map.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/player.js"></script>
+  <script>
+		setTimeout(function() {
+		  alert('gameover');
+		  window.location.href = '../../../register/next_page.html';
+		}, 1000); // 1000 毫秒后弹出窗口
+	  </script>
+</body>
+</html>
