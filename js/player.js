@@ -29,7 +29,7 @@ class Player {
     const newY = Math.floor(playerCenterY + offsetY + dy);
 
     // 碰撞检测
-    if (collisionMap[newY][newX] === 1) {
+    if (collisionMap[newY][newX] === 1 ) {
       return true; // 碰撞检测
     }
 
@@ -75,7 +75,11 @@ class Player {
       this.showMessage("你捡到了4块拼图，一共有16块！");
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 5) {
+    // if (collisionMap[interactY][interactX] === 6) {
+    //   this.showMessage("你捡到了4块拼图，一共有16块！");
+     
+    // }
+    if (collisionMap[interactY][interactX] === 6) {
       const dialogues = [
         "经过层层梦境的探查，莱拉终于在一个极其隐秘的梦境层中找到了卡尔。",
         "他被困在一个由组织设计的特殊梦境中，这个梦境层与之前的所有梦境都截然不同：",
@@ -158,7 +162,7 @@ class Player {
       dialogBox.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
-      collisionMap[interactY][interactX] = 0;
+      
     }
   }
 
