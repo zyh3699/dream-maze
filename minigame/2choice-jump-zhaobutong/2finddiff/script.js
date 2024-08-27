@@ -223,7 +223,7 @@ function gameOver(won) {
         console.log("array[index].achi5:", array[index].achi5);
 
         window.localStorage.userArr = JSON.stringify(array);
-        window.location.href = "../../../html/chapter3.html";
+        window.location.href = "../../../html/chapter2_branch1.html";
     }
 }
 
