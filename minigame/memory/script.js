@@ -101,7 +101,7 @@ const startGame = () => {
 
             window.localStorage.userArr = JSON.stringify(array);
           setTimeout(() => {
-            window.location.href = "../../html/final.html"; // 将 'main.js' 替换为你想跳转的页面路径
+            window.location.href = "../../html/chapter4_branch1.html"; // 将 'main.js' 替换为你想跳转的页面路径
           }, 4000); // 等待2秒后跳转
         }
     }, 1000)
