@@ -184,7 +184,7 @@ class Player {
     bodyElement.style.transition = "opacity 1s ease-out";
     bodyElement.style.opacity = 0;
     setTimeout(() => {
-      window.location.href = "../html/chapter0.html";
+      window.location.href = "../html/ending.html";
     }, 1000); // 等待1秒以完成淡出效果
   }
 
