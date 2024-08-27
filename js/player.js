@@ -162,7 +162,7 @@ class Player {
       dialogBox.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
-      
+      collisionMap[interactY][interactX] = 0;
     }
   }
 
