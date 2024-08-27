@@ -88,7 +88,18 @@ const startGame = () => {
                     with <span class="highlight">${state.totalFlips}</span> moves
                 </span>
             `;
-          clearInterval(state.loop);
+            clearInterval(state.loop);
+            alert("获得成就“虚无的囚徒”");
+
+            var index = window.localStorage.userid;
+            var array = JSON.parse(window.localStorage.userArr);
+            array[index].achi9 = 1;
+            console.log("index:", index); // 确认index的值
+            console.log("array:", array); // 确认array是否被正确解析
+            console.log("array[index]:", array[index]); // 确认 array[index] 是否有效
+            console.log("array[index].achi9:", array[index].achi9);
+
+            window.localStorage.userArr = JSON.stringify(array);
           setTimeout(() => {
             window.location.href = "../../html/final.html"; // 将 'main.js' 替换为你想跳转的页面路径
           }, 4000); // 等待2秒后跳转
@@ -138,7 +149,18 @@ const flipCard = card => {
                     under <span class="highlight">${state.remainingTime}</span> seconds
                 </span>
             `;
-          clearInterval(state.loop);
+            clearInterval(state.loop);
+            alert("获得成就“梦境修复者”");
+
+            var index = window.localStorage.userid;
+            var array = JSON.parse(window.localStorage.userArr);
+            array[index].achi8 = 1;
+            console.log("index:", index); // 确认index的值
+            console.log("array:", array); // 确认array是否被正确解析
+            console.log("array[index]:", array[index]); // 确认 array[index] 是否有效
+            console.log("array[index].achi8:", array[index].achi8);
+
+            window.localStorage.userArr = JSON.stringify(array);
           setTimeout(() => {
             window.location.href = "../../html/final.html"; // 将 'main.js' 替换为你想跳转的页面路径
           }, 4000); // 等待2秒后跳转
