@@ -6,6 +6,7 @@ class Player {
     this.height = 66;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
+    this.puzzle = 0;
   }
 
   draw(ctx) {
@@ -55,6 +56,26 @@ class Player {
     }
   }
 
+  // 定义一个递归函数来更新相邻的格子
+  updateAdjacentPieces(x, y) {
+    // 检查边界条件
+    if (x < 0 || y < 0 || x >= collisionMap[0].length || y >= collisionMap.length) {
+      return;
+    }
+
+    // 如果当前位置是3，则将其更新为100
+    if (collisionMap[y][x] === 3||collisionMap[y][x] === 6) {
+      collisionMap[y][x] = 100;
+
+      // 递归更新相邻的格子
+      this.updateAdjacentPieces(x + 1, y);
+      this.updateAdjacentPieces(x - 1, y);
+      this.updateAdjacentPieces(x, y + 1);
+      this.updateAdjacentPieces(x, y - 1);
+    }
+    else { return; }
+  }
+
   interact(collisionMap) {
     const playerCenterX = map.image.width / 2;
     const playerCenterY = map.image.height / 2;
@@ -67,13 +88,25 @@ class Player {
 
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 2) {
-      this.fadeOutAndRedirect();
-      collisionMap[interactY][interactX] = 0;
+      if (this.puzzle === 16) {
+        this.fadeOutAndRedirect();
+      }
+      else {
+        this.showMessage("你还没有找到全部碎片，请继续寻找吧！");
+      }
     }
  
     if (collisionMap[interactY][interactX] === 3) {
-      this.showMessage("你捡到了4块拼图，一共有16块！");
-      collisionMap[interactY][interactX] = 0;
+      if (this.puzzle < 16) {
+        this.puzzle += 4;
+        this.showMessage(`你收集了碎片（${this.puzzle}/16）`);
+        if (this.puzzle === 16) {
+          setTimeout(() => {
+            this.showMessage("你已集齐了碎片，请去修复它们吧！");
+          }, 4000); // 延迟2秒显示消息
+        }
+        this.updateAdjacentPieces(interactX, interactY);
+      }
     }
     // if (collisionMap[interactY][interactX] === 6) {
     //   this.showMessage("你捡到了4块拼图，一共有16块！");
@@ -158,7 +191,7 @@ class Player {
       dialogBox.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
-      collisionMap[interactY][interactX] = 0;
+      this.updateAdjacentPieces(interactX, interactY);
     }
   }
 
