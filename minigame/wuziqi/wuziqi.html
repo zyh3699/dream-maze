@@ -828,9 +828,32 @@
 			if (chess1 == null) {
 				if (chess == 1) {
 					alert("白棋赢了");
+					alert("获得成就“意志的陨落”");
+
+        var index = window.localStorage.userid;
+        var array = JSON.parse(window.localStorage.userArr);
+        array[index].achi7 = 2;
+        console.log("index:", index); // 确认index的值
+        console.log("array:", array); // 确认array是否被正确解析
+        console.log("array[index]:", array[index]); // 确认 array[index] 是否有效
+        console.log("array[index].achi7:", array[index].achi7);
+
+        window.localStorage.userArr = JSON.stringify(array);
+		window.location.href = '../../../html/chapter4.html';
 				}
 				else {
 					alert("黑棋赢了，按确定键跳转下一层梦境");
+					alert("获得成就“心灵棋士”");
+
+        var index = window.localStorage.userid;
+        var array = JSON.parse(window.localStorage.userArr);
+        array[index].achi6 = 1;
+        console.log("index:", index); // 确认index的值
+        console.log("array:", array); // 确认array是否被正确解析
+        console.log("array[index]:", array[index]); // 确认 array[index] 是否有效
+        console.log("array[index].achi6:", array[index].achi6);
+
+        window.localStorage.userArr = JSON.stringify(array);
 					window.location.href = '../../../html/chapter4.html';
 				}
 				gameOver = true;//设置该局棋盘已经赢了，不可以再走了

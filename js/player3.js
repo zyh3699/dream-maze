@@ -185,7 +185,7 @@ class Player {
     bodyElement.style.transition = "opacity 1s ease-out";
     bodyElement.style.opacity = 0;
     setTimeout(() => {
-      window.location.href = "../minigame/minigame4-wuziqi/index4.html";
+      window.location.href = "../minigame/wuziqi/index4.html";
     }, 1000); // 等待1秒以完成淡出效果
   }
 

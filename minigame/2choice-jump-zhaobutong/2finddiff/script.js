@@ -197,10 +197,33 @@ function gameOver(won) {
     // 实现游戏结束逻辑，比如显示结果、禁用进一步点击等
     clearInterval(timer); // 停止计时器
     if (won) {
+        alert("获得成就“虚假现实的觉醒”");
+
+        var index = window.localStorage.userid;
+        var array = JSON.parse(window.localStorage.userArr);
+        array[index].achi4 = 1;
+        console.log("index:", index); // 确认index的值
+        console.log("array:", array); // 确认array是否被正确解析
+        console.log("array[index]:", array[index]); // 确认 array[index] 是否有效
+        console.log("array[index].achi4:", array[index].achi4);
+
+        window.localStorage.userArr = JSON.stringify(array);
         // alert('恭喜你找到所有不同处！按确认自动跳转。');
         window.location.href = '../../../html/chapter3.html';
     } else {
-        alert('游戏结束，你没有找到所有不同处。你可以选择重新开始，也可以选择跳过游戏。');
+        alert('游戏结束，你没有找到所有不同处。你迷失在梦境之中。');
+        alert("获得成就“迷失的现实”");
+
+        var index = window.localStorage.userid;
+        var array = JSON.parse(window.localStorage.userArr);
+        array[index].achi5 = 1;
+        console.log("index:", index); // 确认index的值
+        console.log("array:", array); // 确认array是否被正确解析
+        console.log("array[index]:", array[index]); // 确认 array[index] 是否有效
+        console.log("array[index].achi5:", array[index].achi5);
+
+        window.localStorage.userArr = JSON.stringify(array);
+        window.location.href = "../../../html/chapter3.html";
     }
 }
 
