@@ -81,9 +81,27 @@ class Player {
     // }
     if (collisionMap[interactY][interactX] === 6) {
       const dialogues = [
-        "经过层层梦境的探查，莱拉终于在一个极其隐秘的梦境层中找到了卡尔。",
-        "他被困在一个由组织设计的特殊梦境中，这个梦境层与之前的所有梦境都截然不同：",
-        "它看似平静祥和，但隐藏着极为危险的心灵陷阱。",
+        {
+          text: "这地方让我有种不祥的预感，艾德里安。你确定文件就在这里？",
+          image: "../img/charactor/莱拉/laila down.png", // 对应的图片路径
+        },
+        {
+          text: "根据我们的线索，梦境的深处藏着答案。我们必须保持警惕，这位企业家的潜意识比我们想象的要复杂得多。",
+          image: "../img/charactor/艾德里安/Wizard down.png", // 另一张图片
+        },
+        {
+          text: "莱拉和艾德里安在城市的迷宫中穿行，高楼大厦上闪烁的电子屏幕播放着梦境主人的记忆片段，像一张巨大的拼图等待解开。",
+        
+        },
+        {
+          text: "这些画面……是他过去的片段？每一个都透露出他的某种心情和意图。",
+          image: "../img/charactor/莱拉/laila down.png", // 另一张图片
+        },
+        {
+          text: "是的。我们必须把这些碎片拼接起来，才能找到他想隐藏的秘密。",
+          image: "../img/charactor/艾德里安/Wizard down.png", // 另一张图片
+        }
+        
       ];
       let currentDialogue = 0;
       let charIndex = 0;
@@ -91,34 +109,6 @@ class Player {
 
       // 添加CSS样式
       const style = document.createElement("style");
-      style.innerHTML = `
-        #dialogue {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%; /* 设置为80%宽度 */
-            height: 100px; /* 固定高度 */
-            text-align: center;
-            position: fixed; /* 固定位置 */
-            bottom: 20px; /* 固定在底部 */
-            left: 50%; /* 水平居中 */
-            transform: translateX(-50%); /* 水平居中 */
-            margin: 0; /* 移除水平居中 */
-            color: white; /* 字体颜色 */
-            font-size: 24px; /* 字体大小 */
-            display: flex;
-            justify-content: center;
-            align-items: center; /* 垂直居中 */
-            box-sizing: border-box;
-        }
-    #dialogue img {
-      position: absolute; /* 绝对定位 */
-      top: -100px; /* 距离顶部10px */
-      left: 10px; /* 距离左侧10px */
-      width: 100px; /* 图片宽度 */
-      height: 100px; /* 图片高度 */
-    }
-    `;
       document.head.appendChild(style);
 
       // 创建对话框元素
@@ -127,8 +117,8 @@ class Player {
 
       // 插入莱拉的图片
       const lailaImage = document.createElement("img");
-      lailaImage.src = "../img/charactor/莱拉/laila down.png";
-      lailaImage.alt = "Image Description";
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
       dialogBox.appendChild(lailaImage);
 
       // 创建对话文本元素
@@ -136,10 +126,15 @@ class Player {
       dialogText.id = "dialogueText";
       dialogBox.appendChild(dialogText);
       document.body.appendChild(dialogBox);
-
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
       function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].length) {
-          dialogText.innerText += dialogues[currentDialogue].charAt(charIndex);
+        
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
           charIndex++;
           setTimeout(typeDialogue, typingSpeed);
         } else {
@@ -151,6 +146,7 @@ class Player {
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
           document.body.removeChild(dialogBox);
