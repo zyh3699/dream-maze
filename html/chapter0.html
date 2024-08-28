@@ -55,13 +55,53 @@
     color: white; /* Text color */
     font-size: 18px; /* Font size */
 }
+#menuButton {
+      position: fixed; /* 固定位置 */
+      top: 20px; /* 固定在顶部 */
+      left: 20px; /* 固定在左侧 */
+      padding: 10px 20px; /* 按钮内边距 */
+      background-color: #4CAF50; /* 按钮背景颜色 */
+      color: white; /* 按钮文字颜色 */
+      border: none; /* 移除边框 */
+      border-radius: 5px; /* 圆角边框 */
+      cursor: pointer; /* 鼠标悬停时显示手型 */
+    }
+    #menuButton:hover {
+      background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+    }
+    .menu {
+      display: none; /* 初始隐藏 */
+      position: fixed; /* 固定位置 */
+      top: 60px; /* 距离顶部 */
+      left: 20px; /* 距离左侧 */
+      background-color: #333; /* 菜单背景颜色 */
+      border-radius: 5px; /* 圆角边框 */
+      padding: 10px; /* 内边距 */
+    }
+    .menu button {
+      display: block; /* 块级元素 */
+      width: 100%; /* 宽度100% */
+      margin: 5px 0; /* 按钮间距 */
+      padding: 10px; /* 按钮内边距 */
+      background-color: #4CAF50; /* 按钮背景颜色 */
+      color: white; /* 按钮文字颜色 */
+      border: none; /* 移除边框 */
+      border-radius: 5px; /* 圆角边框 */
+      cursor: pointer; /* 鼠标悬停时显示手型 */
+    }
+    .menu button:hover {
+      background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+    }
   </style>
   <script src="../js/存档功能.js"></script>
     </head>
     <body>
-      <button onclick="save()">点此存档</button>
-    </head>
-<body>
+      <button id="menuButton" onclick="toggleMenu()">菜单</button>
+  <div class="menu" id="menu">
+    <button onclick="save()">存档</button>
+    <button onclick="settings()">设置</button>
+    <button onclick="tips()">提示</button>
+  </div>
   <div id="intro">
     <div id="dialogue">
       <img src="../img/charactor/莱拉/laila down.png" alt="Image Description"> <!-- 插入图片 -->
@@ -105,6 +145,15 @@
           document.getElementById('gameCanvas').style.display = 'block';
           requestAnimationFrame(mainLoop);
         }, 1000); // 等待1秒以完成淡出效果
+      }
+    }
+
+     function toggleMenu() {
+      const menu = document.getElementById('menu');
+      if (menu.style.display === 'none' || menu.style.display === '') {
+        menu.style.display = 'block';
+      } else {
+        menu.style.display = 'none';
       }
     }
 
