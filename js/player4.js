@@ -162,8 +162,236 @@ class Player {
     });
 
     document.body.appendChild(passwordContainer);
+  }
+
+  startBattle = function() {
+  const battleContainer = document.createElement("div");
+  battleContainer.id = "battleContainer";
+  battleContainer.style.position = "fixed";
+  battleContainer.style.top = "50%";
+  battleContainer.style.left = "50%";
+  battleContainer.style.transform = "translate(-50%, -50%)";
+  battleContainer.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
+  battleContainer.style.padding = "20px";
+  battleContainer.style.borderRadius = "10px";
+  battleContainer.style.textAlign = "center";
+  battleContainer.style.color = "white";
+  battleContainer.style.width = "400px";
+  battleContainer.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+
+  let enemyHealth = 100;
+  let playerHealth = 100;
+  let playerMana = 50; // 初始魔法值
+
+  // 敌人部分
+  const enemyContainer = document.createElement("div");
+  enemyContainer.style.marginBottom = "20px";
+
+  const enemyHealthBarContainer = document.createElement("div");
+  enemyHealthBarContainer.style.width = "100%";
+  enemyHealthBarContainer.style.backgroundColor = "grey";
+  enemyHealthBarContainer.style.borderRadius = "5px";
+  enemyHealthBarContainer.style.marginBottom = "10px";
+
+  const enemyHealthBar = document.createElement("div");
+  enemyHealthBar.id = "enemyHealthBar";
+  enemyHealthBar.style.width = "100%";
+  enemyHealthBar.style.height = "20px";
+  enemyHealthBar.style.backgroundColor = "red";
+  enemyHealthBar.style.borderRadius = "5px";
+  enemyHealthBarContainer.appendChild(enemyHealthBar);
+  enemyContainer.appendChild(enemyHealthBarContainer);
+
+  const enemyImage = document.createElement("img");
+  enemyImage.src = "../img/charactor/精灵/Dwarf.png"; // 替换为实际的敌人图片路径
+  enemyImage.style.width = "100px";
+  enemyImage.style.height = "100px";
+  enemyImage.style.display = "block";
+  enemyImage.style.margin = "0 auto";
+  enemyContainer.appendChild(enemyImage);
+
+  battleContainer.appendChild(enemyContainer);
+
+  // 玩家部分
+  const playerContainer = document.createElement("div");
+  playerContainer.style.marginBottom = "20px";
+
+  const playerHealthBarContainer = document.createElement("div");
+  playerHealthBarContainer.style.width = "100%";
+  playerHealthBarContainer.style.backgroundColor = "grey";
+  playerHealthBarContainer.style.borderRadius = "5px";
+  playerHealthBarContainer.style.marginBottom = "10px";
+
+  const playerHealthBar = document.createElement("div");
+  playerHealthBar.id = "playerHealthBar";
+  playerHealthBar.style.width = "100%";
+  playerHealthBar.style.height = "20px";
+  playerHealthBar.style.backgroundColor = "green";
+  playerHealthBar.style.borderRadius = "5px";
+  playerHealthBarContainer.appendChild(playerHealthBar);
+  playerContainer.appendChild(playerHealthBarContainer);
+
+  const playerManaBarContainer = document.createElement("div");
+  playerManaBarContainer.style.width = "100%";
+  playerManaBarContainer.style.backgroundColor = "grey";
+  playerManaBarContainer.style.borderRadius = "5px";
+  playerManaBarContainer.style.marginBottom = "10px";
+
+  const playerManaBar = document.createElement("div");
+  playerManaBar.id = "playerManaBar";
+  playerManaBar.style.width = "100%";
+  playerManaBar.style.height = "20px";
+  playerManaBar.style.backgroundColor = "blue";
+  playerManaBar.style.borderRadius = "5px";
+  playerManaBarContainer.appendChild(playerManaBar);
+  playerContainer.appendChild(playerManaBarContainer);
+
+  const playerImage = document.createElement("img");
+  playerImage.src = "../img/charactor/莱拉/laila down.png"; // 替换为实际的玩家图片路径
+  playerImage.style.width = "100px";
+  playerImage.style.height = "100px";
+  playerImage.style.display = "block";
+  playerImage.style.margin = "0 auto";
+  playerContainer.appendChild(playerImage);
+
+  battleContainer.appendChild(playerContainer);
+
+  const logContainer = document.createElement("div");
+  logContainer.id = "logContainer";
+  logContainer.style.height = "100px";
+  logContainer.style.overflowY = "auto";
+  logContainer.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+  logContainer.style.padding = "10px";
+  logContainer.style.borderRadius = "5px";
+  logContainer.style.marginBottom = "20px";
+  battleContainer.appendChild(logContainer);
+
+  const logMessage = (message) => {
+    const logEntry = document.createElement("div");
+    logEntry.innerText = message;
+    logContainer.appendChild(logEntry);
+    logContainer.scrollTop = logContainer.scrollHeight;
   };
 
+  const attackButton = document.createElement("button");
+  attackButton.innerText = "攻击";
+  attackButton.style.padding = "10px 20px";
+  attackButton.style.fontSize = "18px";
+  attackButton.style.cursor = "pointer";
+  attackButton.style.marginRight = "10px";
+  attackButton.style.border = "none";
+  attackButton.style.borderRadius = "5px";
+  attackButton.style.backgroundColor = "#ff4d4d";
+  attackButton.style.color = "white";
+  attackButton.onclick = () => {
+    const damage = Math.floor(Math.random() * 20) + 1;
+    enemyHealth -= damage;
+    enemyHealthBar.style.width = `${enemyHealth}%`;
+    logMessage(`你对敌人造成了 ${damage} 点伤害！`);
+    if (enemyHealth <= 0) {
+      alert("你赢了！");
+      document.body.removeChild(battleContainer);
+      return;
+    }
+    enemyTurn();
+  };
+  battleContainer.appendChild(attackButton);
+
+  const defendButton = document.createElement("button");
+  defendButton.innerText = "防御";
+  defendButton.style.padding = "10px 20px";
+  defendButton.style.fontSize = "18px";
+  defendButton.style.cursor = "pointer";
+  defendButton.style.marginRight = "10px";
+  defendButton.style.border = "none";
+  defendButton.style.borderRadius = "5px";
+  defendButton.style.backgroundColor = "#4d94ff";
+  defendButton.style.color = "white";
+  defendButton.onclick = () => {
+    logMessage("你选择了防御！");
+    enemyTurn(true);
+  };
+  battleContainer.appendChild(defendButton);
+
+  const healButton = document.createElement("button");
+  healButton.innerText = "恢复";
+  healButton.style.padding = "10px 20px";
+  healButton.style.fontSize = "18px";
+  healButton.style.cursor = "pointer";
+  healButton.style.marginRight = "10px";
+  healButton.style.border = "none";
+  healButton.style.borderRadius = "5px";
+  healButton.style.backgroundColor = "#4dff4d";
+  healButton.style.color = "white";
+  healButton.onclick = () => {
+    const healAmount = Math.floor(Math.random() * 20) + 1;
+    playerHealth = Math.min(playerHealth + healAmount, 100);
+    playerHealthBar.style.width = `${playerHealth}%`;
+    logMessage(`你恢复了 ${healAmount} 点生命值！`);
+    enemyTurn();
+  };
+  battleContainer.appendChild(healButton);
+
+  const magicButton = document.createElement("button");
+  magicButton.innerText = "魔法攻击";
+  magicButton.style.padding = "10px 20px";
+  magicButton.style.fontSize = "18px";
+  magicButton.style.cursor = "pointer";
+  magicButton.style.border = "none";
+  magicButton.style.borderRadius = "5px";
+  magicButton.style.backgroundColor = "#ff4dff";
+  magicButton.style.color = "white";
+  magicButton.onclick = () => {
+    const magicCost = 10; // 魔法攻击消耗的魔法值
+    if (playerMana >= magicCost) {
+      playerMana -= magicCost;
+      playerManaBar.style.width = `${playerMana}%`;
+      const magicDamage = Math.floor(Math.random() * 30) + 1;
+      enemyHealth -= magicDamage;
+      enemyHealthBar.style.width = `${enemyHealth}%`;
+      logMessage(`你对敌人造成了 ${magicDamage} 点魔法伤害！`);
+      if (enemyHealth <= 0) {
+        alert("你赢了！");
+        document.body.removeChild(battleContainer);
+        return;
+      }
+      enemyTurn();
+    } else {
+      logMessage("魔法值不足，无法使用魔法攻击！");
+    }
+  };
+  battleContainer.appendChild(magicButton);
+
+  const enemyTurn = (isDefending = false) => {
+    setTimeout(() => {
+      const enemyAction = Math.floor(Math.random() * 3);
+      if (enemyAction === 0) {
+        const enemyDamage = Math.floor(Math.random() * 20) + 1;
+        const actualDamage = isDefending ? Math.floor(enemyDamage / 2) : enemyDamage;
+        playerHealth -= actualDamage;
+        playerHealthBar.style.width = `${playerHealth}%`;
+        logMessage(`敌人对你造成了 ${actualDamage} 点伤害！`);
+      } else if (enemyAction === 1) {
+        const enemyHeal = Math.floor(Math.random() * 20) + 1;
+        enemyHealth = Math.min(enemyHealth + enemyHeal, 100);
+        enemyHealthBar.style.width = `${enemyHealth}%`;
+        logMessage(`敌人恢复了 ${enemyHeal} 点生命值！`);
+      } else {
+        const enemyMagicDamage = Math.floor(Math.random() * 30) + 1;
+        playerHealth -= enemyMagicDamage;
+        playerHealthBar.style.width = `${playerHealth}%`;
+        logMessage(`敌人对你造成了 ${enemyMagicDamage} 点魔法伤害！`);
+      }
+
+      if (playerHealth <= 0) {
+        alert("你输了！");
+        document.body.removeChild(battleContainer);
+      }
+    }, 1000);
+  };
+
+  document.body.appendChild(battleContainer);
+};
   interact(collisionMap) {
     const playerCenterX = map.image.width / 2;
     const playerCenterY = map.image.height / 2;
@@ -185,7 +413,7 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 10) {
-      this.showPasswordPrompt();
+      this.startBattle();
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 5) {
