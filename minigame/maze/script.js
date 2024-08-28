@@ -70,6 +70,7 @@ const countdownInterval = setInterval(() => {
         clearInterval(countdownInterval);
         alert('Time is up! Game over!');
         alert("获得成就“梦境守卫者”");
+        window.location.href = 'smoke2/demo.html';
         clearInterval(countdownInterval);
 
         var index = window.localStorage.userid;
@@ -82,7 +83,7 @@ const countdownInterval = setInterval(() => {
 
         window.localStorage.userArr = JSON.stringify(array);
         // 你可以在这里添加更多逻辑来处理游戏结束
-        window.location.href = "../../html/chapter2.html"; // 跳转到首页
+        window.location.href = "smoke2/demo.html"; // 跳转到首页
     }
 }, 1000);
 

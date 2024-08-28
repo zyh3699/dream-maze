@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ending Video</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <video id="endingVideo" autoplay muted>
+        <source src="../video/chapter2_branch1.mp4" type="video/mp4">
+        您的浏览器不支持 HTML5 视频标签。
+    </video>
+    <audio id="backgroundAudio" src="../audio/background_audio.mp3"></audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const videoElement = document.getElementById('endingVideo');
+            const audioElement = document.getElementById('backgroundAudio');
+
+            if (videoElement.requestFullscreen) {
+                videoElement.requestFullscreen();
+            } else if (videoElement.mozRequestFullScreen) { // Firefox
+                videoElement.mozRequestFullScreen();
+            } else if (videoElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                videoElement.webkitRequestFullscreen();
+            } else if (videoElement.msRequestFullscreen) { // IE/Edge
+                videoElement.msRequestFullscreen();
+            }
+
+            videoElement.addEventListener('play', () => {
+                audioElement.play();
+            });
+
+            videoElement.addEventListener('pause', () => {
+                audioElement.pause();
+            });
+
+            videoElement.addEventListener('ended', () => {
+                audioElement.pause();
+                audioElement.currentTime = 0;
+            });
+        });
+    </script>
+</body>
+</html>
