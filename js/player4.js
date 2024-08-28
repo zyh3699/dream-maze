@@ -97,6 +97,73 @@ class Player {
     }
   }
 
+  showPasswordPrompt() {
+    const passwordContainer = document.createElement("div");
+    passwordContainer.id = "passwordContainer";
+    passwordContainer.style.position = "fixed";
+    passwordContainer.style.top = "50%";
+    passwordContainer.style.left = "50%";
+    passwordContainer.style.transform = "translate(-50%, -50%)";
+    passwordContainer.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    passwordContainer.style.padding = "20px";
+    passwordContainer.style.borderRadius = "10px";
+    passwordContainer.style.display = "grid";
+    passwordContainer.style.gridTemplateColumns = "repeat(3, 1fr)";
+    passwordContainer.style.gridGap = "10px";
+    passwordContainer.style.textAlign = "center";
+    passwordContainer.style.color = "white";
+
+    const inputField = document.createElement("input");
+    inputField.type = "password";
+    inputField.id = "passwordInput";
+    inputField.style.gridColumn = "span 3";
+    inputField.style.padding = "10px";
+    inputField.style.fontSize = "18px";
+    inputField.style.textAlign = "center";
+    passwordContainer.appendChild(inputField);
+
+    const buttons = [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "删除",
+      "0",
+      "确定",
+    ];
+
+    buttons.forEach((buttonText) => {
+      const button = document.createElement("button");
+      button.innerText = buttonText;
+      button.style.padding = "10px";
+      button.style.fontSize = "18px";
+      button.style.cursor = "pointer";
+      button.onclick = () => {
+        if (buttonText === "删除") {
+          inputField.value = inputField.value.slice(0, -1);
+        } else if (buttonText === "确定") {
+          if (inputField.value === "1829") {
+            alert("密码正确");
+            this.showMessage("你居然发现了梦境最深层的秘密，不可思议");
+            document.body.removeChild(passwordContainer);
+          } else {
+            alert("密码错误");
+          }
+        } else {
+          inputField.value += buttonText;
+        }
+      };
+      passwordContainer.appendChild(button);
+    });
+
+    document.body.appendChild(passwordContainer);
+  };
+
   interact(collisionMap) {
     const playerCenterX = map.image.width / 2;
     const playerCenterY = map.image.height / 2;
@@ -115,6 +182,10 @@ class Player {
 
     if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("你修复了一处结构！");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 10) {
+      this.showPasswordPrompt();
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 5) {
