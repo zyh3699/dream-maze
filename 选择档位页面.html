@@ -1,0 +1,99 @@
+<html>
+<head><title>梦境迷途</title>
+    <link rel="stylesheet" type="text/css" href="mycss.css" />
+    <style>
+        h1 {font-family:楷体;text-align: center; color:white;font-size: xxx-large;}
+        .p1{text-align: center;}
+        .ziti{font-family: 隶书; font-size: xx-large;text-align: center;color:red;cursor: pointer;outline: none;background-color:lightskyblue;border-width: 0px;}
+        .ziti:hover{background-color: blue;}
+        body{background-position: center;}
+        #main{background:rgba(177, 177, 192, 0.5);
+        padding:20px;
+        margin:50px auto;
+        width:600px;
+        height:450px;}
+        a:hover{font-size: larger}
+        a{text-decoration: none;}
+    </style>
+    <script src="js/存档功能.js"></script>
+</head>
+<body>
+    <h1>梦境迷途</h1>
+    <div id="main">
+    <p class="p1"><button class="ziti" onclick="c1()">档位1</button></p>
+    <p class="p1"><button class="ziti" onclick="c2()">档位2</button></p>
+    <p class="p1"><button class="ziti" onclick="c3()">档位3</button></p>
+    <p class="p1"><button class="ziti" onclick="c4()">档位4</button></p>
+    <p class="p1"><button class="ziti" onclick="c5()">档位5</button></p>
+    <p class="p1"><button class="ziti" onclick="c6()">档位6</button></p>
+    <p class="p1"><button class="ziti" onclick="c7()">档位7</button></p>
+    <p class="p1"><button class="ziti" onclick="c8()">档位8</button></p>
+    </div>
+    <script>
+        function c1(){
+            localStorage.setItem('temp01',Number(curlife))
+            localStorage.setItem('attack01',Number(curattack))
+            localStorage.setItem('defend01',Number(curdefend))
+            localStorage.setItem('tempurl1',localStorage.getItem('tempurl'))
+            alert("存档成功！")
+            window.location.href=localStorage.getItem('tempurl')
+        }
+        function c2(){
+            localStorage.setItem('temp02',Number(curlife))
+            localStorage.setItem('attack02',Number(curattack))
+            localStorage.setItem('defend02',Number(curdefend))
+            localStorage.setItem('tempurl2',localStorage.getItem('tempurl'))
+            alert("存档成功！")
+            window.location.href=localStorage.getItem('tempurl')
+        }
+        function c3(){
+            localStorage.setItem('temp03',Number(curlife))
+            localStorage.setItem('attack03',Number(curattack))
+            localStorage.setItem('defend03',Number(curdefend))
+            localStorage.setItem('tempurl3',localStorage.getItem('tempurl'))
+            alert("存档成功！")
+            window.location.href=localStorage.getItem('tempurl')
+        }
+        function c4(){
+            localStorage.setItem('temp04',Number(curlife))
+            localStorage.setItem('attack04',Number(curattack))
+            localStorage.setItem('defend04',Number(curdefend))
+            localStorage.setItem('tempurl4',localStorage.getItem('tempurl'))
+            alert("存档成功！")
+            window.location.href=localStorage.getItem('tempurl')
+        }
+        function c5(){
+            localStorage.setItem('temp05',Number(curlife))
+            localStorage.setItem('attack05',Number(curattack))
+            localStorage.setItem('defend05',Number(curdefend))
+            localStorage.setItem('tempurl5',localStorage.getItem('tempurl'))
+            alert("存档成功！")
+            window.location.href=localStorage.getItem('tempurl')
+        }
+        function c6(){
+            localStorage.setItem('temp06',Number(curlife))
+            localStorage.setItem('attack06',Number(curattack))
+            localStorage.setItem('defend06',Number(curdefend))
+            localStorage.setItem('tempurl6',localStorage.getItem('tempurl'))
+            alert("存档成功！")
+            window.location.href=localStorage.getItem('tempurl')
+        }
+        function c7(){
+            localStorage.setItem('temp07',Number(curlife))
+            localStorage.setItem('attack07',Number(curattack))
+            localStorage.setItem('defend07',Number(curdefend))
+            localStorage.setItem('tempurl7',localStorage.getItem('tempurl'))
+            alert("存档成功！")
+            window.location.href=localStorage.getItem('tempurl')
+        }
+        function c8(){
+            localStorage.setItem('temp08',Number(curlife))
+            localStorage.setItem('attack08',Number(curattack))
+            localStorage.setItem('defend08',Number(curdefend))
+            localStorage.setItem('tempurl8',localStorage.getItem('tempurl'))
+            alert("存档成功！")
+            window.location.href=localStorage.getItem('tempurl')
+        }
+    </script>
+</body>
+</html>
