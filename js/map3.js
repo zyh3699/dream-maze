@@ -16,8 +16,8 @@ let map = {
       this.height,
       0,
       0,
-      this.width * 3,
-      this.height * 3
+      this.width * 1.5,
+      this.height * 1.5
     );
   },
   move: function (dx, dy) {
@@ -33,8 +33,8 @@ map.image.src = "../img/bgr/chapter3_background.png"; // 替换为你的图片�
 map.image.onload = function () {
   window.map = map;
 
-  map.startX = -500 + (map.image.width - map.width / 3) / 2;
-  map.startY = -500 + (map.image.height - map.height / 3) / 2;
+  map.startX = -500 + (map.image.width - map.width / 1.5) / 2;
+  map.startY = -500 + (map.image.height - map.height / 1.5) / 2;
 
   map.draw(ctx);
 };
