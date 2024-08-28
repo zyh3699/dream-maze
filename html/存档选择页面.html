@@ -1,0 +1,77 @@
+<html>
+<head><title>梦境迷途</title>
+    <link rel="stylesheet" type="text/css" href="mycss.css" />
+    <style>
+        h1 {font-family:楷体;text-align: center; color:white;font-size: xxx-large;}
+        .p1{text-align: center;}
+        .ziti{font-family: 隶书; font-size: xx-large;text-align: center;color:red;cursor: pointer;outline: none;background-color:lightskyblue;border-width: 0px;}
+        .ziti:hover{background-color: blue;}
+        body{background-position: center;}
+        #main{background:rgba(177, 177, 192, 0.5);
+        padding:20px;
+        margin:50px auto;
+        width:600px;
+        height:450px;}
+        a:hover{font-size: larger}
+        a{text-decoration: none;}
+    </style>
+    <script src="js/存档功能.js"></script>
+</head>
+<body>
+    <h1>梦境迷途</h1>
+    <div id="main">
+    <p class="p1"><button class="ziti" onclick="load1()">存档1</button></p>
+    <p class="p1"><button class="ziti" onclick="load2()">存档2</button></p>
+    <p class="p1"><button class="ziti" onclick="load3()">存档3</button></p>
+    <p class="p1"><button class="ziti" onclick="load4()">存档4</button></p>
+    <p class="p1"><button class="ziti" onclick="load5()">存档5</button></p>
+    <p class="p1"><button class="ziti" onclick="load6()">存档6</button></p>
+    <p class="p1"><button class="ziti" onclick="load7()">存档7</button></p>
+    <p class="p1"><button class="ziti" onclick="load8()">存档8</button></p>
+    </div>
+    <script>
+        function load1(){
+            localStorage.setItem('temp',localStorage.getItem('temp01'))
+            localStorage.setItem('attack',localStorage.getItem('attack01'))
+            localStorage.setItem('defend',localStorage.getItem('defend01'))
+            window.location.href=localStorage.getItem('tempurl1')
+        }
+        function load2(){
+            localStorage.setItem('temp',localStorage.getItem('temp02'))
+            localStorage.setItem('attack',localStorage.getItem('attack02'))
+            localStorage.setItem('defend',localStorage.getItem('defend02'))
+            window.location.href=localStorage.getItem('tempurl2')
+        }function load3(){
+            localStorage.setItem('temp',localStorage.getItem('temp03'))
+            localStorage.setItem('attack',localStorage.getItem('attack03'))
+            localStorage.setItem('defend',localStorage.getItem('defend03'))
+            window.location.href=localStorage.getItem('tempurl3')
+        }function load4(){
+            localStorage.setItem('temp',localStorage.getItem('temp04'))
+            localStorage.setItem('attack',localStorage.getItem('attack04'))
+            localStorage.setItem('defend',localStorage.getItem('defend04'))
+            window.location.href=localStorage.getItem('tempurl4')
+        }function load5(){
+            localStorage.setItem('temp',localStorage.getItem('temp05'))
+            localStorage.setItem('attack',localStorage.getItem('attack05'))
+            localStorage.setItem('defend',localStorage.getItem('defend05'))
+            window.location.href=localStorage.getItem('tempurl5')
+        }function load6(){
+            localStorage.setItem('temp',localStorage.getItem('temp06'))
+            localStorage.setItem('attack',localStorage.getItem('attack06'))
+            localStorage.setItem('defend',localStorage.getItem('defend06'))
+            window.location.href=localStorage.getItem('tempurl6')
+        }function load7(){
+            localStorage.setItem('temp',localStorage.getItem('temp07'))
+            localStorage.setItem('attack',localStorage.getItem('attack07'))
+            localStorage.setItem('defend',localStorage.getItem('defend07'))
+            window.location.href=localStorage.getItem('tempurl7')
+        }function load8(){
+            localStorage.setItem('temp',localStorage.getItem('temp08'))
+            localStorage.setItem('attack',localStorage.getItem('attack08'))
+            localStorage.setItem('defend',localStorage.getItem('defend08'))
+            window.location.href=localStorage.getItem('tempurl8')
+        }
+    </script>
+</body>
+</html>
