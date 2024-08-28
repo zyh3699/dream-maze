@@ -157,6 +157,7 @@ console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
               console.log('array[index].achi2:', array[index].achi2); 
 
 					
+              
               window.localStorage.userArr = JSON.stringify(array);
 						
 					
