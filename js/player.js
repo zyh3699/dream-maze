@@ -116,23 +116,23 @@ class Player {
       const dialogues = [
         {
           text: "这地方让我有种不祥的预感，艾德里安。你确定文件就在这里？",
-          image: "../img/charactor/莱拉/laila down.png", // 对应的图片路径
-        },
-        {
-          text: "根据我们的线索，梦境的深处藏着答案。我们必须保持警惕，这位企业家的潜意识比我们想象的要复杂得多。",
-          image: "../img/charactor/艾德里安/Wizard down.png", // 另一张图片
-        },
-        {
-          text: "莱拉和艾德里安在城市的迷宫中穿行，高楼大厦上闪烁的电子屏幕播放着梦境主人的记忆片段，像一张巨大的拼图等待解开。",
-          image: "../img/charactor/精灵/Dwarf.png", // 精灵        
-        },
-        {
-          text: "这些画面……是他过去的片段？每一个都透露出他的某种心情和意图。",
-          image: "../img/charactor/莱拉/laila down.png", // 另一张图片
-        },
-        {
-          text: "是的。我们必须把这些碎片拼接起来，才能找到他想隐藏的秘密。",
-          image: "../img/charactor/艾德里安/Wizard down.png", // 另一张图片
+          image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+        },
+        {
+          text: "根据我们的线索，梦境的深处藏着答案。我们必须保持警惕，这位企业家的潜意识比我们想象的要复杂得多。",
+          image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
+        },
+        {
+          text: "莱拉和艾德里安在城市的迷宫中穿行，高楼大厦上闪烁的电子屏幕播放着梦境主人的记忆片段，像一张巨大的拼图等待解开。",
+          image: "../img/conversation/精灵/精灵.png", // 精灵        
+        },
+        {
+          text: "这些画面……是他过去的片段？每一个都透露出他的某种心情和意图。",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
+        {
+          text: "是的。我们必须把这些碎片拼接起来，才能找到他想隐藏的秘密。",
+          image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
         }
         
       ];
