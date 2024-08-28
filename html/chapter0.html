@@ -32,29 +32,24 @@
       transition: opacity 1s ease-out;
     }
     #dialogue {
-      background: url('../img/conversation/background/bg3.png') no-repeat center center;
+      background: rgba(0, 0, 0, 0.7);
       padding: 20px;
-      background-size: contain;
       border-radius: 10px;
       width: 80%; /* 设置为80%宽度 */
-      text-align: left;
+      text-align: center;
       position: fixed; /* 固定位置 */
       bottom: 20px; /* 固定在底部 */
       left: 50%; /* 水平居中 */
       transform: translateX(-50%); /* 水平居中 */
       margin: 0; /* 移除水平居中 */
-      display: flex; /* Flexbox layout */
-       align-items: center; /* Center items vertically */
     }
     #dialogue img {
-      width: 150px; /* Enlarged image width */
-     height: auto; /* Maintain aspect ratio */
-     margin-right: 20px; /* Space between image and text */
+      position: absolute; /* 绝对定位 */
+      top: -100px; /* 距离顶部10px */
+      left: 10px; /* 距离左侧10px */
+      width: 100px; /* 图片宽度 */
+      height: 100px; /* 图片高度 */
     }
-    #dialogueText {
-    color: white; /* Text color */
-    font-size: 18px; /* Font size */
-}
 #menuButton {
       position: fixed; /* 固定位置 */
       top: 20px; /* 固定在顶部 */
