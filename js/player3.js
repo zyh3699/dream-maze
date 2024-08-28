@@ -36,6 +36,31 @@ class Player {
     return false;
   }
 
+  updateAdjacentPieces(x, y) {
+    // 检查边界条件
+    if (
+      x < 0 ||
+      y < 0 ||
+      x >= collisionMap[0].length ||
+      y >= collisionMap.length
+    ) {
+      return;
+    }
+
+    // 如果当前位置是3，则将其更新为100
+    if (collisionMap[y][x] === 3 || collisionMap[y][x] === 6) {
+      collisionMap[y][x] = 100;
+
+      // 递归更新相邻的格子
+      this.updateAdjacentPieces(x + 1, y);
+      this.updateAdjacentPieces(x - 1, y);
+      this.updateAdjacentPieces(x, y + 1);
+      this.updateAdjacentPieces(x, y - 1);
+    } else {
+      return;
+    }
+  }
+
   updateImage(direction) {
     switch (direction) {
       case "up":
@@ -72,39 +97,39 @@ class Player {
     }
   }
 
-    interact(collisionMap) {
-        const playerCenterX = map.image.width / 2;
-        const playerCenterY = map.image.height / 2;
+  interact(collisionMap) {
+    const playerCenterX = map.image.width / 2;
+    const playerCenterY = map.image.height / 2;
 
-        const offsetX = window.map.offsetX;
-        const offsetY = window.map.offsetY;
+    const offsetX = window.map.offsetX;
+    const offsetY = window.map.offsetY;
 
-        const interactX = Math.floor(playerCenterX + offsetX);
-        const interactY = Math.floor(playerCenterY + offsetY);
+    const interactX = Math.floor(playerCenterX + offsetX);
+    const interactY = Math.floor(playerCenterY + offsetY);
 
-        // 检测是否有物品
-        if (collisionMap[interactY][interactX] === 2) {
-            this.fadeOutAndRedirect();
-            collisionMap[interactY][interactX] = 0;
-        }
+    // 检测是否有物品
+    if (collisionMap[interactY][interactX] === 2) {
+      this.fadeOutAndRedirect();
+      collisionMap[interactY][interactX] = 0;
+    }
 
-        if (collisionMap[interactY][interactX] === 3) {
-            this.showMessage("你捡到了一个物品！");
-            collisionMap[interactY][interactX] = 0;
-        }
-        if (collisionMap[interactY][interactX] === 5) {
-          const dialogues = [
-            "经过层层梦境的探查，莱拉终于在一个极其隐秘的梦境层中找到了卡尔。",
-            "他被困在一个由组织设计的特殊梦境中，这个梦境层与之前的所有梦境都截然不同：",
-            "它看似平静祥和，但隐藏着极为危险的心灵陷阱。",
-          ];
-          let currentDialogue = 0;
-          let charIndex = 0;
-          const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+    if (collisionMap[interactY][interactX] === 3) {
+      this.showMessage("你捡到了一个物品！");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 5) {
+      const dialogues = [
+        "经过层层梦境的探查，莱拉终于在一个极其隐秘的梦境层中找到了卡尔。",
+        "他被困在一个由组织设计的特殊梦境中，这个梦境层与之前的所有梦境都截然不同：",
+        "它看似平静祥和，但隐藏着极为危险的心灵陷阱。",
+      ];
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
 
-          // 添加CSS样式
-          const style = document.createElement("style");
-          style.innerHTML = `
+      // 添加CSS样式
+      const style = document.createElement("style");
+      style.innerHTML = `
         #dialogue {
             background: rgba(0, 0, 0, 0.7);
             padding: 20px;
@@ -132,53 +157,52 @@ class Player {
       height: 100px; /* 图片高度 */
     }
     `;
-          document.head.appendChild(style);
+      document.head.appendChild(style);
 
-          // 创建对话框元素
-          const dialogBox = document.createElement("div");
-          dialogBox.id = "dialogue";
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
 
-          // 插入莱拉的图片
-          const lailaImage = document.createElement("img");
-          lailaImage.src = "../img/charactor/莱拉/laila down.png";
-          lailaImage.alt = "Image Description";
-          dialogBox.appendChild(lailaImage);
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.src = "../img/charactor/莱拉/laila down.png";
+      lailaImage.alt = "Image Description";
+      dialogBox.appendChild(lailaImage);
 
-          // 创建对话文本元素
-          const dialogText = document.createElement("span");
-          dialogText.id = "dialogueText";
-          dialogBox.appendChild(dialogText);
-          document.body.appendChild(dialogBox);
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
 
-          function typeDialogue() {
-            if (charIndex < dialogues[currentDialogue].length) {
-              dialogText.innerText +=
-                dialogues[currentDialogue].charAt(charIndex);
-              charIndex++;
-              setTimeout(typeDialogue, typingSpeed);
-            } else {
-              currentDialogue++;
-              charIndex = 0;
-            }
-          }
-
-          function showNextDialogue() {
-            if (currentDialogue < dialogues.length) {
-              dialogText.innerText = "";
-              typeDialogue();
-            } else {
-              document.body.removeChild(dialogBox);
-              document.getElementById("gameCanvas").style.display = "block";
-              requestAnimationFrame(mainLoop);
-            }
-          }
-
-          dialogBox.addEventListener("click", showNextDialogue);
-          showNextDialogue();
-
-          collisionMap[interactY][interactX] = 0;
+      function typeDialogue() {
+        if (charIndex < dialogues[currentDialogue].length) {
+          dialogText.innerText += dialogues[currentDialogue].charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
         }
+      }
+
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+
+      dialogBox.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      collisionMap[interactY][interactX] = 0;
     }
+  }
 
   fadeOutAndRedirect() {
     const bodyElement = document.body;

@@ -36,6 +36,31 @@ class Player {
     return false;
   }
 
+  updateAdjacentPieces(x, y) {
+    // 检查边界条件
+    if (
+      x < 0 ||
+      y < 0 ||
+      x >= collisionMap[0].length ||
+      y >= collisionMap.length
+    ) {
+      return;
+    }
+
+    // 如果当前位置是3，则将其更新为100
+    if (collisionMap[y][x] === 5 || collisionMap[y][x] === 6) {
+      collisionMap[y][x] = 100;
+
+      // 递归更新相邻的格子
+      this.updateAdjacentPieces(x + 1, y);
+      this.updateAdjacentPieces(x - 1, y);
+      this.updateAdjacentPieces(x, y + 1);
+      this.updateAdjacentPieces(x, y - 1);
+    } else {
+      return;
+    }
+  }
+
   updateImage(direction) {
     switch (direction) {
       case "up":
@@ -94,9 +119,26 @@ class Player {
     }
     if (collisionMap[interactY][interactX] === 5) {
       const dialogues = [
-        "经过层层梦境的探查，莱拉终于在一个极其隐秘的梦境层中找到了卡尔。",
-        "他被困在一个由组织设计的特殊梦境中，这个梦境层与之前的所有梦境都截然不同：",
-        "它看似平静祥和，但隐藏着极为危险的心灵陷阱。",
+        {
+          text: "卡尔，我们剩下的时间不多了，整个梦境都在崩塌。",
+          image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+        },
+        {
+          text: "我们必须找到关键的梦境支柱，修复它们，否则一切都完了。",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "在这场终极挑战中，莱拉和卡尔将面临决定世界命运的最后抉择。",
+          image: "../img/conversation/精灵/精灵.png", // 精灵
+        },
+        {
+          text: "莱拉，这是我们的最后机会。阿尔法梦境不仅能改变现实，它还能操控时间。如果我们失败了……整个世界都将陷入无尽的黑暗。",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "无论如何，我们必须阻止它。",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
       ];
       let currentDialogue = 0;
       let charIndex = 0;
@@ -104,34 +146,6 @@ class Player {
 
       // 添加CSS样式
       const style = document.createElement("style");
-      style.innerHTML = `
-        #dialogue {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%; /* 设置为80%宽度 */
-            height: 100px; /* 固定高度 */
-            text-align: center;
-            position: fixed; /* 固定位置 */
-            bottom: 20px; /* 固定在底部 */
-            left: 50%; /* 水平居中 */
-            transform: translateX(-50%); /* 水平居中 */
-            margin: 0; /* 移除水平居中 */
-            color: white; /* 字体颜色 */
-            font-size: 24px; /* 字体大小 */
-            display: flex;
-            justify-content: center;
-            align-items: center; /* 垂直居中 */
-            box-sizing: border-box;
-        }
-    #dialogue img {
-      position: absolute; /* 绝对定位 */
-      top: -100px; /* 距离顶部10px */
-      left: 10px; /* 距离左侧10px */
-      width: 100px; /* 图片宽度 */
-      height: 100px; /* 图片高度 */
-    }
-    `;
       document.head.appendChild(style);
 
       // 创建对话框元素
@@ -140,8 +154,8 @@ class Player {
 
       // 插入莱拉的图片
       const lailaImage = document.createElement("img");
-      lailaImage.src = "../img/charactor/莱拉/laila down.png";
-      lailaImage.alt = "Image Description";
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
       dialogBox.appendChild(lailaImage);
 
       // 创建对话文本元素
@@ -149,10 +163,15 @@ class Player {
       dialogText.id = "dialogueText";
       dialogBox.appendChild(dialogText);
       document.body.appendChild(dialogBox);
-
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
       function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].length) {
-          dialogText.innerText += dialogues[currentDialogue].charAt(charIndex);
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
           charIndex++;
           setTimeout(typeDialogue, typingSpeed);
         } else {
@@ -164,6 +183,7 @@ class Player {
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
           document.body.removeChild(dialogBox);
@@ -175,7 +195,7 @@ class Player {
       dialogBox.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
-      collisionMap[interactY][interactX] = 0;
+      this.updateAdjacentPieces(interactX, interactY);
     }
   }
 
