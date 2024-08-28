@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maze Game</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        #dialogue {
+      background: url('../../img/conversation/background/bg3.png') no-repeat center center; /* 背景图居中对齐 */
+      background-size: cover; /* 保证背景图完整显示 */
+      padding: 60px;
+      border-radius: 40px;
+      width: 80%; /* 保持80%宽度 */
+      text-align: center;
+      position: fixed; /* 固定位置 */
+      bottom: 20px; /* 固定在底部 */
+      left: 50%; /* 水平居中 */
+      transform: translateX(-50%); /* 水平居中 */
+      margin: 0; /* 移除水平居中 */
+    }
+    #dialogue img {
+      position: absolute; /* 绝对定位 */
+      top: -100px; /* 距离顶部10px */
+      left: 10px; /* 距离左侧10px */
+      width: 100px; /* 图片宽度 */
+      height: 100px; /* 图片高度 */
+    }
+        </style>
 </head>
 <body>
     <div class="navbar">
@@ -17,8 +39,8 @@
             <canvas id="mazeCanvas" width="860" height="770" ></canvas> <!-- 隐藏的画布 --要想画布隐藏 <canvas id="mazeCanvas" width="860" height="770" style="display:none;"></canvas> !-->
             <div id="player"></div>
             <div id="fog"></div> <!-- 烟雾层 -->
-            
-        </div>11
+           
+        </div>
     </div>
    
     <div id="countdown">
