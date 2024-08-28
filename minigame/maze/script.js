@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // setInterval(changeFogImage, 200);
  // 将迷宫图片绘制到 canvas 上
  let timeLeft = 120; // 总时间，单位为秒
+ let timeminus=1;
 const totalTime = timeLeft; // 用于计算进度条的初始宽度
 
 const timerElement = document.getElementById('timer');
@@ -60,7 +61,7 @@ const progressBar = document.getElementById('time-bar-progress');
 
 const countdownInterval = setInterval(() => {
     if (timeLeft > 0) {
-        timeLeft--;
+        timeLeft-=timeminus;
         timerElement.textContent = timeLeft;
 
         // 计算进度条的宽度
@@ -97,6 +98,14 @@ const countdownInterval = setInterval(() => {
 function getPixelColor(x, y) {
     const pixel = mazeContext.getImageData(x, y, 1, 1).data;
     return pixel[0]; // 返回红色通道的值
+}
+function getPixelColor1(x, y) {
+    const pixel = mazeContext.getImageData(x, y, 1, 1).data;
+    return pixel[1]; // 返回红色通道的值
+}
+function getPixelColor2(x, y) {
+    const pixel = mazeContext.getImageData(x, y, 1, 1).data;
+    return pixel[2]; // 返回红色通道的值
 }
     // 检查当前位置是否为障碍物（红色通道值大于230）
     function isCollision(x, y) {
@@ -146,8 +155,6 @@ document.addEventListener('keydown', (e) => {
                 newLeft >= targetArea.left && newLeft <= targetArea.left + targetArea.width) {
              alert('获得成就“迷宫大师”');
                 clearInterval(countdownInterval);
-                    
-					
                     var index = window.localStorage.userid;
 					var array = JSON.parse(window.localStorage.userArr);
                     array[index].achi2 = 1;
@@ -155,14 +162,146 @@ document.addEventListener('keydown', (e) => {
 console.log('array:', array);  // 确认array是否被正确解析
 console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
               console.log('array[index].achi2:', array[index].achi2); 
-
-					
-              
               window.localStorage.userArr = JSON.stringify(array);
-						
-					
-               
                 window.location.href = "../../html/chapter2.html"; // 跳转到下一个页面
+                }
+                if(getPixelColor2(centerX, centerY) >= 249){
+                    timeminus=2;
+                   
+                    const dialogues = [
+                        {
+                          text: "注意！注意！梦境守卫开始出现，前成员潜意识的防御机制启动，时空扭曲开启!",
+                          image: "../../img/conversation/精灵/Dwarf.png", // 对应的图片路径
+                }
+               
+                        
+                      ];
+                      let currentDialogue = 0;
+                      let charIndex = 0;
+                      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+                
+                      // 添加CSS样式
+                      const style = document.createElement("style");
+                      document.head.appendChild(style);
+                
+                      // 创建对话框元素
+                      const dialogBox = document.createElement("div");
+                      dialogBox.id = "dialogue";
+                
+                      // 插入莱拉的图片
+                      const lailaImage = document.createElement("img");
+                      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+                      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+                      dialogBox.appendChild(lailaImage);
+                
+                      // 创建对话文本元素
+                      const dialogText = document.createElement("span");
+                      dialogText.id = "dialogueText";
+                      dialogBox.appendChild(dialogText);
+                      document.body.appendChild(dialogBox);
+                      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+                      dialogText.style.fontSize = "20px"; // 字体大小
+                      dialogText.style.color = "#FFFFFF"; // 字体颜色
+                      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+                      dialogText.style.lineHeight = "1.5"; // 行高
+                      function typeDialogue() {
+                        
+                        if (charIndex < dialogues[currentDialogue].text.length) {
+                          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+                          charIndex++;
+                          setTimeout(typeDialogue, typingSpeed);
+                        } else {
+                          currentDialogue++;
+                          charIndex = 0;
+                        }
+                      }
+                
+                      function showNextDialogue() {
+                        if (currentDialogue < dialogues.length) {
+                          dialogText.innerText = "";
+                          lailaImage.src = dialogues[currentDialogue].image;
+                          typeDialogue();
+                        } else {
+                          document.body.removeChild(dialogBox);
+                          document.getElementById("gameCanvas").style.display = "block";
+                          requestAnimationFrame(mainLoop);
+                        }
+                      }
+                
+                      dialogBox.addEventListener("click", showNextDialogue);
+                      showNextDialogue();
+                
+                      this.updateAdjacentPieces(interactX, interactY);
+                    
+                }
+                if(getPixelColor(centerX, centerY) <=3 && getPixelColor1(centerX, centerY) >=175 ){
+                    timeminus=4;
+                   
+                    const dialogues = [
+                        {
+                          text: "时空畸变加剧！请尽快离开！请尽快离开！",
+                          image: "../../img/conversation/精灵/Dwarf.png", // 对应的图片路径
+                }
+               
+                        
+                      ];
+                      let currentDialogue = 0;
+                      let charIndex = 0;
+                      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+                
+                      // 添加CSS样式
+                      const style = document.createElement("style");
+                      document.head.appendChild(style);
+                
+                      // 创建对话框元素
+                      const dialogBox = document.createElement("div");
+                      dialogBox.id = "dialogue";
+                
+                      // 插入莱拉的图片
+                      const lailaImage = document.createElement("img");
+                      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+                      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+                      dialogBox.appendChild(lailaImage);
+                
+                      // 创建对话文本元素
+                      const dialogText = document.createElement("span");
+                      dialogText.id = "dialogueText";
+                      dialogBox.appendChild(dialogText);
+                      document.body.appendChild(dialogBox);
+                      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+                      dialogText.style.fontSize = "20px"; // 字体大小
+                      dialogText.style.color = "#FFFFFF"; // 字体颜色
+                      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+                      dialogText.style.lineHeight = "1.5"; // 行高
+                      function typeDialogue() {
+                        
+                        if (charIndex < dialogues[currentDialogue].text.length) {
+                          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+                          charIndex++;
+                          setTimeout(typeDialogue, typingSpeed);
+                        } else {
+                          currentDialogue++;
+                          charIndex = 0;
+                        }
+                      }
+                
+                      function showNextDialogue() {
+                        if (currentDialogue < dialogues.length) {
+                          dialogText.innerText = "";
+                          lailaImage.src = dialogues[currentDialogue].image;
+                          typeDialogue();
+                        } else {
+                          document.body.removeChild(dialogBox);
+                          document.getElementById("gameCanvas").style.display = "block";
+                          requestAnimationFrame(mainLoop);
+                        }
+                      }
+                
+                      dialogBox.addEventListener("click", showNextDialogue);
+                      showNextDialogue();
+                
+                      this.updateAdjacentPieces(interactX, interactY);
+                    
                 }
             // fog.style.clipPath = `circle(${radius}px at ${fogX}px ${fogY}px)`;
         }
