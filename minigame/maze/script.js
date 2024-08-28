@@ -83,7 +83,7 @@ const countdownInterval = setInterval(() => {
 
         window.localStorage.userArr = JSON.stringify(array);
         // 你可以在这里添加更多逻辑来处理游戏结束
-        window.location.href = "../../html/chapter1_branch1.html"; // 跳转到首页
+        window.location.href = "smoke2/demo.html"; // 跳转到首页
     }
 }, 1000);
 
