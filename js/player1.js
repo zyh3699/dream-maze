@@ -95,35 +95,37 @@ updateAdjacentPieces(x, y) {
       if (collisionMap[interactY][interactX] === 6) {
         const dialogues = [
           {
-            text: "这些组织的线索指向了全球各地的多家企业和政府机构……它们表面上合法，背地里却在利用梦境技术操控人们的意识。这不可能只是偶然。",
-            image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+            text: "莱拉，是我。我知道你已经发现了那个组织的秘密。我们不能再等了，他们已经在行动。你需要我的帮助。",
+            image: "../img/conversation/艾德里安/艾德里安.png",
           },
           {
-            text: "这与我之前的一些研究相吻合。梦境技术本就有极大的潜在风险，一旦被滥用，后果不堪设想。",
-            image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
-          },
-          {
-            text: "只有一条路可走——继续深入。下一个目标是一位组织的前成员，他或许知道更多。",
+            text: "为什么你要帮我？",
             image: "../img/conversation/莱拉/莱拉.png",
           },
           {
-            text: "为了进一步探究组织的真面目，莱拉与艾德里安再次联手，进入了一次更加危险的多层梦境探险。他们的目标是一名知晓组织内情的前成员。",
-           image: "../img/conversation/精灵/精灵.png", // 精灵 
+            text: "因为我曾经也是他们的一员，但我不愿再被他们操控。这次，我站在你这边。",
+            image: "../img/conversation/艾德里安/艾德里安.png",
           },
           {
-            text: "我们必须找到他，他知道的可能是打破这个阴谋的关键。",
-            image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
-          },
-          {
-            text: "准备好面对更多的危险了吗？每层梦境都比上一层更加复杂和危险。",
-            image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
-          },
-          {
-            text: "你该知道，我从不惧怕挑战。",
-            image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
-          },
-          
+            text: "请你做出你的选择，莱拉。你是决定与艾德里安合作，还是放弃？",
+            image: "../img/conversation/精灵/精灵.png",
+          }
         ];
+      
+        const choiceDialogues = {
+          cooperate: [
+            {
+              text: "你做出了正确的选择，莱拉。我们会一起对抗他们。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+          ],
+          abandon: [
+            {
+              text: "你选择了放弃。这可能是更安全的决定，但我们都知道，代价会是什么。",
+              image: "../img/conversation/精灵/精灵.png",
+            },
+          ]
+        };
         let currentDialogue = 0;
         let charIndex = 0;
         const typingSpeed = 50; // 每个字符的打印速度（毫秒）
@@ -180,10 +182,124 @@ updateAdjacentPieces(x, y) {
         showNextDialogue();
   
         this.updateAdjacentPieces(interactX, interactY);
-        
       }
+      //   let currentDialogue = 0;
+      //   let charIndex = 0;
+      //   const typingSpeed = 50;
+      
+      //   const style = document.createElement("style");
+      //   style.textContent = `
+      //     #dialogue {
+      //       position: fixed;
+      //       bottom: 10%;
+      //       left: 20%;
+      //       background: rgba(0, 0, 0, 0.8);
+      //       padding: 20px;
+      //       border-radius: 10px;
+      //       z-index: 1000;
+      //     }
+      
+      //     #dialogueText {
+      //       display: block;
+      //       margin-top: 10px;
+      //     }
+      
+      //     .button-container {
+      //       position: fixed;
+      //       top: 50%;
+      //       left: 50%;
+      //       transform: translate(-50%, -50%);
+      //       display: flex;
+      //       justify-content: center;
+      //       z-index: 1001;
+      //     }
+      
+      //     .button-container button {
+      //       margin: 0 10px;
+      //       padding: 10px 20px;
+      //       font-size: 16px;
+      //     }
+      //   `;
+      //   document.head.appendChild(style);
+      
+      //   const dialogBox = document.createElement("div");
+      //   dialogBox.id = "dialogue";
+      
+      //   const lailaImage = document.createElement("img");
+      //   lailaImage.style.width = "100px";
+      //   lailaImage.style.height = "auto";
+      //   dialogBox.appendChild(lailaImage);
+      
+      //   const dialogText = document.createElement("span");
+      //   dialogText.id = "dialogueText";
+      //   dialogBox.appendChild(dialogText);
+      //   document.body.appendChild(dialogBox);
+      
+      //   dialogText.style.fontFamily = "Arial, sans-serif";
+      //   dialogText.style.fontSize = "20px";
+      //   dialogText.style.color = "#FFFFFF";
+      //   dialogText.style.textShadow = "2px 2px 4px #000000";
+      //   dialogText.style.lineHeight = "1.5";
+      
+      //   const buttonContainer = document.createElement("div");
+      //   buttonContainer.className = "button-container";
+      //   buttonContainer.innerHTML = `
+      //     <button id="cooperateButton">与艾德里安合作</button>
+      //     <button id="abandonButton">放弃</button>
+      //   `;
+      //   document.body.appendChild(buttonContainer);
+      
+      //   function typeDialogue() {
+      //     if (charIndex < dialogues[currentDialogue].text.length) {
+      //       dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+      //       charIndex++;
+      //       setTimeout(typeDialogue, typingSpeed);
+      //     } else {
+      //       currentDialogue++;
+      //       charIndex = 0;
+      //       if (currentDialogue === dialogues.length) {
+      //         showChoices();
+      //       }
+      //     }
+      //   }
+      
+      //   function showNextDialogue() {
+      //     if (currentDialogue < dialogues.length) {
+      //       dialogText.innerText = "";
+      //       lailaImage.src = dialogues[currentDialogue].image;
+      //       typeDialogue();
+      //     } else {
+      //       document.body.removeChild(dialogBox);
+      //       document.body.removeChild(buttonContainer);
+      //       document.getElementById("gameCanvas").style.display = "block";
+      //       requestAnimationFrame(mainLoop);
+      //     }
+      //   }
+      
+      //   function showChoices() {
+      //     document.getElementById("cooperateButton").onclick = () => showChoiceDialogue("cooperate");
+      //     document.getElementById("abandonButton").onclick = () => showChoiceDialogue("abandon");
+      //   }
+      
+      //   function showChoiceDialogue(choice) {
+      //     buttonContainer.style.display = "none"; // 隐藏按钮
+      //     currentDialogue = 0;
+      //     const selectedDialogues = choiceDialogues[choice];
+      //     dialogues.length = 0; // 清空原对话
+      //     selectedDialogues.forEach(dialogue => dialogues.push(dialogue)); // 加载新对话
+      //     showNextDialogue();
+      //   }
+      
+      //   dialogBox.addEventListener("click", showNextDialogue);
+      //   showNextDialogue();
+      
+      //   this.updateAdjacentPieces(interactX, interactY);
+      // }
+      
+      
+      
+      
   }
-
   fadeOutAndRedirect() {
     const bodyElement = document.body;
     bodyElement.style.transition = "opacity 1s ease-out";
