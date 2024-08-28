@@ -114,10 +114,43 @@ updateAdjacentPieces(x, y) {
       
         const choiceDialogues = {
           cooperate: [
+           
             {
-              text: "你做出了正确的选择，莱拉。我们会一起对抗他们。",
+              text: "艾德里安，为什么你会联系我？我们上次的合作……你知道，我依然有很多疑问。",
+              image: "../img/conversation/莱拉/莱拉.png",
+            },
+            {
+              text: "我明白你的顾虑，莱拉。但你必须知道，这个组织的影响力远比我们当初想象的要大得多。",
               image: "../img/conversation/艾德里安/艾德里安.png",
             },
+            {
+              text: "过去我可能隐瞒了些东西，但现在……我不再是他们的一部分。我想帮你，揭开这一切的真相。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "你说你不再是他们的一部分，可是，是什么让你背叛了他们？你以前也利用过这些技术，谁能保证这次你不是在设下另一个陷阱？",
+              image: "../img/conversation/莱拉/莱拉.png",
+            },
+            {
+              text: "因为我见证了太多人的生活被彻底改变——不，应该说被毁灭了。他们用梦境技术操控了太多人，改写了记忆，扭曲了现实。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "这次，他们的计划更大、更危险。我不想再成为他们的棋子。我知道我们过去有过分歧，但这次，只有我们联手，才能阻止他们。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "好吧，艾德里安，我选择相信你。这次我们必须彻底摧毁他们的阴谋。但你要知道，如果你再次背叛我，我绝不会再有第二次犹豫。",
+              image: "../img/conversation/莱拉/莱拉.png",
+            },
+            {
+              text: "你不会后悔的，莱拉。我已经找到了一个重要的线索——一个前成员。他曾经是组织的核心，现在躲藏在一个梦境中。我们得尽快找到他，时间不多了。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "那么我们出发吧，希望这次我们能够顺利地揭开真相。",
+              image: "../img/conversation/莱拉/莱拉.png",
+            }
           ],
           abandon: [
             {
@@ -129,9 +162,26 @@ updateAdjacentPieces(x, y) {
         let currentDialogue = 0;
         let charIndex = 0;
         const typingSpeed = 50; // 每个字符的打印速度（毫秒）
-  
+        let playerAlignment = null; // 初始为空，表示玩家未做出选择
         // 添加CSS样式
         const style = document.createElement("style");
+        style.textContent = `
+            .button-container {
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              display: flex;
+              justify-content: center;
+              z-index: 1001;
+            }
+        
+            .button-container button {
+              margin: 0 10px;
+              padding: 10px 20px;
+              font-size: 16px;
+            }
+          `;
         document.head.appendChild(style);
   
         // 创建对话框元素
@@ -154,35 +204,83 @@ updateAdjacentPieces(x, y) {
         dialogText.style.color = "#FFFFFF"; // 字体颜色
         dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
         dialogText.style.lineHeight = "1.5"; // 行高
+        const buttonContainer = document.createElement("div");
+        buttonContainer.className = "button-container";
+        buttonContainer.innerHTML = `
+          <button id="cooperateButton">与艾德里安合作</button>
+          <button id="abandonButton">放弃合作</button>
+        `;
+        document.body.appendChild(buttonContainer);
+
         function typeDialogue() {
-          
           if (charIndex < dialogues[currentDialogue].text.length) {
             dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
             charIndex++;
+            buttonContainer.style.display = "none"; 
+            
             setTimeout(typeDialogue, typingSpeed);
           } else {
             currentDialogue++;
             charIndex = 0;
+            
+              buttonContainer.style.display = "none"; // 隐藏按钮
+            
+            if (currentDialogue === dialogues.length&&dialogues.length===4) {
+              buttonContainer.style.display = "flex";
+                      showChoices();
+                      
+                    }
           }
         }
-  
+       
+
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
             dialogText.innerText = "";
             lailaImage.src = dialogues[currentDialogue].image;
+            buttonContainer.style.display = "none"; 
             typeDialogue();
           } else {
             document.body.removeChild(dialogBox);
+            buttonContainer.style.display = "none"; 
             document.getElementById("gameCanvas").style.display = "block";
             requestAnimationFrame(mainLoop);
           }
         }
-  
+     function showChoices() {
+          document.getElementById("cooperateButton").onclick = () => showChoiceDialogue("cooperate");
+          document.getElementById("abandonButton").onclick = () => showChoiceDialogue("abandon");
+        }  
+        function showChoiceDialogue(choice) {
+          buttonContainer.style.display = "none"; // 隐藏按钮
+          currentDialogue = 0;
+          const selectedDialogues = choiceDialogues[choice];
+          
+          playerAlignment = choice; // 记录玩家的选择
+          var index = window.localStorage.userid;
+					var array = JSON.parse(window.localStorage.userArr);
+          if (playerAlignment === "cooperate") {
+          // 玩家选择了合作，触发合作相关的剧情或行为
+          array[index].choose1 = 2;
+          console.log(playerAlignment);
+        } else if (playerAlignment === "abandon") {
+          // 玩家选择了放弃，触发放弃相关的剧情或行为
+          array[index].choose1 = 3;
+          
+        } 
+         window.localStorage.userArr = JSON.stringify(array);
+          dialogues.length = 0; // 清空原对话
+          selectedDialogues.forEach(dialogue => dialogues.push(dialogue)); // 加载新对话
+          showNextDialogue();
+        } 
+         
+       
         dialogBox.addEventListener("click", showNextDialogue);
         showNextDialogue();
-  
+       
         this.updateAdjacentPieces(interactX, interactY);
       }
+          
       //   let currentDialogue = 0;
       //   let charIndex = 0;
       //   const typingSpeed = 50;
