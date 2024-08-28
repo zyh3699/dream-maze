@@ -96,7 +96,7 @@ updateAdjacentPieces(x, y) {
         const dialogues = [
           {
             text: "这些组织的线索指向了全球各地的多家企业和政府机构……它们表面上合法，背地里却在利用梦境技术操控人们的意识。这不可能只是偶然。",
-            image: "../img/conversation/莱拉/莱拉.png, // 对应的图片路径
+            image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
           },
           {
             text: "这与我之前的一些研究相吻合。梦境技术本就有极大的潜在风险，一旦被滥用，后果不堪设想。",
