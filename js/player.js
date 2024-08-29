@@ -1,4 +1,5 @@
 class Player {
+  
   constructor() {
     this.image = new Image();
     this.image.src = "../img/charactor/莱拉/laila down.png";
@@ -7,6 +8,8 @@ class Player {
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
     this.puzzle = 0;
+    this.ai=0;
+    this.map=0;
   }
 
   draw(ctx) {
@@ -18,7 +21,7 @@ class Player {
       window.map.move(dx, dy); // 移动背景图
     }
   }
-
+  
   isCollision(dx, dy, collisionMap) {
     const playerCenterX = map.image.width / 2;
     const playerCenterY = map.image.height / 2;
@@ -55,6 +58,37 @@ class Player {
         this.image.src = "../img/charactor/莱拉/laila down.png";
     }
   }
+  mapp() {
+    if (this.map === 0) {
+        this.showMessage("你还没有找到机密文件，请继续寻找吧！");
+    } 
+    if (this.map === 1) {
+        this.showMessage("按K键收起");
+
+        // Create or select the image element
+        let image = document.getElementById('mapImage');
+        if (!image) {
+            image = document.createElement('img');
+            image.id = 'mapImage';
+            image.src = 'path_to_your_image.png'; // replace with the actual path to your image
+            image.style.position = 'fixed';
+            image.style.top = '50%';
+            image.style.left = '50%';
+            image.style.transform = 'translate(-50%, -50%)';
+            image.style.zIndex = '1000';
+            document.body.appendChild(image);
+        } else {
+            image.style.display = 'block';
+        }
+
+        // Add an event listener to hide the image when K is pressed
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'k' || e.key === 'K') {
+                image.style.display = 'none';
+            }
+        });
+    }
+}
 
   // 定义一个递归函数来更新相邻的格子
   updateAdjacentPieces(x, y) {
@@ -112,7 +146,18 @@ class Player {
     //   this.showMessage("你捡到了4块拼图，一共有16块！");
      
     // }
+    if(collisionMap[interactY][interactX] === 7){
+      if(this.ai===1){
+      this.showMessage("恭喜你，找到了机密文件，按M键打开，按K键收起，请你按照机密文件的指示去搜寻碎片吧！");
+      this.updateAdjacentPieces(interactX, interactY);}
+      if(this.ai===0){
+        this.map=1;
+        this.showMessage("你需要先找到艾德里安，才能看到机密文件的指示！");
+        this.updateAdjacentPieces(interactX, interactY);
+      }
+    }
     if (collisionMap[interactY][interactX] === 6) {
+      this.ai=1;
       const dialogues = [
         {
           text: "这地方让我有种不祥的预感，艾德里安。你确定文件就在这里？",

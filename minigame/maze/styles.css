@@ -45,7 +45,7 @@ body {
     margin-top: 100px;
     width: 860px;
     height: 770px;
-    background-image: url('img/maze.png'); /* 替换为你的迷宫图片路径 */
+    background-image: url('img/mazeback.jpg'); /* 替换为你的迷宫图片路径 */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -129,7 +129,7 @@ body {
     position: absolute;
     width: 32px;
     height: 66px;
-    background-image: url('img/player/up.png'); /* 替换为你的玩家图片路径 */
+    background-image: url('img/player/laila up.png'); /* 替换为你的玩家图片路径 */
     background-size: cover; /* 让图片适应元素大小 */
 
     top: 600px;

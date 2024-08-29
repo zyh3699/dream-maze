@@ -119,19 +119,19 @@ document.addEventListener('keydown', (e) => {
     switch (e.key) {
         case 'ArrowUp': case 'w':case 'W':
             newTop -= step;
-            player.style.backgroundImage = "url('img/player/up.png')";  // 显示向上的图标
+            player.style.backgroundImage = "url('img/player/laila up.png')";  // 显示向上的图标
             break;
         case 'ArrowDown':case 's':case 'S':
             newTop += step;
-            player.style.backgroundImage = "url('img/player/down.png')";  // 显示向下的图标
+            player.style.backgroundImage = "url('img/player/laila down.png')";  // 显示向下的图标
             break;
         case 'ArrowLeft':case 'a':case 'A':
             newLeft -= step;
-            player.style.backgroundImage = "url('img/player/left.png')";  // 显示向左的图标
+            player.style.backgroundImage = "url('img/player/laila left.png')";  // 显示向左的图标
             break;
         case 'ArrowRight':case 'd':case 'D':
             newLeft += step;
-            player.style.backgroundImage = "url('img/player/right.png')";  // 显示向右的图标
+            player.style.backgroundImage = "url('img/player/laila right.png')";  // 显示向右的图标
             break;
     }
 
