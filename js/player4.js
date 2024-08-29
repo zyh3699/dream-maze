@@ -9,8 +9,9 @@ class Player {
     this.bug = 0;
     this.frameIndex = 0; // 当前帧索引
     this.frameDelay = 0; // 帧间隔计时器
-    this.frameInterval = 15; // 每隔多少次update切换一次帧
+    this.frameInterval = 45; // 每隔多少次update切换一次帧
     this.direction = "down"; // 默认方向
+    this.map = 0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -57,6 +58,38 @@ class Player {
     }
 
     return false;
+  }
+
+  mapp() {
+    if (this.map === 1) {
+      this.showMessage("按K键收起");
+
+      // Create or select the image element
+      let image = document.getElementById("mapImage");
+      if (!image) {
+        image = document.createElement("img");
+        image.id = "mapImage";
+        image.src = "../map/secret.jpg"; // replace with the actual path to your image
+        image.style.position = "fixed";
+        image.style.top = "50%";
+        image.style.left = "50%";
+        image.style.transform = "translate(-50%, -50%)";
+        image.style.zIndex = "1000";
+        image.style.width = "500px"; // Set the width
+        image.style.height = "300px"; // Set the height
+        image.style.border = "15px solid white"; // Set border size, style, and color
+        document.body.appendChild(image);
+      } else {
+        image.style.display = "block";
+      }
+
+      // Add an event listener to hide the image when K is pressed
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "k" || e.key === "K") {
+          image.style.display = "none";
+        }
+      });
+    }
   }
 
   updateAdjacentPieces(x, y) {
@@ -196,8 +229,94 @@ class Player {
         } else if (buttonText === "确定") {
           if (inputField.value === "1829") {
             alert("密码正确");
-            this.showMessage("你居然发现了梦境最深层的秘密，不可思议");
+            this.map = 1;
             document.body.removeChild(passwordContainer);
+            const dialogues = [
+              {
+                text: "欢迎你，尊贵的1829组织成员",
+                image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+              },
+              {
+                text: "这份文件从来没有其他人看到过...你是艾德里安吗？",
+                image: "../img/conversation/精灵/精灵.png", // 另一张图片
+              },
+              {
+                text: "不，我是莱拉",
+                image: "../img/conversation/莱拉/莱拉.png", // 精灵
+              },
+              {
+                text: "在你来之前，艾德里安已经来过这里了",
+                image: "../img/conversation/精灵/精灵.png", // 精灵
+              },
+              {
+                text: "不过很可惜，他当时没有找到正确的密码...",
+                image: "../img/conversation/精灵/精灵.png", // 精灵
+              },
+              {
+                text: "不管怎么说，恭喜你，请你点击M键来查看这份查看机密文件吧",
+                image: "../img/conversation/精灵/精灵.png", // 精灵
+              },
+              {
+                text: "这里到底还有多少秘密...",
+                image: "../img/conversation/莱拉/莱拉.png", // 精灵
+              },
+            ];
+            let currentDialogue = 0;
+            let charIndex = 0;
+            const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+            // 添加CSS样式
+            const style = document.createElement("style");
+            document.head.appendChild(style);
+
+            // 创建对话框元素
+            const dialogBox = document.createElement("div");
+            dialogBox.id = "dialogue";
+
+            // 插入莱拉的图片
+            const lailaImage = document.createElement("img");
+            lailaImage.style.width = "100px"; // 将宽度设置为200像素
+            lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+            dialogBox.appendChild(lailaImage);
+
+            // 创建对话文本元素
+            const dialogText = document.createElement("span");
+            dialogText.id = "dialogueText";
+            dialogBox.appendChild(dialogText);
+            document.body.appendChild(dialogBox);
+            dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+            dialogText.style.fontSize = "20px"; // 字体大小
+            dialogText.style.color = "#FFFFFF"; // 字体颜色
+            dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+            dialogText.style.lineHeight = "1.5"; // 行高
+            function typeDialogue() {
+              if (charIndex < dialogues[currentDialogue].text.length) {
+                dialogText.innerText +=
+                  dialogues[currentDialogue].text.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeDialogue, typingSpeed);
+              } else {
+                currentDialogue++;
+                charIndex = 0;
+              }
+            }
+
+            function showNextDialogue() {
+              if (currentDialogue < dialogues.length) {
+                dialogText.innerText = "";
+                lailaImage.src = dialogues[currentDialogue].image;
+                typeDialogue();
+              } else {
+                document.body.removeChild(dialogBox);
+                document.getElementById("gameCanvas").style.display = "block";
+                requestAnimationFrame(mainLoop);
+              }
+            }
+
+            document.addEventListener("click", showNextDialogue);
+            showNextDialogue();
+
+            collisionMap[interactY][interactX] = 1000;
           } else {
             alert("密码错误");
           }
@@ -733,7 +852,7 @@ class Player {
         showNextDialogue();
 
         collisionMap[interactY][interactX] = 0;
-      } else {
+      } else if (this.bug >= 5 && window.map.index == 2) {
         this.fadeOutAndRedirect();
         collisionMap[interactY][interactX] = 0;
       }
@@ -1105,6 +1224,8 @@ class Player {
     }, 2000); // 2秒后开始淡出
   }
 }
+
+
 
 const player = new Player();
 window.player = player;
