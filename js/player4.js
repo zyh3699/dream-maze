@@ -53,7 +53,8 @@ class Player {
       collisionMap[y][x] === 5 ||
       collisionMap[y][x] === 6 ||
       collisionMap[y][x] === 10 ||
-      collisionMap[y][x] === 11 
+      collisionMap[y][x] === 11 ||
+      collisionMap[y][x] === 3
     ) {
       collisionMap[y][x] = 100;
 
@@ -101,16 +102,16 @@ class Player {
       this.showMessage("你现在还不可以进去");
       collisionMap[interactY][interactX] = 0;
     }
-    if(collisionMap[interactY][interactX] === 11){
+    if (collisionMap[interactY][interactX] === 11) {
       this.showMessage("点E可以进行交互");
     }
-    if(collisionMap[interactY][interactX] === 10){
+    if (collisionMap[interactY][interactX] === 10) {
       this.showMessage("点E进行解码");
     }
-    if(collisionMap[interactY][interactX] === 2){
+    if (collisionMap[interactY][interactX] === 2) {
       this.showMessage("点E进入梦境核心");
     }
-    if(collisionMap[interactY][interactX] === 3){
+    if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("点E开始修复结构");
     }
   }
@@ -178,6 +179,18 @@ class Player {
       };
       passwordContainer.appendChild(button);
     });
+
+    const exitButton = document.createElement("button");
+    exitButton.innerText = "退出";
+    exitButton.style.gridColumn = "span 3";
+    exitButton.style.padding = "10px";
+    exitButton.style.fontSize = "18px";
+    exitButton.style.cursor = "pointer";
+    exitButton.style.marginTop = "10px";
+    exitButton.onclick = () => {
+      document.body.removeChild(passwordContainer);
+    };
+    passwordContainer.appendChild(exitButton);
 
     document.body.appendChild(passwordContainer);
   }
@@ -489,7 +502,6 @@ class Player {
     };
 
     // 提示信息
-    
 
     const keydownHandler = (event) => {
       if (gameEnded) return;
@@ -521,7 +533,6 @@ class Player {
             }
             this.updateAdjacentPieces(interactX, interactY);
           }
-          
         }
       }
     };
@@ -610,10 +621,8 @@ class Player {
         dialogBox.addEventListener("click", showNextDialogue);
         showNextDialogue();
 
-        
         collisionMap[interactY][interactX] = 0;
-      }
-      else {
+      } else {
         this.fadeOutAndRedirect();
         collisionMap[interactY][interactX] = 0;
       }
@@ -621,8 +630,8 @@ class Player {
 
     if (collisionMap[interactY][interactX] === 3) {
       this.setupCoopGameUI();
-      
-      collisionMap[interactY][interactX] = 0;
+
+      this.updateAdjacentPieces(interactX, interactY);
     }
     if (collisionMap[interactY][interactX] === 10) {
       const dialogues = [
