@@ -961,6 +961,8 @@ class Player {
           }
         }
 
+        const self = this;
+
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
             dialogText.innerText = "";
@@ -969,6 +971,7 @@ class Player {
             typeDialogue();
           } else {
             document.body.removeChild(dialogBox);
+            self.showPasswordPrompt();
             document.getElementById("gameCanvas").style.display = "block";
             requestAnimationFrame(mainLoop);
           }
@@ -1019,8 +1022,7 @@ class Player {
         showNextDialogue();
         this.visit = 1;
       }
-
-      this.showPasswordPrompt();
+      
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 12) {
@@ -1077,6 +1079,8 @@ class Player {
           charIndex = 0;
         }
       }
+      
+      const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
@@ -1085,6 +1089,7 @@ class Player {
           typeDialogue();
         } else {
           document.body.removeChild(dialogBox);
+          self.startBattle();
           document.getElementById("gameCanvas").style.display = "block";
           requestAnimationFrame(mainLoop);
         }
@@ -1093,7 +1098,7 @@ class Player {
       document.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
-      this.startBattle();
+      
       this.updateAdjacentPieces(interactX, interactY);
     }
     if (collisionMap[interactY][interactX] === 5) {
