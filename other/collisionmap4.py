@@ -19,6 +19,7 @@ def generate_collision_map(image_path):
     (5 if (r == 0 and g == 122 and b == 65) else 
      (10 if (r == 223 and g == 178 and b == 252) else 
       (11 if (r == 255 and g == 205 and b == 0) else 
+       12 if (r == 240 and g == 214 and b == 254) else
        0)))))))
         collision_map.append(row)
 
@@ -43,6 +44,8 @@ def mark_collision_map(collision_map, image):
                 image.putpixel((x, y), (255, 0, 255))
             elif collision_map[y][x] == 11:
                 image.putpixel((x, y), (255, 255, 255))
+            elif collision_map[y][x] == 12:
+                image.putpixel((x, y), (0, 0, 0))
 
     return image
 
