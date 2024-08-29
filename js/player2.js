@@ -134,93 +134,55 @@ class Player {
       this.fadeOutAndRedirect();
       collisionMap[interactY][interactX] = 0;
     }
-
     if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 5) {
       const dialogues = [
+        {
+          text: "...欢迎来到alpha幻境...我能感受到你。你叫......",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },
+        {
+          text: "（???!!!）",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },
+        {
+          text: "对，莱拉...欢迎来到alpha幻境...sigh...我曾经也跟你一样，正如你的心自由的听从你的意识，我也...",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },
+        {
+          text: "（闭口不语）",
+          image: "../img/conversation/精灵/精灵.png",
+        },
+        {
+          text: "（试探性）先生？",
+          image: "../img/conversation/精灵/精灵.png",
+        },
+        {
+          text: "去找布谷钟吧...莱拉，把握住...咳，沦为囚徒...难道囚禁是我的宿命吗...",
+          image: "../img/conversation/精灵/精灵.png",
+        } ,       
+        {
+          text: "（着急）把握住什么？先生？先生？",
+          image: "../img/conversation/精灵/精灵.png",
+        },
+        {
+          text: "（幽灵缓缓闭上眼，若有若无的身躯似乎比之前散发出更多的寒意。看样子不会再跟你多说些什么了。）",
+          image: "../img/conversation/精灵/精灵.png",
+        }
+      ];      
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 6) {
+      const dialogues = [
         "最终，莱拉和艾德里安成功突破梦境层层防御，获取了关于神秘组织的更多信息。",
         "他们发现，这个组织并不仅仅在追求财富或权力，而是在试图掌控人类的集体潜意识，以改变世界的未来。",
         "与此同时，一切似乎都奇怪了起来 ...... "
       ];
-      let currentDialogue = 0;
-      let charIndex = 0;
-      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
-
-      // 添加CSS样式
-      const style = document.createElement("style");
-      style.innerHTML = `
-        #dialogue {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%; /* 设置为80%宽度 */
-            height: 100px; /* 固定高度 */
-            text-align: center;
-            position: fixed; /* 固定位置 */
-            bottom: 20px; /* 固定在底部 */
-            left: 50%; /* 水平居中 */
-            transform: translateX(-50%); /* 水平居中 */
-            margin: 0; /* 移除水平居中 */
-            color: white; /* 字体颜色 */
-            font-size: 24px; /* 字体大小 */
-            display: flex;
-            justify-content: center;
-            align-items: center; /* 垂直居中 */
-            box-sizing: border-box;
-        }
-          #dialogue img {
-            position: absolute; /* 绝对定位 */
-            top: -100px; /* 距离顶部10px */
-            left: 10px; /* 距离左侧10px */
-            width: 100px; /* 图片宽度 */
-            height: 100px; /* 图片高度 */
-          }`;
-      document.head.appendChild(style);
-
-      // 创建对话框元素
-      const dialogBox = document.createElement("div");
-      dialogBox.id = "dialogue";
-
-      // 插入莱拉的图片
-      const lailaImage = document.createElement("img");
-      lailaImage.src = "../img/charactor/莱拉/laila down.png";
-      lailaImage.alt = "Image Description";
-      dialogBox.appendChild(lailaImage);
-
-      // 创建对话文本元素
-      const dialogText = document.createElement("span");
-      dialogText.id = "dialogueText";
-      dialogBox.appendChild(dialogText);
-      document.body.appendChild(dialogBox);
-
-      function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].length) {
-          dialogText.innerText += dialogues[currentDialogue].charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
-
-      function showNextDialogue() {
-        if (currentDialogue < dialogues.length) {
-          dialogText.innerText = "";
-          typeDialogue();
-        } else {
-          document.body.removeChild(dialogBox);
-          document.getElementById("gameCanvas").style.display = "block";
-          requestAnimationFrame(mainLoop);
-        }
-      }
-
-      dialogBox.addEventListener("click", showNextDialogue);
-      showNextDialogue();
-
+      createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
   }
@@ -261,3 +223,84 @@ class Player {
 
 const player = new Player();
 window.player = player;
+
+function createDialogueBox(dialogues) {
+  let currentDialogue = 0;
+  let charIndex = 0;
+  const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+  // 添加CSS样式
+  if (!document.getElementById("dialogue-style")) {
+    const style = document.createElement("style");
+    style.id = "dialogue-style";
+    style.innerHTML = `
+      #dialogue {
+          background: rgba(0, 0, 0, 0.7);
+          padding: 20px;
+          border-radius: 10px;
+          width: 80%;
+          height: 100px;
+          text-align: center;
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          color: white;
+          font-size: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+      }
+      #dialogue img {
+          position: absolute;
+          top: -100px;
+          left: 10px;
+          width: 100px;
+          height: 100px;
+      }`;
+    document.head.appendChild(style);
+  }
+
+  // 创建对话框元素
+  const dialogBox = document.createElement("div");
+  dialogBox.id = "dialogue";
+
+  // 创建图片元素
+  const charImage = document.createElement("img");
+  charImage.alt = "Character Image";
+  dialogBox.appendChild(charImage);
+
+  // 创建对话文本元素
+  const dialogText = document.createElement("span");
+  dialogText.id = "dialogueText";
+  dialogBox.appendChild(dialogText);
+  document.body.appendChild(dialogBox);
+
+  function typeDialogue() {
+    if (charIndex < dialogues[currentDialogue].text.length) {
+      dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeDialogue, typingSpeed);
+    } else {
+      currentDialogue++;
+      charIndex = 0;
+    }
+  }
+
+  function showNextDialogue() {
+    if (currentDialogue < dialogues.length) {
+      // 更新图片和文本内容
+      charImage.src = dialogues[currentDialogue].image;
+      dialogText.innerText = "";
+      typeDialogue();
+    } else {
+      document.body.removeChild(dialogBox);
+      document.getElementById("gameCanvas").style.display = "block";
+      requestAnimationFrame(mainLoop); // 继续游戏主循环
+    }
+  }
+
+  dialogBox.addEventListener("click", showNextDialogue);
+  showNextDialogue();
+}
