@@ -40,8 +40,21 @@ def mark_collision_map(collision_map, image):
             elif collision_map[y][x] == 3:
                 image.putpixel((x, y), (0, 0, 255))
             elif collision_map[y][x] == 4:
-                image.putpixel((x, y), (0, 255, 255))
-
+                image.putpixel((x, y), (100, 255, 255))
+            elif collision_map[y][x] == 5:
+                image.putpixel((x, y), (222, 255, 255))
+            elif collision_map[y][x] == 6:
+                image.putpixel((x, y), (80, 255, 255))
+            elif collision_map[y][x] == 7:
+                image.putpixel((x, y), (0, 25, 255))
+            elif collision_map[y][x] == 8:
+                image.putpixel((x, y), (9, 25, 25))
+            elif collision_map[y][x] == 10:
+                image.putpixel((x, y), (99, 2, 2))
+            elif collision_map[y][x] == 11:
+                image.putpixel((x, y), (11, 0, 255))
+            elif collision_map[y][x] == 12:
+                image.putpixel((x, y), (222, 222, 25))
     return image
 
 def save_collision_map_to_json(collision_map, json_path):
