@@ -890,26 +890,38 @@ class Player {
           {
             text: "你有没有想起来什么...",
             image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            
           },
           {
             text: "之前艾德里安总是提到过一个组织，组织名称好像是一串数字...",
             image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
-            options: ["有印象->", "不记得了->"], // 添加选项
-          },
-          {
-            text: "你确定就是那四个数字吗莱拉，这么梦境很不稳定，可能我们输入错误就没有办法获得后续的提示了",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
-            
-          },
-          {
-            text: "来吧，我们也只能放手一搏了，时间不多了",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
-          },
-          {
-            text: "嘶...",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            options: ["记得->", "不记得->"], // 添加选项
           },
         ];
+
+        
+        const choiceDialogues = {
+          cooperate: [
+            {
+              text: "艾德里安，为什么你会联系我？我们上次的合作……你知道，我依然有很多疑问。",
+              image: "../img/conversation/莱拉/莱拉.png",
+            },
+            {
+              text: "我明白你的顾虑，莱拉。但你必须知道，这个组织的影响力远比我们当初想象的要大得多。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "过去我可能隐瞒了些东西，但现在……我不再是他们的一部分。我想帮你，揭开这一切的真相。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+          ],
+          abandon: [
+            {
+              text: "嘶...",
+              image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            },
+          ],
+        };
 
         let currentDialogue = 0;
         let charIndex = 0;
@@ -954,6 +966,7 @@ class Player {
           } else {
             if (dialogues[currentDialogue].options) {
               showOptions(dialogues[currentDialogue].options);
+              charIndex = -1;
             } else {
               currentDialogue++;
               charIndex = 0;
@@ -968,6 +981,7 @@ class Player {
             dialogText.innerText = "";
             lailaImage.src = dialogues[currentDialogue].image;
             optionsContainer.innerHTML = ""; // 清空选项按钮
+            
             typeDialogue();
           } else {
             document.body.removeChild(dialogBox);
@@ -1006,20 +1020,19 @@ class Player {
           });
         }
 
-         function handleOption(option) {
-           if (option === "有印象->") {
-             currentDialogue = dialogues.findIndex(
-               (d) =>
-                 d.text ===
-                 "你确定就是那四个数字吗莱拉，这么梦境很不稳定，可能我们输入错误就没有办法获得后续的提示了"
-             );
-           } else if (option === "不记得了->") {
-             currentDialogue = dialogues.findIndex(
-               (d) => d.text === "来吧，我们也只能放手一搏了，时间不多了"
-             );
-           } 
-           showNextDialogue();
-         }
+        function handleOption(option) {
+          if (option === "记得->") {
+            dialogues.push(...choiceDialogues.cooperate);
+          } else if (option === "不记得->") {
+            dialogues.push(...choiceDialogues.abandon);
+          }
+          if (option === "好->") { 
+            dialogues.push(...choiceDialogues.cooperate);
+          }
+          currentDialogue++;
+          
+          showNextDialogue();
+        }
 
         document.addEventListener("click", showNextDialogue);
         showNextDialogue();
