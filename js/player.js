@@ -39,7 +39,13 @@ class Player {
   draw(ctx) {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
-
+  MusicPlayer() {//对话框音效
+        var music = document.getElementById("music");
+        music.play();
+        music.loop = false;
+        music.preload = true;
+        music.volume = 1;
+    }
   move(dx, dy, collisionMap) {
     if (!this.isCollision(dx, dy, collisionMap)) {
       window.map.move(dx, dy); // 移动背景图
@@ -160,6 +166,7 @@ class Player {
  
     if (collisionMap[interactY][interactX] === 3) {
       if (this.puzzle < 16) {
+          this.MusicPlayer();
         this.puzzle += 4;
         this.showMessage(`你收集了碎片（${this.puzzle}/16）`);
         if (this.puzzle === 16) {

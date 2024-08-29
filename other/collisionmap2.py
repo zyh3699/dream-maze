@@ -15,7 +15,15 @@ def generate_collision_map(image_path):
             row.append(1 if (r == 255 and g == 255 and b == 255) else 
  (2 if (r == 0 and g == 0 and b == 0) else 
   (3 if (r == 239 and g == 55 and b == 58) else 
-   (4 if (r == 42 and g == 62 and b == 214) else 0))))
+   (4 if (r == 42 and g == 62 and b == 214) else
+    (5 if (r == 255 and g == 38 and b == 0) else 
+     (6 if (r == 131 and g == 17 and b == 0) else
+      (7 if (r == 0 and g == 249 and b == 0) else 
+       (8 if (r == 255 and g == 64 and b == 255) else 
+        (9 if (r == 255 and g == 147 and b == 0) else 
+         (10 if (r == 56 and g == 234 and b == 0) else 
+          (11 if (r == 255 and g == 252 and b == 83) else 
+           (12 if (r == 255 and g == 119 and b == 221) else 0))))))))))))
         collision_map.append(row)
 
     return collision_map, image
@@ -32,8 +40,21 @@ def mark_collision_map(collision_map, image):
             elif collision_map[y][x] == 3:
                 image.putpixel((x, y), (0, 0, 255))
             elif collision_map[y][x] == 4:
-                image.putpixel((x, y), (0, 255, 255))
-
+                image.putpixel((x, y), (100, 255, 255))
+            elif collision_map[y][x] == 5:
+                image.putpixel((x, y), (222, 255, 255))
+            elif collision_map[y][x] == 6:
+                image.putpixel((x, y), (80, 255, 255))
+            elif collision_map[y][x] == 7:
+                image.putpixel((x, y), (0, 25, 255))
+            elif collision_map[y][x] == 8:
+                image.putpixel((x, y), (9, 25, 25))
+            elif collision_map[y][x] == 10:
+                image.putpixel((x, y), (99, 2, 2))
+            elif collision_map[y][x] == 11:
+                image.putpixel((x, y), (11, 0, 255))
+            elif collision_map[y][x] == 12:
+                image.putpixel((x, y), (222, 222, 25))
     return image
 
 def save_collision_map_to_json(collision_map, json_path):
