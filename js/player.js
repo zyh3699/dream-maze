@@ -70,12 +70,15 @@ class Player {
         if (!image) {
             image = document.createElement('img');
             image.id = 'mapImage';
-            image.src = 'path_to_your_image.png'; // replace with the actual path to your image
+            image.src = '../img/bgr/chapter0_map.png'; // replace with the actual path to your image
             image.style.position = 'fixed';
             image.style.top = '50%';
             image.style.left = '50%';
             image.style.transform = 'translate(-50%, -50%)';
             image.style.zIndex = '1000';
+            image.style.width = '1350px'; // Set the width
+            image.style.height = '900px'; // Set the height
+            image.style.border = '15px solid white'; // Set border size, style, and color
             document.body.appendChild(image);
         } else {
             image.style.display = 'block';
@@ -148,10 +151,12 @@ class Player {
     // }
     if(collisionMap[interactY][interactX] === 7){
       if(this.ai===1){
+        this.map=1;
       this.showMessage("恭喜你，找到了机密文件，按M键打开，按K键收起，请你按照机密文件的指示去搜寻碎片吧！");
       this.updateAdjacentPieces(interactX, interactY);}
-      if(this.ai===0){
-        this.map=1;
+      if(this.ai===0)
+        {
+        
         this.showMessage("你需要先找到艾德里安，才能看到机密文件的指示！");
         this.updateAdjacentPieces(interactX, interactY);
       }

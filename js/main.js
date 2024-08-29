@@ -49,6 +49,9 @@ function update(deltatime) {
   if (keysPressed["e"] || keysPressed["E"]) {
     window.player.interact(collisionMap);
   }
+  if (keysPressed["m"] || keysPressed["M"]) {
+    window.player.mapp();
+  }
 }
 
 function draw(ctx) {
