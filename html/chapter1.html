@@ -9,6 +9,18 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
+      background-size: cover;
+      background-color: #2e6231; 
+    }
+    body::before {
+      content: '';
+      position: fixed; /* 使用 fixed 可以确保背景图填满整个视口 */
+      top: 0;
+      left: 0;
+      width: 100vw; /* 确保背景图片宽度为视口宽度 */
+      height: 100vh; /* 确保背景图片高度为视口高度 */
+      background: url('../img/edge_background.png') no-repeat center center; /* 替换成您的背景图片路径 */
+      background-size: cover; /* 确保背景图片始终填充视口 */
     }
     canvas {
       display: block;
