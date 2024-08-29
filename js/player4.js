@@ -12,6 +12,7 @@ class Player {
     this.frameInterval = 45; // 每隔多少次update切换一次帧
     this.direction = "down"; // 默认方向
     this.map = 0;
+    this.visit =0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -864,97 +865,163 @@ class Player {
       this.updateAdjacentPieces(interactX, interactY);
     }
     if (collisionMap[interactY][interactX] === 10) {
-      const dialogues = [
-        {
-          text: "这是什么地方？",
-          image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
-        },
-        {
-          text: "我们必须找到关键的梦境支柱，修复它们，否则一切都完了。",
-          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
-        },
-        {
-          text: "在这场终极挑战中，莱拉和卡尔将面临决定世界命运的最后抉择。",
-          image: "../img/conversation/精灵/精灵.png", // 精灵
-        },
-        {
-          text: "莱拉，这是我们的最后机会。阿尔法梦境不仅能改变现实，它还能操控时间。如果我们失败了……整个世界都将陷入无尽的黑暗。",
-          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
-        },
-        {
-          text: "无论如何，我们必须阻止它。",
-          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
-        },
-        {
-          text: "我们已经多次引起梦境防御机制的反制，许多梦境守卫已经追到了这一层梦境之中。他们很善于伪装，同样有高超的梦境技术。如果你没有办法战胜他们，我们只能重新回到上一层梦境中暂避锋芒。",
-          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
-        },
-        {
-          text: "不仅如此...总之这层梦境是我从未涉足的地方，我也不知道这里会发生什么，一定要多加小心！",
-          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
-        },
-        {
-          text: "你也是",
-          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
-        },
-      ];
-      let currentDialogue = 0;
-      let charIndex = 0;
-      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+      if (this.visit === 0) {
+        const dialogues = [
+          {
+            text: "这是什么地方？",
+            image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+          },
+          {
+            text: "这看起来像一个被遗弃的电子保险箱。",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "这上面有输入密码的地方，在如此靠近阿尔法梦境核心的地方放置的东西，一定不简单...",
+            image: "../img/conversation/莱拉/莱拉.png", // 精灵
+          },
+          {
+            text: "可是我们能从哪里找到密码...",
+            image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+          },
+          {
+            text: "嗯...",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "你有没有想起来什么...",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "之前艾德里安总是提到过一个组织，组织名称好像是一串数字...",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            options: ["有印象->", "不记得了->"], // 添加选项
+          },
+          {
+            text: "你确定就是那四个数字吗莱拉，这么梦境很不稳定，可能我们输入错误就没有办法获得后续的提示了",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            
+          },
+          {
+            text: "来吧，我们也只能放手一搏了，时间不多了",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "嘶...",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+        ];
 
-      // 添加CSS样式
-      const style = document.createElement("style");
-      document.head.appendChild(style);
+        let currentDialogue = 0;
+        let charIndex = 0;
+        const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
-      // 创建对话框元素
-      const dialogBox = document.createElement("div");
-      dialogBox.id = "dialogue";
+        // 添加CSS样式
+        const style = document.createElement("style");
+        document.head.appendChild(style);
 
-      // 插入莱拉的图片
-      const lailaImage = document.createElement("img");
-      lailaImage.style.width = "100px"; // 将宽度设置为200像素
-      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
-      dialogBox.appendChild(lailaImage);
+        // 创建对话框元素
+        const dialogBox = document.createElement("div");
+        dialogBox.id = "dialogue";
 
-      // 创建对话文本元素
-      const dialogText = document.createElement("span");
-      dialogText.id = "dialogueText";
-      dialogBox.appendChild(dialogText);
-      document.body.appendChild(dialogBox);
-      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
-      dialogText.style.fontSize = "20px"; // 字体大小
-      dialogText.style.color = "#FFFFFF"; // 字体颜色
-      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
-      dialogText.style.lineHeight = "1.5"; // 行高
-      function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText +=
-            dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
+        // 插入莱拉的图片
+        const lailaImage = document.createElement("img");
+        lailaImage.style.width = "100px"; // 将宽度设置为200像素
+        lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+        dialogBox.appendChild(lailaImage);
+
+        // 创建对话文本元素
+        const dialogText = document.createElement("span");
+        dialogText.id = "dialogueText";
+        dialogBox.appendChild(dialogText);
+        document.body.appendChild(dialogBox);
+        dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+        dialogText.style.fontSize = "20px"; // 字体大小
+        dialogText.style.color = "#FFFFFF"; // 字体颜色
+        dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+        dialogText.style.lineHeight = "1.5"; // 行高
+
+        // 创建选项按钮容器
+        const optionsContainer = document.createElement("div");
+        optionsContainer.id = "options";
+        dialogBox.appendChild(optionsContainer);
+
+        function typeDialogue() {
+          if (charIndex < dialogues[currentDialogue].text.length) {
+            dialogText.innerText +=
+              dialogues[currentDialogue].text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeDialogue, typingSpeed);
+          } else {
+            if (dialogues[currentDialogue].options) {
+              showOptions(dialogues[currentDialogue].options);
+            } else {
+              currentDialogue++;
+              charIndex = 0;
+            }
+          }
         }
-      }
 
-      function showNextDialogue() {
-        if (currentDialogue < dialogues.length) {
-          dialogText.innerText = "";
-          lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
-        } else {
-          document.body.removeChild(dialogBox);
-          document.getElementById("gameCanvas").style.display = "block";
-          requestAnimationFrame(mainLoop);
+        function showNextDialogue() {
+          if (currentDialogue < dialogues.length) {
+            dialogText.innerText = "";
+            lailaImage.src = dialogues[currentDialogue].image;
+            optionsContainer.innerHTML = ""; // 清空选项按钮
+            typeDialogue();
+          } else {
+            document.body.removeChild(dialogBox);
+            document.getElementById("gameCanvas").style.display = "block";
+            requestAnimationFrame(mainLoop);
+          }
         }
-      }
 
-      document.addEventListener("click", showNextDialogue);
-      showNextDialogue();
+        function showOptions(options) {
+          options.forEach((option) => {
+            const button = document.createElement("div"); // 使用 div 而不是 button
+            button.className = "option-text";
+            button.innerText = option;
+            button.style.cursor = "pointer"; // 鼠标悬停时显示为指针
+            button.style.margin = "10px 0"; // 上下间距
+            button.style.color = "#FFFFFF"; // 字体颜色设置为白色
+            button.style.fontSize = "24px"; // 字体大小
+            button.style.fontFamily = "Arial, sans-serif"; // 字体设置为 Arial
+            button.style.textShadow = "1px 1px 2px #000000"; // 添加文本阴影
+            button.style.transition = "background-color 0.3s, color 0.3s"; // 添加过渡效果
+
+            // 添加鼠标悬停效果
+            button.onmouseover = () => {
+              button.style.backgroundColor = "#444444"; // 鼠标悬停时的背景色
+              button.style.color = "#FFD700"; // 鼠标悬停时的字体颜色
+            };
+            button.onmouseout = () => {
+              button.style.backgroundColor = ""; // 恢复原背景色
+              button.style.color = "#FFFFFF"; // 恢复原字体颜色
+            };
+
+            button.onclick = () => handleOption(option);
+            optionsContainer.appendChild(button);
+          });
+        }
+
+        function handleOption(option) {
+          if (option === "有印象->") {
+            currentDialogue = dialogues.findIndex(
+              (d) =>
+                d.text ===
+                "你确定就是那四个数字吗莱拉，这么梦境很不稳定，可能我们输入错误就没有办法获得后续的提示了"
+            );
+          } else if (option === "不记得了->") {
+            currentDialogue = dialogues.findIndex((d) => d.text === "嘶...");
+          } 
+          showNextDialogue();
+        }
+
+        document.addEventListener("click", showNextDialogue);
+        showNextDialogue();
+        this.visit = 1;
+      }
 
       this.showPasswordPrompt();
-      this.updateAdjacentPieces(interactX, interactY);
+      collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 12) {
       const dialogues = [
