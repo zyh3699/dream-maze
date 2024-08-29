@@ -484,7 +484,7 @@ class Player {
 
       if (progress <= 0) {
         clearInterval(progressInterval);
-        alert("任务失败！请调整位点尝试重新修复");
+        alert("任务失败！梦境启动防御机制，请更换位点尝试重新修复");
         endGame();
       }
     };
@@ -515,7 +515,7 @@ class Player {
       }
 
       if (event.key === " ") {
-        progress = Math.min(progress + 3, 100);
+        progress = Math.min(progress + 5, 100);
         progressFill.style.width = `${progress}%`;
         progressDisplay.innerText = `进度: ${progress}%`;
 
