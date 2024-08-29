@@ -6,6 +6,7 @@ class Player {
     this.height = 66;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
+    this.bug = 0;
   }
 
   draw(ctx) {
@@ -48,7 +49,12 @@ class Player {
     }
 
     // 如果当前位置是3，则将其更新为100
-    if (collisionMap[y][x] === 5 || collisionMap[y][x] === 6) {
+    if (
+      collisionMap[y][x] === 5 ||
+      collisionMap[y][x] === 6 ||
+      collisionMap[y][x] === 10 ||
+      collisionMap[y][x] === 11 
+    ) {
       collisionMap[y][x] = 100;
 
       // 递归更新相邻的格子
@@ -94,6 +100,12 @@ class Player {
     if (collisionMap[interactY][interactX] === 4) {
       this.showMessage("你现在还不可以进去");
       collisionMap[interactY][interactX] = 0;
+    }
+    if(collisionMap[interactY][interactX] === 11){
+      this.showMessage("点E可以进行交互");
+    }
+    if(collisionMap[interactY][interactX] === 10){
+      this.showMessage("点E进行解码");
     }
   }
 
@@ -164,234 +176,352 @@ class Player {
     document.body.appendChild(passwordContainer);
   }
 
-  startBattle = function() {
-  const battleContainer = document.createElement("div");
-  battleContainer.id = "battleContainer";
-  battleContainer.style.position = "fixed";
-  battleContainer.style.top = "50%";
-  battleContainer.style.left = "50%";
-  battleContainer.style.transform = "translate(-50%, -50%)";
-  battleContainer.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
-  battleContainer.style.padding = "20px";
-  battleContainer.style.borderRadius = "10px";
-  battleContainer.style.textAlign = "center";
-  battleContainer.style.color = "white";
-  battleContainer.style.width = "400px";
-  battleContainer.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+  startBattle = function () {
+    const battleContainer = document.createElement("div");
+    battleContainer.id = "battleContainer";
+    battleContainer.style.position = "fixed";
+    battleContainer.style.top = "50%";
+    battleContainer.style.left = "50%";
+    battleContainer.style.transform = "translate(-50%, -50%)";
+    battleContainer.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
+    battleContainer.style.padding = "20px";
+    battleContainer.style.borderRadius = "10px";
+    battleContainer.style.textAlign = "center";
+    battleContainer.style.color = "white";
+    battleContainer.style.width = "400px";
+    battleContainer.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
 
-  let enemyHealth = 100;
-  let playerHealth = 100;
-  let playerMana = 50; // 初始魔法值
+    let enemyHealth = 100;
+    let playerHealth = 100;
+    let playerMana = 50; // 初始魔法值
 
-  // 敌人部分
-  const enemyContainer = document.createElement("div");
-  enemyContainer.style.marginBottom = "20px";
+    // 敌人部分
+    const enemyContainer = document.createElement("div");
+    enemyContainer.style.marginBottom = "20px";
 
-  const enemyHealthBarContainer = document.createElement("div");
-  enemyHealthBarContainer.style.width = "100%";
-  enemyHealthBarContainer.style.backgroundColor = "grey";
-  enemyHealthBarContainer.style.borderRadius = "5px";
-  enemyHealthBarContainer.style.marginBottom = "10px";
+    const enemyHealthBarContainer = document.createElement("div");
+    enemyHealthBarContainer.style.width = "100%";
+    enemyHealthBarContainer.style.backgroundColor = "grey";
+    enemyHealthBarContainer.style.borderRadius = "5px";
+    enemyHealthBarContainer.style.marginBottom = "10px";
 
-  const enemyHealthBar = document.createElement("div");
-  enemyHealthBar.id = "enemyHealthBar";
-  enemyHealthBar.style.width = "100%";
-  enemyHealthBar.style.height = "20px";
-  enemyHealthBar.style.backgroundColor = "red";
-  enemyHealthBar.style.borderRadius = "5px";
-  enemyHealthBarContainer.appendChild(enemyHealthBar);
-  enemyContainer.appendChild(enemyHealthBarContainer);
+    const enemyHealthBar = document.createElement("div");
+    enemyHealthBar.id = "enemyHealthBar";
+    enemyHealthBar.style.width = "100%";
+    enemyHealthBar.style.height = "20px";
+    enemyHealthBar.style.backgroundColor = "red";
+    enemyHealthBar.style.borderRadius = "5px";
+    enemyHealthBarContainer.appendChild(enemyHealthBar);
+    enemyContainer.appendChild(enemyHealthBarContainer);
 
-  const enemyImage = document.createElement("img");
-  enemyImage.src = "../img/charactor/精灵/Dwarf.png"; // 替换为实际的敌人图片路径
-  enemyImage.style.width = "100px";
-  enemyImage.style.height = "100px";
-  enemyImage.style.display = "block";
-  enemyImage.style.margin = "0 auto";
-  enemyContainer.appendChild(enemyImage);
+    const enemyImage = document.createElement("img");
+    enemyImage.src = "../img/charactor/精灵/Dwarf.png"; // 替换为实际的敌人图片路径
+    enemyImage.style.width = "100px";
+    enemyImage.style.height = "100px";
+    enemyImage.style.display = "block";
+    enemyImage.style.margin = "0 auto";
+    enemyContainer.appendChild(enemyImage);
 
-  battleContainer.appendChild(enemyContainer);
+    battleContainer.appendChild(enemyContainer);
 
-  // 玩家部分
-  const playerContainer = document.createElement("div");
-  playerContainer.style.marginBottom = "20px";
+    // 玩家部分
+    const playerContainer = document.createElement("div");
+    playerContainer.style.marginBottom = "20px";
 
-  const playerHealthBarContainer = document.createElement("div");
-  playerHealthBarContainer.style.width = "100%";
-  playerHealthBarContainer.style.backgroundColor = "grey";
-  playerHealthBarContainer.style.borderRadius = "5px";
-  playerHealthBarContainer.style.marginBottom = "10px";
+    const playerHealthBarContainer = document.createElement("div");
+    playerHealthBarContainer.style.width = "100%";
+    playerHealthBarContainer.style.backgroundColor = "grey";
+    playerHealthBarContainer.style.borderRadius = "5px";
+    playerHealthBarContainer.style.marginBottom = "10px";
 
-  const playerHealthBar = document.createElement("div");
-  playerHealthBar.id = "playerHealthBar";
-  playerHealthBar.style.width = "100%";
-  playerHealthBar.style.height = "20px";
-  playerHealthBar.style.backgroundColor = "green";
-  playerHealthBar.style.borderRadius = "5px";
-  playerHealthBarContainer.appendChild(playerHealthBar);
-  playerContainer.appendChild(playerHealthBarContainer);
+    const playerHealthBar = document.createElement("div");
+    playerHealthBar.id = "playerHealthBar";
+    playerHealthBar.style.width = "100%";
+    playerHealthBar.style.height = "20px";
+    playerHealthBar.style.backgroundColor = "green";
+    playerHealthBar.style.borderRadius = "5px";
+    playerHealthBarContainer.appendChild(playerHealthBar);
+    playerContainer.appendChild(playerHealthBarContainer);
 
-  const playerManaBarContainer = document.createElement("div");
-  playerManaBarContainer.style.width = "100%";
-  playerManaBarContainer.style.backgroundColor = "grey";
-  playerManaBarContainer.style.borderRadius = "5px";
-  playerManaBarContainer.style.marginBottom = "10px";
+    const playerManaBarContainer = document.createElement("div");
+    playerManaBarContainer.style.width = "100%";
+    playerManaBarContainer.style.backgroundColor = "grey";
+    playerManaBarContainer.style.borderRadius = "5px";
+    playerManaBarContainer.style.marginBottom = "10px";
 
-  const playerManaBar = document.createElement("div");
-  playerManaBar.id = "playerManaBar";
-  playerManaBar.style.width = "100%";
-  playerManaBar.style.height = "20px";
-  playerManaBar.style.backgroundColor = "blue";
-  playerManaBar.style.borderRadius = "5px";
-  playerManaBarContainer.appendChild(playerManaBar);
-  playerContainer.appendChild(playerManaBarContainer);
+    const playerManaBar = document.createElement("div");
+    playerManaBar.id = "playerManaBar";
+    playerManaBar.style.width = "100%";
+    playerManaBar.style.height = "20px";
+    playerManaBar.style.backgroundColor = "blue";
+    playerManaBar.style.borderRadius = "5px";
+    playerManaBarContainer.appendChild(playerManaBar);
+    playerContainer.appendChild(playerManaBarContainer);
 
-  const playerImage = document.createElement("img");
-  playerImage.src = "../img/charactor/莱拉/laila down.png"; // 替换为实际的玩家图片路径
-  playerImage.style.width = "100px";
-  playerImage.style.height = "100px";
-  playerImage.style.display = "block";
-  playerImage.style.margin = "0 auto";
-  playerContainer.appendChild(playerImage);
+    const playerImage = document.createElement("img");
+    playerImage.src = "../img/charactor/莱拉/laila down.png"; // 替换为实际的玩家图片路径
+    playerImage.style.width = "100px";
+    playerImage.style.height = "100px";
+    playerImage.style.display = "block";
+    playerImage.style.margin = "0 auto";
+    playerContainer.appendChild(playerImage);
 
-  battleContainer.appendChild(playerContainer);
+    battleContainer.appendChild(playerContainer);
 
-  const logContainer = document.createElement("div");
-  logContainer.id = "logContainer";
-  logContainer.style.height = "100px";
-  logContainer.style.overflowY = "auto";
-  logContainer.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
-  logContainer.style.padding = "10px";
-  logContainer.style.borderRadius = "5px";
-  logContainer.style.marginBottom = "20px";
-  battleContainer.appendChild(logContainer);
+    const logContainer = document.createElement("div");
+    logContainer.id = "logContainer";
+    logContainer.style.height = "100px";
+    logContainer.style.overflowY = "auto";
+    logContainer.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+    logContainer.style.padding = "10px";
+    logContainer.style.borderRadius = "5px";
+    logContainer.style.marginBottom = "20px";
+    battleContainer.appendChild(logContainer);
 
-  const logMessage = (message) => {
-    const logEntry = document.createElement("div");
-    logEntry.innerText = message;
-    logContainer.appendChild(logEntry);
-    logContainer.scrollTop = logContainer.scrollHeight;
-  };
+    const logMessage = (message) => {
+      const logEntry = document.createElement("div");
+      logEntry.innerText = message;
+      logContainer.appendChild(logEntry);
+      logContainer.scrollTop = logContainer.scrollHeight;
+    };
 
-  const attackButton = document.createElement("button");
-  attackButton.innerText = "攻击";
-  attackButton.style.padding = "10px 20px";
-  attackButton.style.fontSize = "18px";
-  attackButton.style.cursor = "pointer";
-  attackButton.style.marginRight = "10px";
-  attackButton.style.border = "none";
-  attackButton.style.borderRadius = "5px";
-  attackButton.style.backgroundColor = "#ff4d4d";
-  attackButton.style.color = "white";
-  attackButton.onclick = () => {
-    const damage = Math.floor(Math.random() * 20) + 1;
-    enemyHealth -= damage;
-    enemyHealthBar.style.width = `${enemyHealth}%`;
-    logMessage(`你对敌人造成了 ${damage} 点伤害！`);
-    if (enemyHealth <= 0) {
-      alert("你赢了！");
-      document.body.removeChild(battleContainer);
-      return;
-    }
-    enemyTurn();
-  };
-  battleContainer.appendChild(attackButton);
-
-  const defendButton = document.createElement("button");
-  defendButton.innerText = "防御";
-  defendButton.style.padding = "10px 20px";
-  defendButton.style.fontSize = "18px";
-  defendButton.style.cursor = "pointer";
-  defendButton.style.marginRight = "10px";
-  defendButton.style.border = "none";
-  defendButton.style.borderRadius = "5px";
-  defendButton.style.backgroundColor = "#4d94ff";
-  defendButton.style.color = "white";
-  defendButton.onclick = () => {
-    logMessage("你选择了防御！");
-    enemyTurn(true);
-  };
-  battleContainer.appendChild(defendButton);
-
-  const healButton = document.createElement("button");
-  healButton.innerText = "恢复";
-  healButton.style.padding = "10px 20px";
-  healButton.style.fontSize = "18px";
-  healButton.style.cursor = "pointer";
-  healButton.style.marginRight = "10px";
-  healButton.style.border = "none";
-  healButton.style.borderRadius = "5px";
-  healButton.style.backgroundColor = "#4dff4d";
-  healButton.style.color = "white";
-  healButton.onclick = () => {
-    const healAmount = Math.floor(Math.random() * 20) + 1;
-    playerHealth = Math.min(playerHealth + healAmount, 100);
-    playerHealthBar.style.width = `${playerHealth}%`;
-    logMessage(`你恢复了 ${healAmount} 点生命值！`);
-    enemyTurn();
-  };
-  battleContainer.appendChild(healButton);
-
-  const magicButton = document.createElement("button");
-  magicButton.innerText = "魔法攻击";
-  magicButton.style.padding = "10px 20px";
-  magicButton.style.fontSize = "18px";
-  magicButton.style.cursor = "pointer";
-  magicButton.style.border = "none";
-  magicButton.style.borderRadius = "5px";
-  magicButton.style.backgroundColor = "#ff4dff";
-  magicButton.style.color = "white";
-  magicButton.onclick = () => {
-    const magicCost = 10; // 魔法攻击消耗的魔法值
-    if (playerMana >= magicCost) {
-      playerMana -= magicCost;
-      playerManaBar.style.width = `${playerMana}%`;
-      const magicDamage = Math.floor(Math.random() * 30) + 1;
-      enemyHealth -= magicDamage;
+    const attackButton = document.createElement("button");
+    attackButton.innerText = "攻击";
+    attackButton.style.padding = "10px 20px";
+    attackButton.style.fontSize = "18px";
+    attackButton.style.cursor = "pointer";
+    attackButton.style.marginRight = "10px";
+    attackButton.style.border = "none";
+    attackButton.style.borderRadius = "5px";
+    attackButton.style.backgroundColor = "#ff4d4d";
+    attackButton.style.color = "white";
+    attackButton.onclick = () => {
+      const damage = Math.floor(Math.random() * 20) + 1;
+      enemyHealth -= damage;
       enemyHealthBar.style.width = `${enemyHealth}%`;
-      logMessage(`你对敌人造成了 ${magicDamage} 点魔法伤害！`);
+      logMessage(`你对敌人造成了 ${damage} 点伤害！`);
       if (enemyHealth <= 0) {
         alert("你赢了！");
         document.body.removeChild(battleContainer);
         return;
       }
       enemyTurn();
-    } else {
-      logMessage("魔法值不足，无法使用魔法攻击！");
-    }
-  };
-  battleContainer.appendChild(magicButton);
+    };
+    battleContainer.appendChild(attackButton);
 
-  const enemyTurn = (isDefending = false) => {
-    setTimeout(() => {
-      const enemyAction = Math.floor(Math.random() * 3);
-      if (enemyAction === 0) {
-        const enemyDamage = Math.floor(Math.random() * 20) + 1;
-        const actualDamage = isDefending ? Math.floor(enemyDamage / 2) : enemyDamage;
-        playerHealth -= actualDamage;
-        playerHealthBar.style.width = `${playerHealth}%`;
-        logMessage(`敌人对你造成了 ${actualDamage} 点伤害！`);
-      } else if (enemyAction === 1) {
-        const enemyHeal = Math.floor(Math.random() * 20) + 1;
-        enemyHealth = Math.min(enemyHealth + enemyHeal, 100);
+    const defendButton = document.createElement("button");
+    defendButton.innerText = "防御";
+    defendButton.style.padding = "10px 20px";
+    defendButton.style.fontSize = "18px";
+    defendButton.style.cursor = "pointer";
+    defendButton.style.marginRight = "10px";
+    defendButton.style.border = "none";
+    defendButton.style.borderRadius = "5px";
+    defendButton.style.backgroundColor = "#4d94ff";
+    defendButton.style.color = "white";
+    defendButton.onclick = () => {
+      logMessage("你选择了防御！");
+      enemyTurn(true);
+    };
+    battleContainer.appendChild(defendButton);
+
+    const healButton = document.createElement("button");
+    healButton.innerText = "恢复";
+    healButton.style.padding = "10px 20px";
+    healButton.style.fontSize = "18px";
+    healButton.style.cursor = "pointer";
+    healButton.style.marginRight = "10px";
+    healButton.style.border = "none";
+    healButton.style.borderRadius = "5px";
+    healButton.style.backgroundColor = "#4dff4d";
+    healButton.style.color = "white";
+    healButton.onclick = () => {
+      const healAmount = Math.floor(Math.random() * 20) + 1;
+      playerHealth = Math.min(playerHealth + healAmount, 100);
+      playerHealthBar.style.width = `${playerHealth}%`;
+      logMessage(`你恢复了 ${healAmount} 点生命值！`);
+      enemyTurn();
+    };
+    battleContainer.appendChild(healButton);
+
+    const magicButton = document.createElement("button");
+    magicButton.innerText = "魔法攻击";
+    magicButton.style.padding = "10px 20px";
+    magicButton.style.fontSize = "18px";
+    magicButton.style.cursor = "pointer";
+    magicButton.style.border = "none";
+    magicButton.style.borderRadius = "5px";
+    magicButton.style.backgroundColor = "#ff4dff";
+    magicButton.style.color = "white";
+    magicButton.onclick = () => {
+      const magicCost = 10; // 魔法攻击消耗的魔法值
+      if (playerMana >= magicCost) {
+        playerMana -= magicCost;
+        playerManaBar.style.width = `${playerMana}%`;
+        const magicDamage = Math.floor(Math.random() * 30) + 1;
+        enemyHealth -= magicDamage;
         enemyHealthBar.style.width = `${enemyHealth}%`;
-        logMessage(`敌人恢复了 ${enemyHeal} 点生命值！`);
+        logMessage(`你对敌人造成了 ${magicDamage} 点魔法伤害！`);
+        if (enemyHealth <= 0) {
+          alert("你赢了！");
+          document.body.removeChild(battleContainer);
+          return;
+        }
+        enemyTurn();
       } else {
-        const enemyMagicDamage = Math.floor(Math.random() * 30) + 1;
-        playerHealth -= enemyMagicDamage;
-        playerHealthBar.style.width = `${playerHealth}%`;
-        logMessage(`敌人对你造成了 ${enemyMagicDamage} 点魔法伤害！`);
+        logMessage("魔法值不足，无法使用魔法攻击！");
       }
+    };
+    battleContainer.appendChild(magicButton);
 
-      if (playerHealth <= 0) {
-        alert("你输了！");
-        document.body.removeChild(battleContainer);
-      }
-    }, 1000);
+    const enemyTurn = (isDefending = false) => {
+      setTimeout(() => {
+        const enemyAction = Math.floor(Math.random() * 3);
+        if (enemyAction === 0) {
+          const enemyDamage = Math.floor(Math.random() * 20) + 1;
+          const actualDamage = isDefending
+            ? Math.floor(enemyDamage / 2)
+            : enemyDamage;
+          playerHealth -= actualDamage;
+          playerHealthBar.style.width = `${playerHealth}%`;
+          logMessage(`敌人对你造成了 ${actualDamage} 点伤害！`);
+        } else if (enemyAction === 1) {
+          const enemyHeal = Math.floor(Math.random() * 20) + 1;
+          enemyHealth = Math.min(enemyHealth + enemyHeal, 100);
+          enemyHealthBar.style.width = `${enemyHealth}%`;
+          logMessage(`敌人恢复了 ${enemyHeal} 点生命值！`);
+        } else {
+          const enemyMagicDamage = Math.floor(Math.random() * 30) + 1;
+          playerHealth -= enemyMagicDamage;
+          playerHealthBar.style.width = `${playerHealth}%`;
+          logMessage(`敌人对你造成了 ${enemyMagicDamage} 点魔法伤害！`);
+        }
+
+        if (playerHealth <= 0) {
+          alert("你输了！");
+          document.body.removeChild(battleContainer);
+        }
+      }, 1000);
+    };
+
+    document.body.appendChild(battleContainer);
   };
 
-  document.body.appendChild(battleContainer);
-};
+  setupCoopGameUI() {
+    const gameContainer = document.createElement("div");
+    gameContainer.id = "gameContainer";
+    gameContainer.style.position = "fixed";
+    gameContainer.style.top = "50%";
+    gameContainer.style.left = "50%";
+    gameContainer.style.transform = "translate(-50%, -50%)";
+    gameContainer.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
+    gameContainer.style.padding = "20px";
+    gameContainer.style.borderRadius = "10px";
+    gameContainer.style.textAlign = "center";
+    gameContainer.style.color = "white";
+    gameContainer.style.width = "400px";
+    gameContainer.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+
+    // 创建任务进度部分
+    const progressContainer = document.createElement("div");
+    progressContainer.style.marginBottom = "20px";
+
+    const progressTitle = document.createElement("h2");
+    progressTitle.innerText = "任务进度";
+    progressContainer.appendChild(progressTitle);
+
+    const progressBar = document.createElement("div");
+    progressBar.style.width = "100%";
+    progressBar.style.backgroundColor = "grey";
+    progressBar.style.borderRadius = "5px";
+    progressBar.style.marginBottom = "10px";
+
+    const progressFill = document.createElement("div");
+    progressFill.id = "progressFill";
+    progressFill.style.width = "0%";
+    progressFill.style.height = "20px";
+    progressFill.style.backgroundColor = "green";
+    progressFill.style.borderRadius = "5px";
+    progressBar.appendChild(progressFill);
+    progressContainer.appendChild(progressBar);
+
+    const progressDisplay = document.createElement("div");
+    progressDisplay.id = "progressDisplay";
+    progressDisplay.innerText = `进度: 0%`;
+    progressContainer.appendChild(progressDisplay);
+
+    gameContainer.appendChild(progressContainer);
+    document.body.appendChild(gameContainer);
+
+    let progress = 0;
+    let progressInterval;
+    let gameStarted = false;
+    let gameEnded = false;
+
+    const updateProgress = () => {
+      progress = Math.max(progress - 1, 0);
+      progressFill.style.width = `${progress}%`;
+      progressDisplay.innerText = `进度: ${progress}%`;
+
+      if (progress <= 0) {
+        clearInterval(progressInterval);
+        alert("任务失败！请调整位点尝试重新修复");
+        endGame();
+      }
+    };
+
+    const endGame = () => {
+      gameEnded = true;
+      document.removeEventListener("keydown", keydownHandler);
+      setTimeout(() => {
+        gameContainer.style.transition = "opacity 1s";
+        gameContainer.style.opacity = "0";
+        setTimeout(() => {
+          document.body.removeChild(gameContainer);
+        }, 1000);
+      }, 2000);
+    };
+
+    // 提示信息
+    
+
+    const keydownHandler = (event) => {
+      if (gameEnded) return;
+
+      if (event.key === " " && !gameStarted) {
+        gameStarted = true;
+        // 开始减少进度
+        setTimeout(() => {
+          progressInterval = setInterval(updateProgress, 100);
+        }, 2000);
+      }
+
+      if (event.key === " ") {
+        progress = Math.min(progress + 3, 100);
+        progressFill.style.width = `${progress}%`;
+        progressDisplay.innerText = `进度: ${progress}%`;
+
+        if (progress >= 100) {
+          clearInterval(progressInterval);
+          alert("任务成功！");
+          endGame();
+          if (this.bug < 5) {
+            this.bug += 1;
+            this.showMessage(`你修复了漏洞（${this.bug}/5）`);
+            if (this.bug === 5) {
+              setTimeout(() => {
+                this.showMessage("你已修复完梦境所有漏洞，请前往阿尔法核心");
+              }, 4000); // 延迟2秒显示消息
+            }
+            this.updateAdjacentPieces(interactX, interactY);
+          }
+          
+        }
+      }
+    };
+
+    document.addEventListener("keydown", keydownHandler);
+  }
   interact(collisionMap) {
     const playerCenterX = map.image.width / 2;
     const playerCenterY = map.image.height / 2;
@@ -404,17 +534,100 @@ class Player {
 
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 2) {
-      this.fadeOutAndRedirect();
-      collisionMap[interactY][interactX] = 0;
+      if (this.bug < 5) {
+        this.showMessage("你还没有修复完梦境漏洞，请继续修复！");
+      }
+      else {
+        this.fadeOutAndRedirect();
+        collisionMap[interactY][interactX] = 0;
+      }
     }
 
     if (collisionMap[interactY][interactX] === 3) {
-      this.showMessage("你修复了一处结构！");
+      this.setupCoopGameUI();
+      
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 10) {
-      this.startBattle();
-      collisionMap[interactY][interactX] = 0;
+      const dialogues = [
+        {
+          text: "这是什么地方？",
+          image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+        },
+        {
+          text: "我们必须找到关键的梦境支柱，修复它们，否则一切都完了。",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "在这场终极挑战中，莱拉和卡尔将面临决定世界命运的最后抉择。",
+          image: "../img/conversation/精灵/精灵.png", // 精灵
+        },
+        {
+          text: "莱拉，这是我们的最后机会。阿尔法梦境不仅能改变现实，它还能操控时间。如果我们失败了……整个世界都将陷入无尽的黑暗。",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "无论如何，我们必须阻止它。",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
+      ];
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      function typeDialogue() {
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
+        }
+      }
+
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+
+      dialogBox.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      this.showPasswordPrompt();
+      this.updateAdjacentPieces(interactX, interactY);
     }
     if (collisionMap[interactY][interactX] === 5) {
       const dialogues = [
@@ -437,6 +650,86 @@ class Player {
         {
           text: "无论如何，我们必须阻止它。",
           image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
+      ];
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      function typeDialogue() {
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
+        }
+      }
+
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+
+      dialogBox.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      this.updateAdjacentPieces(interactX, interactY);
+    }
+    if (collisionMap[interactY][interactX] === 11) {
+      const dialogues = [
+        {
+          text: "这个水池我好像在哪里见过...",
+          image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+        },
+        {
+          text: "可能在你之前的梦境的梦境里见过，但是进入新梦境前你的记忆会被抹去。",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "但是阿尔法梦境与其他梦境不同，它非常不稳定",
+          image: "../img/conversation/卡尔/Elliott.png", // 精灵
+        },
+        {
+          text: "也就是说，要是我们无法修复修复这个梦境核心，我们的记忆包括存在都可能会被永久抹去。",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
+        {
+          text: "千真万确，所以...抓紧时间吧。",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
         },
       ];
       let currentDialogue = 0;
