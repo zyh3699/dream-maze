@@ -76,7 +76,8 @@ class Player {
       collisionMap[y][x] === 6 ||
       collisionMap[y][x] === 10 ||
       collisionMap[y][x] === 11 ||
-      collisionMap[y][x] === 3
+      collisionMap[y][x] === 3 ||
+      collisionMap[y][x] === 12
     ) {
       collisionMap[y][x] = 100;
 
@@ -135,8 +136,11 @@ class Player {
     if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("点E开始修复结构");
     }
-    if(collisionMap[interactY][interactX] === 5){
+    if (collisionMap[interactY][interactX] === 5) {
       this.showMessage("按E与卡尔对话");
+    }
+    if (collisionMap[interactY][interactX] === 12) {
+      this.showMessage("按E获取关键线索");
     }
   }
 
@@ -443,6 +447,89 @@ class Player {
         if (playerHealth <= 0) {
           alert("你输了！");
           document.body.removeChild(battleContainer);
+          const dialogues = [
+            {
+              text: "放弃吧，更多梦境守卫已经赶过来了",
+              image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+            },
+            {
+              text: "莱拉，没有别的办法了，我们只能回到上一层梦境暂时躲避他们",
+              image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            },
+            {
+              text: "上一层梦境相对稳定，梦境守卫不会在那里这么快发现我们的",
+              image: "../img/conversation/卡尔/Elliott.png", // 精灵
+            },
+            {
+              text: "梦境守卫确实厉害...我很难辨别他们的攻击方式",
+              image: "../img/conversation/莱拉/莱拉.png", // 精灵
+            },
+            {
+              text: "以我现在的能力，很可能也没有办法修复阿尔法梦境的核心，那里可能有更大的挑战",
+              image: "../img/conversation/莱拉/莱拉.png", // 精灵
+            },
+            {
+              text: "上层梦境说不定还有我们遗漏的东西...",
+              image: "../img/conversation/莱拉/莱拉.png", // 精灵
+            },
+          ];
+          let currentDialogue = 0;
+          let charIndex = 0;
+          const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+          // 添加CSS样式
+          const style = document.createElement("style");
+          document.head.appendChild(style);
+
+          // 创建对话框元素
+          const dialogBox = document.createElement("div");
+          dialogBox.id = "dialogue";
+
+          // 插入莱拉的图片
+          const lailaImage = document.createElement("img");
+          lailaImage.style.width = "100px"; // 将宽度设置为200像素
+          lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+          dialogBox.appendChild(lailaImage);
+
+          // 创建对话文本元素
+          const dialogText = document.createElement("span");
+          dialogText.id = "dialogueText";
+          dialogBox.appendChild(dialogText);
+          document.body.appendChild(dialogBox);
+          dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+          dialogText.style.fontSize = "20px"; // 字体大小
+          dialogText.style.color = "#FFFFFF"; // 字体颜色
+          dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+          dialogText.style.lineHeight = "1.5"; // 行高
+          function typeDialogue() {
+            if (charIndex < dialogues[currentDialogue].text.length) {
+              dialogText.innerText +=
+                dialogues[currentDialogue].text.charAt(charIndex);
+              charIndex++;
+              setTimeout(typeDialogue, typingSpeed);
+            } else {
+              currentDialogue++;
+              charIndex = 0;
+            }
+          }
+
+          function showNextDialogue() {
+            if (currentDialogue < dialogues.length) {
+              dialogText.innerText = "";
+              lailaImage.src = dialogues[currentDialogue].image;
+              typeDialogue();
+            } else {
+              document.body.removeChild(dialogBox);
+              window.location.href = "../html/chapter3_without_intro.html";
+              document.getElementById("gameCanvas").style.display = "block";
+              requestAnimationFrame(mainLoop);
+            }
+          }
+
+          document.addEventListener("click", showNextDialogue);
+          showNextDialogue();
+
+          collisionMap[interactY][interactX] = 1000;
         }
       }, 1000);
     };
@@ -679,6 +766,18 @@ class Player {
           text: "无论如何，我们必须阻止它。",
           image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
         },
+        {
+          text: "我们已经多次引起梦境防御机制的反制，许多梦境守卫已经追到了这一层梦境之中。他们很善于伪装，同样有高超的梦境技术。如果你没有办法战胜他们，我们只能重新回到上一层梦境中暂避锋芒。",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "不仅如此...总之这层梦境是我从未涉足的地方，我也不知道这里会发生什么，一定要多加小心！",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "你也是",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
       ];
       let currentDialogue = 0;
       let charIndex = 0;
@@ -736,6 +835,79 @@ class Player {
       showNextDialogue();
 
       this.showPasswordPrompt();
+      this.updateAdjacentPieces(interactX, interactY);
+    }
+    if (collisionMap[interactY][interactX] === 12) {
+      const dialogues = [
+        {
+          text: "终于找到你了",
+          image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+        },
+        {
+          text: "除了与我战斗，你没有别的选择了",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "我是不会让你轻易通过这里的",
+          image: "../img/conversation/精灵/精灵.png", // 精灵
+        },
+      ];
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      function typeDialogue() {
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
+        }
+      }
+
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+
+      document.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      this.startBattle();
       this.updateAdjacentPieces(interactX, interactY);
     }
     if (collisionMap[interactY][interactX] === 5) {
