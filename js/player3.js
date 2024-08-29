@@ -91,10 +91,26 @@ class Player {
     const interactY = Math.floor(playerCenterY + offsetY);
 
     // 检测是否有物品
-    if (collisionMap[interactY][interactX] === 4) {
-      this.showMessage("这里怎么有个骷髅");
+    if (collisionMap[interactY][interactX] === 7) {
+      this.showMessage("这就是legend fish？传说之鱼，行于地，栖于冥。Sigh ... 好危险 ... ");
       collisionMap[interactY][interactX] = 0;
     }
+    if (collisionMap[interactY][interactX] === 6) {
+      this.showMessage("致幻蘑菇：当然可以食用了！现实里，一生你只有一次机会吃掉它，但是在这里，谁知道呢？");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 9) {
+      this.showMessage("小恐龙吗？从来没有见过，看起来好可爱呀...（^pet^pet^）啊！怎么会喷火？？？");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 10) {
+      this.showMessage("宝藏箱：Pirate of Caribbean. 身为被诅咒之人，你似乎无法触碰到它。");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 8) {
+      this.showMessage("Ghost: ～你要跟我对话吗～o.o.o.");
+      collisionMap[interactY][interactX] = 0;
+    }    
   }
 
   interact(collisionMap) {
@@ -112,7 +128,6 @@ class Player {
       this.fadeOutAndRedirect();
       collisionMap[interactY][interactX] = 0;
     }
-
     if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
@@ -202,6 +217,7 @@ class Player {
 
       collisionMap[interactY][interactX] = 0;
     }
+
   }
 
   fadeOutAndRedirect() {
