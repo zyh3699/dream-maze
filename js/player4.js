@@ -52,7 +52,8 @@ class Player {
     if (
       collisionMap[y][x] === 5 ||
       collisionMap[y][x] === 6 ||
-      collisionMap[y][x] === 10
+      collisionMap[y][x] === 10 ||
+      collisionMap[y][x] === 11 
     ) {
       collisionMap[y][x] = 100;
 
@@ -99,6 +100,9 @@ class Player {
     if (collisionMap[interactY][interactX] === 4) {
       this.showMessage("你现在还不可以进去");
       collisionMap[interactY][interactX] = 0;
+    }
+    if(collisionMap[interactY][interactX] === 11){
+      this.showMessage("点E可以进行交互");
     }
   }
 
@@ -490,7 +494,7 @@ class Player {
       }
 
       if (event.key === " ") {
-        progress = Math.min(progress + 5, 100);
+        progress = Math.min(progress + 3, 100);
         progressFill.style.width = `${progress}%`;
         progressDisplay.innerText = `进度: ${progress}%`;
 
@@ -527,8 +531,13 @@ class Player {
 
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 2) {
-      this.fadeOutAndRedirect();
-      collisionMap[interactY][interactX] = 0;
+      if (this.bug < 5) {
+        this.showMessage("你还没有修复完梦境漏洞，请继续修复！");
+      }
+      else {
+        this.fadeOutAndRedirect();
+        collisionMap[interactY][interactX] = 0;
+      }
     }
 
     if (collisionMap[interactY][interactX] === 3) {
@@ -561,6 +570,86 @@ class Player {
         {
           text: "无论如何，我们必须阻止它。",
           image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
+      ];
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      function typeDialogue() {
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
+        }
+      }
+
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+
+      dialogBox.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      this.updateAdjacentPieces(interactX, interactY);
+    }
+    if (collisionMap[interactY][interactX] === 11) {
+      const dialogues = [
+        {
+          text: "这个水池我好像在哪里见过...",
+          image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+        },
+        {
+          text: "可能在你之前的梦境的梦境里见过，但是进入新梦境前你的记忆会被抹去。",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "但是阿尔法梦境与其他梦境不同，它非常不稳定",
+          image: "../img/conversation/卡尔/Elliott.png", // 精灵
+        },
+        {
+          text: "也就是说，要是我们无法修复修复这个梦境核心，我们的记忆包括存在都可能会被永久抹去。",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
+        {
+          text: "千真万确，所以...抓紧时间吧。",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
         },
       ];
       let currentDialogue = 0;
