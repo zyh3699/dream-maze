@@ -457,3 +457,84 @@ updateAdjacentPieces(x, y) {
 
 const player = new Player();
 window.player = player;
+
+function createDialogueBox(dialogues) {
+  let currentDialogue = 0;
+  let charIndex = 0;
+  const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+  // 添加CSS样式
+  if (!document.getElementById("dialogue-style")) {
+    const style = document.createElement("style");
+    style.id = "dialogue-style";
+    style.innerHTML = `
+      #dialogue {
+          background: rgba(0, 0, 0, 0.7);
+          padding: 20px;
+          border-radius: 10px;
+          width: 80%;
+          height: 100px;
+          text-align: center;
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          color: white;
+          font-size: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+      }
+      #dialogue img {
+          position: absolute;
+          top: -100px;
+          left: 10px;
+          width: 100px;
+          height: 100px;
+      }`;
+    document.head.appendChild(style);
+  }
+
+  // 创建对话框元素
+  const dialogBox = document.createElement("div");
+  dialogBox.id = "dialogue";
+
+  // 创建图片元素
+  const charImage = document.createElement("img");
+  charImage.alt = "Character Image";
+  dialogBox.appendChild(charImage);
+
+  // 创建对话文本元素
+  const dialogText = document.createElement("span");
+  dialogText.id = "dialogueText";
+  dialogBox.appendChild(dialogText);
+  document.body.appendChild(dialogBox);
+
+  function typeDialogue() {
+    if (charIndex < dialogues[currentDialogue].text.length) {
+      dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeDialogue, typingSpeed);
+    } else {
+      currentDialogue++;
+      charIndex = 0;
+    }
+  }
+
+  function showNextDialogue() {
+    if (currentDialogue < dialogues.length) {
+      // 更新图片和文本内容
+      charImage.src = dialogues[currentDialogue].image;
+      dialogText.innerText = "";
+      typeDialogue();
+    } else {
+      document.body.removeChild(dialogBox);
+      document.getElementById("gameCanvas").style.display = "block";
+      requestAnimationFrame(mainLoop); // 继续游戏主循环
+    }
+  }
+
+  dialogBox.addEventListener("click", showNextDialogue);
+  showNextDialogue();
+}
