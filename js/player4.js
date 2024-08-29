@@ -107,6 +107,12 @@ class Player {
     if(collisionMap[interactY][interactX] === 10){
       this.showMessage("点E进行解码");
     }
+    if(collisionMap[interactY][interactX] === 2){
+      this.showMessage("点E进入梦境核心");
+    }
+    if(collisionMap[interactY][interactX] === 3){
+      this.showMessage("点E开始修复结构");
+    }
   }
 
   showPasswordPrompt() {
@@ -535,7 +541,77 @@ class Player {
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 2) {
       if (this.bug < 5) {
-        this.showMessage("你还没有修复完梦境漏洞，请继续修复！");
+        const dialogues = [
+          {
+            text: "哦不卡尔，我们好像还无法进入梦境核心",
+            image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+          },
+          {
+            text: "阿尔法梦境的核心是一个非常复杂的结构，我们需要修复所有的漏洞才能进入。",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "否则这个梦境结构会一直崩塌",
+            image: "../img/conversation/精灵/精灵.png", // 精灵
+          },
+        ];
+        let currentDialogue = 0;
+        let charIndex = 0;
+        const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+        // 添加CSS样式
+        const style = document.createElement("style");
+        document.head.appendChild(style);
+
+        // 创建对话框元素
+        const dialogBox = document.createElement("div");
+        dialogBox.id = "dialogue";
+
+        // 插入莱拉的图片
+        const lailaImage = document.createElement("img");
+        lailaImage.style.width = "100px"; // 将宽度设置为200像素
+        lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+        dialogBox.appendChild(lailaImage);
+
+        // 创建对话文本元素
+        const dialogText = document.createElement("span");
+        dialogText.id = "dialogueText";
+        dialogBox.appendChild(dialogText);
+        document.body.appendChild(dialogBox);
+        dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+        dialogText.style.fontSize = "20px"; // 字体大小
+        dialogText.style.color = "#FFFFFF"; // 字体颜色
+        dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+        dialogText.style.lineHeight = "1.5"; // 行高
+        function typeDialogue() {
+          if (charIndex < dialogues[currentDialogue].text.length) {
+            dialogText.innerText +=
+              dialogues[currentDialogue].text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeDialogue, typingSpeed);
+          } else {
+            currentDialogue++;
+            charIndex = 0;
+          }
+        }
+
+        function showNextDialogue() {
+          if (currentDialogue < dialogues.length) {
+            dialogText.innerText = "";
+            lailaImage.src = dialogues[currentDialogue].image;
+            typeDialogue();
+          } else {
+            document.body.removeChild(dialogBox);
+            document.getElementById("gameCanvas").style.display = "block";
+            requestAnimationFrame(mainLoop);
+          }
+        }
+
+        dialogBox.addEventListener("click", showNextDialogue);
+        showNextDialogue();
+
+        
+        collisionMap[interactY][interactX] = 0;
       }
       else {
         this.fadeOutAndRedirect();
