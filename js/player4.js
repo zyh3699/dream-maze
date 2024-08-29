@@ -7,6 +7,28 @@ class Player {
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
     this.bug = 0;
+    this.frameIndex = 0; // 当前帧索引
+    this.frameDelay = 0; // 帧间隔计时器
+    this.frameInterval = 15; // 每隔多少次update切换一次帧
+    this.direction = "down"; // 默认方向
+    // 预加载所有的帧图像
+    this.images = {
+      up: [],
+      down: [],
+      left: [],
+      right: [],
+    };
+    for (let i = 0; i < 4; i++) {
+      this.images.up[i] = new Image();
+      this.images.up[i].src = `../img/charactor/莱拉1/up${i}.png`;
+      this.images.down[i] = new Image();
+      this.images.down[i].src = `../img/charactor/莱拉1/down${i}.png`;
+      this.images.left[i] = new Image();
+      this.images.left[i].src = `../img/charactor/莱拉1/left${i}.png`;
+      this.images.right[i] = new Image();
+      this.images.right[i].src = `../img/charactor/莱拉1/right${i}.png`;
+    }
+    this.image = this.images.down[0]; // 初始图像
   }
 
   draw(ctx) {
@@ -53,7 +75,8 @@ class Player {
       collisionMap[y][x] === 5 ||
       collisionMap[y][x] === 6 ||
       collisionMap[y][x] === 10 ||
-      collisionMap[y][x] === 11 
+      collisionMap[y][x] === 11 ||
+      collisionMap[y][x] === 3
     ) {
       collisionMap[y][x] = 100;
 
@@ -68,24 +91,23 @@ class Player {
   }
 
   updateImage(direction) {
-    switch (direction) {
-      case "up":
-        this.image.src = "../img/charactor/莱拉/laila up.png";
-        break;
-      case "down":
-        this.image.src = "../img/charactor/莱拉/laila down.png";
-        break;
-      case "left":
-        this.image.src = "../img/charactor/莱拉/laila left.png";
-        break;
-      case "right":
-        this.image.src = "../img/charactor/莱拉/laila right.png";
-        break;
-      default:
-        this.image.src = "../img/charactor/莱拉/laila down.png";
+    if (this.direction !== direction) {
+      this.direction = direction;
+      this.frameIndex = 0;
+      this.frameDelay = 0;
     }
-  }
 
+    // 每次调用 updateImage 函数时增加帧间隔计时器
+    this.frameDelay++;
+
+    // 如果帧间隔计时器达到指定的帧间隔，就更新帧索引
+    if (this.frameDelay >= this.frameInterval) {
+      this.frameDelay = 0;
+      this.frameIndex = (this.frameIndex + 1) % 4; // 循环切换四帧
+    }
+
+    this.image = this.images[direction][this.frameIndex];
+  }
   show(collisionMap) {
     const playerCenterX = map.image.width / 2;
     const playerCenterY = map.image.height / 2;
@@ -101,17 +123,20 @@ class Player {
       this.showMessage("你现在还不可以进去");
       collisionMap[interactY][interactX] = 0;
     }
-    if(collisionMap[interactY][interactX] === 11){
+    if (collisionMap[interactY][interactX] === 11) {
       this.showMessage("点E可以进行交互");
     }
-    if(collisionMap[interactY][interactX] === 10){
+    if (collisionMap[interactY][interactX] === 10) {
       this.showMessage("点E进行解码");
     }
-    if(collisionMap[interactY][interactX] === 2){
+    if (collisionMap[interactY][interactX] === 2) {
       this.showMessage("点E进入梦境核心");
     }
-    if(collisionMap[interactY][interactX] === 3){
+    if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("点E开始修复结构");
+    }
+    if(collisionMap[interactY][interactX] === 5){
+      this.showMessage("按E与卡尔对话");
     }
   }
 
@@ -178,6 +203,18 @@ class Player {
       };
       passwordContainer.appendChild(button);
     });
+
+    const exitButton = document.createElement("button");
+    exitButton.innerText = "退出";
+    exitButton.style.gridColumn = "span 3";
+    exitButton.style.padding = "10px";
+    exitButton.style.fontSize = "18px";
+    exitButton.style.cursor = "pointer";
+    exitButton.style.marginTop = "10px";
+    exitButton.onclick = () => {
+      document.body.removeChild(passwordContainer);
+    };
+    passwordContainer.appendChild(exitButton);
 
     document.body.appendChild(passwordContainer);
   }
@@ -471,7 +508,7 @@ class Player {
 
       if (progress <= 0) {
         clearInterval(progressInterval);
-        alert("任务失败！请调整位点尝试重新修复");
+        alert("任务失败！梦境启动防御机制，请更换位点尝试重新修复");
         endGame();
       }
     };
@@ -489,7 +526,6 @@ class Player {
     };
 
     // 提示信息
-    
 
     const keydownHandler = (event) => {
       if (gameEnded) return;
@@ -503,7 +539,7 @@ class Player {
       }
 
       if (event.key === " ") {
-        progress = Math.min(progress + 3, 100);
+        progress = Math.min(progress + 5, 100);
         progressFill.style.width = `${progress}%`;
         progressDisplay.innerText = `进度: ${progress}%`;
 
@@ -521,7 +557,6 @@ class Player {
             }
             this.updateAdjacentPieces(interactX, interactY);
           }
-          
         }
       }
     };
@@ -557,7 +592,7 @@ class Player {
         ];
         let currentDialogue = 0;
         let charIndex = 0;
-        const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+        const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
         // 添加CSS样式
         const style = document.createElement("style");
@@ -607,13 +642,11 @@ class Player {
           }
         }
 
-        dialogBox.addEventListener("click", showNextDialogue);
+        document.addEventListener("click", showNextDialogue);
         showNextDialogue();
 
-        
         collisionMap[interactY][interactX] = 0;
-      }
-      else {
+      } else {
         this.fadeOutAndRedirect();
         collisionMap[interactY][interactX] = 0;
       }
@@ -621,8 +654,8 @@ class Player {
 
     if (collisionMap[interactY][interactX] === 3) {
       this.setupCoopGameUI();
-      
-      collisionMap[interactY][interactX] = 0;
+
+      this.updateAdjacentPieces(interactX, interactY);
     }
     if (collisionMap[interactY][interactX] === 10) {
       const dialogues = [
@@ -649,7 +682,7 @@ class Player {
       ];
       let currentDialogue = 0;
       let charIndex = 0;
-      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
       // 添加CSS样式
       const style = document.createElement("style");
@@ -699,7 +732,7 @@ class Player {
         }
       }
 
-      dialogBox.addEventListener("click", showNextDialogue);
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
       this.showPasswordPrompt();
@@ -730,7 +763,7 @@ class Player {
       ];
       let currentDialogue = 0;
       let charIndex = 0;
-      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
       // 添加CSS样式
       const style = document.createElement("style");
@@ -780,7 +813,7 @@ class Player {
         }
       }
 
-      dialogBox.addEventListener("click", showNextDialogue);
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
       this.updateAdjacentPieces(interactX, interactY);
@@ -810,7 +843,7 @@ class Player {
       ];
       let currentDialogue = 0;
       let charIndex = 0;
-      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
       // 添加CSS样式
       const style = document.createElement("style");
@@ -860,7 +893,7 @@ class Player {
         }
       }
 
-      dialogBox.addEventListener("click", showNextDialogue);
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
       this.updateAdjacentPieces(interactX, interactY);

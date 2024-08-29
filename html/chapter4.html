@@ -87,20 +87,72 @@
     .menu button:hover {
       background-color: #45a049; /* 鼠标悬停时的背景颜色 */
     }
+    #progressContainer {
+      display: none; /* 初始隐藏进度条容器 */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      background-color: #f3f3f3;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      z-index: 1000;
+    }
+    .progressBarWrapper {
+      margin-bottom: 10px;
+    }
+    .progressLabel {
+      display: inline-block;
+      width: 100px;
+      text-align: right;
+      margin-right: 10px;
+    }
+    .progressBar {
+      display: inline-block;
+      width: 70%;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      vertical-align: middle;
+    }
+    .progressBar div {
+      height: 100%;
+      background-color: #4CAF50;
+      width: 0;
+      border-radius: 5px;
+    }
   </style>
   <script src="../js/存档功能.js"></script>
     </head>
-    <body>
+    <body onkeydown="return false;">
        <button id="menuButton" onclick="toggleMenu()">菜单</button>
   <div class="menu" id="menu">
     <button onclick="save()">存档</button>
     <button onclick="settings()">设置</button>
-    <button onclick="tips()">提示</button>
+    <button onclick="tips()">任务提示</button>
   </div>
   <div id="intro">
     <div id="dialogue">
       <img src="../img/charactor/莱拉/laila down.png" alt="Image Description"> <!-- 插入图片 -->
       <span id="dialogueText"></span> <!-- 用于显示对话文本 -->
+    </div>
+  </div>
+  <div id="progressContainer">
+    <div class="progressBarWrapper">
+      <span class="progressLabel">修复漏洞</span>
+      <div class="progressBar"><div id="bugProgress"></div></div>
+    </div>
+    <div class="progressBarWrapper">
+      <span class="progressLabel">解密</span>
+      <div class="progressBar"><div id="decryptProgress"></div></div>
+    </div>
+    <div class="progressBarWrapper">
+      <span class="progressLabel">对话</span>
+      <div class="progressBar"><div id="dialogueProgress"></div></div>
     </div>
   </div>
   <canvas id="gameCanvas" style="display: none;"></canvas>
@@ -113,10 +165,11 @@
       "梦境的各个部分开始迅速崩塌，仿佛有一股不可抗拒的力量正在撕裂梦境的结构。",
       "相信你也明白，如果你无法在梦境完全崩溃之前到达核心，你们将永远被困在梦境之中，无法再回到现实。",
       "勇敢的莱拉，你现在已经掌握了高超的梦境技术，有着最为坚定的意志，相信你一定能够成功。",
+      "当然，在这之前，你们需要先进行沟通"
     ];
     let currentDialogue = 0;
     let charIndex = 0;
-    const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+    const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
     function typeDialogue() {
       if (charIndex < dialogues[currentDialogue].length) {
@@ -125,6 +178,38 @@
         setTimeout(typeDialogue, typingSpeed);
       }
     }
+
+    
+    function tips() {
+      const progressContainer = document.getElementById("progressContainer");
+      if (progressContainer.style.display === "none") {
+        const bugProgress = document.getElementById("bugProgress");
+        const decryptProgress = document.getElementById("decryptProgress");
+        const dialogueProgress = document.getElementById("dialogueProgress");
+
+        const bugCount = window.player.bug; // 获取漏洞修复数
+        const decryptCount = window.player.decrypt; // 获取解密数
+        const dialogueCount = window.player.dialogue; // 获取对话数
+
+        const totalBugs = 5; // 总漏洞数
+        const totalDecrypts = 3; // 总解密数
+        const totalDialogues = 4; // 总对话数
+
+        bugProgress.style.width = (bugCount / totalBugs) * 100 + "%";
+        decryptProgress.style.width = (decryptCount / totalDecrypts) * 100 + "%";
+        dialogueProgress.style.width = (dialogueCount / totalDialogues) * 100 + "%";
+
+        progressContainer.style.display = "block";
+      } else {
+        progressContainer.style.display = "none";
+      }
+    }
+
+    document.body.onkeydown = function(event) {
+  if (event.key === " ") {
+    event.preventDefault(); // 禁用空格键默认行为
+  }
+};
 
     function showNextDialogue() {
       if (currentDialogue < dialogues.length - 1) {

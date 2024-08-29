@@ -1,11 +1,33 @@
 class Player {
   constructor() {
     this.image = new Image();
-    this.image.src = "../img/charactor/莱拉/laila down.png";
+    this.image.src = "../img/charactor/莱拉1/down0.png";
     this.width = 32;
-    this.height = 66;
+    this.height = 52;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
+    this.frameIndex = 0; // 当前帧索引
+    this.frameDelay = 0; // 帧间隔计时器
+    this.frameInterval = 15; // 每隔多少次update切换一次帧
+    this.direction = "down"; // 默认方向
+    // 预加载所有的帧图像
+    this.images = {
+      up: [],
+      down: [],
+      left: [],
+      right: []
+    };
+    for (let i = 0; i < 4; i++) {
+      this.images.up[i] = new Image();
+      this.images.up[i].src = `../img/charactor/莱拉1/up${i}.png`;
+      this.images.down[i] = new Image();
+      this.images.down[i].src = `../img/charactor/莱拉1/down${i}.png`;
+      this.images.left[i] = new Image();
+      this.images.left[i].src = `../img/charactor/莱拉1/left${i}.png`;
+      this.images.right[i] = new Image();
+      this.images.right[i].src = `../img/charactor/莱拉1/right${i}.png`;
+    }
+    this.image = this.images.down[0]; // 初始图像
   }
 
   draw(ctx) {
@@ -62,24 +84,24 @@ class Player {
   }
 
   updateImage(direction) {
-    switch (direction) {
-      case "up":
-        this.image.src = "../img/charactor/莱拉/laila up.png";
-        break;
-      case "down":
-        this.image.src = "../img/charactor/莱拉/laila down.png";
-        break;
-      case "left":
-        this.image.src = "../img/charactor/莱拉/laila left.png";
-        break;
-      case "right":
-        this.image.src = "../img/charactor/莱拉/laila right.png";
-        break;
-      default:
-        this.image.src = "../img/charactor/莱拉/laila down.png";
+    if (this.direction !== direction) {
+      this.direction = direction;
+      this.frameIndex = 0;
+      this.frameDelay = 0;
     }
-  }
-
+  
+    // 每次调用 updateImage 函数时增加帧间隔计时器
+    this.frameDelay++;
+  
+    // 如果帧间隔计时器达到指定的帧间隔，就更新帧索引
+    if (this.frameDelay >= this.frameInterval) {
+      this.frameDelay = 0;
+      this.frameIndex = (this.frameIndex + 1) % 4; // 循环切换四帧
+    }
+  
+    this.image = this.images[direction][this.frameIndex];
+    }
+  
   show(collisionMap) {
     const playerCenterX = map.image.width / 2;
     const playerCenterY = map.image.height / 2;
@@ -91,10 +113,26 @@ class Player {
     const interactY = Math.floor(playerCenterY + offsetY);
 
     // 检测是否有物品
-    if (collisionMap[interactY][interactX] === 4) {
-      this.showMessage("这里怎么有个骷髅");
+    if (collisionMap[interactY][interactX] === 7) {
+      this.showMessage("这就是legend fish？传说之鱼，行于地，栖于冥。Sigh ... 好危险 ... ");
       collisionMap[interactY][interactX] = 0;
     }
+    if (collisionMap[interactY][interactX] === 6) {
+      this.showMessage("致幻蘑菇：当然可以食用了！现实里，一生你只有一次机会吃掉它，但是在这里，谁知道呢？");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 9) {
+      this.showMessage("小恐龙吗？从来没有见过，看起来好可爱呀...（^pet^pet^）啊！怎么会喷火？？？");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 10) {
+      this.showMessage("宝藏箱：Pirate of Caribbean. 身为被诅咒之人，你似乎无法触碰到它。");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 8) {
+      this.showMessage("Ghost: ～你要跟我对话吗～o.o.o.");
+      collisionMap[interactY][interactX] = 0;
+    }    
   }
 
   interact(collisionMap) {
@@ -112,7 +150,6 @@ class Player {
       this.fadeOutAndRedirect();
       collisionMap[interactY][interactX] = 0;
     }
-
     if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
@@ -202,6 +239,7 @@ class Player {
 
       collisionMap[interactY][interactX] = 0;
     }
+
   }
 
   fadeOutAndRedirect() {
