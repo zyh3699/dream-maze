@@ -568,7 +568,7 @@ class Player {
         ];
         let currentDialogue = 0;
         let charIndex = 0;
-        const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+        const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
         // 添加CSS样式
         const style = document.createElement("style");
@@ -658,7 +658,7 @@ class Player {
       ];
       let currentDialogue = 0;
       let charIndex = 0;
-      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
       // 添加CSS样式
       const style = document.createElement("style");
@@ -739,7 +739,7 @@ class Player {
       ];
       let currentDialogue = 0;
       let charIndex = 0;
-      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
       // 添加CSS样式
       const style = document.createElement("style");
@@ -819,7 +819,7 @@ class Player {
       ];
       let currentDialogue = 0;
       let charIndex = 0;
-      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
       // 添加CSS样式
       const style = document.createElement("style");
