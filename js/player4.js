@@ -972,6 +972,7 @@ class Player {
           } else {
             document.body.removeChild(dialogBox);
             self.showPasswordPrompt();
+            self.visit = 1;
             document.getElementById("gameCanvas").style.display = "block";
             requestAnimationFrame(mainLoop);
           }
@@ -1005,25 +1006,29 @@ class Player {
           });
         }
 
-        function handleOption(option) {
-          if (option === "有印象->") {
-            currentDialogue = dialogues.findIndex(
-              (d) =>
-                d.text ===
-                "你确定就是那四个数字吗莱拉，这么梦境很不稳定，可能我们输入错误就没有办法获得后续的提示了"
-            );
-          } else if (option === "不记得了->") {
-            currentDialogue = dialogues.findIndex((d) => d.text === "嘶...");
-          } 
-          showNextDialogue();
-        }
+         function handleOption(option) {
+           if (option === "有印象->") {
+             currentDialogue = dialogues.findIndex(
+               (d) =>
+                 d.text ===
+                 "你确定就是那四个数字吗莱拉，这么梦境很不稳定，可能我们输入错误就没有办法获得后续的提示了"
+             );
+           } else if (option === "不记得了->") {
+             currentDialogue = dialogues.findIndex(
+               (d) => d.text === "来吧，我们也只能放手一搏了，时间不多了"
+             );
+           } 
+           showNextDialogue();
+         }
 
         document.addEventListener("click", showNextDialogue);
         showNextDialogue();
-        this.visit = 1;
       }
       
       collisionMap[interactY][interactX] = 0;
+      if (this.visit === 1) {
+        this.showPasswordPrompt();
+      }
     }
     if (collisionMap[interactY][interactX] === 12) {
       const dialogues = [
