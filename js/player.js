@@ -214,6 +214,7 @@ class Player {
       dialogText.style.color = "#FFFFFF"; // 字体颜色
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
+      
       function typeDialogue() {
         
         if (charIndex < dialogues[currentDialogue].text.length) {
