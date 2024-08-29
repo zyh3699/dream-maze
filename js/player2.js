@@ -141,13 +141,13 @@ class Player {
     }
     if (collisionMap[interactY][interactX] === 5) {
       const dialogues = [
-        "经过层层梦境的探查，莱拉终于在一个极其隐秘的梦境层中找到了卡尔。",
-        "他被困在一个由组织设计的特殊梦境中，这个梦境层与之前的所有梦境都截然不同：",
-        "它看似平静祥和，但隐藏着极为危险的心灵陷阱。",
+        "最终，莱拉和艾德里安成功突破梦境层层防御，获取了关于神秘组织的更多信息。",
+        "他们发现，这个组织并不仅仅在追求财富或权力，而是在试图掌控人类的集体潜意识，以改变世界的未来。",
+        "与此同时，一切似乎都奇怪了起来 ...... "
       ];
       let currentDialogue = 0;
       let charIndex = 0;
-      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
       // 添加CSS样式
       const style = document.createElement("style");
@@ -171,14 +171,13 @@ class Player {
             align-items: center; /* 垂直居中 */
             box-sizing: border-box;
         }
-    #dialogue img {
-      position: absolute; /* 绝对定位 */
-      top: -100px; /* 距离顶部10px */
-      left: 10px; /* 距离左侧10px */
-      width: 100px; /* 图片宽度 */
-      height: 100px; /* 图片高度 */
-    }
-    `;
+          #dialogue img {
+            position: absolute; /* 绝对定位 */
+            top: -100px; /* 距离顶部10px */
+            left: 10px; /* 距离左侧10px */
+            width: 100px; /* 图片宽度 */
+            height: 100px; /* 图片高度 */
+          }`;
       document.head.appendChild(style);
 
       // 创建对话框元素
