@@ -11,6 +11,7 @@ class Player {
     this.frameDelay = 0; // 帧间隔计时器
     this.frameInterval = 45; // 每隔多少次update切换一次帧
     this.direction = "down"; // 默认方向
+    this.map = 0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -57,6 +58,38 @@ class Player {
     }
 
     return false;
+  }
+
+  mapp() {
+    if (this.map === 1) {
+      this.showMessage("按K键收起");
+
+      // Create or select the image element
+      let image = document.getElementById("mapImage");
+      if (!image) {
+        image = document.createElement("img");
+        image.id = "mapImage";
+        image.src = "../map/secret.jpg"; // replace with the actual path to your image
+        image.style.position = "fixed";
+        image.style.top = "50%";
+        image.style.left = "50%";
+        image.style.transform = "translate(-50%, -50%)";
+        image.style.zIndex = "1000";
+        image.style.width = "500px"; // Set the width
+        image.style.height = "300px"; // Set the height
+        image.style.border = "15px solid white"; // Set border size, style, and color
+        document.body.appendChild(image);
+      } else {
+        image.style.display = "block";
+      }
+
+      // Add an event listener to hide the image when K is pressed
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "k" || e.key === "K") {
+          image.style.display = "none";
+        }
+      });
+    }
   }
 
   updateAdjacentPieces(x, y) {
@@ -196,6 +229,7 @@ class Player {
         } else if (buttonText === "确定") {
           if (inputField.value === "1829") {
             alert("密码正确");
+            this.map = 1;
             document.body.removeChild(passwordContainer);
             const dialogues = [
               {
@@ -818,7 +852,7 @@ class Player {
         showNextDialogue();
 
         collisionMap[interactY][interactX] = 0;
-      } else if(this.bug>=5&&window.map.index ==2){
+      } else if (this.bug >= 5 && window.map.index == 2) {
         this.fadeOutAndRedirect();
         collisionMap[interactY][interactX] = 0;
       }

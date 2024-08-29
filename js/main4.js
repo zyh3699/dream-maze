@@ -50,6 +50,9 @@ function update(deltatime) {
     window.player.interact(collisionMap);
   }
   window.player.show(collisionMap);
+  if (keysPressed["m"] || keysPressed["M"]) {
+    window.player.mapp();
+  }
 }
 
 function draw(ctx) {
