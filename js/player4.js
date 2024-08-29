@@ -618,7 +618,7 @@ class Player {
           }
         }
 
-        dialogBox.addEventListener("click", showNextDialogue);
+        document.addEventListener("click", showNextDialogue);
         showNextDialogue();
 
         collisionMap[interactY][interactX] = 0;
@@ -708,7 +708,7 @@ class Player {
         }
       }
 
-      dialogBox.addEventListener("click", showNextDialogue);
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
       this.showPasswordPrompt();
@@ -789,7 +789,7 @@ class Player {
         }
       }
 
-      dialogBox.addEventListener("click", showNextDialogue);
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
       this.updateAdjacentPieces(interactX, interactY);
@@ -869,7 +869,7 @@ class Player {
         }
       }
 
-      dialogBox.addEventListener("click", showNextDialogue);
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
       this.updateAdjacentPieces(interactX, interactY);
