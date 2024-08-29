@@ -17,7 +17,6 @@ class Player {
       left: [],
       right: []
     };
-    
     for (let i = 0; i < 4; i++) {
       this.images.up[i] = new Image();
       this.images.up[i].src = `../img/charactor/莱拉1/up${i}.png`;
