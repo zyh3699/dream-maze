@@ -114,7 +114,7 @@ class Player {
 
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 7) {
-      this.showMessage("这就是legend fish？传说之鱼，行于地，栖于冥。Sigh ... 好危险 ... ");
+      this.showMessage("这就是legend fish？传说之鱼，行于地，栖于冥。Sigh ... 好危险 ... 它会说话？按E试试 ");
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 6) {
@@ -133,6 +133,15 @@ class Player {
       this.showMessage("Ghost: ～你要跟我对话吗～o.o.o.");
       collisionMap[interactY][interactX] = 0;
     }    
+    if (collisionMap[interactY][interactX] === 14) {
+      this.showMessage("这边好像过不去哎");
+      collisionMap[interactY][interactX] = 0;
+    }    
+    if (collisionMap[interactY][interactX] === 13) {
+      this.showMessage("那边有条...鱼？在陆地上的鱼？快去看看...");
+      collisionMap[interactY][interactX] = 0;
+    }    
+
   }
 
   interact(collisionMap) {
@@ -154,90 +163,250 @@ class Player {
       this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 5) {
+    if (collisionMap[interactY][interactX] === 16) {
       const dialogues = [
-        "经过层层梦境的探查，莱拉终于在一个极其隐秘的梦境层中找到了卡尔。",
-        "他被困在一个由组织设计的特殊梦境中，这个梦境层与之前的所有梦境都截然不同：",
-        "它看似平静祥和，但隐藏着极为危险的心灵陷阱。",
+        {
+          text: "不要这样盯着我！It's so rude...",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "（凌厉）向我许个愿望",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "（心存诸多疑虑，但你不得不快速许了一个愿望）我想拯救alpha梦境。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "许完了吗。好。从我右边那个柱子正右侧开始，往下走到底，再向右走一小步，你就会走到虚空法阵里。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "在虚空法阵，你可以传送到一个神秘的岛屿上，据说至今，除了我，还没有任何人去过呢。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "嗯...",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "按照传说之鱼的说法，去虚空法阵，按E实现传送。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
       ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 12) {
+      const dialogues = [
+        {
+          text: "你找到我了。莱拉。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "我是虚空法阵。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "？",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "来吧，去跟我们的长老对话吧",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+
+      createDialogueBox(dialogues);
+        document.addEventListener("click", chuansong);
+
+      function chuansong() {
+        player.move(-200, 0, collisionMap);
+        document.removeEventListener("click", chuansong);
+      }
+      collisionMap[interactY][interactX] = 0;
+    }
+        if (collisionMap[interactY][interactX] === 17) {
+      const dialogues = [
+        {
+          text: "“她曾想知道真相，但是，却还是选择了将其遗忘。”",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "你好，你愿意陪我吗？",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          options: ["当然，我会陪你的->", "不，我现在没有空->"], // 添加选项
+        },
+      ]; 
+      const choiceDialogues = {
+        cooperate: [
+          {
+            text: "好样的，莱拉。",
+            image: "../img/conversation/其他人物/ghost.png",
+          },
+          {
+            text: "你跟她不一样。你永远记得你的使命。",
+            image: "../img/conversation/其他人物/ghost.png",
+          },
+          {
+            text: "我只帮助那些值得帮助的人。来吧。让我帮助你。",
+            image: "../img/conversation/其他人物/ghost.png",
+          },
+          {
+            text: "组织的暗号：4399",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },  
+          {
+            text: "说出这个数字，无论是谁，都会相信你是组织的人。",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },
+          {
+            text: "你这么聪明，肯定知道这样可以得到艾德里安的信任，从而套出艾德里安的真实身份吧！",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },
+          {
+            text: "一直向前，不要回头！",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },
+          {
+            text: "“她曾想知道真相，但是，却还是选择了将其遗忘。”",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },  
+          {
+            text: "祝你好运。",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },  
+          {
+            text: "去找艾德里安。",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },  
+            ],
+        abandon: [
+          {
+            text: "（仰天长啸）哈哈哈哈哈哈哈",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "原来，你和她是一样的。",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "难道不应该快去救alpha梦境吗？这里不欢迎你。我只帮助那些值得帮助的人。",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+        ],
+      };
+
       let currentDialogue = 0;
       let charIndex = 0;
-      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
-
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
       // 添加CSS样式
       const style = document.createElement("style");
-      style.innerHTML = `
-        #dialogue {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%; /* 设置为80%宽度 */
-            height: 100px; /* 固定高度 */
-            text-align: center;
-            position: fixed; /* 固定位置 */
-            bottom: 20px; /* 固定在底部 */
-            left: 50%; /* 水平居中 */
-            transform: translateX(-50%); /* 水平居中 */
-            margin: 0; /* 移除水平居中 */
-            color: white; /* 字体颜色 */
-            font-size: 24px; /* 字体大小 */
-            display: flex;
-            justify-content: center;
-            align-items: center; /* 垂直居中 */
-            box-sizing: border-box;
-        }
-    #dialogue img {
-      position: absolute; /* 绝对定位 */
-      top: -100px; /* 距离顶部10px */
-      left: 10px; /* 距离左侧10px */
-      width: 100px; /* 图片宽度 */
-      height: 100px; /* 图片高度 */
-    }
-    `;
       document.head.appendChild(style);
-
       // 创建对话框元素
       const dialogBox = document.createElement("div");
       dialogBox.id = "dialogue";
-
       // 插入莱拉的图片
       const lailaImage = document.createElement("img");
-      lailaImage.src = "../img/charactor/莱拉/laila down.png";
-      lailaImage.alt = "Image Description";
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
       dialogBox.appendChild(lailaImage);
-
-      // 创建对话文本元素
+      // 创建对s话文本元素
       const dialogText = document.createElement("span");
       dialogText.id = "dialogueText";
       dialogBox.appendChild(dialogText);
       document.body.appendChild(dialogBox);
-
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      // 创建选项按钮容器
+      const optionsContainer = document.createElement("div");
+      optionsContainer.id = "options";
+      dialogBox.appendChild(optionsContainer);
       function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].length) {
-          dialogText.innerText += dialogues[currentDialogue].charAt(charIndex);
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
           charIndex++;
           setTimeout(typeDialogue, typingSpeed);
         } else {
-          currentDialogue++;
-          charIndex = 0;
+          if (dialogues[currentDialogue].options) {
+            showOptions(dialogues[currentDialogue].options);
+            charIndex = -1;
+          } else {
+            currentDialogue++;
+            charIndex = 0;
+          }
         }
       }
-
+      const self = this;
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          optionsContainer.innerHTML = ""; // 清空选项按钮
           typeDialogue();
         } else {
           document.body.removeChild(dialogBox);
+          self.showPasswordPrompt();
+          self.visit = 1;
           document.getElementById("gameCanvas").style.display = "block";
           requestAnimationFrame(mainLoop);
         }
       }
+      function showOptions(options) {
+        options.forEach((option) => {
+          const button = document.createElement("div"); // 使用 div 而不是 button
+          button.className = "option-text";
+          button.innerText = option;
+          button.style.cursor = "pointer"; // 鼠标悬停时显示为指针
+          button.style.margin = "10px 0"; // 上下间距
+          button.style.color = "#FFFFFF"; // 字体颜色设置为白色
+          button.style.fontSize = "24px"; // 字体大小
+          button.style.fontFamily = "Arial, sans-serif"; // 字体设置为 Arial
+          button.style.textShadow = "1px 1px 2px #000000"; // 添加文本阴影
+          button.style.transition = "background-color 0.3s, color 0.3s"; // 添加过渡效果
 
-      dialogBox.addEventListener("click", showNextDialogue);
+          // 添加鼠标悬停效果
+          button.onmouseover = () => {
+            button.style.backgroundColor = "#444444"; // 鼠标悬停时的背景色
+            button.style.color = "#FFD700"; // 鼠标悬停时的字体颜色
+          };
+          button.onmouseout = () => {
+            button.style.backgroundColor = ""; // 恢复原背景色
+            button.style.color = "#FFFFFF"; // 恢复原字体颜色
+          };
+
+          button.onclick = () => handleOption(option);
+          optionsContainer.appendChild(button);
+        });
+      }
+
+      function handleOption(option) {
+        if (option === "不，我现在没有空->") {
+          dialogues.push(...choiceDialogues.cooperate);
+          // player.move(-200,0,collisionMap);
+          document.addEventListener("click", chuansong);
+
+          function chuansong() {
+            player.move(-350, 0, collisionMap);
+            document.removeEventListener("click", chuansong);
+          }    
+        } else if (option === "当然，我会陪你的->") {
+          dialogues.push(...choiceDialogues.abandon);
+        }
+        if (option === "好->") { 
+          dialogues.push(...choiceDialogues.cooperate);
+        }
+        currentDialogue++;          
+        showNextDialogue();
+      }
+
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
-
-      collisionMap[interactY][interactX] = 0;
+          collisionMap[interactY][interactX] = 0;
     }
 
   }
@@ -278,3 +447,71 @@ class Player {
 
 const player = new Player();
 window.player = player;
+
+function createDialogueBox(dialogues) {
+  let currentDialogue = 0;
+
+  // 添加CSS样式
+  if (!document.getElementById("dialogue-style")) {
+    const style = document.createElement("style");
+    style.id = "dialogue-style";
+    style.innerHTML = `
+      #dialogue {
+          background: rgba(0, 0, 0, 0.7);
+          padding: 20px;
+          border-radius: 10px;
+          width: 80%;
+          height: 100px;
+          text-align: center;
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          color: white;
+          font-size: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+      }
+      #dialogue img {
+          position: absolute;
+          top: -100px;
+          left: 10px;
+          width: 100px;
+          height: 100px;
+      }`;
+    document.head.appendChild(style);
+  }
+
+  // 创建对话框元素
+  const dialogBox = document.createElement("div");
+  dialogBox.id = "dialogue";
+
+  // 创建图片元素
+  const charImage = document.createElement("img");
+  charImage.alt = "Character Image";
+  dialogBox.appendChild(charImage);
+
+  // 创建对话文本元素
+  const dialogText = document.createElement("span");
+  dialogText.id = "dialogueText";
+  dialogBox.appendChild(dialogText);
+  document.body.appendChild(dialogBox);
+
+  function showNextDialogue() {
+    if (currentDialogue < dialogues.length) {
+      // 更新图片和文本内容
+      charImage.src = dialogues[currentDialogue].image;
+      dialogText.innerText = dialogues[currentDialogue].text; // 直接显示整个文本
+      currentDialogue++;
+    } else {
+      document.body.removeChild(dialogBox);
+      document.getElementById("gameCanvas").style.display = "block";
+      requestAnimationFrame(mainLoop); // 继续游戏主循环
+    }
+  }
+
+  dialogBox.addEventListener("click", showNextDialogue);
+  showNextDialogue();
+}
