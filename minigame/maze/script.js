@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fog = document.getElementById('fog');
     const mazeCanvas = document.getElementById('mazeCanvas');
     const mazeContext = mazeCanvas.getContext('2d');
-    const step = 10;
+    const step = 15;
     const radius = 30;
     const targetArea = {
         top: 94,  // 替换为你设定的目标区域顶部的 y 坐标

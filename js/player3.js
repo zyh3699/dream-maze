@@ -141,6 +141,14 @@ class Player {
       this.showMessage("那边有条...鱼？在陆地上的鱼？快去看看...");
       collisionMap[interactY][interactX] = 0;
     }    
+    if (collisionMap[interactY][interactX] === 18) {
+      this.showMessage("你听到了一阵熟悉的声音，按E查看");
+      collisionMap[interactY][interactX] = 0;
+    }    
+    if (collisionMap[interactY][interactX] === 11) {
+      this.showMessage("空气中传来一声冷笑，像是艾德里安的声音");
+      collisionMap[interactY][interactX] = 0;
+    }
 
   }
 
@@ -154,8 +162,27 @@ class Player {
     const interactX = Math.floor(playerCenterX + offsetX);
     const interactY = Math.floor(playerCenterY + offsetY);
 
-    // 检测是否有物品
+
     if (collisionMap[interactY][interactX] === 2) {
+      const dialogues = [
+        {
+          text: "（冷冷地）莱拉，卡尔，你们可真是让我刮目相看。居然能找到这里来。不过，你们真的以为能轻易阻止这一切吗？",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "（警惕地）艾德里安……你怎么会在这里？",
+          image: "../img/conversation/卡尔/卡尔.png",
+        },  
+        {
+          text: "哦，莱拉，我当然会在这里。这里的一切都是我的设计。我就是这个梦境的主人。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "你到底是谁？你真正的目的是什么？",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        }, 
+      ];
+      createDialogueBox(dialogues);
       this.fadeOutAndRedirect();
       collisionMap[interactY][interactX] = 0;
     }
@@ -166,11 +193,11 @@ class Player {
     if (collisionMap[interactY][interactX] === 16) {
       const dialogues = [
         {
-          text: "不要这样盯着我！It's so rude...",
+          text: "你就是莱拉？",
           image: "../img/conversation/艾德里安/艾德里安.png",
         },  
         {
-          text: "（凌厉）向我许个愿望",
+          text: "向我许个愿望吧，尽快，孩子。你的愿望会引领你到达光明之岸。",
           image: "../img/conversation/艾德里安/艾德里安.png",
         },  
         {
@@ -178,11 +205,15 @@ class Player {
           image: "../img/conversation/艾德里安/艾德里安.png",
         },  
         {
-          text: "许完了吗。好。从我右边那个柱子正右侧开始，往下走到底，再向右走一小步，你就会走到虚空法阵里。",
+          text: "现在，从我右边那个柱子正右侧开始，往下走到底，再向右走一小步，你就会走到虚空法阵里。",
           image: "../img/conversation/艾德里安/艾德里安.png",
         },  
         {
-          text: "在虚空法阵，你可以传送到一个神秘的岛屿上，据说至今，除了我，还没有任何人去过呢。",
+          text: "在虚空法阵，你可以传送到一个神秘的岛屿上。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "（后期，这些对话加一下神秘组织的故事）",
           image: "../img/conversation/艾德里安/艾德里安.png",
         },  
         {
@@ -191,6 +222,28 @@ class Player {
         },  
         {
           text: "按照传说之鱼的说法，去虚空法阵，按E实现传送。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 15) {
+      const dialogues = [
+        {
+          text: "（喃喃自语）卡尔……你到底在哪儿？这里的一切看起来太真实了，但我知道它们都是假的。",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "（低声）莱拉，别走太远……这里的每一步都可能是陷阱。",
+          image: "../img/conversation/卡尔/卡尔.png",
+        },  
+        {
+          text: "卡尔？？？卡尔一定在附近！",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "探索这个地图，找到卡尔吧！",
           image: "../img/conversation/艾德里安/艾德里安.png",
         },  
       ];
@@ -226,7 +279,7 @@ class Player {
       }
       collisionMap[interactY][interactX] = 0;
     }
-        if (collisionMap[interactY][interactX] === 17) {
+    if (collisionMap[interactY][interactX] === 17) {
       const dialogues = [
         {
           text: "“她曾想知道真相，但是，却还是选择了将其遗忘。”",
@@ -407,6 +460,61 @@ class Player {
       document.addEventListener("click", showNextDialogue);
       showNextDialogue();
           collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 5) {
+      const dialogues = [
+        {
+          text: "（激动地）卡尔！我终于找到你了！你没事吧？",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "（微笑）我很好，莱拉。其实，我故意让自己被困在这里，为的是收集更多关于组织的情报，并找到阻止他们的办法。",
+          image: "../img/conversation/卡尔/卡尔.png",
+        },  
+        {
+          text: "（疑惑）组织？你是说艾德里安所在的那个组织？",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "（点头）是的，莱拉。这个组织已经不再是简单的阴谋集团。他们掌握了一种能够控制全球梦境的技术——“阿尔法梦境”。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        }, 
+        {
+          text: "阿尔法梦境是一种终极的梦境技术，它能够潜入任何人的潜意识，改变他们的记忆和行为，从而影响整个世界的未来。",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "（震惊）如果他们成功启动了阿尔法梦境，那岂不是整个世界都要陷入他们的掌控之中？",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "（严肃）没错。这也是我为什么必须留下来的原因。我需要更多的信息来破坏他们的计划。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "我该怎么办？",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "我们必须知道那个组织的暗号。这也是我在这里的原因。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "这张地图上有很多组织的前成员。他们的形态和性格各异。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "尊重他们。他们会告诉你我们想要的东西。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "一旦知道了密码，去揭穿艾德里安的密谋！",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+      this.aidedialog=true;
     }
 
   }

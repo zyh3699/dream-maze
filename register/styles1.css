@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../img/menuBox/main_page.jpg'); /* 背景图片 */
+    background-size: 100% auto; /* 图片大小覆盖整个页面 */
+    background-position: center; /* 图片居中对齐 */
+    background-repeat: no-repeat; /* 图片不重复 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景，使内容易读 */
+    background-image: url('../img/menuBox/menu_backgroud.png'); /* 背景图片 */
+    background-repeat: no-repeat; /* 图片不重复 */
+    background-size: cover;
+    width: 80%; /* 增加容器宽度为80% */
+    max-width: 250px; /* 最大宽度 */
+    height: 37vh; /* 设置高度为视口高度的80% */
+    background-position: center; /* 图片居中对齐 */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* 居中容器 */
+}
+
+
+h2 {
+    margin-bottom: 20px;
+    color: white; /* 将文字颜色改为白色 */
+    text-align: center; /* 居中显示 */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.form .inputBox {
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+
+/* 登录按钮样式 */
+ 
+
+
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+button {
+    width:150px; /* 让按钮宽度可调节，并设置与父容器之间的间距 */
+    padding: 10px 20px;
+    background-color:  #28a745;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 仿宋;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 6px auto;
+    display: block;
+}
+button:hover {
+    background-color: #0056b3;
+}
+#registerBtn {
+    background-color: #28a745;
+}
+
+#registerBtn:hover {
+    background-color: #0056b3
+}
+
+p {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
