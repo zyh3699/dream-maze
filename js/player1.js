@@ -359,7 +359,7 @@ updateAdjacentPieces(x, y) {
         lailaImage.style.width = "100px"; // 将宽度设置为200像素
         lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
         dialogBox.appendChild(lailaImage);
-        // 创建对s话文本元素
+        // 创建对话文本元素
         const dialogText = document.createElement("span");
         dialogText.id = "dialogueText";
         dialogBox.appendChild(dialogText);
@@ -431,11 +431,6 @@ updateAdjacentPieces(x, y) {
             optionsContainer.appendChild(button);
           });
         }
- 
- 
-
-
-
         function handleOption(option) {
           var index = window.localStorage.userid;
 var array = JSON.parse(window.localStorage.userArr);
