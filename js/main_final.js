@@ -51,7 +51,7 @@ function update(deltatime) {
   }
   window.player.show(collisionMap);
   if (keysPressed["p"] || keysPressed["P"]) {
-    window.location.href = "../html/final_without_intro.html";
+    window.location.href = "../html/final.html";
   }
 }
 
