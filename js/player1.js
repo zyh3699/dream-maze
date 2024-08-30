@@ -333,14 +333,17 @@ updateAdjacentPieces(x, y) {
               left: 50%;
               transform: translate(-50%, -50%);
               display: flex;
-              justify-content: center;
+              flex-direction: column;
+              align-items: center; 
               z-index: 1001;
             }
         
             .button-container button {
-              margin: 0 10px;
+              margin: 10px 0;
               padding: 10px 20px;
               font-size: 16px;
+              width: 150px; /* 设置相同的宽度 */
+              height: 50px; /* 设置相同的高度 */
             }
           `;
         document.head.appendChild(style);
@@ -369,7 +372,7 @@ updateAdjacentPieces(x, y) {
         buttonContainer.className = "button-container";
         buttonContainer.innerHTML = `
           <button id="cooperateButton">与艾德里安合作</button>
-          <button id="abandonButton">放弃合作</button>
+          <button id="abandonButton">   放弃合作  </button>
         `;
         document.body.appendChild(buttonContainer);
 
