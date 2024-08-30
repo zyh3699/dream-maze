@@ -6,6 +6,30 @@ class Player {
     this.height = 66;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
+    this.frameIndex = 0; // 当前帧索引
+    this.frameDelay = 0; // 帧间隔计时器
+    this.frameInterval = 45; // 每隔多少次update切换一次帧
+    this.direction = "down"; // 默认方向
+    this.map = 0;
+    this.visit = 0;
+    // 预加载所有的帧图像
+    this.images = {
+      up: [],
+      down: [],
+      left: [],
+      right: [],
+    };
+    for (let i = 0; i < 4; i++) {
+      this.images.up[i] = new Image();
+      this.images.up[i].src = `../img/charactor/莱拉1/up${i}.png`;
+      this.images.down[i] = new Image();
+      this.images.down[i].src = `../img/charactor/莱拉1/down${i}.png`;
+      this.images.left[i] = new Image();
+      this.images.left[i].src = `../img/charactor/莱拉1/left${i}.png`;
+      this.images.right[i] = new Image();
+      this.images.right[i].src = `../img/charactor/莱拉1/right${i}.png`;
+    }
+    this.image = this.images.down[0]; // 初始图像
   }
 
   draw(ctx) {
@@ -37,22 +61,22 @@ class Player {
   }
 
   updateImage(direction) {
-    switch (direction) {
-      case "up":
-        this.image.src = "../img/charactor/莱拉/laila up.png";
-        break;
-      case "down":
-        this.image.src = "../img/charactor/莱拉/laila down.png";
-        break;
-      case "left":
-        this.image.src = "../img/charactor/莱拉/laila left.png";
-        break;
-      case "right":
-        this.image.src = "../img/charactor/莱拉/laila right.png";
-        break;
-      default:
-        this.image.src = "../img/charactor/莱拉/laila down.png";
+    if (this.direction !== direction) {
+      this.direction = direction;
+      this.frameIndex = 0;
+      this.frameDelay = 0;
     }
+
+    // 每次调用 updateImage 函数时增加帧间隔计时器
+    this.frameDelay++;
+
+    // 如果帧间隔计时器达到指定的帧间隔，就更新帧索引
+    if (this.frameDelay >= this.frameInterval) {
+      this.frameDelay = 0;
+      this.frameIndex = (this.frameIndex + 1) % 4; // 循环切换四帧
+    }
+
+    this.image = this.images[direction][this.frameIndex];
   }
 
   show(collisionMap) {
@@ -100,7 +124,7 @@ class Player {
       ];
       let currentDialogue = 0;
       let charIndex = 0;
-      const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
       // 添加CSS样式
       const style = document.createElement("style");
