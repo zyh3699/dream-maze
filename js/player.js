@@ -64,7 +64,8 @@ class Player {
 
     const newX = Math.floor(playerCenterX + offsetX + dx);
     const newY = Math.floor(playerCenterY + offsetY + dy);
-
+    if (collisionMap[newY][newX] === 2 || collisionMap[newY][newX] === 3 || collisionMap[newY][newX] === 6 || collisionMap[newY][newX] === 7)
+      this.showMessage("按E键交互 ");
     // 碰撞检测
     if (collisionMap[newY][newX] === 1 ) {
       return true; // 碰撞检测
@@ -90,7 +91,23 @@ class Player {
   
     this.image = this.images[direction][this.frameIndex];
     }
+    show(collisionMap) {
+      const playerCenterX = map.image.width / 2;
+      const playerCenterY = map.image.height / 2;
   
+      const offsetX = window.map.offsetX;
+      const offsetY = window.map.offsetY;
+  
+      const interactX = Math.floor(playerCenterX + offsetX);
+      const interactY = Math.floor(playerCenterY + offsetY);
+  
+      // 检测是否有物品
+      if (collisionMap[interactY][interactX] === 2 || collisionMap[interactY][interactX] === 3 )
+        this.showMessage("按E键查看交互 ");
+        
+      }
+     
+    
   
   mapp() {
     if (this.map === 0) {
