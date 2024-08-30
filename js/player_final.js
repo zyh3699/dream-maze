@@ -468,7 +468,7 @@ class Player {
     const interactY = Math.floor(playerCenterY + offsetY);
 
     // 检测是否有物品
-    if (collisionMap[interactY][interactX] === 2) {
+    if (collisionMap[interactY][interactX] === 2&&window.map.status==1) {
       this.fadeOutAndRedirect();
       collisionMap[interactY][interactX] = 0;
     }
