@@ -2,19 +2,53 @@
 <head><title>梦境迷途</title>
     <link rel="stylesheet" type="text/css" href="mycss.css" />
     <style>
-        h1 {font-family:楷体;text-align: center; color:white;font-size: xxx-large;}
+        body {
+            background-color: #000; /* 深色背景 */
+            color: white; /* 文字颜色为白色 */
+            background-image: url('../img/存档/存档bg.png'); /* 添加科幻风格的背景图片 */
+            background-size: cover;
+            background-position: center;
+            font-family: 'Courier New', monospace; /* 科幻风格字体 */
+        }
+        h1 {font-family:'Courier New', monospace;
+            text-align: center; 
+            color: cyan; /* 改为科幻风格颜色 */
+            font-size: 3rem;
+            text-shadow: 0 0 10px cyan; /* 发光效果 */
+        }
+        
         .p1{text-align: center;}
-        .ziti{font-family: 隶书; font-size: xx-large;text-align: center;color:red;cursor: pointer;outline: none;background-color:lightskyblue;border-width: 0px;}
-        .ziti:hover{background-color: blue;}
-        body{background-position: center;}
-        #main{background:rgba(177, 177, 192, 0.5);
+        
+        .ziti{ font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            color: #35f8eb; /* 绿色文字，符合科幻主题 */
+            cursor: pointer;
+            outline: none;
+            background-color: transparent; /* 背景透明 */
+            border: 2px solid #35f8eb; /* 绿色边框 */
+            border-radius: 10px;
+            padding: 10px 20px;
+            transition: all 0.3s ease; /* 平滑过渡效果 */
+         }
+        
+         .ziti:hover{
+            background-color: #35f8eb; /* 悬停时背景颜色 */
+            color: black; /* 悬停时文字颜色 */
+            box-shadow: 0 0 20px #35f8eb; /* 发光效果 */
+            transform: scale(1.1); /* 放大效果 */}
+
+    #main{
+        background: rgba(32, 30, 30, 0.8);
         padding:20px;
         margin:50px auto;
         width:600px;
-        height:450px;}
+        height:560px;
+        border-radius: 15px; /* 圆角边框 */
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);}
         a:hover{font-size: larger}
         a{text-decoration: none;}
     </style>
+    
     <script src="js/存档功能.js"></script>
 </head>
 <body>
