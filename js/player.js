@@ -644,75 +644,8 @@ class Player {
     bodyElement.style.transition = "opacity 1s ease-out";
     bodyElement.style.opacity = 0;
     setTimeout(() => {
-      const dialogues = [
-        {
-          text:"最后一刻，莱拉成功获取了文件。然而，当她打开文件的一瞬间，一种前所未有的危机感笼罩了她。文件的内容暗示着一场可能改变世界的巨大阴谋。",
-          image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
-        },
-        {
-          text:"莱拉的直觉告诉她，这只是开始，一个深藏在梦境与现实之间的秘密正等待她去揭开。",
-          image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
-        }
-      ];
-      let currentDialogue = 0;
-      let charIndex = 0;
-      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
-
-      // 添加CSS样式
-      const style = document.createElement("style");
-      document.head.appendChild(style);
-
-      // 创建对话框元素
-      const dialogBox = document.createElement("div");
-      dialogBox.id = "dialogue";
-
-      // 插入莱拉的图片
-      const lailaImage = document.createElement("img");
-      lailaImage.style.width = "100px"; // 将宽度设置为200像素
-      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
-      dialogBox.appendChild(lailaImage);
-
-      // 创建对话文本元素
-      const dialogText = document.createElement("span");
-      dialogText.id = "dialogueText";
-      dialogBox.appendChild(dialogText);
-      document.body.appendChild(dialogBox);
-      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
-      dialogText.style.fontSize = "20px"; // 字体大小
-      dialogText.style.color = "#FFFFFF"; // 字体颜色
-      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
-      dialogText.style.lineHeight = "1.5"; // 行高
-      
-      function typeDialogue() {
-        
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
-
-      function showNextDialogue() {
-        if (currentDialogue < dialogues.length) {
-          dialogText.innerText = "";
-          lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
-        } else {
-          document.body.removeChild(dialogBox);
-          document.getElementById("gameCanvas").style.display = "block";
-          requestAnimationFrame(mainLoop);
-        }
-      }
-
-      dialogBox.addEventListener("click", showNextDialogue);
-      showNextDialogue();
-
-      this.updateAdjacentPieces(interactX, interactY);
       window.location.href = "../minigame/puzzle/try.html";
-    }, 1000); // 等待1秒以完成淡出效果
+         }, 1000); // 等待1秒以完成淡出效果
   }
 
   showMessage(message) {
