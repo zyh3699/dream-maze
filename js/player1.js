@@ -84,7 +84,7 @@ updateAdjacentPieces(x, y) {
     }
 
     // 如果当前位置是3，则将其更新为100
-    if (collisionMap[y][x] === 3||collisionMap[y][x] === 6) {
+    if (collisionMap[y][x] === 3||collisionMap[y][x] === 6||collisionMap[y][x] === 2) {
       collisionMap[y][x] = 100;
 
       // 递归更新相邻的格子
@@ -106,11 +106,148 @@ updateAdjacentPieces(x, y) {
     const interactY = Math.floor(playerCenterY + offsetY);
 
     // 检测是否有物品
-    if (collisionMap[interactY][interactX] === 2) {
+    if (collisionMap[interactY][interactX] === 9) {
       this.fadeOutAndRedirect();
       collisionMap[interactY][interactX] = 0;
     }
+    if(collisionMap[interactY][interactX] === 7){
+      this.showMessage("你开启了谜题");
 
+        // Create or select the image element
+        let image = document.getElementById('mapImage');
+        if (!image) {
+            image = document.createElement('img');
+            image.id = 'mapImage';
+            image.src = '../img/bgr/chapter1_puzzle.jpg'; // replace with the actual path to your image
+            image.style.position = 'fixed';
+            image.style.top = '50%';
+            image.style.left = '50%';
+            image.style.transform = 'translate(-50%, -50%)';
+            image.style.zIndex = '1000';
+            image.style.width = '900px'; // Set the width
+            image.style.height = '600px'; // Set the height
+            image.style.border = '15px solid white'; // Set border size, style, and color
+            document.body.appendChild(image);
+        } else {
+            image.style.display = 'block';
+        }
+
+        // Add an event listener to hide the image when K is pressed
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'k' || e.key === 'K') {
+                image.style.display = 'none';
+            }
+        });
+    }
+    if (collisionMap[interactY][interactX] === 2) {
+      const dialogues = [
+        {
+          text: "这个梦境真是奇怪，时间流逝得如此之快……",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },
+        {
+          text: "莱拉敲了敲门，不久，门开了",
+          image: "../img/conversation/精灵/精灵.png",
+        },
+        {
+          text: "你就是那个前成员，对吗？我们需要你的帮助。",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },
+        {
+          text: "你们终于来了。我早就预料到有人会来找我，但没想到会在这里见面。梦境中的时间和现实中的时间不一样，你知道吗？",
+          image: "../img/conversation/前成员/Shane_Winter.png",
+        },
+        {
+          text: "我意识到了这一点。我们需要你的帮助，你曾经是那个组织的一员，现在我们需要你告诉我们他们的计划，以及如何阻止他们。",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },
+        {
+          text: "（叹气）你们不了解他们的力量。这不仅仅是关于控制梦境，而是改变现实本身。他们的目标是通过改变人们的潜意识来操控整个世界。任何一个人只要被植入了特定的想法，现实也会因此改变。",
+          image: "../img/conversation/前成员/Shane_Winter.png",
+        },
+        {
+          text: "（皱眉）这正是我们需要阻止的。你既然曾经是他们的一员，一定知道他们的弱点。告诉我们，如何破解他们的计划？",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },
+        {
+          text: "（犹豫了一下）在这个梦境中，他们设置了一个时钟。正常人都以为这只是一个普通的时钟，但实际上，它是他们控制梦境的核心，也是时间差异的原因。",
+          image: "../img/conversation/前成员/Shane_Winter.png",
+        },
+        {
+          text: "你需要把这个时钟调到一个特定的时间，只有那一个时间，才能逃离这个梦境，也才能阻止他们的计划。",
+          image: "../img/conversation/前成员/Shane_Winter.png",
+        },
+        {
+          text: "他们设置了一个谜题，只有解开了这个谜题，才能知道正确的时间。这个谜题刻在下面的石板上，只有按下按钮才会显现。",
+          image: "../img/conversation/前成员/Shane_Winter.png",
+        },
+        {
+          text: "我只知道这么多，之后只能靠你们自己了。祝你们好运。",
+          image: "../img/conversation/前成员/Shane_Winter.png",
+        },
+        {
+          text: "谢谢你，我们一定会成功的。",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },
+      ];
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      
+      function typeDialogue() {
+        
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
+        }
+      }
+
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+
+      dialogBox.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      this.updateAdjacentPieces(interactX, interactY);
+    }
     if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
@@ -118,68 +255,59 @@ updateAdjacentPieces(x, y) {
       if (collisionMap[interactY][interactX] === 6) {
         const dialogues = [
           {
-            text: "莱拉，是我。我知道你已经发现了那个组织的秘密。我们不能再等了，他们已经在行动。你需要我的帮助。",
-            image: "../img/conversation/艾德里安/艾德里安.png",
-          },
-          {
-            text: "为什么你要帮我？",
+            text: "艾德里安！我找到了些关于那个神秘组织的信息，我们需要谈谈。",
             image: "../img/conversation/莱拉/莱拉.png",
           },
           {
-            text: "因为我曾经也是他们的一员，但我不愿再被他们操控。这次，我站在你这边。",
+            text: "莱拉，你来的正好。我也刚刚发现了一些线索。你找到什么了？",
             image: "../img/conversation/艾德里安/艾德里安.png",
           },
           {
-            text: "请你做出你的选择，莱拉。你是决定与艾德里安合作，还是放弃？",
+            text: "（递上文件）这些资料显示，这个组织利用梦境技术来操控人们的意识，改变他们的行为。这比我们想象的要复杂得多。",
+            image: "../img/conversation/莱拉/莱拉.png",
+          },
+          {
+            text: "（查看文件，皱眉）这些信息确实很惊人。如果这是真的，那么我们面对的可能不仅仅是一个普通的敌人，而是一个精心策划的全球性阴谋。",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },
+          {
+            text: "我们得深入调查，你愿意和我一起合作吗？",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },
+          {
+            text: "请你做出你的选择，莱拉。你是决定与艾德里安合作，还是选择独自一人？",
             image: "../img/conversation/精灵/精灵.png",
           }
         ];
       
         const choiceDialogues = {
           cooperate: [
-           
             {
-              text: "艾德里安，为什么你会联系我？我们上次的合作……你知道，我依然有很多疑问。",
+              text: "莱拉决定信任艾德里安。他们需要更多的情报来了解这个组织的真正面目。",
+              image: "../img/conversation/精灵/精灵.png",
+            },
+            {
+              text: " （坚定地）好吧，艾德里安，我们再一次联手。我感觉到，这次我们面对的不只是普通的梦境……",
               image: "../img/conversation/莱拉/莱拉.png",
             },
             {
-              text: "我明白你的顾虑，莱拉。但你必须知道，这个组织的影响力远比我们当初想象的要大得多。",
+              text: "（微笑）那我们就一起深入这次梦境吧。我知道一个前成员的下落，他曾经是组织的核心，现在躲藏在一个城堡中。他可能会有我们需要的答案。",
               image: "../img/conversation/艾德里安/艾德里安.png",
-            },
-            {
-              text: "过去我可能隐瞒了些东西，但现在……我不再是他们的一部分。我想帮你，揭开这一切的真相。",
-              image: "../img/conversation/艾德里安/艾德里安.png",
-            },
-            {
-              text: "你说你不再是他们的一部分，可是，是什么让你背叛了他们？你以前也利用过这些技术，谁能保证这次你不是在设下另一个陷阱？",
-              image: "../img/conversation/莱拉/莱拉.png",
-            },
-            {
-              text: "因为我见证了太多人的生活被彻底改变——不，应该说被毁灭了。他们用梦境技术操控了太多人，改写了记忆，扭曲了现实。",
-              image: "../img/conversation/艾德里安/艾德里安.png",
-            },
-            {
-              text: "这次，他们的计划更大、更危险。我不想再成为他们的棋子。我知道我们过去有过分歧，但这次，只有我们联手，才能阻止他们。",
-              image: "../img/conversation/艾德里安/艾德里安.png",
-            },
-            {
-              text: "好吧，艾德里安，我选择相信你。这次我们必须彻底摧毁他们的阴谋。但你要知道，如果你再次背叛我，我绝不会再有第二次犹豫。",
-              image: "../img/conversation/莱拉/莱拉.png",
-            },
-            {
-              text: "你不会后悔的，莱拉。我已经找到了一个重要的线索——一个前成员。他曾经是组织的核心，现在躲藏在一个城堡中。我们得尽快找到他，时间不多了。",
-              image: "../img/conversation/艾德里安/艾德里安.png",
-            },
-            {
-              text: "那么我们出发吧，希望这次我们能够顺利地揭开真相。",
-              image: "../img/conversation/莱拉/莱拉.png",
             }
           ],
           abandon: [
             {
-              text: "你选择了放弃。这可能是更安全的决定，但我们都知道，代价会是什么。",
+              text: "莱拉决定独自行动，她觉得艾德里安可能隐藏着什么。",
               image: "../img/conversation/精灵/精灵.png",
             },
+            {
+              text: " （决绝）艾德里安，我想这次我需要单独行动。你知道的太多了，但我不知道该不该完全信任你",
+              image: "../img/conversation/莱拉/莱拉.png",
+            },
+            {
+              text: "（叹气）我明白你的顾虑，莱拉。但愿你知道自己在做什么。祝你好运。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            }
           ]
         };
         let currentDialogue = 0;
@@ -248,7 +376,7 @@ updateAdjacentPieces(x, y) {
             
               buttonContainer.style.display = "none"; // 隐藏按钮
             
-            if (currentDialogue === dialogues.length&&dialogues.length===4) {
+            if (currentDialogue === dialogues.length&&dialogues.length===6) {
               buttonContainer.style.display = "flex";
                       showChoices();
                       
@@ -304,121 +432,7 @@ updateAdjacentPieces(x, y) {
         this.updateAdjacentPieces(interactX, interactY);
       }
           
-      //   let currentDialogue = 0;
-      //   let charIndex = 0;
-      //   const typingSpeed = 50;
-      
-      //   const style = document.createElement("style");
-      //   style.textContent = `
-      //     #dialogue {
-      //       position: fixed;
-      //       bottom: 10%;
-      //       left: 20%;
-      //       background: rgba(0, 0, 0, 0.8);
-      //       padding: 20px;
-      //       border-radius: 10px;
-      //       z-index: 1000;
-      //     }
-      
-      //     #dialogueText {
-      //       display: block;
-      //       margin-top: 10px;
-      //     }
-      
-      //     .button-container {
-      //       position: fixed;
-      //       top: 50%;
-      //       left: 50%;
-      //       transform: translate(-50%, -50%);
-      //       display: flex;
-      //       justify-content: center;
-      //       z-index: 1001;
-      //     }
-      
-      //     .button-container button {
-      //       margin: 0 10px;
-      //       padding: 10px 20px;
-      //       font-size: 16px;
-      //     }
-      //   `;
-      //   document.head.appendChild(style);
-      
-      //   const dialogBox = document.createElement("div");
-      //   dialogBox.id = "dialogue";
-      
-      //   const lailaImage = document.createElement("img");
-      //   lailaImage.style.width = "100px";
-      //   lailaImage.style.height = "auto";
-      //   dialogBox.appendChild(lailaImage);
-      
-      //   const dialogText = document.createElement("span");
-      //   dialogText.id = "dialogueText";
-      //   dialogBox.appendChild(dialogText);
-      //   document.body.appendChild(dialogBox);
-      
-      //   dialogText.style.fontFamily = "Arial, sans-serif";
-      //   dialogText.style.fontSize = "20px";
-      //   dialogText.style.color = "#FFFFFF";
-      //   dialogText.style.textShadow = "2px 2px 4px #000000";
-      //   dialogText.style.lineHeight = "1.5";
-      
-      //   const buttonContainer = document.createElement("div");
-      //   buttonContainer.className = "button-container";
-      //   buttonContainer.innerHTML = `
-      //     <button id="cooperateButton">与艾德里安合作</button>
-      //     <button id="abandonButton">放弃</button>
-      //   `;
-      //   document.body.appendChild(buttonContainer);
-      
-      //   function typeDialogue() {
-      //     if (charIndex < dialogues[currentDialogue].text.length) {
-      //       dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-      //       charIndex++;
-      //       setTimeout(typeDialogue, typingSpeed);
-      //     } else {
-      //       currentDialogue++;
-      //       charIndex = 0;
-      //       if (currentDialogue === dialogues.length) {
-      //         showChoices();
-      //       }
-      //     }
-      //   }
-      
-      //   function showNextDialogue() {
-      //     if (currentDialogue < dialogues.length) {
-      //       dialogText.innerText = "";
-      //       lailaImage.src = dialogues[currentDialogue].image;
-      //       typeDialogue();
-      //     } else {
-      //       document.body.removeChild(dialogBox);
-      //       document.body.removeChild(buttonContainer);
-      //       document.getElementById("gameCanvas").style.display = "block";
-      //       requestAnimationFrame(mainLoop);
-      //     }
-      //   }
-      
-      //   function showChoices() {
-      //     document.getElementById("cooperateButton").onclick = () => showChoiceDialogue("cooperate");
-      //     document.getElementById("abandonButton").onclick = () => showChoiceDialogue("abandon");
-      //   }
-      
-      //   function showChoiceDialogue(choice) {
-      //     buttonContainer.style.display = "none"; // 隐藏按钮
-      //     currentDialogue = 0;
-      //     const selectedDialogues = choiceDialogues[choice];
-      //     dialogues.length = 0; // 清空原对话
-      //     selectedDialogues.forEach(dialogue => dialogues.push(dialogue)); // 加载新对话
-      //     showNextDialogue();
-      //   }
-      
-      //   dialogBox.addEventListener("click", showNextDialogue);
-      //   showNextDialogue();
-      
-      //   this.updateAdjacentPieces(interactX, interactY);
-      // }
-      
-      
-      
+     
       
   }
   fadeOutAndRedirect() {
