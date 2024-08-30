@@ -13,7 +13,7 @@ class Player {
     this.map = 0;
     this.visit = 0;
     this.read = 0;
-    
+
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -395,7 +395,7 @@ class Player {
           image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
         },
         {
-          text: "好像..?在%-之中...可以随意**时间...",
+          text: "好像..?在%-之中...可以随意回溯时间...",
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
         {
