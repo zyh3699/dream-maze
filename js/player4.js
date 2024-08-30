@@ -630,7 +630,7 @@ class Player {
       setTimeout(() => {
         const enemyAction = Math.floor(Math.random() * 3);
         if (enemyAction === 0) {
-          const enemyDamage = Math.floor(Math.random() * 20) + 1;
+          const enemyDamage = Math.floor(Math.random() * 10) + 1;
           const actualDamage = isDefending
             ? Math.floor(enemyDamage / 2)
             : enemyDamage;
@@ -638,12 +638,12 @@ class Player {
           playerHealthBar.style.width = `${playerHealth}%`;
           logMessage(`敌人对你的梦境入侵，造成了 ${actualDamage} 点破坏！`);
         } else if (enemyAction === 1) {
-          const enemyHeal = Math.floor(Math.random() * 20) + 1;
+          const enemyHeal = Math.floor(Math.random() * 10) + 1;
           enemyHealth = Math.min(enemyHealth + enemyHeal, 100);
           enemyHealthBar.style.width = `${enemyHealth}%`;
           logMessage(`敌人回溯到上层梦境，恢复了当前梦境 ${enemyHeal} 点状态！`);
         } else {
-          const enemyMagicDamage = Math.floor(Math.random() * 30) + 1;
+          const enemyMagicDamage = Math.floor(Math.random() * 20) + 1;
           playerHealth -= enemyMagicDamage;
           playerHealthBar.style.width = `${playerHealth}%`;
           logMessage(`敌人对你潜意识突破，造成了 ${enemyMagicDamage} 点混乱！`);
@@ -1427,7 +1427,7 @@ class Player {
           image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
         },
         {
-          text: "等等，你有注意到水池上方的变化吗...",
+          text: "等等，你有注意到水池上方雕塑的变化吗...",
           image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
         },
       ];
