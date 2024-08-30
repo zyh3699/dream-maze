@@ -142,10 +142,7 @@
     <button onclick="tips()">提示</button>
   </div>
   <div id="intro">
-    <div id="dialogue">
-      <img src="../img/conversation/莱拉/莱拉.png" alt="Image Description"> <!-- 插入图片 -->
-      <span id="dialogueText"></span> <!-- 用于显示对话文本 -->
-    </div>
+    
   </div>
   <div id="progressContainer">
     <div class="progressBarWrapper">
@@ -166,38 +163,95 @@
   <script src="../js/main1.js"></script>
   <script src="../js/player1.js"></script>
   <script>
-    const dialogues = [
-      "从“钢铁都市”回到现实，莱拉对文件中的内容充满了疑惑,她决定追查文件中提到的神秘组织。",
-      "她的研究显示，这个组织与全球多家大型企业和政府机构有着千丝万缕的联系，表面上他们是合法的商业或科研机构，但背地里却在利用梦境技术操控人们的意识，改变他们的记忆和行为。",
-      "为了进一步了解这个组织的真面目，莱拉需要再次寻找艾德里安，并作出自己的抉择。"
-    ];
-    let currentDialogue = 0;
-    let charIndex = 0;
-    const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+       const dialogues = [
+          {
+            text:"从“钢铁都市”梦境回到现实后，莱拉对文件中的内容心生疑虑。文件中提到的神秘组织隐藏在全球多个大型企业和政府机构背后，表面上是合法的商业或科研机构，实则利用梦境技术操控人们的意识，改变他们的记忆和行为。",
+            image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+          },
+          {
+            text:"莱拉坐在电脑前，紧盯着屏幕上的资料，眉头紧锁。她的眼神中流露出一种坚决和不安的交织。",
+            image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+          },
+          {
+            text:"这到底是什么组织？他们的目的是什么？用梦境技术操控人们的意识，这太危险了……我们必须揭开这个阴谋。",
+            image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+          },
+          {
+            text:"突然，她的通讯器发出一声提示音。",
+            image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+          },
+          {
+            text:"（查看通讯器）是艾德里安？他也在调查这个组织？",
+            image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
+          },
+          {
+            text:"莱拉决定去找艾德里安，寻求他的帮助和意见。",
+            image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+          }
+        ];
+        let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
-    function typeDialogue() {
-      if (charIndex < dialogues[currentDialogue].length) {
-        document.getElementById('dialogueText').innerText += dialogues[currentDialogue].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeDialogue, typingSpeed);
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      
+      function typeDialogue() {
+        
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
+        }
       }
-    }
 
-    function showNextDialogue() {
-      if (currentDialogue < dialogues.length - 1) {
-        currentDialogue++;
-        charIndex = 0;
-        document.getElementById('dialogueText').innerText = '';
-        typeDialogue();
-      }else {
-        document.getElementById('intro').style.opacity = 0;
-        setTimeout(() => {
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+          document.getElementById('intro').style.opacity = 0;
+          setTimeout(() => {
           document.getElementById('intro').style.display = 'none';
           document.getElementById('gameCanvas').style.display = 'block';
           requestAnimationFrame(mainLoop);
         }, 1000); // 等待1秒以完成淡出效果
+        }
       }
-    }
+
+      dialogBox.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      
     function tips() {
       const progressContainer = document.getElementById("progressContainer");
       if (progressContainer.style.display === "none") {
@@ -232,10 +286,7 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', (event) => {
-      typeDialogue();
-      document.addEventListener('click', showNextDialogue);
-    });
+   
   </script>
 </body>
 </html>
