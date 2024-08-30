@@ -341,11 +341,24 @@ updateAdjacentPieces(x, y) {
             .button-container button {
               margin: 10px 0;
               padding: 10px 20px;
-              font-size: 16px;
+              font-size: 15px;
               width: 150px; /* 设置相同的宽度 */
               height: 50px; /* 设置相同的高度 */
-            }
-          `;
+              background-image: url('../img/conversation/background/bg4.png'); /* 替换为你的图片URL */
+              background-size: cover; /* 调整图片尺寸以完全覆盖按钮 */
+              background-position: center; /* 将图片居中显示 */
+              background-repeat: no-repeat; /* 不重复背景图片 */
+              background-color: transparent; /* 设置背景色为透明 */
+              border: none; /* 移除默认的按钮边框 */
+              color: white; /* 设置文字颜色，确保可读性 */
+              text-align: center; /* 确保文字在按钮中居中 */
+              cursor: pointer; /* 更改鼠标光标为手形 */
+              }
+
+              .button-container button:hover {
+               opacity: 0.8; /* 鼠标悬停时稍微改变透明度，创建悬停效果 */
+              }
+            `;
         document.head.appendChild(style);
   
         // 创建对话框元素
