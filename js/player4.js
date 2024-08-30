@@ -913,6 +913,7 @@ class Player {
             {
               text: "过去我可能隐瞒了些东西，但现在……我不再是他们的一部分。我想帮你，揭开这一切的真相。",
               image: "../img/conversation/艾德里安/艾德里安.png",
+              options: ["好->", "不好->"], // 添加选项
             },
           ],
           abandon: [
@@ -1028,6 +1029,9 @@ class Player {
           }
           if (option === "好->") { 
             dialogues.push(...choiceDialogues.cooperate);
+          }
+          if (option === "不好->") {
+            dialogues.push(...choiceDialogues.abandon);
           }
           currentDialogue++;
           
