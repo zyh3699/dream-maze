@@ -50,6 +50,9 @@ function update(deltatime) {
     window.player.interact(collisionMap);
   }
   window.player.show(collisionMap);
+  if (keysPressed["p"] || keysPressed["P"]) {
+    window.location.href = "../html/final_without_intro.html";
+  }
 }
 
 function draw(ctx) {

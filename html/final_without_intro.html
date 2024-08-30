@@ -47,11 +47,60 @@
       border-radius: 5px; /* 圆角边框 */
       cursor: pointer; /* 鼠标悬停时显示手型 */
     }
+    #statusText {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 32px;
+      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 1000;
+    }
+    #timeControl {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+    }
     .menu button:hover {
       background-color: #45a049; /* 鼠标悬停时的背景颜色 */
     }
   </style>
   <script src="../js/存档功能.js"></script>
+  <script>
+    function tips() {
+  const timeControl = document.getElementById('timeControl');
+  if (timeControl.style.display === 'none' || timeControl.style.display === '') {
+    timeControl.style.display = 'inline-block';
+  } else {
+    timeControl.style.display = 'none';
+  }
+}
+
+   function settings() {
+      const statusText = document.getElementById('statusText');
+      console.log('settings function called'); // 调试信息
+      console.log('window.map.status:', window.map.status); // 调试信息
+      if (statusText.style.display === 'none' || statusText.style.display === '') {
+        if (window.map.status === 0) {
+          statusText.innerText = '现实';
+        } else if (window.map.status === 1) {
+          statusText.innerText = '梦境';
+        }
+        statusText.style.display = 'block';
+      } else {
+        statusText.style.display = 'none';
+      }
+    }
+  </script>
 </head>
 <body>
     <!-- 播放bgm -->
@@ -59,10 +108,14 @@
   <button id="menuButton" onclick="toggleMenu()">菜单</button>
   <div class="menu" id="menu">
     <button onclick="save()">存档</button>
-    <button onclick="settings()">设置</button>
-    <button onclick="tips()">提示</button>
+    <button onclick="settings()">判断</button>
+    <button onclick="tips()">操控时间</button>
   </div>
   <canvas id="gameCanvas"></canvas>
+   <div id="statusText"></div>
+  <div id="timeControl" style="display: none;">
+  <input type="range" id="timeSlider" min="0" max="10" step="1" value="0" oninput="if (window.map.status === 1) { window.map.move(Math.floor(Math.random() * 201) - 100, Math.floor(Math.random() * 201) - 100); }">
+</div>
   <script src="../js/map_final.js"></script>
   <script src="../js/main_final.js"></script>
   <script src="../js/player_final.js"></script>
