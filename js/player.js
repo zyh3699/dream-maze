@@ -197,25 +197,34 @@ class Player {
       this.ai=1;
       const dialogues = [
         {
-          text: "这地方让我有种不祥的预感，艾德里安。你确定文件就在这里？",
+          text: "这次的任务，感觉有些不太对劲。文件只提到要获取信息，可为什么感觉像是深陷泥潭？",
           image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
-},
-{
- text: "根据我们的线索，梦境的深处藏着答案。我们必须保持警惕，这位企业家的潜意识比我们想象的要复杂得多。",
- image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
-},
- {
- text: "莱拉和艾德里安在城市的迷宫中穿行，高楼大厦上闪烁的电子屏幕播放着梦境主人的记忆片段，像一张巨大的拼图等待解开。",
- image: "../img/conversation/精灵/精灵.png", // 精灵        
- },
- {
- text: "这些画面……是他过去的片段？每一个都透露出他的某种心情和意图。",
- image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
- },
- {
- text: "是的。我们必须去寻找那块电子屏幕，找到机密文件，把这些碎片拼接起来，才能找到他想隐藏的秘密。",
- image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
-        }
+        },
+        {
+        text: "你每次进入梦境都会有这种感觉，莱拉。这就是为什么你是个出色的“编梦者”。你能感知到梦境的脉搏，闻到其中隐藏的秘密。",
+        image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
+        },
+        {
+        text: "艾德里安，你总是这么神秘兮兮的。我们这次的目标是什么？文件没有详细说明。",
+        image: "../img/conversation/莱拉/莱拉.png", // 精灵        
+        },
+        {
+        text: "目标是一位知名企业家的梦境。据说他的梦境深处隐藏着一份关于全球经济秩序的重要文件。文件的内容非常敏感，可能会引发不可预测的后果。",
+        image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
+        },
+        {
+          text: "背景音逐渐变得紧张起来，远处隐约传来机械齿轮转动的声音。",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "听起来像是个大麻烦。我们怎么找到这份文件？",
+          image: "../img/conversation/莱拉/莱拉.png", // 精灵        
+        },
+                  
+       {
+          text: "我们需要通过电子屏幕获取线索。每块屏幕上都可能播放着梦境主人的记忆片段。仔细观察，它们会指引我们找到文件的位置。",
+           image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
+       }
         
       ];
       let currentDialogue = 0;
@@ -314,6 +323,86 @@ class Player {
 
 const player = new Player();
 window.player = player;
+function createDialogueBox(dialogues) {
+  let currentDialogue = 0;
+  let charIndex = 0;
+  const typingSpeed = 50; // 每个字符的打印速度（毫秒）
+
+  // 添加CSS样式
+  if (!document.getElementById("dialogue-style")) {
+    const style = document.createElement("style");
+    style.id = "dialogue-style";
+    style.innerHTML = `
+      #dialogue {
+          background: rgba(0, 0, 0, 0.7);
+          padding: 20px;
+          border-radius: 10px;
+          width: 80%;
+          height: 100px;
+          text-align: center;
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          color: white;
+          font-size: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+      }
+      #dialogue img {
+          position: absolute;
+          top: -100px;
+          left: 10px;
+          width: 100px;
+          height: 100px;
+      }`;
+    document.head.appendChild(style);
+  }
+
+  // 创建对话框元素
+  const dialogBox = document.createElement("div");
+  dialogBox.id = "dialogue";
+
+  // 创建图片元素
+  const charImage = document.createElement("img");
+  charImage.alt = "Character Image";
+  dialogBox.appendChild(charImage);
+
+  // 创建对话文本元素
+  const dialogText = document.createElement("span");
+  dialogText.id = "dialogueText";
+  dialogBox.appendChild(dialogText);
+  document.body.appendChild(dialogBox);
+
+  function typeDialogue() {
+    if (charIndex < dialogues[currentDialogue].text.length) {
+      dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeDialogue, typingSpeed);
+    } else {
+      currentDialogue++;
+      charIndex = 0;
+    }
+  }
+
+  function showNextDialogue() {
+    if (currentDialogue < dialogues.length) {
+      // 更新图片和文本内容
+      charImage.src = dialogues[currentDialogue].image;
+      dialogText.innerText = "";
+      typeDialogue();
+    } else {
+      document.body.removeChild(dialogBox);
+      document.getElementById("gameCanvas").style.display = "block";
+      requestAnimationFrame(mainLoop); // 继续游戏主循环
+    }
+  }
+
+  dialogBox.addEventListener("click", showNextDialogue);
+  showNextDialogue();
+}
 function createDialogueBox(dialogues) {
   let currentDialogue = 0;
   let charIndex = 0;
