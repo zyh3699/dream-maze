@@ -73,6 +73,16 @@
       border-radius: 5px; /* 圆角边框 */
       padding: 10px; /* 内边距 */
     }
+    #timeControl {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+    }
     .menu button {
       display: block; /* 块级元素 */
       width: 100%; /* 宽度100% */
@@ -89,6 +99,16 @@
     }
   </style>
   <script src="../js/存档功能.js"></script>
+  <script>
+    function tips() {
+  const timeControl = document.getElementById('timeControl');
+  if (timeControl.style.display === 'none' || timeControl.style.display === '') {
+    timeControl.style.display = 'inline-block';
+  } else {
+    timeControl.style.display = 'none';
+  }
+}
+  </script>
     </head>
     <body>
         <!-- 播放bgm -->
@@ -97,7 +117,7 @@
   <div class="menu" id="menu">
     <button onclick="save()">存档</button>
     <button onclick="settings()">设置</button>
-    <button onclick="tips()">提示</button>
+    <button onclick="tips()">操控时间</button>
   </div>
   <div id="intro">
     <div id="dialogue">
@@ -106,13 +126,19 @@
     </div>
   </div>
   <canvas id="gameCanvas" style="display: none;"></canvas>
+  <div id="timeControl" style="display: none;">
+  <input type="range" id="timeSlider" min="0" max="10" step="1" value="0" oninput="window.map.move(  Math.floor(Math.random() * 201)-100,  Math.floor(Math.random() * 201)-100)">
+</div>
   <script src="../js/map_final.js"></script>
   <script src="../js/main_final.js"></script>
   <script src="../js/player_final.js"></script>
   <script>
     const dialogues = [
-      "你已成功摧毁阿尔法梦境，你们成功地破坏了梦境的核心，组织的阴谋也随之瓦解。",
-      "请前往梦境的出口吧!"
+      "经过层层的考验，你们终于到达了阿尔法梦境的核心",
+      "你会发现它变得稳定了许多，之前的漏洞也不复存在了",
+      "你们现在已经无比接近梦境核心的真相了...",
+      "不过，在那之前...",
+      "你真的分得清这里是梦境还是现实吗...",
     ];
     let currentDialogue = 0;
     let charIndex = 0;
@@ -141,6 +167,8 @@
         }, 1000); // 等待1秒以完成淡出效果
       }
     }
+
+    
 
      function toggleMenu() {
       const menu = document.getElementById('menu');
