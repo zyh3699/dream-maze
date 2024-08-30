@@ -117,6 +117,55 @@ class Player {
       this.showMessage("这里怎么有个骷髅");
       collisionMap[interactY][interactX] = 0;
     }
+    if (collisionMap[interactY][interactX] === 20) {
+      this.showMessage("这个小幽灵好像睡着了...这个地方？这些刷怪笼是用来干什么的？这个法阵又通往何处？");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 21) {
+      this.showMessage("这里有个会发光的镜子");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 22) {
+      this.showMessage("这只猫...是在对我笑吗？");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 23) {
+      this.showMessage("正常人会在这里放个玩偶吗...");
+      collisionMap[interactY][interactX] = 0;
+    }
+
+    if (collisionMap[interactY][interactX] === 14) {
+      this.showMessage("为什么总感觉有好多双眼睛在看着我...");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 15) {
+      this.showMessage("这个玩偶我在卡尔的办公室见到过！卡尔一定来过这里！");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 16) {
+      this.showMessage("散落在地上的书？看起来没什么用");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 17) {
+      this.showMessage("这只是个普通的镜子，这个房间好多镜子啊");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 18) {
+      this.showMessage("伪装成小提琴乐谱的附魔书？想要骗过谁，又能骗过谁呢？不对，这...");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 19) {
+      this.showMessage("结满蜘蛛网的房间吗？但是为什么隐隐的有音乐声？");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 11) {
+      this.showMessage("悦耳的风铃声，好奇怪，如此奇异的地方竟会有那么清脆的让人愉快的声音。一定是魔法。");
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 12) {
+      this.showMessage("一阵浓郁的药草香，但是你感觉真的很好闻，清新中带着一股纯真");
+      collisionMap[interactY][interactX] = 0;
+    }
   }
 
   interact(collisionMap) {
@@ -238,7 +287,6 @@ class Player {
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
-
     if (collisionMap[interactY][interactX] === 6) {
       const dialogues = [
         {
@@ -366,7 +414,11 @@ class Player {
           image: "../img/conversation/艾德里安/艾德里安.png",
         },
         {
-          text: "请去往左边房间的法阵！找到卡尔！",
+          text: "哦对了，经过我右边的房间了吗，没经过的话，你可以去看看。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },
+        {
+          text: "请一定要救出卡尔。",
           image: "../img/conversation/艾德里安/艾德里安.png",
         },
         {
@@ -374,87 +426,252 @@ class Player {
           image: "../img/conversation/艾德里安/艾德里安.png",
         },  
         {
-          text: "目前还未完善，所以直接去左边有法阵的房间的左侧地上的笼子按E！",
+          text: "当前任务：找到法阵，见到卡尔",
           image: "../img/conversation/艾德里安/艾德里安.png",
         },  
-
       ];
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 12) {
-      this.showOptionBox();
-    }
+    if (collisionMap[interactY][interactX] === 13) {
+        const dialogues = [
+          {
+            text: "我在梦里梦到一个依稀记得的梦...前进就是唯一的退路。",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "请回答：为什么不要用现实中的事情来制造梦境？",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            options: ["那会让你分不清梦境和现实->", "因为现实和梦境没有区别->"], // 添加选项
+          },
+        ]; 
+        const choiceDialogues = {
+          cooperate: [
+            {
+              text: "认证通过。法阵欢迎您。",
+              image: "../img/conversation/其他人物/ghost.png",
+            },
+            {
+              text: "对不起......我还是太虚弱了，我没有保护好卡尔...",
+              image: "../img/conversation/其他人物/ghost.png",
+            },
+            {
+              text: "什么？",
+              image: "../img/conversation/其他人物/ghost.png",
+            },
+            {
+              text: "我是附在法阵上的魂灵。卡尔...被他们抓走了...",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "这层梦境原本是一片荒凉...卡尔为你，也为我们搭建了一个暂时的安全之地。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "但是，依旧没逃过他们的搜查.....",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "我们这些被诅咒的人，只留下一些断断续续的记忆...",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "（低头）我该怎么办？",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "我的力量是无穷的，我是个传送法阵...但被封印住了，又有什么用呢？",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "你一定要找到卡尔，他知道怎么解封我。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "勇敢点，莱拉。拯救卡尔，拯救我们，也拯救你自己。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },  
+            {
+              text: "去我左边地上的刷怪笼吧。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "那是一个暗道，卡尔被困在下一层梦境里。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "记住，无论怎么样，不要放弃！",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },
+            {
+              text: "请去法阵左侧的刷怪笼（按E进入暗道），迎接下一个挑战，拯救卡尔，拯救他们，拯救你自己",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },  
+              ],
+          abandon: [
+            {
+              text: "你错了",
+              image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            },
+            {
+              text: "你不是我要找的人",
+              image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            },
+            {
+              text: "你是组织的人。这里不欢迎你。",
+              image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            },
+          ],
+        };
+
+        let currentDialogue = 0;
+        let charIndex = 0;
+        const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+        // 添加CSS样式
+        const style = document.createElement("style");
+        document.head.appendChild(style);
+        // 创建对话框元素
+        const dialogBox = document.createElement("div");
+        dialogBox.id = "dialogue";
+        // 插入莱拉的图片
+        const lailaImage = document.createElement("img");
+        lailaImage.style.width = "100px"; // 将宽度设置为200像素
+        lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+        dialogBox.appendChild(lailaImage);
+        // 创建对s话文本元素
+        const dialogText = document.createElement("span");
+        dialogText.id = "dialogueText";
+        dialogBox.appendChild(dialogText);
+        document.body.appendChild(dialogBox);
+        dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+        dialogText.style.fontSize = "20px"; // 字体大小
+        dialogText.style.color = "#FFFFFF"; // 字体颜色
+        dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+        dialogText.style.lineHeight = "1.5"; // 行高
+        // 创建选项按钮容器
+        const optionsContainer = document.createElement("div");
+        optionsContainer.id = "options";
+        dialogBox.appendChild(optionsContainer);
+        function typeDialogue() {
+          if (charIndex < dialogues[currentDialogue].text.length) {
+            dialogText.innerText +=
+              dialogues[currentDialogue].text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeDialogue, typingSpeed);
+          } else {
+            if (dialogues[currentDialogue].options) {
+              showOptions(dialogues[currentDialogue].options);
+              charIndex = -1;
+            } else {
+              currentDialogue++;
+              charIndex = 0;
+            }
+          }
+        }
+        const self = this;
+        function showNextDialogue() {
+          if (currentDialogue < dialogues.length) {
+            dialogText.innerText = "";
+            lailaImage.src = dialogues[currentDialogue].image;
+            optionsContainer.innerHTML = ""; // 清空选项按钮
+            typeDialogue();
+          } else {
+            document.body.removeChild(dialogBox);
+            self.showPasswordPrompt();
+            self.visit = 1;
+            document.getElementById("gameCanvas").style.display = "block";
+            requestAnimationFrame(mainLoop);
+          }
+        }
+        function showOptions(options) {
+          options.forEach((option) => {
+            const button = document.createElement("div"); // 使用 div 而不是 button
+            button.className = "option-text";
+            button.innerText = option;
+            button.style.cursor = "pointer"; // 鼠标悬停时显示为指针
+            button.style.margin = "10px 0"; // 上下间距
+            button.style.color = "#FFFFFF"; // 字体颜色设置为白色
+            button.style.fontSize = "24px"; // 字体大小
+            button.style.fontFamily = "Arial, sans-serif"; // 字体设置为 Arial
+            button.style.textShadow = "1px 1px 2px #000000"; // 添加文本阴影
+            button.style.transition = "background-color 0.3s, color 0.3s"; // 添加过渡效果
+
+            // 添加鼠标悬停效果
+            button.onmouseover = () => {
+              button.style.backgroundColor = "#444444"; // 鼠标悬停时的背景色
+              button.style.color = "#FFD700"; // 鼠标悬停时的字体颜色
+            };
+            button.onmouseout = () => {
+              button.style.backgroundColor = ""; // 恢复原背景色
+              button.style.color = "#FFFFFF"; // 恢复原字体颜色
+            };
+
+            button.onclick = () => handleOption(option);
+            optionsContainer.appendChild(button);
+          });
+        }
+
+        function handleOption(option) {
+          if (option === "那会让你分不清梦境和现实->") {
+            dialogues.push(...choiceDialogues.cooperate);
+          } else if (option === "因为现实和梦境没有区别->") {
+            dialogues.push(...choiceDialogues.abandon);
+          }
+          if (option === "好->") { 
+            dialogues.push(...choiceDialogues.cooperate);
+          }
+          currentDialogue++;          
+          showNextDialogue();
+        }
+
+        document.addEventListener("click", showNextDialogue);
+        showNextDialogue();
+            collisionMap[interactY][interactX] = 0;
+      }
+    if (collisionMap[interactY][interactX] === 10) {
+        const dialogues = [
+          {
+            text: "你好！",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },
+          {
+            text: "（艾德里安？？？但是为什么看起来这么年轻？）",
+            image: "../img/conversation/莱拉/莱拉.png",
+          },
+          {
+            text: "需要帮忙吗？",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },
+          {
+            text: "...",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },  
+          {
+            text: "那我先炼药了！",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },
+          {
+            text: "安得广厦千万间，大庇天下寒士俱欢颜......",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          }, 
+          {
+            text: "(原来，艾德里安曾经是这样有志气的巫师...只不过，现在的艾德里安，还是这样的吗？)",
+            image: "../img/conversation/莱拉/莱拉.png",
+          },
+          {
+            text: "（担忧）看来这里也是幻象了......",
+            image: "../img/conversation/莱拉/莱拉.png",
+          },    
+          {
+            text: "（传来小艾德里安的歌声）一颗小小的意念种子，也会生根成形，它可能成就你，也可能毁了你～",
+            image: "../img/conversation/艾德里安/艾德里安.png",
+          },              
+        ];
+        createDialogueBox(dialogues);
+        collisionMap[interactY][interactX] = 0;
+      }
   }
-  showOptionBox() {
-    // 创建选项框元素
-    const optionBox = document.createElement("div");
-    optionBox.style.position = "fixed";
-    optionBox.style.top = "50%";
-    optionBox.style.left = "50%";
-    optionBox.style.transform = "translate(-50%, -50%)";
-    optionBox.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-    optionBox.style.padding = "20px";
-    optionBox.style.borderRadius = "10px";
-    optionBox.style.color = "white";
-    optionBox.style.textAlign = "center";
-    optionBox.style.width = "300px";
 
-    // 问题文本
-    const question = document.createElement("p");
-    question.innerText = "名落孙山中的孙山，最后考上了吗？";
-    optionBox.appendChild(question);
-
-    // 创建“考上了”按钮
-    const optionYes = document.createElement("button");
-    optionYes.innerText = "考上了";
-    optionYes.style.margin = "10px";
-    optionYes.onclick = () => {
-      window.location.href = "index.html";
-    };
-    optionBox.appendChild(optionYes);
-
-    // 创建“没考上”按钮
-    const optionNo = document.createElement("button");
-    optionNo.innerText = "没考上";
-    optionNo.style.margin = "10px";
-    optionNo.onclick = () => {
-      this.showErrorMessage();
-      document.body.removeChild(optionBox);
-    };
-    optionBox.appendChild(optionNo);
-
-    // 添加选项框到页面
-    document.body.appendChild(optionBox);
-  }
-
-  showErrorMessage() {
-    // 创建错误信息对话框
-    const messageElement = document.createElement("div");
-    messageElement.style.position = "fixed";
-    messageElement.style.top = "50%";
-    messageElement.style.left = "50%";
-    messageElement.style.transform = "translate(-50%, -50%)";
-    messageElement.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-    messageElement.style.color = "white";
-    messageElement.style.padding = "20px";
-    messageElement.style.borderRadius = "10px";
-    messageElement.style.textAlign = "center";
-    messageElement.style.width = "300px";
-    messageElement.innerText = "错误！考上了，放榜的时候孙山在倒数第一，但是也算是榜上有名。而名落孙山意思是名字在孙山后面，还没考上。";
-
-    // 添加对话框到页面
-    document.body.appendChild(messageElement);
-
-    // 2秒后淡出并移除对话框
-    setTimeout(() => {
-      messageElement.style.transition = "opacity 1s ease-out";
-      messageElement.style.opacity = 0;
-      setTimeout(() => {
-        document.body.removeChild(messageElement);
-      }, 1000);
-    }, 2000);
-  }
   fadeOutAndRedirect() {
     const bodyElement = document.body;
     bodyElement.style.transition = "opacity 1s ease-out";
@@ -491,6 +708,8 @@ class Player {
 
 const player = new Player();
 window.player = player;
+
+
 
 // function createDialogueBox(dialogues) {
 //   let currentDialogue = 0;
