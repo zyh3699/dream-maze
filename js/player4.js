@@ -453,7 +453,7 @@ class Player {
     };
 
     const attackButton = document.createElement("button");
-    attackButton.innerText = "攻击";
+    attackButton.innerText = "潜梦";
     attackButton.style.padding = "10px 20px";
     attackButton.style.fontSize = "18px";
     attackButton.style.cursor = "pointer";
@@ -466,7 +466,7 @@ class Player {
       const damage = Math.floor(Math.random() * 20) + 1;
       enemyHealth -= damage;
       enemyHealthBar.style.width = `${enemyHealth}%`;
-      logMessage(`你对敌人造成了 ${damage} 点伤害！`);
+      logMessage(`你潜入敌人梦境，对敌人梦境造成了 ${damage} 点破坏！`);
       if (enemyHealth <= 0) {
         alert("你赢了！");
         document.body.removeChild(battleContainer);
@@ -477,7 +477,7 @@ class Player {
     battleContainer.appendChild(attackButton);
 
     const defendButton = document.createElement("button");
-    defendButton.innerText = "防御";
+    defendButton.innerText = "守卫";
     defendButton.style.padding = "10px 20px";
     defendButton.style.fontSize = "18px";
     defendButton.style.cursor = "pointer";
@@ -487,13 +487,13 @@ class Player {
     defendButton.style.backgroundColor = "#4d94ff";
     defendButton.style.color = "white";
     defendButton.onclick = () => {
-      logMessage("你选择了防御！");
+      logMessage("你选择了守护梦境！");
       enemyTurn(true);
     };
     battleContainer.appendChild(defendButton);
 
     const healButton = document.createElement("button");
-    healButton.innerText = "恢复";
+    healButton.innerText = "回溯";
     healButton.style.padding = "10px 20px";
     healButton.style.fontSize = "18px";
     healButton.style.cursor = "pointer";
@@ -506,13 +506,13 @@ class Player {
       const healAmount = Math.floor(Math.random() * 20) + 1;
       playerHealth = Math.min(playerHealth + healAmount, 100);
       playerHealthBar.style.width = `${playerHealth}%`;
-      logMessage(`你恢复了 ${healAmount} 点生命值！`);
+      logMessage(`你回溯到了上层梦境，恢复了当前梦境 ${healAmount} 点状态！`);
       enemyTurn();
     };
     battleContainer.appendChild(healButton);
 
     const magicButton = document.createElement("button");
-    magicButton.innerText = "魔法攻击";
+    magicButton.innerText = "意识重现";
     magicButton.style.padding = "10px 20px";
     magicButton.style.fontSize = "18px";
     magicButton.style.cursor = "pointer";
@@ -528,15 +528,100 @@ class Player {
         const magicDamage = Math.floor(Math.random() * 30) + 1;
         enemyHealth -= magicDamage;
         enemyHealthBar.style.width = `${enemyHealth}%`;
-        logMessage(`你对敌人造成了 ${magicDamage} 点魔法伤害！`);
+        logMessage(`你对敌人潜意识发起进攻，造成了 ${magicDamage} 点混乱！`);
         if (enemyHealth <= 0) {
-          alert("你赢了！");
+          alert("你突破了梦境守卫的限制！");
           document.body.removeChild(battleContainer);
-          return;
+          const dialogues = [
+            {
+              text: "不可思议...你的梦境技术已经变得如此高超...不...",
+              image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+            },
+            {
+              text: "在食物店旁边，梦境陷入雪境的时候，你会发现它",
+              image: "../img/conversation/精灵/精灵.png", // 另一张图片
+            },
+            {
+              text: "哦对了，还有那个魔法球...",
+              image: "../img/conversation/精灵/精灵.png", // 精灵
+            },
+            {
+              text: "去吧，没人能再阻挡你了",
+              image: "../img/conversation/精灵/精灵.png", // 精灵
+            },
+            {
+              text: "组织的秘密再也藏不住了...",
+              image: "../img/conversation/精灵/精灵.png.png", // 精灵
+            },
+            {
+              text: "组织？难道真的是那个组织吗",
+              image: "../img/conversation/莱拉/莱拉.png", // 精灵
+            },
+            {
+              text: "如果你能早点想起来组织的名字，或许就不用花费这么大力气找梦境里的数字了...",
+              image: "../img/conversation/精灵/精灵.png", // 精灵
+            },
+          ];
+          let currentDialogue = 0;
+          let charIndex = 0;
+          const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+          // 添加CSS样式
+          const style = document.createElement("style");
+          document.head.appendChild(style);
+
+          // 创建对话框元素
+          const dialogBox = document.createElement("div");
+          dialogBox.id = "dialogue";
+
+          // 插入莱拉的图片
+          const lailaImage = document.createElement("img");
+          lailaImage.style.width = "100px"; // 将宽度设置为200像素
+          lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+          dialogBox.appendChild(lailaImage);
+
+          // 创建对话文本元素
+          const dialogText = document.createElement("span");
+          dialogText.id = "dialogueText";
+          dialogBox.appendChild(dialogText);
+          document.body.appendChild(dialogBox);
+          dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+          dialogText.style.fontSize = "20px"; // 字体大小
+          dialogText.style.color = "#FFFFFF"; // 字体颜色
+          dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+          dialogText.style.lineHeight = "1.5"; // 行高
+          function typeDialogue() {
+            if (charIndex < dialogues[currentDialogue].text.length) {
+              dialogText.innerText +=
+                dialogues[currentDialogue].text.charAt(charIndex);
+              charIndex++;
+              setTimeout(typeDialogue, typingSpeed);
+            } else {
+              currentDialogue++;
+              charIndex = 0;
+            }
+          }
+
+          function showNextDialogue() {
+            if (currentDialogue < dialogues.length) {
+              dialogText.innerText = "";
+              lailaImage.src = dialogues[currentDialogue].image;
+              typeDialogue();
+            } else {
+              document.body.removeChild(dialogBox);
+              document.getElementById("gameCanvas").style.display = "block";
+              requestAnimationFrame(mainLoop);
+            }
+          }
+
+          document.addEventListener("click", showNextDialogue);
+          showNextDialogue();
+
+          collisionMap[interactY][interactX] = 1000;
         }
         enemyTurn();
       } else {
-        logMessage("魔法值不足，无法使用魔法攻击！");
+        logMessage("你的梦境技术不足，无法使用意识重现！");
       }
     };
     battleContainer.appendChild(magicButton);
@@ -551,21 +636,21 @@ class Player {
             : enemyDamage;
           playerHealth -= actualDamage;
           playerHealthBar.style.width = `${playerHealth}%`;
-          logMessage(`敌人对你造成了 ${actualDamage} 点伤害！`);
+          logMessage(`敌人对你的梦境入侵，造成了 ${actualDamage} 点破坏！`);
         } else if (enemyAction === 1) {
           const enemyHeal = Math.floor(Math.random() * 20) + 1;
           enemyHealth = Math.min(enemyHealth + enemyHeal, 100);
           enemyHealthBar.style.width = `${enemyHealth}%`;
-          logMessage(`敌人恢复了 ${enemyHeal} 点生命值！`);
+          logMessage(`敌人回溯到上层梦境，恢复了当前梦境 ${enemyHeal} 点状态！`);
         } else {
           const enemyMagicDamage = Math.floor(Math.random() * 30) + 1;
           playerHealth -= enemyMagicDamage;
           playerHealthBar.style.width = `${playerHealth}%`;
-          logMessage(`敌人对你造成了 ${enemyMagicDamage} 点魔法伤害！`);
+          logMessage(`敌人对你潜意识突破，造成了 ${enemyMagicDamage} 点混乱！`);
         }
 
         if (playerHealth <= 0) {
-          alert("你输了！");
+          alert("你的梦境和潜意识崩溃！");
           document.body.removeChild(battleContainer);
           const dialogues = [
             {
@@ -789,7 +874,7 @@ class Player {
             image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
           },
           {
-            text: "阿尔法梦境的核心是一个非常复杂的结构，我们需要修复所有的漏洞才能进入。",
+            text: "阿尔法梦境的核心是一个非常复杂的结构，我们需要修复所有的漏洞可能才能进入。",
             image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
           },
           {
@@ -903,22 +988,24 @@ class Player {
         const choiceDialogues = {
           cooperate: [
             {
-              text: "艾德里安，为什么你会联系我？我们上次的合作……你知道，我依然有很多疑问。",
-              image: "../img/conversation/莱拉/莱拉.png",
+              text: "你确定你真的记得吗，我们可能再也没办法获取提示了，梦境会立即识别出我们的入侵的。",
+              image: "../img/conversation/卡尔/Elliott.png",
             },
             {
-              text: "我明白你的顾虑，莱拉。但你必须知道，这个组织的影响力远比我们当初想象的要大得多。",
-              image: "../img/conversation/艾德里安/艾德里安.png",
-            },
-            {
-              text: "过去我可能隐瞒了些东西，但现在……我不再是他们的一部分。我想帮你，揭开这一切的真相。",
-              image: "../img/conversation/艾德里安/艾德里安.png",
-              options: ["好->", "不好->"], // 添加选项
+              text: "一定要慎重莱拉...",
+              image: "../img/conversation/卡尔/Elliott.png",
+              options: ["十分确定->", "让我再想一想->"], // 添加选项
             },
           ],
           abandon: [
             {
-              text: "嘶...",
+              text: "地图上你还有许多没有探索到的信息，各个角落都会有的，想想卡尔一开始说的...梦境不同形态都有不一样的差异...",
+              image: "../img/conversation/精灵/精灵.png", // 另一张图片
+            },
+          ],
+          next: [
+            {
+              text: "无条件相信你，来吧莱拉。时间确实不多了，我们只能放手一搏",
               image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
             },
           ],
@@ -1027,10 +1114,10 @@ class Player {
           } else if (option === "不记得->") {
             dialogues.push(...choiceDialogues.abandon);
           }
-          if (option === "好->") { 
-            dialogues.push(...choiceDialogues.cooperate);
+          if (option === "十分确定->") { 
+            dialogues.push(...choiceDialogues.next);
           }
-          if (option === "不好->") {
+          if (option === "让我再想一想->") {
             dialogues.push(...choiceDialogues.abandon);
           }
           currentDialogue++;
@@ -1059,6 +1146,18 @@ class Player {
         },
         {
           text: "我是不会让你轻易通过这里的",
+          image: "../img/conversation/精灵/精灵.png", // 精灵
+        },
+        {
+          text: "还有，如果你真想获得关键信息，靠自己的本事来拿",
+          image: "../img/conversation/精灵/精灵.png", // 精灵
+        },
+        {
+          text: "你的最后一击只有使用“意识重现”才能获取到情报，因为在潜意识里我早就把它隐藏起来了",
+          image: "../img/conversation/精灵/精灵.png", // 精灵
+        },
+        {
+          text: "我会让你知道，你的能力还远远不够",
           image: "../img/conversation/精灵/精灵.png", // 精灵
         },
       ];
@@ -1134,7 +1233,7 @@ class Player {
           image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
         },
         {
-          text: "在这场终极挑战中，莱拉和卡尔将面临决定世界命运的最后抉择。",
+          text: "在这场终极挑战中，你和卡尔将面临决定世界命运的最后抉择。",
           image: "../img/conversation/精灵/精灵.png", // 精灵
         },
         {
@@ -1143,6 +1242,30 @@ class Player {
         },
         {
           text: "无论如何，我们必须阻止它。",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
+        {
+          text: "在行动之前，我必须有些东西要告诉你，这是我这么多年来一直在了解阿尔法梦境得出的结论",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "相信你也注意到了，现在这层梦境非常不稳定，它随时都会改变",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "我之前看到了有关的机密文件，上面说梦境的不同形态都会有差异，可能在某些不起眼的角落",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "之前我曾进来过一次，我发现汽车上只要到达某一层梦境时会显现数字...这个数字可能我们需要利用",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "我们分头行动，去找齐所有的数字，拼凑到一起可能会解开梦境的秘密",
+          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "我清楚了，这就去",
           image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
         },
       ];
@@ -1224,6 +1347,10 @@ class Player {
         {
           text: "千真万确，所以...抓紧时间吧。",
           image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+        },
+        {
+          text: "等等，你有注意到水池上方的变化吗...",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
         },
       ];
       let currentDialogue = 0;
