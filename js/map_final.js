@@ -6,6 +6,7 @@ let map = {
   height: window.innerHeight,
   offsetX: 0,
   offsetY: 0,
+  status: Math.floor(Math.random() * 1.5),
   draw: function (ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(

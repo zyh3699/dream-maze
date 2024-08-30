@@ -50,7 +50,8 @@ class Player {
 
     const newX = Math.floor(playerCenterX + offsetX + dx);
     const newY = Math.floor(playerCenterY + offsetY + dy);
-
+    if (collisionMap[newY][newX] === 6 || collisionMap[newY][newX] === 7 || collisionMap[newY][newX] === 8 || collisionMap[newY][newX] === 2) 
+      this.showMessage("按E键交互 ");
     // 碰撞检测
     if (collisionMap[newY][newX] === 1) {
       return true; // 碰撞检测
@@ -121,7 +122,7 @@ updateAdjacentPieces(x, y) {
     
     }
     if(collisionMap[interactY][interactX] === 7){
-      this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。");
+      this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。按k键收起");
 
         // Create or select the image element
         let image = document.getElementById('mapImage');
@@ -138,6 +139,27 @@ updateAdjacentPieces(x, y) {
             image.style.height = '600px'; // Set the height
             image.style.border = '15px solid white'; // Set border size, style, and color
             document.body.appendChild(image);
+            let closeButton = document.createElement('button');
+            closeButton.innerHTML = 'X';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '170px';
+            closeButton.style.right = '480px';
+            closeButton.style.backgroundColor = 'red';
+            closeButton.style.color = 'white';
+            closeButton.style.border = 'none';
+            closeButton.style.padding = '5px 10px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.fontSize = '16px';
+            closeButton.style.zIndex = '1001'; // Ensure it appears above the image
+        
+            // Append the button to the image's parent (body)
+            document.body.appendChild(closeButton);
+        
+            // Add event listener to close the image on button click
+            closeButton.addEventListener('click', function () {
+                image.style.display = 'none';
+                closeButton.style.display = 'none';
+            });
         } else {
             image.style.display = 'block';
         }
@@ -287,6 +309,7 @@ updateAdjacentPieces(x, y) {
           {
             text: "请你做出你的选择，莱拉。你是决定与艾德里安合作，还是选择独自一人？",
             image: "../img/conversation/精灵/精灵.png",
+            options: ["与艾德里安合作->", "独自前行->"], // 添加选项
           }
         ];
       
@@ -320,57 +343,22 @@ updateAdjacentPieces(x, y) {
             }
           ]
         };
+        let playerAlignment = null; // 初始为空，表示玩家未做出选择
+        // 添加CSS样式
         let currentDialogue = 0;
         let charIndex = 0;
         const typingSpeed = 1; // 每个字符的打印速度（毫秒）
-        let playerAlignment = null; // 初始为空，表示玩家未做出选择
         // 添加CSS样式
         const style = document.createElement("style");
-        style.textContent = `
-            .button-container {
-              position: fixed;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              display: flex;
-              flex-direction: column;
-              align-items: center; 
-              z-index: 1001;
-            }
-        
-            .button-container button {
-              margin: 10px 0;
-              padding: 10px 20px;
-              font-size: 15px;
-              width: 150px; /* 设置相同的宽度 */
-              height: 50px; /* 设置相同的高度 */
-              background-image: url('../img/conversation/background/bg4.png'); /* 替换为你的图片URL */
-              background-size: cover; /* 调整图片尺寸以完全覆盖按钮 */
-              background-position: center; /* 将图片居中显示 */
-              background-repeat: no-repeat; /* 不重复背景图片 */
-              background-color: transparent; /* 设置背景色为透明 */
-              border: none; /* 移除默认的按钮边框 */
-              color: white; /* 设置文字颜色，确保可读性 */
-              text-align: center; /* 确保文字在按钮中居中 */
-              cursor: pointer; /* 更改鼠标光标为手形 */
-              }
-
-              .button-container button:hover {
-               opacity: 0.8; /* 鼠标悬停时稍微改变透明度，创建悬停效果 */
-              }
-            `;
         document.head.appendChild(style);
-  
         // 创建对话框元素
         const dialogBox = document.createElement("div");
         dialogBox.id = "dialogue";
-  
         // 插入莱拉的图片
         const lailaImage = document.createElement("img");
         lailaImage.style.width = "100px"; // 将宽度设置为200像素
         lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
         dialogBox.appendChild(lailaImage);
-  
         // 创建对话文本元素
         const dialogText = document.createElement("span");
         dialogText.id = "dialogueText";
@@ -381,78 +369,83 @@ updateAdjacentPieces(x, y) {
         dialogText.style.color = "#FFFFFF"; // 字体颜色
         dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
         dialogText.style.lineHeight = "1.5"; // 行高
-        const buttonContainer = document.createElement("div");
-        buttonContainer.className = "button-container";
-        buttonContainer.innerHTML = `
-          <button id="cooperateButton">与艾德里安合作</button>
-          <button id="abandonButton">   放弃合作  </button>
-        `;
-        document.body.appendChild(buttonContainer);
-
+        // 创建选项按钮容器
+        const optionsContainer = document.createElement("div");
+        optionsContainer.id = "options";
+        dialogBox.appendChild(optionsContainer);
         function typeDialogue() {
           if (charIndex < dialogues[currentDialogue].text.length) {
-            dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+            dialogText.innerText +=
+              dialogues[currentDialogue].text.charAt(charIndex);
             charIndex++;
-            buttonContainer.style.display = "none"; 
-            
             setTimeout(typeDialogue, typingSpeed);
           } else {
-            currentDialogue++;
-            charIndex = 0;
-            
-              buttonContainer.style.display = "none"; // 隐藏按钮
-            
-            if (currentDialogue === dialogues.length&&dialogues.length===6) {
-              buttonContainer.style.display = "flex";
-                      showChoices();
-                      
-                    }
+            if (dialogues[currentDialogue].options) {
+              showOptions(dialogues[currentDialogue].options);
+              charIndex = -1;
+            } else {
+              currentDialogue++;
+              charIndex = 0;
+            }
           }
         }
-       
-
+        const self = this;
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
             dialogText.innerText = "";
             lailaImage.src = dialogues[currentDialogue].image;
-            buttonContainer.style.display = "none"; 
+            optionsContainer.innerHTML = ""; // 清空选项按钮
             typeDialogue();
           } else {
             document.body.removeChild(dialogBox);
-            buttonContainer.style.display = "none"; 
+            self.showPasswordPrompt();
+            self.visit = 1;
             document.getElementById("gameCanvas").style.display = "block";
             requestAnimationFrame(mainLoop);
           }
         }
-     function showChoices() {
-          document.getElementById("cooperateButton").onclick = () => showChoiceDialogue("cooperate");
-          document.getElementById("abandonButton").onclick = () => showChoiceDialogue("abandon");
-        }  
-        function showChoiceDialogue(choice) {
-          buttonContainer.style.display = "none"; // 隐藏按钮
-          currentDialogue = 0;
-          const selectedDialogues = choiceDialogues[choice];
-          
-          playerAlignment = choice; // 记录玩家的选择
+        function showOptions(options) {
+          options.forEach((option) => {
+            const button = document.createElement("div"); // 使用 div 而不是 button
+            button.className = "option-text";
+            button.innerText = option;
+            button.style.cursor = "pointer"; // 鼠标悬停时显示为指针
+            button.style.margin = "10px 0"; // 上下间距
+            button.style.color = "#FFFFFF"; // 字体颜色设置为白色
+            button.style.fontSize = "24px"; // 字体大小
+            button.style.fontFamily = "Arial, sans-serif"; // 字体设置为 Arial
+            button.style.textShadow = "1px 1px 2px #000000"; // 添加文本阴影
+            button.style.transition = "background-color 0.3s, color 0.3s"; // 添加过渡效果
+
+            // 添加鼠标悬停效果
+            button.onmouseover = () => {
+              button.style.backgroundColor = "#444444"; // 鼠标悬停时的背景色
+              button.style.color = "#FFD700"; // 鼠标悬停时的字体颜色
+            };
+            button.onmouseout = () => {
+              button.style.backgroundColor = ""; // 恢复原背景色
+              button.style.color = "#FFFFFF"; // 恢复原字体颜色
+            };
+
+            button.onclick = () => handleOption(option);
+            optionsContainer.appendChild(button);
+          });
+        }
+        function handleOption(option) {
           var index = window.localStorage.userid;
-					var array = JSON.parse(window.localStorage.userArr);
-          if (playerAlignment === "cooperate") {
-          // 玩家选择了合作，触发合作相关的剧情或行为
-          array[index].choose1 = 2;
-          console.log(playerAlignment);
-        } else if (playerAlignment === "abandon") {
-          // 玩家选择了放弃，触发放弃相关的剧情或行为
-          array[index].choose1 = 3;
-          
-        } 
+var array = JSON.parse(window.localStorage.userArr);
+          if (option === "与艾德里安合作->") {array[index].choose1 = 2;
+            dialogues.push(...choiceDialogues.cooperate);
+          } else if (option === "独自前行->") {
+            dialogues.push(...choiceDialogues.abandon);
+            array[index].choose1 = 3;
+          }
          window.localStorage.userArr = JSON.stringify(array);
-          dialogues.length = 0; // 清空原对话
-          selectedDialogues.forEach(dialogue => dialogues.push(dialogue)); // 加载新对话
+          currentDialogue++;          
           showNextDialogue();
-        } 
-         
-       
-        dialogBox.addEventListener("click", showNextDialogue);
+        }
+
+        document.addEventListener("click", showNextDialogue);
         showNextDialogue();
        
         this.updateAdjacentPieces(interactX, interactY);

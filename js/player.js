@@ -64,7 +64,8 @@ class Player {
 
     const newX = Math.floor(playerCenterX + offsetX + dx);
     const newY = Math.floor(playerCenterY + offsetY + dy);
-
+    if (collisionMap[newY][newX] === 2 || collisionMap[newY][newX] === 3 || collisionMap[newY][newX] === 6 || collisionMap[newY][newX] === 7)
+      this.showMessage("按E键交互 ");
     // 碰撞检测
     if (collisionMap[newY][newX] === 1 ) {
       return true; // 碰撞检测
@@ -90,7 +91,23 @@ class Player {
   
     this.image = this.images[direction][this.frameIndex];
     }
+    show(collisionMap) {
+      const playerCenterX = map.image.width / 2;
+      const playerCenterY = map.image.height / 2;
   
+      const offsetX = window.map.offsetX;
+      const offsetY = window.map.offsetY;
+  
+      const interactX = Math.floor(playerCenterX + offsetX);
+      const interactY = Math.floor(playerCenterY + offsetY);
+  
+      // 检测是否有物品
+      if (collisionMap[interactY][interactX] === 2 || collisionMap[interactY][interactX] === 3 )
+        this.showMessage("按E键查看交互 ");
+        
+      }
+     
+    
   
   mapp() {
     if (this.map === 0) {
@@ -114,6 +131,27 @@ class Player {
             image.style.height = '900px'; // Set the height
             image.style.border = '15px solid white'; // Set border size, style, and color
             document.body.appendChild(image);
+            let closeButton = document.createElement('button');
+            closeButton.innerHTML = 'X';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '10px';
+            closeButton.style.right = '240px';
+            closeButton.style.backgroundColor = 'red';
+            closeButton.style.color = 'white';
+            closeButton.style.border = 'none';
+            closeButton.style.padding = '5px 10px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.fontSize = '16px';
+            closeButton.style.zIndex = '1001'; // Ensure it appears above the image
+        
+            // Append the button to the image's parent (body)
+            document.body.appendChild(closeButton);
+        
+            // Add event listener to close the image on button click
+            closeButton.addEventListener('click', function () {
+                image.style.display = 'none';
+                closeButton.style.display = 'none';
+            });
         } else {
             image.style.display = 'block';
         }

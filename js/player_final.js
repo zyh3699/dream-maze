@@ -78,7 +78,8 @@ class Player {
       collisionMap[y][x] === 10 ||
       collisionMap[y][x] === 11 ||
       collisionMap[y][x] === 3 ||
-      collisionMap[y][x] === 12
+      collisionMap[y][x] === 12 ||
+      collisionMap[y][x] === 4
     ) {
       collisionMap[y][x] = 100;
 
@@ -123,8 +124,164 @@ class Player {
 
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 4) {
-      this.showMessage("你现在还不可以进去");
-      collisionMap[interactY][interactX] = 0;
+      const dialogues = [
+        {
+          text: "meng境@...*现实...&难以分辨...",
+          image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+        },
+        {
+          text: "你^^们...*能够...&分bian...*吗？",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "快#看***《。背包",
+          image: "../img/conversation/精灵/精灵.png", // 精灵
+        },
+        {
+          text: "要是不小心回@@了现ssd’实",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "重新刷**新界￥面进入...可能又能}回到梦境了",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "记住...一定@要回：到梦境你才能￥%……操控时间...",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+      ];
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      function typeDialogue() {
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
+        }
+      }
+
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+
+      document.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      this.updateAdjacentPieces(interactX, interactY);
+    }
+    if (collisionMap[interactY][interactX] === 3) {
+      const dialogues = [
+        {
+          text: "你#发现.@.法！！...的/密*了吗？",
+          image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+        },
+        {
+          text: "好像..?在%-之中...可以随意**时间...",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "也就c#&fd说，要...是你fh发现当前梦*有地方你×进去，你-以'过..溯时间回到你过去能够进去的时候",
+          image: "../img/conversation/精灵/精灵.png", // 精灵
+        },
+        {
+          text: "我想[$说的|.,*够多了...",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+      ];
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      function typeDialogue() {
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
+        }
+      }
+
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+
+      document.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      this.updateAdjacentPieces(interactX, interactY);
     }
     if (collisionMap[interactY][interactX] === 5) {
       const dialogues = [
@@ -311,7 +468,7 @@ class Player {
     const interactY = Math.floor(playerCenterY + offsetY);
 
     // 检测是否有物品
-    if (collisionMap[interactY][interactX] === 2) {
+    if (collisionMap[interactY][interactX] === 2&&window.map.status==1) {
       this.fadeOutAndRedirect();
       collisionMap[interactY][interactX] = 0;
     }
