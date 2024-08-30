@@ -157,7 +157,7 @@
   <canvas id="gameCanvas" style="display: none;"></canvas>
     <div id="statusText"></div>
   <div id="timeControl" style="display: none;">
-  <input type="range" id="timeSlider" min="0" max="10" step="1" value="0" oninput="window.map.move(  Math.floor(Math.random() * 201)-100,  Math.floor(Math.random() * 201)-100)">
+  <input type="range" id="timeSlider" min="0" max="10" step="1" value="0" oninput="if (window.map.status === 1) { window.map.move(Math.floor(Math.random() * 201) - 100, Math.floor(Math.random() * 201) - 100); }">
 </div>
   <script src="../js/map_final.js"></script>
   <script src="../js/main_final.js"></script>
