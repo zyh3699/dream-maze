@@ -12,6 +12,8 @@ class Player {
     this.direction = "down"; // 默认方向
     this.map = 0;
     this.visit = 0;
+    this.read = 0;
+    
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -287,7 +289,7 @@ class Player {
 
       this.updateAdjacentPieces(interactX, interactY);
     }
-    if (collisionMap[interactY][interactX] === 5) {
+    if (collisionMap[interactY][interactX] === 5&&this.read==0) {
       const dialogues = [
         {
           text: "莱拉，我们好像真的没有办法分清这个梦境和现实了...",
@@ -366,12 +368,15 @@ class Player {
         }
       }
 
+      const self = this;
+
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.read = 1;
           document.body.removeChild(dialogBox);
           document.getElementById("gameCanvas").style.display = "block";
           requestAnimationFrame(mainLoop);
