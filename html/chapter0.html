@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <audio id="music" src="../music/sound/pick.mp3"></audio>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Move and Fill</title>
@@ -143,6 +144,8 @@
   <script src="../js/存档功能.js"></script>
     </head>
     <body>
+        <!-- 播放bgm -->
+  <audio src="../music/sound/0.mp3" loop autoplay></audio>
       <button id="menuButton" onclick="toggleMenu()">菜单</button>
   <div class="menu" id="menu">
     <button onclick="save()">存档</button>
@@ -157,11 +160,11 @@
   </div>
   <div id="progressContainer">
     <div class="progressBarWrapper">
-      <span class="progressLabel">修复漏洞</span>
+      <span class="progressLabel">碎片进度</span>
       <div class="progressBar"><div id="bugProgress"></div></div>
     </div>
     <div class="progressBarWrapper">
-      <span class="progressLabel">解密</span>
+      <span class="progressLabel">图纸</span>
       <div class="progressBar"><div id="decryptProgress"></div></div>
     </div>
     <div class="progressBarWrapper">
@@ -175,10 +178,11 @@
   <script src="../js/player.js"></script>
   <script>
     const dialogues = [
-      "你即将进入一个被称为“梦境迷途”的虚拟世界，这是一个由多层梦境组成的复杂迷宫，每一层梦境都有独特的规则和环境。",
+      "梦境迷途，欢迎你进入这片神秘而未知的领域。这里是“钢铁都市”，一个由冷冽的钢铁和科技感十足的建筑构成的梦境。",
+      "高楼林立，电子屏幕上闪烁着模糊的记忆片段。危险在每个角落潜伏，稍不留神便会被无情的梦境卷走。",
       "你扮演的莱拉，一位被称为“编梦者”的角色，拥有进入他人梦境并操控梦境结构的能力。",
       "你的任务是从这些梦境中获取隐藏的机密信息，同时揭开一场潜伏在意识深处的巨大阴谋。",
-      "你可以通过键盘控制角色移动，使用E键与物体互动，使用M键查看机密文件，不过机密文件的获取需要一定的条件。",
+      "你可以通过键盘控制角色移动，使用E键与物体或人物互动",
       "与你共同进入梦境的是艾德里安·赫尔特，你需要要找到他，从而获取一份关键文件。",
       "据说它隐藏着关于全球经济秩序的秘密..."
     ];
@@ -227,11 +231,11 @@
 
         const bugCount = window.player.bug; // 获取漏洞修复数
         const decryptCount = window.player.decrypt; // 获取解密数
-        const dialogueCount = window.player.dialogue; // 获取对话数
+        const dialogueCount = window.player.dialoguep; // 获取对话数
 
-        const totalBugs = 5; // 总漏洞数
-        const totalDecrypts = 3; // 总解密数
-        const totalDialogues = 4; // 总对话数
+        const totalBugs = 4; // 总漏洞数
+        const totalDecrypts = 1; // 总解密数
+        const totalDialogues = 5; // 总对话数
 
         bugProgress.style.width = (bugCount / totalBugs) * 100 + "%";
         decryptProgress.style.width = (decryptCount / totalDecrypts) * 100 + "%";
