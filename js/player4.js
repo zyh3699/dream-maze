@@ -168,7 +168,7 @@ class Player {
       this.showMessage("点E进入梦境核心");
     }
     if (collisionMap[interactY][interactX] === 3) {
-      this.showMessage("点E开始修复结构");
+      this.showMessage("点空格开始修复结构");
     }
     if (collisionMap[interactY][interactX] === 5) {
       this.showMessage("按E与卡尔对话");
