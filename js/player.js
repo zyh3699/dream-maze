@@ -7,6 +7,9 @@ class Player {
     this.height = 52;
     this.x = (window.innerWidth - this.width) / 2;
     this.y = (window.innerHeight - this.height) / 2;
+    this.bug=0;
+    this.decrypt=0;
+    this.dialoguep=0;
     this.frameIndex = 0; // 当前帧索引
     this.frameDelay = 0; // 帧间隔计时器
     this.frameInterval = 15; // 每隔多少次update切换一次帧
@@ -168,6 +171,8 @@ class Player {
       if (this.puzzle < 16) {
           this.MusicPlayer();
         this.puzzle += 4;
+        this.bug++;
+        this.dialoguep++;
         if (this.puzzle === 4) {
          const dialogues = [
           {
@@ -453,6 +458,7 @@ class Player {
     if(collisionMap[interactY][interactX] === 7){
       if(this.ai===1){
         this.map=1;
+        this.decrypt++;
         const dialogues = [
           {
             text:"莱拉来到一座被雾气笼罩的大厦前。大厦门口的电子屏幕上闪烁着企业家的记忆片段。",
@@ -540,6 +546,7 @@ class Player {
     }
     if (collisionMap[interactY][interactX] === 6) {
       this.ai=1;
+      this.dialoguep++;
       const dialogues = [
         {
           text: "这次的任务，感觉有些不太对劲。文件只提到要获取信息，可为什么感觉像是深陷泥潭？",
@@ -637,6 +644,73 @@ class Player {
     bodyElement.style.transition = "opacity 1s ease-out";
     bodyElement.style.opacity = 0;
     setTimeout(() => {
+      const dialogues = [
+        {
+          text:"最后一刻，莱拉成功获取了文件。然而，当她打开文件的一瞬间，一种前所未有的危机感笼罩了她。文件的内容暗示着一场可能改变世界的巨大阴谋。",
+          image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+        },
+        {
+          text:"莱拉的直觉告诉她，这只是开始，一个深藏在梦境与现实之间的秘密正等待她去揭开。",
+          image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+        }
+      ];
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+
+      // 创建对话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      
+      function typeDialogue() {
+        
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          currentDialogue++;
+          charIndex = 0;
+        }
+      }
+
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+
+      dialogBox.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      this.updateAdjacentPieces(interactX, interactY);
       window.location.href = "../minigame/puzzle/try.html";
     }, 1000); // 等待1秒以完成淡出效果
   }
@@ -747,85 +821,4 @@ function createDialogueBox(dialogues) {
 
   dialogBox.addEventListener("click", showNextDialogue);
   showNextDialogue();
-}
-function createDialogueBox(dialogues,X, Y) {
-  let currentDialogue = 0;
-  let charIndex = 0;
-  const typingSpeed = 1; // 每个字符的打印速度（毫秒）
-
-  // 添加CSS样式
-  if (!document.getElementById("dialogue-style")) {
-    const style = document.createElement("style");
-    style.id = "dialogue-style";
-    style.innerHTML = `
-      #dialogue {
-          background: rgba(0, 0, 0, 0.7);
-          padding: 20px;
-          border-radius: 10px;
-          width: 80%;
-          height: 100px;
-          text-align: center;
-          position: fixed;
-          bottom: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          color: white;
-          font-size: 24px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          box-sizing: border-box;
-      }
-      #dialogue img {
-          position: absolute;
-          top: -100px;
-          left: 10px;
-          width: 100px;
-          height: 100px;
-      }`;
-    document.head.appendChild(style);
-  }
-
-  // 创建对话框元素
-  const dialogBox = document.createElement("div");
-  dialogBox.id = "dialogue";
-
-  // 创建图片元素
-  const charImage = document.createElement("img");
-  charImage.alt = "Character Image";
-  dialogBox.appendChild(charImage);
-
-  // 创建对话文本元素
-  const dialogText = document.createElement("span");
-  dialogText.id = "dialogueText";
-  dialogBox.appendChild(dialogText);
-  document.body.appendChild(dialogBox);
-
-  function typeDialogue() {
-    if (charIndex < dialogues[currentDialogue].text.length) {
-      dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-      charIndex++;
-      setTimeout(typeDialogue, typingSpeed);
-    } else {
-      currentDialogue++;
-      charIndex = 0;
-    }
-  }
-
-  function showNextDialogue() {
-    if (currentDialogue < dialogues.length) {
-      // 更新图片和文本内容
-      charImage.src = dialogues[currentDialogue].image;
-      dialogText.innerText = "";
-      typeDialogue();
-    } else {
-      document.body.removeChild(dialogBox);
-      document.getElementById("gameCanvas").style.display = "block";
-      requestAnimationFrame(mainLoop); // 继续游戏主循环
-    }
-  }
-
-  dialogBox.addEventListener("click", showNextDialogue);
-  showNextDialogue();
-  this.updateAdjacentPieces(X, Y);
 }
