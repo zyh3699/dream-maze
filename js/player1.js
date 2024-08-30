@@ -122,7 +122,7 @@ updateAdjacentPieces(x, y) {
     
     }
     if(collisionMap[interactY][interactX] === 7){
-      this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。");
+      this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。按k键收起");
 
         // Create or select the image element
         let image = document.getElementById('mapImage');
@@ -139,6 +139,27 @@ updateAdjacentPieces(x, y) {
             image.style.height = '600px'; // Set the height
             image.style.border = '15px solid white'; // Set border size, style, and color
             document.body.appendChild(image);
+            let closeButton = document.createElement('button');
+            closeButton.innerHTML = 'X';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '170px';
+            closeButton.style.right = '480px';
+            closeButton.style.backgroundColor = 'red';
+            closeButton.style.color = 'white';
+            closeButton.style.border = 'none';
+            closeButton.style.padding = '5px 10px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.fontSize = '16px';
+            closeButton.style.zIndex = '1001'; // Ensure it appears above the image
+        
+            // Append the button to the image's parent (body)
+            document.body.appendChild(closeButton);
+        
+            // Add event listener to close the image on button click
+            closeButton.addEventListener('click', function () {
+                image.style.display = 'none';
+                closeButton.style.display = 'none';
+            });
         } else {
             image.style.display = 'block';
         }

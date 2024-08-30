@@ -131,6 +131,27 @@ class Player {
             image.style.height = '900px'; // Set the height
             image.style.border = '15px solid white'; // Set border size, style, and color
             document.body.appendChild(image);
+            let closeButton = document.createElement('button');
+            closeButton.innerHTML = 'X';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '10px';
+            closeButton.style.right = '240px';
+            closeButton.style.backgroundColor = 'red';
+            closeButton.style.color = 'white';
+            closeButton.style.border = 'none';
+            closeButton.style.padding = '5px 10px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.fontSize = '16px';
+            closeButton.style.zIndex = '1001'; // Ensure it appears above the image
+        
+            // Append the button to the image's parent (body)
+            document.body.appendChild(closeButton);
+        
+            // Add event listener to close the image on button click
+            closeButton.addEventListener('click', function () {
+                image.style.display = 'none';
+                closeButton.style.display = 'none';
+            });
         } else {
             image.style.display = 'block';
         }
