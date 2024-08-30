@@ -360,7 +360,7 @@ class Player {
 
     let enemyHealth = 100;
     let playerHealth = 100;
-    let playerMana = 50; // 初始魔法值
+    let playerMana = 100; // 初始魔法值
 
     // 敌人部分
     const enemyContainer = document.createElement("div");
@@ -468,9 +468,83 @@ class Player {
       enemyHealthBar.style.width = `${enemyHealth}%`;
       logMessage(`你潜入敌人梦境，对敌人梦境造成了 ${damage} 点破坏！`);
       if (enemyHealth <= 0) {
-        alert("你赢了！");
+        alert("你突破了梦境守卫的限制！");
         document.body.removeChild(battleContainer);
-        return;
+        const dialogues = [
+          {
+            text: "你确实技高一筹...",
+            image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+          },
+          {
+            text: "但是你没有使用意识重现完成斩杀，你再也没用办法从我的意识里找到任何线索了",
+            image: "../img/conversation/精灵/精灵.png", // 另一张图片
+          },
+          {
+            text: "祝你好运吧...",
+            image: "../img/conversation/精灵/精灵.png", // 精灵
+          },
+          {
+            text: "一切线索都要靠你自己找了",
+            image: "../img/conversation/精灵/精灵.png", // 精灵
+          },
+          
+        ];
+        let currentDialogue = 0;
+        let charIndex = 0;
+        const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+        // 添加CSS样式
+        const style = document.createElement("style");
+        document.head.appendChild(style);
+
+        // 创建对话框元素
+        const dialogBox = document.createElement("div");
+        dialogBox.id = "dialogue";
+
+        // 插入莱拉的图片
+        const lailaImage = document.createElement("img");
+        lailaImage.style.width = "100px"; // 将宽度设置为200像素
+        lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+        dialogBox.appendChild(lailaImage);
+
+        // 创建对话文本元素
+        const dialogText = document.createElement("span");
+        dialogText.id = "dialogueText";
+        dialogBox.appendChild(dialogText);
+        document.body.appendChild(dialogBox);
+        dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+        dialogText.style.fontSize = "20px"; // 字体大小
+        dialogText.style.color = "#FFFFFF"; // 字体颜色
+        dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+        dialogText.style.lineHeight = "1.5"; // 行高
+        function typeDialogue() {
+          if (charIndex < dialogues[currentDialogue].text.length) {
+            dialogText.innerText +=
+              dialogues[currentDialogue].text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeDialogue, typingSpeed);
+          } else {
+            currentDialogue++;
+            charIndex = 0;
+          }
+        }
+
+        function showNextDialogue() {
+          if (currentDialogue < dialogues.length) {
+            dialogText.innerText = "";
+            lailaImage.src = dialogues[currentDialogue].image;
+            typeDialogue();
+          } else {
+            document.body.removeChild(dialogBox);
+            document.getElementById("gameCanvas").style.display = "block";
+            requestAnimationFrame(mainLoop);
+          }
+        }
+
+        document.addEventListener("click", showNextDialogue);
+        showNextDialogue();
+
+        collisionMap[interactY][interactX] = 1000;
       }
       enemyTurn();
     };
@@ -521,7 +595,7 @@ class Player {
     magicButton.style.backgroundColor = "#ff4dff";
     magicButton.style.color = "white";
     magicButton.onclick = () => {
-      const magicCost = 10; // 魔法攻击消耗的魔法值
+      const magicCost = 30; // 魔法攻击消耗的魔法值
       if (playerMana >= magicCost) {
         playerMana -= magicCost;
         playerManaBar.style.width = `${playerMana}%`;
