@@ -149,6 +149,10 @@ class Player {
           text: "记住...一定@要回：到梦境你才能￥%……操控时间...",
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
+        {
+          text: "按P刷新梦境...",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
       ];
       let currentDialogue = 0;
       let charIndex = 0;
