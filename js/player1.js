@@ -110,8 +110,18 @@ updateAdjacentPieces(x, y) {
       this.fadeOutAndRedirect();
       collisionMap[interactY][interactX] = 0;
     }
+    if (collisionMap[interactY][interactX] === 8) {
+    
+      const bodyElement = document.body;
+      bodyElement.style.transition = "opacity 1s ease-out";
+      bodyElement.style.opacity = 0;
+      setTimeout(() => {
+        window.location.href = "../html/chapter1_clock.html";
+      }, 1000); // 等待1秒以完成淡出效果
+    
+    }
     if(collisionMap[interactY][interactX] === 7){
-      this.showMessage("你开启了谜题");
+      this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。");
 
         // Create or select the image element
         let image = document.getElementById('mapImage');

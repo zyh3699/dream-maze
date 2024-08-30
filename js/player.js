@@ -375,7 +375,7 @@ class Player {
             },
             {
                   text:"你们是谁？为什么要打扰我的梦境？",
-                  image: "../img/conversation/前成员/Shane_Winter.png", // 另一张图片
+                  image: "../img/conversation/企业家/enterpreneur.png", // 另一张图片
             },
             {
               text:"钢铁城市的街道开始变得不稳定，空气中的机械音越来越尖锐刺耳。",
