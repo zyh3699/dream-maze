@@ -66,6 +66,9 @@ class Player {
     const newY = Math.floor(playerCenterY + offsetY + dy);
     if (collisionMap[newY][newX] === 2 || collisionMap[newY][newX] === 3 || collisionMap[newY][newX] === 6 || collisionMap[newY][newX] === 7)
       this.showMessage("按E键交互 ");
+    if (collisionMap[newY][newX] === 20) {
+      this.showMessage("前往出生地左边的塔下找到艾德里安");
+    }
     // 碰撞检测
     if (collisionMap[newY][newX] === 1 ) {
       return true; // 碰撞检测
@@ -173,7 +176,7 @@ class Player {
     }
 
     // 如果当前位置是3，则将其更新为100
-    if (collisionMap[y][x] === 3||collisionMap[y][x] === 6||collisionMap[y][x] === 7) {
+    if (collisionMap[y][x] === 3||collisionMap[y][x] === 6||collisionMap[y][x] === 7||collisionMap[y][x] === 20) {
       collisionMap[y][x] = 100;
 
       // 递归更新相邻的格子
@@ -483,7 +486,7 @@ class Player {
     
           this.updateAdjacentPieces(interactX, interactY);
           setTimeout(() => {
-            this.showMessage("你已集齐了碎片，请去修复它们吧！");
+            this.showMessage("你已集齐了碎片，请通过地图右下角的通道打开去往下一层梦境的大门吧！");
           }, 4000); // 延迟2秒显示消息
         }
         this.updateAdjacentPieces(interactX, interactY);
@@ -513,6 +516,10 @@ class Player {
           {
               text:"好的，我来看看。艾德里安，你去搜集其他屏幕上的信息。我们分头行动。",
               image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+          },
+          {
+            text:"重要提示：有的建筑物有门，记得从门进去获得拼图！",
+            image: "../img/conversation/精灵/精灵.png", // 另一张图片
           }
           
         ];
@@ -614,7 +621,15 @@ class Player {
        {
           text: "我们需要通过电子屏幕获取线索。每块屏幕上都可能播放着梦境主人的记忆片段。仔细观察，它们会指引我们找到文件的位置。",
            image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
-       }
+        },
+        {
+          text: "你需要找的文件是16块拼图，它们平均分散在四个地方，地图左上角的电子屏幕和右下角去往下一层的入口有藏宝图",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "切记，有的拼图在建筑物的门里，你需要进入门才能拿到",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        }
         
       ];
       let currentDialogue = 0;
