@@ -141,7 +141,7 @@ class Player {
     if (collisionMap[interactY][interactX] === 5) {
       const dialogues = [
         {
-          text: "...欢迎来到alpha幻境...我能感受到你。你叫......",
+          text: "he",
           image: "../img/conversation/艾德里安/艾德里安.png",
         },
         {
