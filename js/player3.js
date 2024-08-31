@@ -10,6 +10,11 @@ class Player {
     this.frameDelay = 0; // 帧间隔计时器
     this.frameInterval = 15; // 每隔多少次update切换一次帧
     this.direction = "down"; // 默认方向
+    this.dialogAde=0;
+    this.dialogKarl=0;
+    this.dialogFish=0;
+    this.dialogGhost=0;
+    this.sound=0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -57,6 +62,100 @@ class Player {
 
     return false;
   }
+
+  showPasswordModal() {
+    // 创建一个容器来放置输入框和按钮
+    const container = document.createElement('div');
+    container.style.position = 'absolute';
+    container.style.top = '50%';
+    container.style.left = '50%';
+    container.style.transform = 'translate(-50%, -50%)';
+    container.style.textAlign = 'center';
+
+    // 创建输入框
+    const passwordInput = document.createElement('input');
+    passwordInput.type = 'password';
+    passwordInput.placeholder = '请输入密码';
+    passwordInput.style.marginBottom = '10px';
+    passwordInput.style.padding = '8px';
+    passwordInput.style.display = 'block';
+    passwordInput.style.width = '100%';
+
+    // 创建错误提示
+    const errorMessage = document.createElement('div');
+    errorMessage.style.color = 'red';
+    errorMessage.style.marginTop = '10px';
+    errorMessage.style.display = 'none';  // 默认隐藏
+
+    // 创建提交按钮
+    const submitButton = document.createElement('button');
+    submitButton.textContent = '提交';
+    submitButton.style.marginRight = '10px';
+
+    // 创建取消按钮
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = '取消';
+
+    // 提交按钮点击事件
+    submitButton.onclick = () => {
+        if (passwordInput.value === '4399') {
+          const dialoguews = [
+            {
+              text: "（震惊）你怎么会知道？",
+              image: "../img/conversation/莱拉/莱拉.png",
+            },  
+            {
+              text: "艾德里安，你曾也是个有志气的巫师。这个组织曾也是个///",
+              image: "../img/conversation/卡尔/卡尔.png",
+            },  
+            {
+              text: "（冷静）你说错了。我是组织的核心成员之一。我多年前就和他们签订了协议，利用他们的资源进行梦境技术的研究。我的目标？很简单，通过掌控梦境和潜意识，创造一个更理想的世界。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            },  
+            {
+              text: "（插嘴）但你早就和组织的目标分道扬镳了，不是吗？你想利用我们达到自己的野心。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            }, 
+            {
+              text: "（狡黠地笑）你们说的没错。阿尔法梦境的技术是一把双刃剑，它可以控制他人，也可以将我困住。所以，我需要你们来帮我达成我的目标。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            }, 
+            {
+              text: "（坚定地）我们不会让你得逞的，艾德里安。我们会阻止你，阻止组织的所有阴谋！",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            }, 
+            {
+              text: "（耸肩，冷笑）好吧，那就看看你们有多少本事吧。欢迎来到我的游戏——心灵对弈。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            }, 
+            {
+              text: "为了阻止这场灾难，莱拉和卡尔决定联手，破坏阿尔法梦境的核心。这个核心位于一个极其危险且复杂的梦境结构中，充满了各种心理陷阱和防御机制。玩家将参与一场激烈的心理战——“心灵对弈”。",
+              image: "../img/conversation/艾德里安/艾德里安.png",
+            }, 
+          ];
+              createDialogueBox(dialogues,1);
+            // self.fadeOutAndRedirect();
+            // window.location.href = 'index.html'; // 跳转页面
+        } else {
+            errorMessage.textContent = '暗号错误，艾德里安奇怪的看了你一眼。';
+            errorMessage.style.display = 'block';  // 显示错误提示
+        }
+    };
+
+    // 取消按钮点击事件
+    cancelButton.onclick = () => {
+        container.remove(); // 移除输入框和按钮
+    };
+
+    // 将元素添加到容器中
+    container.appendChild(passwordInput);
+    container.appendChild(submitButton);
+    container.appendChild(cancelButton);
+    container.appendChild(errorMessage);
+
+    // 将容器添加到页面中
+    document.body.appendChild(container);
+}
 
   updateAdjacentPieces(x, y) {
     // 检查边界条件
@@ -162,8 +261,30 @@ class Player {
     const interactX = Math.floor(playerCenterX + offsetX);
     const interactY = Math.floor(playerCenterY + offsetY);
 
-
-    if (collisionMap[interactY][interactX] === 2) {
+    if (collisionMap[interactY][interactX] === 2 && this.dialogAde===0 && this.dialogKarl===0) {
+      const dialogues = [
+        {
+          text: "莱拉?",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "(冷笑)你不是应该在找卡尔吗？",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "你在这里干什么？",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "（虚伪）我等着你们",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 2 && this.dialogAde===0 && this.dialogKarl===1) {
+      this.dialogAde=1;
       const dialogues = [
         {
           text: "（冷冷地）莱拉，卡尔，你们可真是让我刮目相看。居然能找到这里来。不过，你们真的以为能轻易阻止这一切吗？",
@@ -180,17 +301,283 @@ class Player {
         {
           text: "你到底是谁？你真正的目的是什么？",
           image: "../img/conversation/艾德里安/艾德里安.png",
+          options: ["说出组织暗号->", "无话可说->"], // 添加选项
         }, 
       ];
-      createDialogueBox(dialogues);
-      this.fadeOutAndRedirect();
-      collisionMap[interactY][interactX] = 0;
+      const choiceDialogues = {
+        cooperate: [
+          {
+            text: "艾德里安，你知道这串数字意味着什么吗？",
+            image: "../img/conversation/其他人物/ghost.png",
+          },
+            ],
+        abandon: [
+          {
+            text: "你不该这样做......",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "我们不会让你得逞的，艾德里安。我们会阻止你，阻止组织的所有阴谋！",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "无知的人类",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+        ],
+      };
+
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+      // 创建对s话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      // 创建选项按钮容器
+      const optionsContainer = document.createElement("div");
+      optionsContainer.id = "options";
+      dialogBox.appendChild(optionsContainer);
+      function typeDialogue() {
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          if (dialogues[currentDialogue].options) {
+            showOptions(dialogues[currentDialogue].options);
+            charIndex = -1;
+          } else {
+            currentDialogue++;
+            charIndex = 0;
+          }
+        }
+      }
+      const self = this;
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          optionsContainer.innerHTML = ""; // 清空选项按钮
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          // self.showPasswordModal();
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+      function showOptions(options) {
+        options.forEach((option) => {
+          const button = document.createElement("div"); // 使用 div 而不是 button
+          button.className = "option-text";
+          button.innerText = option;
+          button.style.cursor = "pointer"; // 鼠标悬停时显示为指针
+          button.style.margin = "10px 0"; // 上下间距
+          button.style.color = "#FFFFFF"; // 字体颜色设置为白色
+          button.style.fontSize = "24px"; // 字体大小
+          button.style.fontFamily = "Arial, sans-serif"; // 字体设置为 Arial
+          button.style.textShadow = "1px 1px 2px #000000"; // 添加文本阴影
+          button.style.transition = "background-color 0.3s, color 0.3s"; // 添加过渡效果
+
+          // 添加鼠标悬停效果
+          button.onmouseover = () => {
+            button.style.backgroundColor = "#444444"; // 鼠标悬停时的背景色
+            button.style.color = "#FFD700"; // 鼠标悬停时的字体颜色
+          };
+          button.onmouseout = () => {
+            button.style.backgroundColor = ""; // 恢复原背景色
+            button.style.color = "#FFFFFF"; // 恢复原字体颜色
+          };
+
+          button.onclick = () => handleOption(option);
+          optionsContainer.appendChild(button);
+        });
+      }
+
+      function handleOption(option) {
+        if (option === "说出组织暗号->") {
+          dialogues.push(...choiceDialogues.cooperate);
+          // player.move(-200,0,collisionMap);
+          document.addEventListener("click", self.showPasswordModal());
+        } else if (option === "无话可说->") {
+          dialogues.push(...choiceDialogues.abandon);
+        }
+        if (option === "好->") { 
+          dialogues.push(...choiceDialogues.cooperate);
+        }
+        currentDialogue++;          
+        showNextDialogue();
+      }
+
+      document.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+          collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 2 && this.dialogAde===1) {
+      const dialogues = [
+        {
+          text: "（冷笑）莱拉，你又来干什么",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "艾德里安……我知道你的目的...",
+          image: "../img/conversation/卡尔/卡尔.png",
+          options: ["说出组织暗号->", "无话可说->"], // 添加选项
+        },  
+      ];
+      const choiceDialogues = {
+        cooperate: [
+          {
+            text: "艾德里安，你知道这串数字意味着什么吗？",
+            image: "../img/conversation/其他人物/ghost.png",
+          },
+            ],
+        abandon: [
+          {
+            text: "你不该这样做......",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "我们不会让你得逞的，艾德里安。我们会阻止你，阻止组织的所有阴谋！",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+          {
+            text: "无知的人类",
+            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          },
+        ],
+      };
+
+      let currentDialogue = 0;
+      let charIndex = 0;
+      const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+      // 添加CSS样式
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+      // 创建对话框元素
+      const dialogBox = document.createElement("div");
+      dialogBox.id = "dialogue";
+      // 插入莱拉的图片
+      const lailaImage = document.createElement("img");
+      lailaImage.style.width = "100px"; // 将宽度设置为200像素
+      lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+      dialogBox.appendChild(lailaImage);
+      // 创建对s话文本元素
+      const dialogText = document.createElement("span");
+      dialogText.id = "dialogueText";
+      dialogBox.appendChild(dialogText);
+      document.body.appendChild(dialogBox);
+      dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+      dialogText.style.fontSize = "20px"; // 字体大小
+      dialogText.style.color = "#FFFFFF"; // 字体颜色
+      dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+      dialogText.style.lineHeight = "1.5"; // 行高
+      // 创建选项按钮容器
+      const optionsContainer = document.createElement("div");
+      optionsContainer.id = "options";
+      dialogBox.appendChild(optionsContainer);
+      function typeDialogue() {
+        if (charIndex < dialogues[currentDialogue].text.length) {
+          dialogText.innerText +=
+            dialogues[currentDialogue].text.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDialogue, typingSpeed);
+        } else {
+          if (dialogues[currentDialogue].options) {
+            showOptions(dialogues[currentDialogue].options);
+            charIndex = -1;
+          } else {
+            currentDialogue++;
+            charIndex = 0;
+          }
+        }
+      }
+      const self = this;
+      function showNextDialogue() {
+        if (currentDialogue < dialogues.length) {
+          dialogText.innerText = "";
+          lailaImage.src = dialogues[currentDialogue].image;
+          optionsContainer.innerHTML = ""; // 清空选项按钮
+          typeDialogue();
+        } else {
+          document.body.removeChild(dialogBox);
+          // self.showPasswordModal();
+          document.getElementById("gameCanvas").style.display = "block";
+          requestAnimationFrame(mainLoop);
+        }
+      }
+      function showOptions(options) {
+        options.forEach((option) => {
+          const button = document.createElement("div"); // 使用 div 而不是 button
+          button.className = "option-text";
+          button.innerText = option;
+          button.style.cursor = "pointer"; // 鼠标悬停时显示为指针
+          button.style.margin = "10px 0"; // 上下间距
+          button.style.color = "#FFFFFF"; // 字体颜色设置为白色
+          button.style.fontSize = "24px"; // 字体大小
+          button.style.fontFamily = "Arial, sans-serif"; // 字体设置为 Arial
+          button.style.textShadow = "1px 1px 2px #000000"; // 添加文本阴影
+          button.style.transition = "background-color 0.3s, color 0.3s"; // 添加过渡效果
+
+          // 添加鼠标悬停效果
+          button.onmouseover = () => {
+            button.style.backgroundColor = "#444444"; // 鼠标悬停时的背景色
+            button.style.color = "#FFD700"; // 鼠标悬停时的字体颜色
+          };
+          button.onmouseout = () => {
+            button.style.backgroundColor = ""; // 恢复原背景色
+            button.style.color = "#FFFFFF"; // 恢复原字体颜色
+          };
+
+          button.onclick = () => handleOption(option);
+          optionsContainer.appendChild(button);
+        });
+      }
+
+      function handleOption(option) {
+        if (option === "说出组织暗号->") {
+          dialogues.push(...choiceDialogues.cooperate);
+          // player.move(-200,0,collisionMap);
+          document.addEventListener("click", self.showPasswordModal());
+        } else if (option === "无话可说->") {
+          dialogues.push(...choiceDialogues.abandon);
+        }
+        if (option === "好->") { 
+          dialogues.push(...choiceDialogues.cooperate);
+        }
+        currentDialogue++;          
+        showNextDialogue();
+      }
+
+      document.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+          collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 16) {
+    if (collisionMap[interactY][interactX] === 16 && this.dialogFish===0) {
+      this.dialogFish=1;
       const dialogues = [
         {
           text: "你就是莱拉？",
@@ -228,7 +615,30 @@ class Player {
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 15) {
+    if (collisionMap[interactY][interactX] === 16 && this.dialogFish===1) {
+      const dialogues = [
+        {
+          text: "莱拉，你忘记了吗。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "从我右边那个柱子正右侧开始，往下走到底，再向右走一小步，你就会走到虚空法阵里。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "在虚空法阵，你可以传送到一个神秘的岛屿上。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "嗯...",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 15 && this.sound===0) {
+      this.sound=1;
       const dialogues = [
         {
           text: "（喃喃自语）卡尔……你到底在哪儿？这里的一切看起来太真实了，但我知道它们都是假的。",
@@ -245,6 +655,20 @@ class Player {
         {
           text: "探索这个地图，找到卡尔吧！",
           image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 15 && this.sound===1) {
+      const dialogues = [
+        {
+          text: "啊，这个地方是我们当时说话的残影...",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "不可思议的梦境",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
       ];
       createDialogueBox(dialogues);
@@ -279,7 +703,8 @@ class Player {
       }
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 17) {
+    if (collisionMap[interactY][interactX] === 17 && this.dialogGhost===0) {
+      this.dialogGhost=1;
       const dialogues = [
         {
           text: "“她曾想知道真相，但是，却还是选择了将其遗忘。”",
@@ -461,7 +886,37 @@ class Player {
       showNextDialogue();
           collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 5) {
+    if (collisionMap[interactY][interactX] === 17 && this.dialogGhost===1) {
+      const dialogues = [
+        {
+          text: "莱拉你又来啦。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "...",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "走吧走吧，我相信你，暗号是4399",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "好...",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+
+      createDialogueBox(dialogues);
+        document.addEventListener("click", chuansong);
+
+      function chuansong() {
+        player.move(-350, 0, collisionMap);
+        document.removeEventListener("click", chuansong);
+      }
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 5 && this.dialogKarl===0) {
+      this.dialogKarl=1;
       const dialogues = [
         {
           text: "（激动地）卡尔！我终于找到你了！你没事吧？",
@@ -516,9 +971,83 @@ class Player {
       collisionMap[interactY][interactX] = 0;
       this.aidedialog=true;
     }
-
+    if (collisionMap[interactY][interactX] === 5 && this.dialogKarl===1) {
+      const dialogues = [
+        {
+          text: "卡尔...",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "莱拉，不必担心我了，我现在在这里很好。",
+          image: "../img/conversation/卡尔/卡尔.png",
+        },  
+        {
+          text: "快去探寻一下这个地图上的异常地方。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "那只传说之鱼，很关键。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        }, 
+        {
+          text: "这个地方，到处都是迷幻，小心别被弄乱了心智。",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "好，我会小心的",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },  
+        {
+          text: "去找传说之鱼吧",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+      this.aidedialog=true;
+    }
+    if (collisionMap[interactY][interactX] === 200) {
+      const dialogues = [
+        {
+          text: "你就是莱拉？",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "向我许个愿望吧，尽快，孩子。你的愿望会引领你到达光明之岸。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "（心存诸多疑虑，但你不得不快速许了一个愿望）我想拯救alpha梦境。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "现在，从我右边那个柱子正右侧开始，往下走到底，再向右走一小步，你就会走到虚空法阵里。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "在虚空法阵，你可以传送到一个神秘的岛屿上。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "（后期，这些对话加一下神秘组织的故事）",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "嗯...",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "按照传说之鱼的说法，去虚空法阵，按E实现传送。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+      createDialogueBox(dialogues);
+      showPasswordModal();
+      collisionMap[interactY][interactX] = 0;
+    }
   }
 
+  
   fadeOutAndRedirect() {
     const bodyElement = document.body;
     bodyElement.style.transition = "opacity 1s ease-out";
@@ -556,7 +1085,7 @@ class Player {
 const player = new Player();
 window.player = player;
 
-function createDialogueBox(dialogues) {
+function createDialogueBox(dialogues,x) {
   let currentDialogue = 0;
 
   // 添加CSS样式
@@ -614,6 +1143,14 @@ function createDialogueBox(dialogues) {
       dialogText.innerText = dialogues[currentDialogue].text; // 直接显示整个文本
       currentDialogue++;
     } else {
+      if (x===1) {
+        const bodyElement = document.body;
+        bodyElement.style.transition = "opacity 1s ease-out";
+        bodyElement.style.opacity = 0;
+        setTimeout(() => {
+          window.location.href = "../minigame/wuziqi/index4.html";
+        }, 1000); // 等待1秒以完成淡出效果    
+      };
       document.body.removeChild(dialogBox);
       document.getElementById("gameCanvas").style.display = "block";
       requestAnimationFrame(mainLoop); // 继续游戏主循环
