@@ -17,6 +17,7 @@ class Player {
     this.dialogue = 0;
     this.waterSecret = 0;
     this.key = 0;
+    this.isconversation = 0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -307,12 +308,16 @@ class Player {
               }
             }
 
+            const self = this;
+
             function showNextDialogue() {
               if (currentDialogue < dialogues.length) {
+                self.isconversation = 1;
                 dialogText.innerText = "";
                 lailaImage.src = dialogues[currentDialogue].image;
                 typeDialogue();
               } else {
+                self.isconversation = 0;
                 document.body.removeChild(dialogBox);
                 document.getElementById("gameCanvas").style.display = "block";
                 requestAnimationFrame(mainLoop);
@@ -537,12 +542,16 @@ class Player {
           }
         }
 
+        const self = this;
+
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
+            self.isconversation = 1;
             dialogText.innerText = "";
             lailaImage.src = dialogues[currentDialogue].image;
             typeDialogue();
           } else {
+            self.isconversation = 0;
             document.body.removeChild(dialogBox);
             document.getElementById("gameCanvas").style.display = "block";
             requestAnimationFrame(mainLoop);
@@ -688,10 +697,12 @@ class Player {
 
           function showNextDialogue() {
             if (currentDialogue < dialogues.length) {
+              self.isconversation = 1;
               dialogText.innerText = "";
               lailaImage.src = dialogues[currentDialogue].image;
               typeDialogue();
             } else {
+              self.isconversation = 0;
               self.key = 1;
               document.body.removeChild(dialogBox);
               document.getElementById("gameCanvas").style.display = "block";
@@ -803,12 +814,16 @@ class Player {
             }
           }
 
+          const self = this;
+
           function showNextDialogue() {
             if (currentDialogue < dialogues.length) {
+              self.isconversation = 1;
               dialogText.innerText = "";
               lailaImage.src = dialogues[currentDialogue].image;
               typeDialogue();
             } else {
+              self.isconversation = 0;
               document.body.removeChild(dialogBox);
               window.location.href = "../html/chapter3_without_intro.html";
               document.getElementById("gameCanvas").style.display = "block";
@@ -1011,12 +1026,16 @@ class Player {
           }
         }
 
+        const self = this;
+
         function showNextDialogue() {
+          self.isconversation = 1;
           if (currentDialogue < dialogues.length) {
             dialogText.innerText = "";
             lailaImage.src = dialogues[currentDialogue].image;
             typeDialogue();
           } else {
+            self.isconversation = 0;
             document.body.removeChild(dialogBox);
             document.getElementById("gameCanvas").style.display = "block";
             requestAnimationFrame(mainLoop);
@@ -1094,12 +1113,16 @@ class Player {
           }
         }
 
+        const self = this;
+
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
+            self.isconversation = 1;
             dialogText.innerText = "";
             lailaImage.src = dialogues[currentDialogue].image;
             typeDialogue();
           } else {
+            self.isconversation = 0;
             document.body.removeChild(dialogBox);
             document.getElementById("gameCanvas").style.display = "block";
             requestAnimationFrame(mainLoop);
@@ -1245,12 +1268,14 @@ class Player {
 
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
+            self.isconversation = 1;
             dialogText.innerText = "";
             lailaImage.src = dialogues[currentDialogue].image;
             optionsContainer.innerHTML = ""; // 清空选项按钮
             
             typeDialogue();
           } else {
+            self.isconversation = 0;
             document.body.removeChild(dialogBox);
             self.showPasswordPrompt();
             self.visit = 1;
@@ -1384,10 +1409,12 @@ class Player {
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isconversation = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isconversation = 0;
           document.body.removeChild(dialogBox);
           self.startBattle();
           document.getElementById("gameCanvas").style.display = "block";
@@ -1504,10 +1531,12 @@ class Player {
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isconversation = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isconversation = 0;
           self.dialogue = 1;
           document.body.removeChild(dialogBox);
           document.getElementById("gameCanvas").style.display = "block";
@@ -1591,10 +1620,12 @@ class Player {
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isconversation = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isconversation = 0;
           self.waterSecret = 1;
           document.body.removeChild(dialogBox);
           document.getElementById("gameCanvas").style.display = "block";
