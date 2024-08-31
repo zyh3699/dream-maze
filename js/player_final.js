@@ -8,7 +8,7 @@ class Player {
     this.y = (window.innerHeight - this.height) / 2;
     this.frameIndex = 0; // 当前帧索引
     this.frameDelay = 0; // 帧间隔计时器
-    this.frameInterval = 45; // 每隔多少次update切换一次帧
+    this.frameInterval = 150; // 每隔多少次update切换一次帧
     this.direction = "down"; // 默认方向
     this.map = 0;
     this.visit = 0;
