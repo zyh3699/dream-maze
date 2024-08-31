@@ -9,6 +9,108 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
+      background-color: #f4f4f9;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    #menuButton {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+    
+    #menuButton:hover {
+      background-color: #34495e;
+    }
+    
+    .taskmenu {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      z-index: 100000;
+      background: linear-gradient(135deg, #e0f7fa, #a5ccd6);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      gap: 15px;
+    }
+        
+    .classbutton {
+      background-color: #4581a9;
+      color: #ffffff;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .classbutton:hover {
+      background-color: #2980b9;
+    }
+    
+    .select-menu {
+      width: 100%;
+      cursor: pointer;
+    }
+    
+    .select {
+      background-color: #7a8f96;
+      padding: 12px;
+      color: #ffffff;
+      font-weight: 500;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .options-list {
+      position: absolute;
+      width: calc(100% - 40px);
+      background-color: #ffffff;
+      border-radius: 8px;
+      margin-top: 10px;
+      padding: 10px;
+      max-height: 180px;
+      overflow-y: auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: none;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+    
+    .option {
+      padding: 8px 0;
+      color: #2c3e50;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+    
+    .option:hover,
+    .option.selected {
+      color: #3498db;
+    }
+    
+    .options-list.active {
+      display: block;
+    }
+        body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
       background-size: cover;
       background-color: black; /* 使用黑色背景，或其他颜色 */
     }
@@ -53,61 +155,45 @@
       width: 100px; /* 图片宽度 */
       height: 100px; /* 图片高度 */
     }
-    #menuButton {
-      position: fixed; /* 固定位置 */
-      top: 20px; /* 固定在顶部 */
-      left: 20px; /* 固定在左侧 */
-      padding: 10px 20px; /* 按钮内边距 */
-      background-color: #4CAF50; /* 按钮背景颜色 */
-      color: white; /* 按钮文字颜色 */
-      border: none; /* 移除边框 */
-      border-radius: 5px; /* 圆角边框 */
-      cursor: pointer; /* 鼠标悬停时显示手型 */
-    }
-    #menuButton:hover {
-      background-color: #45a049; /* 鼠标悬停时的背景颜色 */
-    }
-    .menu {
-      display: none; /* 初始隐藏 */
-      position: fixed; /* 固定位置 */
-      top: 60px; /* 距离顶部 */
-      left: 20px; /* 距离左侧 */
-      background-color: #333; /* 菜单背景颜色 */
-      border-radius: 5px; /* 圆角边框 */
-      padding: 10px; /* 内边距 */
-    }
-    .menu button {
-      display: block; /* 块级元素 */
-      width: 100%; /* 宽度100% */
-      margin: 5px 0; /* 按钮间距 */
-      padding: 10px; /* 按钮内边距 */
-      background-color: #4CAF50; /* 按钮背景颜色 */
-      color: white; /* 按钮文字颜色 */
-      border: none; /* 移除边框 */
-      border-radius: 5px; /* 圆角边框 */
-      cursor: pointer; /* 鼠标悬停时显示手型 */
-    }
-    .menu button:hover {
-      background-color: #45a049; /* 鼠标悬停时的背景颜色 */
-    }
   </style>
   <script src="../js/存档功能.js"></script>
     </head>
     <body>
         <!-- 播放bgm -->
         <audio src="../music/sound/2.mp3" loop autoplay></audio>
-      <button id="menuButton" onclick="toggleMenu()">菜单</button>
-  <div class="menu" id="menu">
+      <!-- <button id="menuButton" onclick="toggleMenu()">菜单</button> -->
+  <!-- <div class="menu" id="menu">
     <button onclick="save()">存档</button>
     <button onclick="settings()">设置</button>
     <button onclick="tips()">提示</button>
-  </div>
+  </div> -->
   <div id="intro">
     <div id="dialogue">
       <img src="../img/conversation/莱拉/莱拉.png" alt="Image Description"> <!-- 插入图片 -->
       <span id="dialogueText"></span> <!-- 用于显示对话文本 -->
     </div>
   </div>
+ <!--  -->
+ <button id="menuButton">菜单</button>
+ <div id="menu" class="taskmenu">
+   <div class="classbutton" onclick="save()">存档</div>
+   <div class="classbutton" onclick="settings()">设置</div>
+   <div class="select-menu">
+     <div class="select" onclick="toggleOptions()">
+       <span>当前任务</span>
+       <i class="fas fa-angle-down"></i>
+     </div>
+     <div class="options-list">
+       <div id="ghost" class="option">与门口小幽灵对话</div>
+       <div id="clock" class="option" style="display:none;">时光回溯（布谷钟）</div>
+       <div id="mirror" class="option" style="display:none;">凝视深渊（附魔镜）</div>
+       <div id="phone" class="option" style="display:none;">接听留言（神秘电话）</div>
+       <div id="frog" class="option" style="display:none;">寻找真相（青蛙先生）</div>
+       <div id="fazhen" class="option" style="display:none;">法阵里？（去找法阵）</div>
+       <div id="cases" class="option" style="display:none;">进入暗道</div>
+     </div>
+   </div>
+ </div><!--  -->
   <canvas id="gameCanvas" style="display: none;"></canvas>
   <script src="../js/map2.js"></script>
   <script src="../js/main2.js"></script>
@@ -137,29 +223,31 @@
         charIndex = 0;
         document.getElementById('dialogueText').innerText = '';
         typeDialogue();
-      }else {
-        document.getElementById('intro').style.opacity = 0;
-        setTimeout(() => {
-          document.getElementById('intro').style.display = 'none';
-          document.getElementById('gameCanvas').style.display = 'block';
-          requestAnimationFrame(mainLoop);
-        }, 1000); // 等待1秒以完成淡出效果
-      }
-    }
-
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      if (menu.style.display === 'none' || menu.style.display === '') {
-        menu.style.display = 'block';
       } else {
-        menu.style.display = 'none';
+        // 所有对话已完成，执行下一步操作
+        document.getElementById('intro').style.opacity = '0'; // 渐隐
+        setTimeout(function() {
+          document.getElementById('intro').style.display = 'none'; // 隐藏元素
+          document.getElementById('gameCanvas').style.display = 'block'; // 显示canvas
+          startGame(); // 开始游戏
+        }, 1000); // 在1秒后执行
       }
     }
 
-    document.addEventListener('DOMContentLoaded', (event) => {
-      typeDialogue();
-      document.addEventListener('click', showNextDialogue);
-    });
+    // 初始化对话
+    typeDialogue();
+
+    // 点击对话框后显示下一个对话
+    document.getElementById('dialogue').addEventListener('click', showNextDialogue);
+ 
+    const menuButton = document.getElementById('menuButton');
+    const menu = document.getElementById('menu');
+
+    menuButton.onclick = () => {
+      menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
+    };
+
+    menu.style.display = 'none';
   </script>
 </body>
 </html>

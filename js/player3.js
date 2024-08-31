@@ -203,11 +203,8 @@ class Player {
               requestAnimationFrame(mainLoop); // 继续游戏主循环
             }
           }
-        
           dialogBox.addEventListener("click", showNextDialogue);
           showNextDialogue();
-                    // self.fadeOutAndRedirect();
-            // window.location.href = 'index.html'; // 跳转页面
         } else {
             errorMessage.textContent = '暗号错误，艾德里安奇怪的看了你一眼。';
             errorMessage.style.display = 'block';  // 显示错误提示
@@ -496,9 +493,6 @@ class Player {
           document.addEventListener("click", self.showPasswordModal());
         } else if (option === "无话可说->") {
           dialogues.push(...choiceDialogues.abandon);
-        }
-        if (option === "好->") { 
-          dialogues.push(...choiceDialogues.cooperate);
         }
         currentDialogue++;          
         showNextDialogue();

@@ -194,6 +194,8 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 5 && this.dialogDoorghost===0 && this.dialogCuckoo===0) {
+      document.getElementById('clock').style.display = 'block';
+      document.getElementById('ghost').style.textDecoration = 'line-through';
       this.dialogDoorghost=1;
       const dialogues = [
         {
@@ -255,6 +257,8 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 7 && this.dialogDoorghost===1 && this.dialogCuckoo===0) {
+      document.getElementById('mirror').style.display = 'block';
+      document.getElementById('clock').style.textDecoration = 'line-through';
       this.dialogCuckoo=1;
       const dialogues = [
         {
@@ -320,6 +324,8 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 6 && this.dialogCuckoo===1 && this.dialogMirror===0) {
+      document.getElementById('phone').style.display = 'block';
+      document.getElementById('mirror').style.textDecoration = 'line-through';
       this.dialogMirror=1;
       const dialogues = [
         {
@@ -397,6 +403,8 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 8 && this.dialogMirror===1 && this.dialogPhone===0) {
+      document.getElementById('frog').style.display = 'block';
+      document.getElementById('phone').style.textDecoration = 'line-through';
       this.dialogPhone=1;
       const dialogues = [
         {
@@ -466,6 +474,8 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 9 && this.dialogPhone===1 && this.dialogFrog===0) {
+      document.getElementById('fazhen').style.display = 'block';
+      document.getElementById('frog').style.textDecoration = 'line-through';
       this.dialogFrog=1;
       const dialogues = [
         {
@@ -531,7 +541,9 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 13 && this.dialogFrog===1 && this.dialogFazhen===0) {
-        const dialogues = [
+      document.getElementById('cases').style.display = 'block';
+      document.getElementById('fazhen').style.textDecoration = 'line-through';  
+      const dialogues = [
           {
             text: "我在梦里梦到一个依稀记得的梦...前进就是唯一的退路。",
             image: "../img/conversation/其他人物/fazhen.png", // 另一张图片
@@ -972,3 +984,23 @@ function createDialogueBox(dialogues) {
   dialogBox.addEventListener("click", showNextDialogue);
   showNextDialogue();
 }
+
+// 任务栏
+const select=document.querySelector(".select")
+const options_list=document.querySelector(".options-list")
+const options=document.querySelectorAll(".option")
+//切换语言菜单得显示和隐藏
+select.addEventListener("click",()=>{
+  options_list.classList.toggle("active");
+  select.querySelector(".fa-angle-down").classList.toggle("fa-angle-up")
+})
+//切换语言
+options.forEach((option)=>{
+option.addEventListener("click",()=>{
+  options.forEach((option)=>{option.classList.remove("selected")});
+  select.querySelector("span").innerHTML=option.innerHTML;
+  option.classList.add("selected");
+  options_list.classList.toggle("active")
+  select.querySelector(".fa-angle-up").classList.toggle("fa-angle-up")
+})
+})
