@@ -1436,6 +1436,10 @@ class Player {
           text: "要是实在没有办法获得关键线索，去菜单的线索里面看看吧",
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
+        {
+          text: "如果你想靠自己完成整个任务，你需要格外留心每一句话，每一个细节...",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
       ];
       let currentDialogue = 0;
       let charIndex = 0;
