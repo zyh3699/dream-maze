@@ -32,16 +32,17 @@
       transition: opacity 1s ease-out;
     }
     #dialogue {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%; /* 设置为80%宽度 */
-      text-align: center;
-      position: fixed; /* 固定位置 */
-      bottom: 20px; /* 固定在底部 */
-      left: 50%; /* 水平居中 */
-      transform: translateX(-50%); /* 水平居中 */
-      margin: 0; /* 移除水平居中 */
+     background: url('../img/conversation/background/bg3.png') no-repeat center center; /* 背景图居中对齐 */
+     background-size: cover; /* 保证背景图完整显示 */
+     padding: 60px;
+     border-radius: 40px;
+     width: 80%; /* 保持80%宽度 */
+     text-align: center;
+     position: fixed; /* 固定位置 */
+     bottom: 20px; /* 固定在底部 */
+     left: 50%; /* 水平居中 */
+     transform: translateX(-50%); /* 水平居中 */
+     margin: 0; /* 移除水平居中 */
     }
     #dialogue img {
       position: absolute; /* 绝对定位 */
@@ -97,6 +98,44 @@
     .menu button:hover {
       background-color: #45a049; /* 鼠标悬停时的背景颜色 */
     }
+    #progressContainer {
+      display: none; /* 初始隐藏进度条容器 */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      background-color: #f3f3f3;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      z-index: 1000;
+    }
+    .progressBarWrapper {
+      margin-bottom: 10px;
+    }
+    .progressLabel {
+      display: inline-block;
+      width: 100px;
+      text-align: right;
+      margin-right: 10px;
+    }
+    .progressBar {
+      display: inline-block;
+      width: 70%;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      vertical-align: middle;
+    }
+    .progressBar div {
+      height: 100%;
+      background-color: #4CAF50;
+      width: 0;
+      border-radius: 5px;
+    }
     #statusText {
       display: none;
       position: absolute;
@@ -147,11 +186,18 @@
     <button onclick="save()">存档</button>
     <button onclick="settings()">背包</button>
     <button onclick="tips()">时间调整</button>
+    <button onclick="clues()">任务提示</button>
   </div>
   <div id="intro">
     <div id="dialogue">
-      <img src="../img/charactor/莱拉/laila down.png" alt="Image Description"> <!-- 插入图片 -->
+      <img src="../img/conversation/莱拉/莱拉.png" alt="Image Description"> <!-- 插入图片 -->
       <span id="dialogueText"></span> <!-- 用于显示对话文本 -->
+    </div>
+  </div>
+  <div id="progressContainer">
+    <div class="progressBarWrapper">
+      <span class="progressLabel">梦境信息</span>
+      <div class="progressBar"><div id="bugProgress"></div></div>
     </div>
   </div>
   <canvas id="gameCanvas" style="display: none;"></canvas>
@@ -197,6 +243,29 @@
         }, 1000); // 等待1秒以完成淡出效果
       }
     }
+
+    function clues() {
+      const progressContainer = document.getElementById("progressContainer");
+      if (progressContainer.style.display === "none") {
+        const bugProgress = document.getElementById("bugProgress");
+
+        const bugCount = window.player.bug; // 获取漏洞修复数
+
+        const totalBugs = 3; // 总漏洞数
+
+        bugProgress.style.width = (bugCount / totalBugs) * 100 + "%";
+
+        progressContainer.style.display = "block";
+      } else {
+        progressContainer.style.display = "none";
+      }
+    }
+
+    document.body.onkeydown = function(event) {
+  if (event.key === " ") {
+    event.preventDefault(); // 禁用空格键默认行为
+  }
+};
 
     
 
