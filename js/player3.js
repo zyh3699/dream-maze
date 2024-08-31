@@ -364,11 +364,11 @@ class Player {
       const dialogues = [
         {
           text: "（冷冷地）莱拉，卡尔，你们可真是让我刮目相看。居然能找到这里来。不过，你们真的以为能轻易阻止这一切吗？",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/艾德里安/艾德里安.png",
         },  
         {
           text: "（警惕地）艾德里安……你怎么会在这里？",
-          image: "../img/conversation/卡尔/卡尔.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
         {
           text: "哦，莱拉，我当然会在这里。这里的一切都是我的设计。我就是这个梦境的主人。",
@@ -376,7 +376,7 @@ class Player {
         },  
         {
           text: "你到底是谁？你真正的目的是什么？",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/莱拉/莱拉.png",
           options: ["说出组织暗号->", "无话可说->"], // 添加选项
         }, 
       ];
@@ -384,21 +384,21 @@ class Player {
         cooperate: [
           {
             text: "艾德里安，你知道这串数字意味着什么吗？",
-            image: "../img/conversation/其他人物/ghost.png",
+            image: "../img/conversation/莱拉/莱拉.png",
           },
             ],
         abandon: [
           {
             text: "你不该这样做......",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
           },
           {
             text: "我们不会让你得逞的，艾德里安。我们会阻止你，阻止组织的所有阴谋！",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
           },
           {
             text: "无知的人类",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
           },
         ],
       };
@@ -512,11 +512,11 @@ class Player {
       const dialogues = [
         {
           text: "（冷笑）莱拉，你又来干什么",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/艾德里安/艾德里安.png",
         },  
         {
           text: "艾德里安……我知道你的目的...",
-          image: "../img/conversation/卡尔/卡尔.png",
+          image: "../img/conversation/莱拉/莱拉.png",
           options: ["说出组织暗号->", "无话可说->"], // 添加选项
         },  
       ];
@@ -524,21 +524,21 @@ class Player {
         cooperate: [
           {
             text: "艾德里安，你知道这串数字意味着什么吗？",
-            image: "../img/conversation/其他人物/ghost.png",
+            image: "../img/conversation/莱拉/莱拉.png",
           },
             ],
         abandon: [
           {
             text: "你不该这样做......",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
           },
           {
             text: "我们不会让你得逞的，艾德里安。我们会阻止你，阻止组织的所有阴谋！",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
           },
           {
             text: "无知的人类",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
           },
         ],
       };
@@ -657,35 +657,35 @@ class Player {
       const dialogues = [
         {
           text: "你就是莱拉？",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fish.png",
         },  
         {
           text: "向我许个愿望吧，尽快，孩子。你的愿望会引领你到达光明之岸。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fish.png",
         },  
         {
           text: "（心存诸多疑虑，但你不得不快速许了一个愿望）我想拯救alpha梦境。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
         {
           text: "现在，从我右边那个柱子正右侧开始，往下走到底，再向右走一小步，你就会走到虚空法阵里。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fish.png",
         },  
         {
           text: "在虚空法阵，你可以传送到一个神秘的岛屿上。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fish.png",
         },  
         {
           text: "（后期，这些对话加一下神秘组织的故事）",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fish.png",
         },  
         {
           text: "嗯...",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
         {
           text: "按照传说之鱼的说法，去虚空法阵，按E实现传送。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/精灵/精灵.png",
         },  
       ];
       createDialogueBox(dialogues);
@@ -695,19 +695,19 @@ class Player {
       const dialogues = [
         {
           text: "莱拉，你忘记了吗。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fish.png",
         },  
         {
           text: "从我右边那个柱子正右侧开始，往下走到底，再向右走一小步，你就会走到虚空法阵里。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fish.png",
         },  
         {
           text: "在虚空法阵，你可以传送到一个神秘的岛屿上。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fish.png",
         },  
         {
           text: "嗯...",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
       ];
       createDialogueBox(dialogues);
@@ -726,11 +726,11 @@ class Player {
         },  
         {
           text: "卡尔？？？卡尔一定在附近！",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
         {
           text: "探索这个地图，找到卡尔吧！",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/精灵/精灵.png",
         },  
       ];
       createDialogueBox(dialogues);
@@ -744,7 +744,7 @@ class Player {
         },  
         {
           text: "不可思议的梦境",
-          image: "../img/conversation/卡尔/卡尔.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
       ];
       createDialogueBox(dialogues);
@@ -754,19 +754,19 @@ class Player {
       const dialogues = [
         {
           text: "你找到我了。莱拉。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fazhen.png",
         },  
         {
           text: "我是虚空法阵。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fazhen.png",
         },  
         {
           text: "？",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
         {
           text: "来吧，去跟我们的长老对话吧",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/fazhen.png",
         },  
       ];
 
@@ -784,11 +784,11 @@ class Player {
       const dialogues = [
         {
           text: "“她曾想知道真相，但是，却还是选择了将其遗忘。”",
-          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          image: "../img/conversation/其他人物/ghost.png", // 另一张图片
         },
         {
           text: "你好，你愿意陪我吗？",
-          image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+          image: "../img/conversation/其他人物/ghostangry.png", // 另一张图片
           options: ["当然，我会陪你的->", "不，我现在没有空->"], // 添加选项
         },
       ]; 
@@ -800,7 +800,7 @@ class Player {
           },
           {
             text: "你跟她不一样。你永远记得你的使命。",
-            image: "../img/conversation/其他人物/ghost.png",
+            image: "../img/conversation/其他人物/ghostangry.png",
           },
           {
             text: "我只帮助那些值得帮助的人。来吧。让我帮助你。",
@@ -808,45 +808,45 @@ class Player {
           },
           {
             text: "组织的暗号：4399",
-            image: "../img/conversation/艾德里安/艾德里安.png",
+            image: "../img/conversation/其他人物/ghost.png",
           },  
           {
             text: "说出这个数字，无论是谁，都会相信你是组织的人。",
-            image: "../img/conversation/艾德里安/艾德里安.png",
+            image: "../img/conversation/其他人物/ghostangry.png",
           },
           {
             text: "你这么聪明，肯定知道这样可以得到艾德里安的信任，从而套出艾德里安的真实身份吧！",
-            image: "../img/conversation/艾德里安/艾德里安.png",
+            image: "../img/conversation/其他人物/ghost.png",
           },
           {
             text: "一直向前，不要回头！",
-            image: "../img/conversation/艾德里安/艾德里安.png",
+            image: "../img/conversation/其他人物/ghostangry.png",
           },
           {
             text: "“她曾想知道真相，但是，却还是选择了将其遗忘。”",
-            image: "../img/conversation/艾德里安/艾德里安.png",
+            image: "../img/conversation/其他人物/ghost.png",
           },  
           {
             text: "祝你好运。",
-            image: "../img/conversation/艾德里安/艾德里安.png",
+            image: "../img/conversation/其他人物/ghost.png",
           },  
           {
             text: "去找艾德里安。",
-            image: "../img/conversation/艾德里安/艾德里安.png",
+            image: "../img/conversation/精灵/精灵.png",
           },  
             ],
         abandon: [
           {
             text: "（仰天长啸）哈哈哈哈哈哈哈",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            image: "../img/conversation/其他人物/ghost.png", // 另一张图片
           },
           {
             text: "原来，你和她是一样的。",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            image: "../img/conversation/其他人物/ghostangry.png", // 另一张图片
           },
           {
             text: "难道不应该快去救alpha梦境吗？这里不欢迎你。我只帮助那些值得帮助的人。",
-            image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
+            image: "../img/conversation/其他人物/ghostangry.png", // 另一张图片
           },
         ],
       };
@@ -966,19 +966,19 @@ class Player {
       const dialogues = [
         {
           text: "莱拉你又来啦。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/ghost.png",
         },  
         {
           text: "...",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/ghostangry.png",
         },  
         {
           text: "走吧走吧，我相信你，暗号是4399",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/其他人物/ghost.png",
         },  
         {
           text: "好...",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
       ];
 
@@ -1004,15 +1004,15 @@ class Player {
         },  
         {
           text: "（疑惑）组织？你是说艾德里安所在的那个组织？",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
         {
           text: "（点头）是的，莱拉。这个组织已经不再是简单的阴谋集团。他们掌握了一种能够控制全球梦境的技术——“阿尔法梦境”。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         }, 
         {
           text: "阿尔法梦境是一种终极的梦境技术，它能够潜入任何人的潜意识，改变他们的记忆和行为，从而影响整个世界的未来。",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
         {
           text: "（震惊）如果他们成功启动了阿尔法梦境，那岂不是整个世界都要陷入他们的掌控之中？",
@@ -1020,27 +1020,27 @@ class Player {
         },  
         {
           text: "（严肃）没错。这也是我为什么必须留下来的原因。我需要更多的信息来破坏他们的计划。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
         {
           text: "我该怎么办？",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },  
         {
           text: "我们必须知道那个组织的暗号。这也是我在这里的原因。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
         {
           text: "这张地图上有很多组织的前成员。他们的形态和性格各异。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
         {
           text: "尊重他们。他们会告诉你我们想要的东西。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
         {
           text: "一旦知道了密码，去揭穿艾德里安的密谋！",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
       ];
       createDialogueBox(dialogues);
@@ -1059,15 +1059,15 @@ class Player {
         },  
         {
           text: "快去探寻一下这个地图上的异常地方。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
         {
           text: "那只传说之鱼，很关键。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         }, 
         {
           text: "这个地方，到处都是迷幻，小心别被弄乱了心智。",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
         {
           text: "好，我会小心的",
@@ -1075,51 +1075,12 @@ class Player {
         },  
         {
           text: "去找传说之鱼吧",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/卡尔/卡尔.png",
         },  
       ];
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
       this.aidedialog=true;
-    }
-    if (collisionMap[interactY][interactX] === 200) {
-      const dialogues = [
-        {
-          text: "你就是莱拉？",
-          image: "../img/conversation/艾德里安/艾德里安.png",
-        },  
-        {
-          text: "向我许个愿望吧，尽快，孩子。你的愿望会引领你到达光明之岸。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
-        },  
-        {
-          text: "（心存诸多疑虑，但你不得不快速许了一个愿望）我想拯救alpha梦境。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
-        },  
-        {
-          text: "现在，从我右边那个柱子正右侧开始，往下走到底，再向右走一小步，你就会走到虚空法阵里。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
-        },  
-        {
-          text: "在虚空法阵，你可以传送到一个神秘的岛屿上。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
-        },  
-        {
-          text: "（后期，这些对话加一下神秘组织的故事）",
-          image: "../img/conversation/艾德里安/艾德里安.png",
-        },  
-        {
-          text: "嗯...",
-          image: "../img/conversation/艾德里安/艾德里安.png",
-        },  
-        {
-          text: "按照传说之鱼的说法，去虚空法阵，按E实现传送。",
-          image: "../img/conversation/艾德里安/艾德里安.png",
-        },  
-      ];
-      createDialogueBox(dialogues);
-      showPasswordModal();
-      collisionMap[interactY][interactX] = 0;
     }
   }
 
