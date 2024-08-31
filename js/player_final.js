@@ -17,6 +17,7 @@ class Player {
     this.check1 = 0;
     this.check2 = 0;
     this.check3 = 0;
+    this.isconversation = 0;
 
     // 预加载所有的帧图像
     this.images = {
@@ -208,10 +209,12 @@ class Player {
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isconversation = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isconversation = 0;
           if (self.check3 == 0) { 
             self.check3 = 1;
             self.bug += 1;
@@ -298,10 +301,12 @@ class Player {
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isconversation = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isconversation = 0;
           if (self.check1 == 0) {
             self.check1 = 1;
             self.bug += 1;
@@ -380,10 +385,12 @@ class Player {
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isconversation = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isconversation = 0;
           if (self.check2 == 0) { 
             self.check2 = 1;
             self.bug += 1;
@@ -482,10 +489,12 @@ class Player {
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isconversation = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isconversation = 0;
           self.read = 1;
           document.body.removeChild(dialogBox);
           document.getElementById("gameCanvas").style.display = "block";
@@ -517,10 +526,6 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
 
-    if (collisionMap[interactY][interactX] === 3) {
-      this.showMessage("你修复了一处结构！");
-      collisionMap[interactY][interactX] = 0;
-    }
   }
 
   fadeOutAndRedirect() {
