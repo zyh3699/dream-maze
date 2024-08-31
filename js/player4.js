@@ -232,14 +232,14 @@ class Player {
         if (buttonText === "删除") {
           inputField.value = inputField.value.slice(0, -1);
         } else if (buttonText === "确定") {
-          if (inputField.value === "1829") {
+          if (inputField.value === "1289") {
             alert("密码正确");
             this.decrypt = 1;
             this.map = 1;
             document.body.removeChild(passwordContainer);
             const dialogues = [
               {
-                text: "欢迎你，尊贵的1829组织成员",
+                text: "欢迎你，尊贵的1289组织成员",
                 image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
               },
               {
@@ -481,7 +481,7 @@ class Player {
             image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
           },
           {
-            text: "但是你没有使用意识重现完成斩杀，你再也没用办法从我的意识里找到任何线索了",
+            text: "但是之前我好像告诉过你，你没有使用意识重现完成斩杀，你再也没用办法从我的意识里找到任何线索了",
             image: "../img/conversation/精灵/精灵.png", // 另一张图片
           },
           {
@@ -492,7 +492,10 @@ class Player {
             text: "一切线索都要靠你自己找了",
             image: "../img/conversation/精灵/精灵.png", // 精灵
           },
-          
+          {
+            text: "要是实在找不到的话，去菜单里面的线索看看吧...",
+            image: "../img/conversation/精灵/精灵.png", // 精灵
+          },
         ];
         let currentDialogue = 0;
         let charIndex = 0;
@@ -617,11 +620,11 @@ class Player {
               image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
             },
             {
-              text: "在食物店旁边，梦境陷入雪境的时候，你会发现它",
+              text: "在右上角食物店左边，梦境陷入雪境的时候，你会发现它的",
               image: "../img/conversation/精灵/精灵.png", // 另一张图片
             },
             {
-              text: "哦对了，还有那个魔法球...",
+              text: "哦对了，还有下面那个魔法球...",
               image: "../img/conversation/精灵/精灵.png", // 精灵
             },
             {
@@ -956,12 +959,16 @@ class Player {
             image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
           },
           {
-            text: "阿尔法梦境的核心是一个非常复杂的结构，我们需要修复所有的漏洞可能才能进入。",
+            text: "阿尔法梦境的核心是一个非常复杂的结构，我们需要完成所有的任务可能才能进入。",
             image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
           },
           {
             text: "否则这个梦境结构会一直崩塌",
-            image: "../img/conversation/精灵/精灵.png", // 精灵
+            image: "../img/conversation/卡尔/Elliott.png", // 精灵
+          },
+          {
+            text: "要完成的任务在菜单里面的任务提示里面找吧，不要迫不得已点到线索哦...相信你还是可以自己找出来的",
+            image: "../img/conversation/精灵/精灵.png", // 另一张图片
           },
         ];
         let currentDialogue = 0;
@@ -1039,7 +1046,11 @@ class Player {
             image: "../img/conversation/精灵/精灵.png", // 精灵
           },
           {
-            text: "你们难道没有发现那个那处废弃的电站吗...",
+            text: "你们难道没有发现上方那个那处废弃的电站吗...",
+            image: "../img/conversation/精灵/精灵.png", // 精灵
+          },
+          {
+            text: "看看你的任务提示，解密部分好像还没有完成...",
             image: "../img/conversation/精灵/精灵.png", // 精灵
           },
         ];
@@ -1160,6 +1171,14 @@ class Player {
           abandon: [
             {
               text: "地图上你还有许多没有探索到的信息，各个角落都会有的，想想卡尔一开始说的...梦境不同形态都有不一样的差异...",
+              image: "../img/conversation/精灵/精灵.png", // 另一张图片
+            },
+            {
+              text: "你有看到梦境到达某个形态时地图上会多出一些数字吗...那些可能是解码的关键",
+              image: "../img/conversation/精灵/精灵.png", // 另一张图片
+            },
+            {
+              text: "忘记告诉你了，密码是四位的，数字要从小到大排...",
               image: "../img/conversation/精灵/精灵.png", // 另一张图片
             },
           ],
