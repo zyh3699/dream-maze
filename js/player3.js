@@ -286,43 +286,43 @@ class Player {
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 7) {
       this.showMessage("这就是legend fish？传说之鱼，行于地，栖于冥。Sigh ... 好危险 ... 它会说话？按E试试 ");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 6) {
       this.showMessage("致幻蘑菇：当然可以食用了！现实里，一生你只有一次机会吃掉它，但是在这里，谁知道呢？");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 9) {
       this.showMessage("小恐龙吗？从来没有见过，看起来好可爱呀...（^pet^pet^）啊！怎么会喷火？？？");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 10) {
       this.showMessage("宝藏箱：Pirate of Caribbean. 身为被诅咒之人，你似乎无法触碰到它。");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 8) {
       this.showMessage("Ghost: ～你要跟我对话吗～o.o.o.");
-      collisionMap[interactY][interactX] = 0;
+      
     }    
     if (collisionMap[interactY][interactX] === 14) {
       this.showMessage("这边好像过不去哎");
-      collisionMap[interactY][interactX] = 0;
+      
     }    
     if (collisionMap[interactY][interactX] === 13) {
       this.showMessage("那边有条...鱼？在陆地上的鱼？快去看看...");
-      collisionMap[interactY][interactX] = 0;
+      
     }    
     if (collisionMap[interactY][interactX] === 18) {
       this.showMessage("你听到了一阵熟悉的声音，按E查看");
-      collisionMap[interactY][interactX] = 0;
+      
     }    
     if (collisionMap[interactY][interactX] === 11) {
       this.showMessage("空气中传来一声冷笑，像是艾德里安的声音");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 19) {
       this.showMessage("你一脚踏空，但是低头却发现自己踩在地上，周围肯定有蹊跷");
-      collisionMap[interactY][interactX] = 0;
+      
     }
 
   }
@@ -1114,8 +1114,8 @@ class Player {
       messageElement.style.opacity = 0;
       setTimeout(() => {
         document.body.removeChild(messageElement);
-      }, 1000); // 等待1秒以完成淡出效果
-    }, 500); // 2秒后开始淡出
+      }, 500); // 等待1秒以完成淡出效果
+    }, 100); // 2秒后开始淡出
   }
 }
 
