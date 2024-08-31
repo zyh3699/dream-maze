@@ -818,7 +818,7 @@ class Player {
       setTimeout(() => {
         document.body.removeChild(messageElement);
       }, 1000); // 等待1秒以完成淡出效果
-    }, 2000); // 2秒后开始淡出
+    }, 300); // 2秒后开始淡出
   }
 }
 
