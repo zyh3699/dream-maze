@@ -121,56 +121,56 @@ class Player {
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 4) {
       this.showMessage("这里怎么有个骷髅");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 20) {
       this.showMessage("这个小幽灵好像睡着了...这个地方？这些刷怪笼是用来干什么的？这个法阵又通往何处？");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 21) {
       this.showMessage("这里有个会发光的镜子");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 22) {
       this.showMessage("这只猫...是在对我笑吗？");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 23) {
       this.showMessage("正常人会在这里放个玩偶吗...");
-      collisionMap[interactY][interactX] = 0;
+      
     }
 
     if (collisionMap[interactY][interactX] === 14) {
       this.showMessage("为什么总感觉有好多双眼睛在看着我...");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 15) {
       this.showMessage("这个玩偶我在卡尔的办公室见到过！卡尔一定来过这里！");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 16) {
       this.showMessage("散落在地上的书？看起来没什么用");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 17) {
       this.showMessage("这只是个普通的镜子，这个房间好多镜子啊");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 18) {
       this.showMessage("伪装成小提琴乐谱的附魔书？想要骗过谁，又能骗过谁呢？不对，这...");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 19) {
       this.showMessage("结满蜘蛛网的房间吗？但是为什么隐隐的有音乐声？");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 11) {
       this.showMessage("悦耳的风铃声，好奇怪，如此奇异的地方竟会有那么清脆的让人愉快的声音。一定是魔法。");
-      collisionMap[interactY][interactX] = 0;
+      
     }
     if (collisionMap[interactY][interactX] === 12) {
       this.showMessage("一阵浓郁的药草香，但是你感觉真的很好闻，清新中带着一股纯真");
-      collisionMap[interactY][interactX] = 0;
+      
     }
   }
 
@@ -816,7 +816,7 @@ class Player {
       setTimeout(() => {
         document.body.removeChild(messageElement);
       }, 1000); // 等待1秒以完成淡出效果
-    }, 2000); // 2秒后开始淡出
+    }, 300); // 2秒后开始淡出
   }
 }
 
