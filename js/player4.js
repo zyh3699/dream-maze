@@ -1433,7 +1433,7 @@ class Player {
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
         {
-          text: "要是实在没有办法获得关键线索，去菜单的线索里面看看吧",
+          text: "要是实在没有办法获得关键线索，去菜单的线索里面看看吧（希望你不需要用到这个按钮）",
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
         {
