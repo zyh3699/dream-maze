@@ -1432,6 +1432,10 @@ class Player {
           text: "你们在这一层需要完成的任务都在菜单的任务提示里面可以找得到...注意及时观察进度条",
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
+        {
+          text: "要是实在没有办法获得关键线索，去菜单的线索里面看看吧",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
       ];
       let currentDialogue = 0;
       let charIndex = 0;

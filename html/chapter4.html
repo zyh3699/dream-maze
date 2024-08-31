@@ -137,7 +137,7 @@
        <button id="menuButton" onclick="toggleMenu()">菜单</button>
   <div class="menu" id="menu">
     <button onclick="save()">存档</button>
-    <button onclick="settings()">设置</button>
+    <button onclick="settings()">线索</button>
     <button onclick="tips()">任务提示</button>
   </div>
   <div id="intro">
@@ -146,6 +146,7 @@
       <span id="dialogueText"></span> <!-- 用于显示对话文本 -->
     </div>
   </div>
+  <div id="statusText" style="display: none;"></div>
   <div id="progressContainer">
     <div class="progressBarWrapper">
       <span class="progressLabel">修复漏洞</span>
@@ -232,6 +233,41 @@
     event.preventDefault(); // 禁用空格键默认行为
   }
 };
+
+function settings() {
+    const statusText = document.getElementById('statusText');
+    let imageContainer = document.getElementById('imageContainer');
+
+    if (imageContainer) {
+      // 如果图片容器已经存在，则移除它
+      document.body.removeChild(imageContainer);
+    } else {
+      // 创建图片容器和图片元素
+      imageContainer = document.createElement('div');
+      imageContainer.id = 'imageContainer'; // 设置ID以便后续查找
+      const image = document.createElement('img');
+
+      // 设置图片路径
+      image.src = '../map/clue.png';
+      image.alt = 'Image Description';
+
+      // 设置图片容器样式
+      imageContainer.style.position = 'fixed';
+      imageContainer.style.top = '50%';
+      imageContainer.style.left = '50%';
+      imageContainer.style.transform = 'translate(-50%, -50%)';
+      imageContainer.style.zIndex = '1000';
+      imageContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+      imageContainer.style.padding = '10px';
+      imageContainer.style.borderRadius = '5px';
+
+      // 添加图片到容器
+      imageContainer.appendChild(image);
+
+      // 将图片容器添加到body
+      document.body.appendChild(imageContainer);
+    }
+  }
 
     function showNextDialogue() {
       if (currentDialogue < dialogues.length - 1) {
