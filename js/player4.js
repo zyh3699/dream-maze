@@ -16,6 +16,7 @@ class Player {
     this.decrypt = 0;
     this.dialogue = 0;
     this.waterSecret = 0;
+    this.key = 0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -680,12 +681,15 @@ class Player {
             }
           }
 
+          const self = this;
+
           function showNextDialogue() {
             if (currentDialogue < dialogues.length) {
               dialogText.innerText = "";
               lailaImage.src = dialogues[currentDialogue].image;
               typeDialogue();
             } else {
+              self.key = 1;
               document.body.removeChild(dialogBox);
               document.getElementById("gameCanvas").style.display = "block";
               requestAnimationFrame(mainLoop);
