@@ -15,6 +15,7 @@ class Player {
     this.visit = 0;
     this.decrypt = 0;
     this.dialogue = 0;
+    this.waterSecret = 0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -1507,7 +1508,7 @@ class Player {
           image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
         },
         {
-          text: "等等，你有注意到水池上方雕塑的变化吗...",
+          text: "等等，你有注意到水池上方左边雕塑的变化吗...",
           image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
         },
       ];
@@ -1551,12 +1552,15 @@ class Player {
         }
       }
 
+      const self = this;
+
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.waterSecret = 1;
           document.body.removeChild(dialogBox);
           document.getElementById("gameCanvas").style.display = "block";
           requestAnimationFrame(mainLoop);

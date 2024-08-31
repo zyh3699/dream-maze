@@ -156,6 +156,10 @@
       <div class="progressBar"><div id="decryptProgress"></div></div>
     </div>
     <div class="progressBarWrapper">
+      <span class="progressLabel">水池的秘密</span>
+      <div class="progressBar"><div id="waterProgress"></div></div>
+    </div>
+    <div class="progressBarWrapper">
       <span class="progressLabel">与卡尔对话</span>
       <div class="progressBar"><div id="dialogueProgress"></div></div>
     </div>
@@ -192,18 +196,22 @@
         const bugProgress = document.getElementById("bugProgress");
         const decryptProgress = document.getElementById("decryptProgress");
         const dialogueProgress = document.getElementById("dialogueProgress");
+        const waterProgress = document.getElementById("waterProgress");
 
         const bugCount = window.player.bug; // 获取漏洞修复数
         const decryptCount = window.player.decrypt; // 获取解密数
         const dialogueCount = window.player.dialogue; // 获取对话数
+        const waterSecret = window.player.waterSecret; // 获取水池秘密数
 
         const totalBugs = 5; // 总漏洞数
         const totalDecrypts = 1; // 总解密数
         const totalDialogues = 1; // 总对话数
+        const totalWaterSecrets = 1; // 总水池秘密数
 
         bugProgress.style.width = (bugCount / totalBugs) * 100 + "%";
         decryptProgress.style.width = (decryptCount / totalDecrypts) * 100 + "%";
         dialogueProgress.style.width = (dialogueCount / totalDialogues) * 100 + "%";
+        waterProgress.style.width = (waterSecret / totalWaterSecrets) * 100 + "%";
 
         progressContainer.style.display = "block";
       } else {
