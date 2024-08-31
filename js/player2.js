@@ -28,6 +28,12 @@ class Player {
       this.images.right[i].src = `../img/charactor/莱拉1/right${i}.png`;
     }
     this.image = this.images.down[0]; // 初始图像
+    this.dialogDoorghost=0;
+    this.dialogCuckoo=0;
+    this.dialogMirror=0;
+    this.dialogPhone=0;
+    this.dialogFrog=0;
+    this.dialogFazhen=0;
   }
 
   draw(ctx) {
@@ -187,7 +193,8 @@ class Player {
       this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 5) {
+    if (collisionMap[interactY][interactX] === 5 && this.dialogDoorghost===0 && this.dialogCuckoo===0) {
+      this.dialogDoorghost=1;
       const dialogues = [
         {
           text: "我知道你会来的。莱拉，我能感受到你。",
@@ -198,7 +205,7 @@ class Player {
           image: "../img/conversation/莱拉/莱拉.png",
         },
         {
-          text: "如你所见，幽灵，还能是什么？(你察觉到一丝指向不明的愤怒)",
+          text: "如你所见，现在是个幽灵(你察觉到指向不明的愤怒)",
           image: "../img/conversation/其他人物/ghostangry.png",
         },
         {
@@ -214,7 +221,7 @@ class Player {
           image: "../img/conversation/莱拉/莱拉.png",
         },
         {
-          text: "去找布谷钟吧...莱拉，把握住...咳咳咳...千万别,沦为囚徒...囚禁，我的宿命...",
+          text: "去找布谷钟吧...莱拉，把握住...咳咳咳...千万别，沦为囚徒...囚禁，我的宿命...",
           image: "../img/conversation/其他人物/ghost.png",
         } ,       
         {
@@ -233,10 +240,25 @@ class Player {
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 7) {
+    if (collisionMap[interactY][interactX] === 5 && this.dialogDoorghost===1 && this.dialogCuckoo===0) {
       const dialogues = [
         {
-          text: "Cuckoo!Cuckoo!时间调回，莱拉！快看，快看！",
+          text: "（幽灵皱了皱眉。始终闭着眼。看样子不会再跟你多说些什么了。）",
+          image: "../img/conversation/其他人物/ghost.png",
+        },
+        {
+          text: "请去找房间里的布谷钟，按E跟他对话。",
+          image: "../img/conversation/精灵/Dwarf.png",
+        }
+      ];      
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 7 && this.dialogDoorghost===1 && this.dialogCuckoo===0) {
+      this.dialogCuckoo=1;
+      const dialogues = [
+        {
+          text: "Cuckoo！我有时间调回的能力。现在请看...",
           image: "../img/conversation/其他人物/Cuckoo.png",
         },
         {
@@ -260,10 +282,6 @@ class Player {
           image: "../img/conversation/莱拉/莱拉.png",
         },
         {
-          text: "（谨慎地）艾德里安，你不觉得……你对这些梦境的了解太多了吗？有时候，我感觉你甚至比我还清楚接下来会发生什么。",
-          image: "../img/conversation/莱拉/莱拉.png",
-        },
-        {
           text: "（略显迟疑）嗯……可能是因为我有些经验吧。毕竟，我一直在研究这些东西……",
           image: "../img/conversation/艾德里安/艾德里安.png",
         },
@@ -276,7 +294,7 @@ class Player {
           image: "../img/conversation/其他人物/Cuckoo.png",
         },
         {
-          text: "好想念小魔。",
+          text: "去找小魔吧。",
           image: "../img/conversation/其他人物/Cuckoo.png",
         },
         {
@@ -287,7 +305,22 @@ class Player {
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 6) {
+    if (collisionMap[interactY][interactX] === 7 && this.dialogDoorghost===1 && this.dialogCuckoo===1 && this.dialogMirror===0) {
+      const dialogues = [
+        {
+          text: "去找小魔吧。告诉他我们都很想他。",
+          image: "../img/conversation/其他人物/Cuckoo.png",
+        },
+        {
+          text: "小魔是一面附魔镜子，看起来和普通镜子没什么两样。（房间内有不只一面镜子！）请在房间内找到小魔，跟他对话，获取更多的信息。",
+          image: "../img/conversation/精灵/精灵.png",
+        },
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 6 && this.dialogCuckoo===1 && this.dialogMirror===0) {
+      this.dialogMirror=1;
       const dialogues = [
         {
           text: "（透过镜子，你看到了什么？）",
@@ -337,7 +370,30 @@ class Player {
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 8) {
+    if (collisionMap[interactY][interactX] === 6 && this.dialogCuckoo===1 && this.dialogMirror===1 && this.dialogPhone===0) {
+      const dialogues = [
+        {
+          text: "当你凝视深渊的时候，深渊也在凝视着你。",
+          image: "../img/conversation/其他人物/ghost.png",
+        },
+        {
+          text: "有人告诉我，你能够帮我们逃离这个梦境！请救救我们！",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },
+        {
+          text: "我只知道这些了。去找神秘电话机吧。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },            
+        {
+          text: "请找到房间内的神秘电话机。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 8 && this.dialogMirror===1 && this.dialogPhone===0) {
+      this.dialogPhone=1;
       const dialogues = [
         {
           text: "（惊恐）别过来！！！",
@@ -391,7 +447,22 @@ class Player {
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 9) {
+    if (collisionMap[interactY][interactX] === 8 && this.dialogMirror===1 && this.dialogPhone===1 && this.dialogFrog===0) {
+      const dialogues = [
+        {
+          text: "......（嘟嘟嘟嘟嘟嘟）",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },
+        {
+          text: "请找到在某个房间内的戴着帽子的低调青蛙王子。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },            
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 9 && this.dialogPhone===1 && this.dialogFrog===0) {
+      this.dialogFrog=1;
       const dialogues = [
         {
           text: "你好。买巫师帽吗？买附魔梭子吗？买隐形药水吗？",
@@ -433,7 +504,29 @@ class Player {
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 13) {
+    if (collisionMap[interactY][interactX] === 9 && this.dialogPhone===1 && this.dialogFrog===1) {
+      const dialogues = [
+        {
+          text: "(神秘)经过我右边的房间了吗，没经过的话，你可以去看看。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },
+        {
+          text: "不过别逗留太久。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },
+        {
+          text: "另外，请一定要救出卡尔。他在法阵里。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+        {
+          text: "当前任务：找到法阵，见到卡尔",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
+    if (collisionMap[interactY][interactX] === 13 && this.dialogFrog===1 && this.dialogFazhen===0) {
         const dialogues = [
           {
             text: "我在梦里梦到一个依稀记得的梦...前进就是唯一的退路。",
@@ -614,6 +707,7 @@ class Player {
         function handleOption(option) {
           if (option === "那会让你分不清梦境和现实->") {
             dialogues.push(...choiceDialogues.cooperate);
+            this.dialogFazhen=1;
           } else if (option === "因为现实和梦境没有区别->") {
             dialogues.push(...choiceDialogues.abandon);
           }
@@ -628,6 +722,24 @@ class Player {
         showNextDialogue();
             collisionMap[interactY][interactX] = 0;
       }
+    if (collisionMap[interactY][interactX] === 13 && this.dialogFrog===1 && this.dialogFazhen===1) {
+      const dialogues = [
+        {
+          text: "我在梦里梦到一个依稀记得的梦...前进就是唯一的退路。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },
+        {
+          text: "(喃喃自语)对不起......卡尔......",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },
+        {
+          text: "请勇敢前往左侧的刷怪笼，在下一层梦境找到卡尔。按E进入。",
+          image: "../img/conversation/艾德里安/艾德里安.png",
+        },  
+      ];
+      createDialogueBox(dialogues);
+      collisionMap[interactY][interactX] = 0;
+    }
     if (collisionMap[interactY][interactX] === 10) {
         const dialogues = [
           {
