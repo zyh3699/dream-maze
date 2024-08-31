@@ -1428,6 +1428,10 @@ class Player {
           text: "我清楚了，这就去",
           image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
         },
+        {
+          text: "你们在这一层需要完成的任务都在菜单的任务提示里面可以找得到...注意及时观察进度条",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
       ];
       let currentDialogue = 0;
       let charIndex = 0;
