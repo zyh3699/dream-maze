@@ -674,8 +674,8 @@ class Player {
             typeDialogue();
           } else {
             document.body.removeChild(dialogBox);
-            self.showPasswordPrompt();
-            self.visit = 1;
+            // self.showPasswordPrompt();
+            // self.visit = 1;
             document.getElementById("gameCanvas").style.display = "block";
             requestAnimationFrame(mainLoop);
           }
@@ -707,21 +707,19 @@ class Player {
             optionsContainer.appendChild(button);
           });
         }
-
         function handleOption(option) {
           if (option === "那会让你分不清梦境和现实->") {
+            self.dialogFazhen=1;
+          }
+          if (option === "那会让你分不清梦境和现实->") {
             dialogues.push(...choiceDialogues.cooperate);
-            this.dialogFazhen=1;
+            // this.dialogFazhen=1;
           } else if (option === "因为现实和梦境没有区别->") {
             dialogues.push(...choiceDialogues.abandon);
-          }
-          if (option === "好->") { 
-            dialogues.push(...choiceDialogues.cooperate);
           }
           currentDialogue++;          
           showNextDialogue();
         }
-
         document.addEventListener("click", showNextDialogue);
         showNextDialogue();
             collisionMap[interactY][interactX] = 0;
