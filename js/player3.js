@@ -99,7 +99,7 @@ class Player {
     // 提交按钮点击事件
     submitButton.onclick = () => {
         if (passwordInput.value === '4399') {
-          const dialoguews = [
+          const dialogues = [
             {
               text: "（震惊）你怎么会知道？",
               image: "../img/conversation/莱拉/莱拉.png",
@@ -133,8 +133,80 @@ class Player {
               image: "../img/conversation/艾德里安/艾德里安.png",
             }, 
           ];
-              createDialogueBox(dialogues,1);
-            // self.fadeOutAndRedirect();
+          let currentDialogue = 0;
+
+          // 添加CSS样式
+          if (!document.getElementById("dialogue-style")) {
+            const style = document.createElement("style");
+            style.id = "dialogue-style";
+            style.innerHTML = `
+              #dialogue {
+                  background: rgba(0, 0, 0, 0.7);
+                  padding: 20px;
+                  border-radius: 10px;
+                  width: 80%;
+                  height: 100px;
+                  text-align: center;
+                  position: fixed;
+                  bottom: 20px;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  color: white;
+                  font-size: 24px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  box-sizing: border-box;
+              }
+              #dialogue img {
+                  position: absolute;
+                  top: -100px;
+                  left: 10px;
+                  width: 100px;
+                  height: 100px;
+              }`;
+            document.head.appendChild(style);
+          }
+        
+          // 创建对话框元素
+          const dialogBox = document.createElement("div");
+          dialogBox.id = "dialogue";
+        
+          // 创建图片元素
+          const charImage = document.createElement("img");
+          charImage.alt = "Character Image";
+          dialogBox.appendChild(charImage);
+        
+          // 创建对话文本元素
+          const dialogText = document.createElement("span");
+          dialogText.id = "dialogueText";
+          dialogBox.appendChild(dialogText);
+          document.body.appendChild(dialogBox);
+        
+          function showNextDialogue() {
+            if (currentDialogue < dialogues.length) {
+              // 更新图片和文本内容
+              charImage.src = dialogues[currentDialogue].image;
+              dialogText.innerText = dialogues[currentDialogue].text; // 直接显示整个文本
+              currentDialogue++;
+            } else {
+              // 
+              const bodyElement = document.body;
+              bodyElement.style.transition = "opacity 1s ease-out";
+              bodyElement.style.opacity = 0;
+              setTimeout(() => {
+                window.location.href = "../minigame/wuziqi/index4.html";
+              }, 1000); // 等待1秒以完成淡出效果    
+      
+              document.body.removeChild(dialogBox);
+              document.getElementById("gameCanvas").style.display = "block";
+              requestAnimationFrame(mainLoop); // 继续游戏主循环
+            }
+          }
+        
+          dialogBox.addEventListener("click", showNextDialogue);
+          showNextDialogue();
+                    // self.fadeOutAndRedirect();
             // window.location.href = 'index.html'; // 跳转页面
         } else {
             errorMessage.textContent = '暗号错误，艾德里安奇怪的看了你一眼。';
@@ -1147,14 +1219,6 @@ function createDialogueBox(dialogues,x) {
       dialogText.innerText = dialogues[currentDialogue].text; // 直接显示整个文本
       currentDialogue++;
     } else {
-      if (x===1) {
-        const bodyElement = document.body;
-        bodyElement.style.transition = "opacity 1s ease-out";
-        bodyElement.style.opacity = 0;
-        setTimeout(() => {
-          window.location.href = "../minigame/wuziqi/index4.html";
-        }, 1000); // 等待1秒以完成淡出效果    
-      };
       document.body.removeChild(dialogBox);
       document.getElementById("gameCanvas").style.display = "block";
       requestAnimationFrame(mainLoop); // 继续游戏主循环
