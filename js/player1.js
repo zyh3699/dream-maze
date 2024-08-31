@@ -53,6 +53,7 @@ class Player {
     if (collisionMap[newY][newX] === 6 || collisionMap[newY][newX] === 7 || collisionMap[newY][newX] === 8 || collisionMap[newY][newX] === 2) 
       this.showMessage("按E键交互 ");
     // 碰撞检测
+    if (collisionMap[newY][newX] === 9)  this.showMessage("请前往右侧灰色按钮处，按E键开启谜题");
     if (collisionMap[newY][newX] === 1) {
       return true; // 碰撞检测
     }
