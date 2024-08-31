@@ -248,6 +248,10 @@ class Player {
       this.showMessage("空气中传来一声冷笑，像是艾德里安的声音");
       collisionMap[interactY][interactX] = 0;
     }
+    if (collisionMap[interactY][interactX] === 19) {
+      this.showMessage("你一脚踏空，但是低头却发现自己踩在地上，周围肯定有蹊跷");
+      collisionMap[interactY][interactX] = 0;
+    }
 
   }
 
@@ -674,7 +678,7 @@ class Player {
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
     }
-    if (collisionMap[interactY][interactX] === 12) {
+    if (collisionMap[interactY][interactX] === 12 && this.dialogFish===1) {
       const dialogues = [
         {
           text: "你找到我了。莱拉。",
