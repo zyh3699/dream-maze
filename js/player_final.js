@@ -193,26 +193,16 @@ class Player {
       dialogText.style.color = "#FFFFFF"; // 字体颜色
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
-      function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText +=
-            dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
+      
 
       const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isconversation = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isconversation = 0;
           if (self.check3 == 0) { 
@@ -285,26 +275,16 @@ class Player {
       dialogText.style.color = "#FFFFFF"; // 字体颜色
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
-      function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText +=
-            dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
+      
 
       const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isconversation = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isconversation = 0;
           if (self.check1 == 0) {
@@ -369,26 +349,15 @@ class Player {
       dialogText.style.color = "#FFFFFF"; // 字体颜色
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
-      function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText +=
-            dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
 
       const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isconversation = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isconversation = 0;
           if (self.check2 == 0) { 
@@ -473,26 +442,16 @@ class Player {
       dialogText.style.color = "#FFFFFF"; // 字体颜色
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
-      function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText +=
-            dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
+      
 
       const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isconversation = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isconversation = 0;
           self.read = 1;
