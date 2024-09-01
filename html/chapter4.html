@@ -173,7 +173,9 @@
       <span id="dialogueText"></span> <!-- 用于显示对话文本 -->
     </div>
   </div>
-  <div id="statusText" style="display: none;"></div>
+  <div id="statusText" style="display: none;">
+    <span class="closeButton">&times;</span>
+  </div>
   <div id="progressContainer">
     <span class="closeButton">&times;</span>
     <div class="progressBarWrapper">
@@ -200,6 +202,9 @@
   <script>
   document.querySelector('#progressContainer .closeButton').addEventListener('click', function() {
     document.getElementById('progressContainer').style.display = 'none';
+  });
+  document.querySelector('#statusText .closeButton').addEventListener('click', function() {
+    document.getElementById('statusText').style.display = 'none';
   });
 </script>
   <canvas id="gameCanvas" style="display: none;"></canvas>
@@ -294,7 +299,15 @@ function settings() {
       imageContainer.style.padding = '10px';
       imageContainer.style.borderRadius = '5px';
 
+      const closeButton = document.createElement('span');
+      closeButton.className = 'closeButton';
+      closeButton.innerHTML = '&times;';
+      closeButton.onclick = function() {
+        document.body.removeChild(imageContainer);
+      };
+
       // 添加图片到容器
+       imageContainer.appendChild(closeButton);
       imageContainer.appendChild(image);
 
       // 将图片容器添加到body
