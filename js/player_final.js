@@ -161,7 +161,7 @@ class Player {
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
         {
-          text: "按P刷新梦境...",
+          text: "按P可以刷新梦境...",
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
       ];
