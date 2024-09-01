@@ -276,7 +276,7 @@ updateAdjacentPieces(x, y) {
         }
       }
 
-      dialogBox.addEventListener("click", showNextDialogue);
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
       this.updateAdjacentPieces(interactX, interactY);
@@ -569,6 +569,6 @@ function createDialogueBox(dialogues) {
     }
   }
 
-  dialogBox.addEventListener("click", showNextDialogue);
+  document.addEventListener("click", showNextDialogue);
   showNextDialogue();
 }
