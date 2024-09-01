@@ -99,6 +99,8 @@ class Player {
     // 提交按钮点击事件
     submitButton.onclick = () => {
         if (passwordInput.value === '4399') {
+          document.getElementById('ade').style.textDecoration = 'line-through';
+          document.getElementById('star').style.display = 'block';
           const dialogues = [
             {
               text: "（震惊）你怎么会知道？",
@@ -106,7 +108,7 @@ class Player {
             },  
             {
               text: "艾德里安，你曾也是个有志气的巫师。这个组织曾也是个///",
-              image: "../img/conversation/卡尔/卡尔.png",
+              image: "../img/conversation/莱拉/莱拉.png",
             },  
             {
               text: "（冷静）你说错了。我是组织的核心成员之一。我多年前就和他们签订了协议，利用他们的资源进行梦境技术的研究。我的目标？很简单，通过掌控梦境和潜意识，创造一个更理想的世界。",
@@ -114,7 +116,7 @@ class Player {
             },  
             {
               text: "（插嘴）但你早就和组织的目标分道扬镳了，不是吗？你想利用我们达到自己的野心。",
-              image: "../img/conversation/艾德里安/艾德里安.png",
+              image: "../img/conversation/莱拉/莱拉.png",
             }, 
             {
               text: "（狡黠地笑）你们说的没错。阿尔法梦境的技术是一把双刃剑，它可以控制他人，也可以将我困住。所以，我需要你们来帮我达成我的目标。",
@@ -122,7 +124,7 @@ class Player {
             }, 
             {
               text: "（坚定地）我们不会让你得逞的，艾德里安。我们会阻止你，阻止组织的所有阴谋！",
-              image: "../img/conversation/艾德里安/艾德里安.png",
+              image: "../img/conversation/莱拉/莱拉.png",
             }, 
             {
               text: "（耸肩，冷笑）好吧，那就看看你们有多少本事吧。欢迎来到我的游戏——心灵对弈。",
@@ -130,7 +132,7 @@ class Player {
             }, 
             {
               text: "为了阻止这场灾难，莱拉和卡尔决定联手，破坏阿尔法梦境的核心。这个核心位于一个极其危险且复杂的梦境结构中，充满了各种心理陷阱和防御机制。玩家将参与一场激烈的心理战——“心灵对弈”。",
-              image: "../img/conversation/艾德里安/艾德里安.png",
+              image: "../img/conversation/精灵/精灵.png",
             }, 
           ];
           let currentDialogue = 0;
@@ -335,6 +337,7 @@ class Player {
     const interactY = Math.floor(playerCenterY + offsetY);
 
     if (collisionMap[interactY][interactX] === 2 && this.dialogAde===0 && this.dialogKarl===0) {
+      document.getElementById('carl').style.display = 'block';
       const dialogues = [
         {
           text: "莱拉?",
@@ -647,6 +650,9 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 16 && this.dialogFish===0) {
+      document.getElementById('fazhen').style.display = 'block';
+      document.getElementById('fish').style.textDecoration = 'line-through';
+
       this.dialogFish=1;
       const dialogues = [
         {
@@ -708,6 +714,7 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 15 && this.sound===0) {
+      document.getElementById('carl').style.display = 'block';
       this.sound=1;
       const dialogues = [
         {
@@ -745,6 +752,8 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 12 && this.dialogFish===1) {
+      document.getElementById('ghost').style.display = 'block';
+      document.getElementById('fazhen').style.textDecoration = 'line-through';
       const dialogues = [
         {
           text: "你找到我了。莱拉。",
@@ -937,7 +946,8 @@ class Player {
           dialogues.push(...choiceDialogues.cooperate);
           // player.move(-200,0,collisionMap);
           document.addEventListener("click", chuansong);
-
+          document.getElementById('ade').style.display = 'block';
+          document.getElementById('ghost').style.textDecoration = 'line-through';    
           function chuansong() {
             player.move(-350, 0, collisionMap);
             document.removeEventListener("click", chuansong);
@@ -986,6 +996,8 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 5 && this.dialogKarl===0) {
+      document.getElementById('fish').style.display = 'block';
+      document.getElementById('carl').style.textDecoration = 'line-through';
       this.dialogKarl=1;
       const dialogues = [
         {
@@ -1183,3 +1195,22 @@ function createDialogueBox(dialogues,x) {
   dialogBox.addEventListener("click", showNextDialogue);
   showNextDialogue();
 }
+// 任务栏
+const select=document.querySelector(".select")
+const options_list=document.querySelector(".options-list")
+const options=document.querySelectorAll(".option")
+//切换语言菜单得显示和隐藏
+select.addEventListener("click",()=>{
+  options_list.classList.toggle("active");
+  select.querySelector(".fa-angle-down").classList.toggle("fa-angle-up")
+})
+//切换语言
+options.forEach((option)=>{
+option.addEventListener("click",()=>{
+  options.forEach((option)=>{option.classList.remove("selected")});
+  select.querySelector("span").innerHTML=option.innerHTML;
+  option.classList.add("selected");
+  options_list.classList.toggle("active")
+  select.querySelector(".fa-angle-up").classList.toggle("fa-angle-up")
+})
+})
