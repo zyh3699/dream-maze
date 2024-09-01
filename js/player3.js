@@ -1,5 +1,6 @@
 class Player {
   constructor() {
+    this.isconversation=0;
     this.image = new Image();
     this.image.src = "../img/charactor/莱拉1/down0.png";
     this.width = 32;
@@ -441,12 +442,18 @@ class Player {
       }
       const self = this;
       function showNextDialogue() {
+        self.isconversation = 1;
+        player.isconversation=1;
+        Player.isconversation=1;  
         if (currentDialogue < dialogues.length) {
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           optionsContainer.innerHTML = ""; // 清空选项按钮
           typeDialogue();
         } else {
+          self.isconversation = 0;
+          player.isconversation=0;
+          Player.isconversation=0;    
           document.body.removeChild(dialogBox);
           // self.showPasswordModal();
           document.getElementById("gameCanvas").style.display = "block";
@@ -578,12 +585,18 @@ class Player {
       }
       const self = this;
       function showNextDialogue() {
+        self.isconversation = 1;
+        player.isconversation=1;
+        Player.isconversation=1;  
         if (currentDialogue < dialogues.length) {
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           optionsContainer.innerHTML = ""; // 清空选项按钮
           typeDialogue();
         } else {
+          self.isconversation = 0;
+          player.isconversation=0;
+          Player.isconversation=0;    
           document.body.removeChild(dialogBox);
           // self.showPasswordModal();
           document.getElementById("gameCanvas").style.display = "block";
@@ -891,12 +904,18 @@ class Player {
       }
       const self = this;
       function showNextDialogue() {
+        self.isconversation = 1;
+        player.isconversation=1;
+        Player.isconversation=1;  
         if (currentDialogue < dialogues.length) {
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           optionsContainer.innerHTML = ""; // 清空选项按钮
           typeDialogue();
         } else {
+          self.isconversation = 0;
+          player.isconversation=0;
+          Player.isconversation=0;
           document.body.removeChild(dialogBox);
           self.showPasswordPrompt();
           self.visit = 1;
@@ -1165,12 +1184,16 @@ function createDialogueBox(dialogues) {
 
   function showNextDialogue() {
     self.isconversation = 1;
+    player.isconversation=1;
+    Player.isconversation=1;
     if (currentDialogue < dialogues.length) {
       dialogText.innerText = "";
       lailaImage.src = dialogues[currentDialogue].image;
       typeDialogue();
     } else {
       self.isconversation = 0;
+      player.isconversation=0;
+      Player.isconversation=0;
       document.body.removeChild(dialogBox);
       document.getElementById("gameCanvas").style.display = "block";
       requestAnimationFrame(mainLoop);
