@@ -252,25 +252,15 @@ class Player {
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
       
-      function typeDialogue() {
-        
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
+      
       const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isdialogue = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isdialogue = 0;
           document.body.removeChild(dialogBox);
@@ -318,17 +308,6 @@ class Player {
        dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
        dialogText.style.lineHeight = "1.5"; // 行高
        
-       function typeDialogue() {
-         
-         if (charIndex < dialogues[currentDialogue].text.length) {
-           dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-           charIndex++;
-           setTimeout(typeDialogue, typingSpeed);
-         } else {
-           currentDialogue++;
-           charIndex = 0;
-         }
-       }
        const self = this;
  
        function showNextDialogue() {
@@ -336,7 +315,7 @@ class Player {
             self.isdialogue = 1;
            dialogText.innerText = "";
            lailaImage.src = dialogues[currentDialogue].image;
-           typeDialogue();
+           currentDialogue++;
          } else {
             self.isdialogue = 0;
            document.body.removeChild(dialogBox);
@@ -384,25 +363,14 @@ class Player {
        dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
        dialogText.style.lineHeight = "1.5"; // 行高
        
-       function typeDialogue() {
-         
-         if (charIndex < dialogues[currentDialogue].text.length) {
-           dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-           charIndex++;
-           setTimeout(typeDialogue, typingSpeed);
-         } else {
-           currentDialogue++;
-           charIndex = 0;
-         }
-       }
         const self = this;
  
        function showNextDialogue() {
          if (currentDialogue < dialogues.length) {
             self.isdialogue = 1;
-           dialogText.innerText = "";
+           dialogText.innerText = dialogues[currentDialogue].text;
            lailaImage.src = dialogues[currentDialogue].image;
-           typeDialogue();
+           currentDialogue++;
          } else {
             self.isdialogue = 0;
            document.body.removeChild(dialogBox);
@@ -467,25 +435,15 @@ class Player {
           dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
           dialogText.style.lineHeight = "1.5"; // 行高
           
-          function typeDialogue() {
-            
-            if (charIndex < dialogues[currentDialogue].text.length) {
-              dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-              charIndex++;
-              setTimeout(typeDialogue, typingSpeed);
-            } else {
-              currentDialogue++;
-              charIndex = 0;
-            }
-          }
+          
           const self = this;
     
           function showNextDialogue() {
             if (currentDialogue < dialogues.length) {
               self.isdialogue = 1;
-              dialogText.innerText = "";
+              dialogText.innerText = dialogues[currentDialogue].text;
               lailaImage.src = dialogues[currentDialogue].image;
-              typeDialogue();
+              currentDialogue++;
             } else {
               self.isdialogue = 0;
               document.body.removeChild(dialogBox);
@@ -569,26 +527,16 @@ class Player {
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
       
-      function typeDialogue() {
-        
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-        }
+      
         
         const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isdialogue = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isdialogue = 0;
           document.body.removeChild(dialogBox);
@@ -679,26 +627,16 @@ class Player {
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
       
-      function typeDialogue() {
-        
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
+      
 
       const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isdialogue = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isdialogue = 0;
           document.body.removeChild(dialogBox);
@@ -803,23 +741,14 @@ function createDialogueBox(dialogues) {
   dialogBox.appendChild(dialogText);
   document.body.appendChild(dialogBox);
 
-  function typeDialogue() {
-    if (charIndex < dialogues[currentDialogue].text.length) {
-      dialogText.innerText += dialogues[currentDialogue].text.charAt(charIndex);
-      charIndex++;
-      setTimeout(typeDialogue, typingSpeed);
-    } else {
-      currentDialogue++;
-      charIndex = 0;
-    }
-  }
+  
 
   function showNextDialogue() {
     if (currentDialogue < dialogues.length) {
       // 更新图片和文本内容
       charImage.src = dialogues[currentDialogue].image;
-      dialogText.innerText = "";
-      typeDialogue();
+      dialogText.innerText = dialogues[currentDialogue].text;
+      currentDialogue++;
     } else {
       document.body.removeChild(dialogBox);
       document.getElementById("gameCanvas").style.display = "block";
