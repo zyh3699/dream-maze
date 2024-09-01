@@ -485,7 +485,7 @@ var array = JSON.parse(window.localStorage.userArr);
       setTimeout(() => {
         document.body.removeChild(messageElement);
       }, 1000); // 等待1秒以完成淡出效果
-    }, 2000); // 2秒后开始淡出
+    }, 500); // 2秒后开始淡出
   }
 }
 
