@@ -149,6 +149,33 @@
       border-radius: 5px;
       z-index: 1000;
     }
+     .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  .closeButton:hover {
+    background-color: #ff1a1a;
+    transform: scale(1.1);
+  }
+
+  .closeButton:active {
+    background-color: #e60000;
+    transform: scale(1);
+  }
   </style>
   <script src="../js/存档功能.js"></script>
   <script>
@@ -195,6 +222,7 @@
     </div>
   </div>
   <div id="progressContainer">
+    <span class="closeButton">&times;</span>
     <div class="progressBarWrapper">
       <span class="progressLabel">梦境信息</span>
       <div class="progressBar"><div id="bugProgress"></div></div>
@@ -205,6 +233,12 @@
   <div id="timeControl" style="display: none;">
   <input type="range" id="timeSlider" min="0" max="10" step="1" value="0" oninput="if (window.map.status === 1) { window.map.move(0, Math.floor(Math.random() * 201) - 100); }">
 </div>
+<script>
+  document.querySelector('#progressContainer .closeButton').addEventListener('click', function() {
+    document.getElementById('progressContainer').style.display = 'none';
+    toggleMenu();
+  });
+</script>
   <script src="../js/map_final.js"></script>
   <script src="../js/main_final.js"></script>
   <script src="../js/player_final.js"></script>
@@ -246,7 +280,7 @@
 
     function clues() {
       const progressContainer = document.getElementById("progressContainer");
-      if (progressContainer.style.display === "none") {
+      if (progressContainer.style.display === "none"|| progressContainer.style.display === "") {
         const bugProgress = document.getElementById("bugProgress");
 
         const bugCount = window.player.bug; // 获取漏洞修复数
