@@ -98,16 +98,12 @@ class Player {
 
     // 提交按钮点击事件
     submitButton.onclick = () => {
-        if (passwordInput.value === '4399') {
+        if (passwordInput.value === 'dreammaze') {
           document.getElementById('ade').style.textDecoration = 'line-through';
           document.getElementById('star').style.display = 'block';
           const dialogues = [
             {
-              text: "（震惊）你怎么会知道？",
-              image: "../img/conversation/莱拉/莱拉.png",
-            },  
-            {
-              text: "艾德里安，你曾也是个有志气的巫师。这个组织曾也是个///",
+              text: "艾德里安，你曾也是个有志气的巫师。这个组织曾也是个...",
               image: "../img/conversation/莱拉/莱拉.png",
             },  
             {
@@ -136,61 +132,53 @@ class Player {
             }, 
           ];
           let currentDialogue = 0;
-
+          let charIndex = 0;
+          const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+        
           // 添加CSS样式
-          if (!document.getElementById("dialogue-style")) {
-            const style = document.createElement("style");
-            style.id = "dialogue-style";
-            style.innerHTML = `
-              #dialogue {
-                  background: rgba(0, 0, 0, 0.7);
-                  padding: 20px;
-                  border-radius: 10px;
-                  width: 80%;
-                  height: 100px;
-                  text-align: center;
-                  position: fixed;
-                  bottom: 20px;
-                  left: 50%;
-                  transform: translateX(-50%);
-                  color: white;
-                  font-size: 24px;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  box-sizing: border-box;
-              }
-              #dialogue img {
-                  position: absolute;
-                  top: -100px;
-                  left: 10px;
-                  width: 100px;
-                  height: 100px;
-              }`;
-            document.head.appendChild(style);
-          }
+          const style = document.createElement("style");
+          document.head.appendChild(style);
         
           // 创建对话框元素
           const dialogBox = document.createElement("div");
           dialogBox.id = "dialogue";
         
-          // 创建图片元素
-          const charImage = document.createElement("img");
-          charImage.alt = "Character Image";
-          dialogBox.appendChild(charImage);
+          // 插入莱拉的图片
+          const lailaImage = document.createElement("img");
+          lailaImage.style.width = "100px"; // 将宽度设置为200像素
+          lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+          dialogBox.appendChild(lailaImage);
         
           // 创建对话文本元素
           const dialogText = document.createElement("span");
           dialogText.id = "dialogueText";
           dialogBox.appendChild(dialogText);
           document.body.appendChild(dialogBox);
+          dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+          dialogText.style.fontSize = "20px"; // 字体大小
+          dialogText.style.color = "#FFFFFF"; // 字体颜色
+          dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+          dialogText.style.lineHeight = "1.5"; // 行高
+          function typeDialogue() {
+            if (charIndex < dialogues[currentDialogue].text.length) {
+              dialogText.innerText +=
+                dialogues[currentDialogue].text.charAt(charIndex);
+              charIndex++;
+              setTimeout(typeDialogue, typingSpeed);
+            } else {
+              currentDialogue++;
+              charIndex = 0;
+            }
+          }
+        
+          const self = this;
         
           function showNextDialogue() {
+            self.isconversation = 1;
             if (currentDialogue < dialogues.length) {
-              // 更新图片和文本内容
-              charImage.src = dialogues[currentDialogue].image;
-              dialogText.innerText = dialogues[currentDialogue].text; // 直接显示整个文本
-              currentDialogue++;
+              dialogText.innerText = "";
+              lailaImage.src = dialogues[currentDialogue].image;
+              typeDialogue();
             } else {
               // 
               const bodyElement = document.body;
@@ -199,14 +187,18 @@ class Player {
               setTimeout(() => {
                 window.location.href = "../minigame/wuziqi/index4.html";
               }, 1000); // 等待1秒以完成淡出效果    
-      
+// 
+              self.isconversation = 0;
               document.body.removeChild(dialogBox);
               document.getElementById("gameCanvas").style.display = "block";
-              requestAnimationFrame(mainLoop); // 继续游戏主循环
+              requestAnimationFrame(mainLoop);
             }
           }
-          dialogBox.addEventListener("click", showNextDialogue);
+        
+          document.addEventListener("click", showNextDialogue);
           showNextDialogue();
+
+
         } else {
             errorMessage.textContent = '暗号错误，艾德里安奇怪的看了你一眼。';
             errorMessage.style.display = 'block';  // 显示错误提示
@@ -296,8 +288,8 @@ class Player {
       
     }
     if (collisionMap[interactY][interactX] === 10) {
-      this.showMessage("宝藏箱：Pirate of Caribbean. 身为被诅咒之人，你似乎无法触碰到它。");
-      
+      this.showMessage("宝藏箱：Pirate of Caribbean. 身为被诅咒之人，你似乎无法触碰到它。但是还是恭喜你找到宝藏。");
+      document.getElementById('mapp').style.textDecoration = 'line-through';
     }
     if (collisionMap[interactY][interactX] === 8) {
       this.showMessage("Ghost: ～你要跟我对话吗～o.o.o.");
@@ -809,11 +801,11 @@ class Player {
             image: "../img/conversation/其他人物/ghost.png",
           },
           {
-            text: "组织的暗号：4399",
+            text: "组织的暗号：dreammaze",
             image: "../img/conversation/其他人物/ghost.png",
           },  
           {
-            text: "说出这个数字，无论是谁，都会相信你是组织的人。",
+            text: "说出这个，无论是谁，都会相信你是组织的人。",
             image: "../img/conversation/其他人物/ghostangry.png",
           },
           {
@@ -977,7 +969,7 @@ class Player {
           image: "../img/conversation/其他人物/ghostangry.png",
         },  
         {
-          text: "走吧走吧，我相信你，暗号是4399",
+          text: "走吧走吧，我相信你，暗号是dreammaze",
           image: "../img/conversation/其他人物/ghost.png",
         },  
         {
