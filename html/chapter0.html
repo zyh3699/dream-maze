@@ -299,12 +299,13 @@
     messageElement.innerText = message;
     document.body.appendChild(messageElement);
 
+    toggleMenu();
+
     setTimeout(() => {
       messageElement.style.opacity = 0;
       setTimeout(() => {
         document.body.removeChild(messageElement);
-        toggleMenu();
-      }, 1000); // 等待1秒以完成淡出效果
+      }, 2500); // 等待1秒以完成淡出效果
     }, 1000); // 1秒后开始淡出
     }
     document.addEventListener('DOMContentLoaded', (event) => {
