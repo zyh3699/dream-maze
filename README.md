@@ -1,3 +1,1 @@
 由于本游戏使用了live server插件，请老师在vscode中打开index.html文件时右键点击选择live server打开，这样才能正常运行。
-其次由于素材未找齐，游戏开头的两个界面仅作为测试对话交互和人物移动。
-minigame已经初步完成，在minigame的文件夹中。
