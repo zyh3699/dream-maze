@@ -113,6 +113,33 @@
       text-align: right;
       margin-right: 10px;
     }
+     .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  .closeButton:hover {
+    background-color: #ff1a1a;
+    transform: scale(1.1);
+  }
+
+  .closeButton:active {
+    background-color: #e60000;
+    transform: scale(1);
+  }
     .progressBar {
       display: inline-block;
       width: 70%;
@@ -148,6 +175,7 @@
   </div>
   <div id="statusText" style="display: none;"></div>
   <div id="progressContainer">
+    <span class="closeButton">&times;</span>
     <div class="progressBarWrapper">
       <span class="progressLabel">修复漏洞</span>
       <div class="progressBar"><div id="bugProgress"></div></div>
@@ -169,6 +197,11 @@
       <div class="progressBar"><div id="dialogueProgress"></div></div>
     </div>
   </div>
+  <script>
+  document.querySelector('#progressContainer .closeButton').addEventListener('click', function() {
+    document.getElementById('progressContainer').style.display = 'none';
+  });
+</script>
   <canvas id="gameCanvas" style="display: none;"></canvas>
   <script src="../js/map4.js"></script>
   <script src="../js/main4.js"></script>
@@ -197,7 +230,7 @@
     
     function tips() {
       const progressContainer = document.getElementById("progressContainer");
-      if (progressContainer.style.display === "none") {
+      if (progressContainer.style.display === "none"|| progressContainer.style.display === "") {
         const bugProgress = document.getElementById("bugProgress");
         const decryptProgress = document.getElementById("decryptProgress");
         const dialogueProgress = document.getElementById("dialogueProgress");
