@@ -2720,7 +2720,7 @@ function gameOver() {
     document.getElementById('life-countdown').textContent = `生命值: ${lifeCount}`;
     
     if (lifeCount <= 0) {
-        alert('生命值已耗尽...您成功逃离了梦境！！！');
+        alert('生命值已耗尽...恭喜您成功识破了梦境的迷幻。现实里只需要达到target...但是在梦境里，您需要die五次...您成功逃离了梦境！！！');
         // Optionally redirect to another page or restart the game
         window.location.href = '../../../html/chapter3.html';
     } else {
