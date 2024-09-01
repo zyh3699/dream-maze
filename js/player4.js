@@ -160,17 +160,17 @@ class Player {
 
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 4) {
-      this.showMessage("你现在还不可以进去");
+      this.showMessage("你现在还不可以进去，等你进入核心之后再看看吧");
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 11) {
       this.showMessage("点E可以进行交互");
     }
     if (collisionMap[interactY][interactX] === 10) {
-      this.showMessage("点E进行解码");
+      this.showMessage("这里就是电站了，点E进行解码");
     }
     if (collisionMap[interactY][interactX] === 2) {
-      this.showMessage("点E进入梦境核心");
+      this.showMessage("好像是阿尔法梦境的核心，点E进入梦境核心");
     }
     if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("点E进入结构节点，点空格开始修复。只允许单点！长按会导致梦境的崩溃！");
@@ -266,6 +266,10 @@ class Player {
               {
                 text: "这里到底还有多少秘密...",
                 image: "../img/conversation/莱拉/莱拉.png", // 精灵
+              },
+              {
+                text: "进入阿尔法梦境核心的入口就在右下角...",
+                image: "../img/conversation/精灵/精灵.png", // 精灵
               },
             ];
             let currentDialogue = 0;
@@ -501,7 +505,40 @@ class Player {
             text: "要是实在找不到的话，去菜单里面的线索看看吧...",
             image: "../img/conversation/精灵/精灵.png", // 精灵
           },
+          {
+            text: "当然，你可以选择回去上一层梦境，在那里的宝箱也有你遗漏的线索...",
+            image: "../img/conversation/精灵/精灵.png", // 精灵
+            options: ["回到上一层->", "我相信我可以在这里找到->"], // 添加选项
+          },
         ];
+
+        const choiceDialogues = {
+          cooperate: [
+            {
+              text: "你做出了明智的选择，当然，回到上一层梦境有特定方法...",
+              image: "../img/conversation/精灵/精灵.png",
+            },
+            {
+              text: "试试同时按住back吧...",
+              image: "../img/conversation/精灵/精灵.png",
+            },
+          ],
+          abandon: [
+            {
+              text: "很有勇气...我还是给你提供一些线索吧",
+              image: "../img/conversation/精灵/精灵.png", // 另一张图片
+            },
+            {
+              text: "魔法球，食物店，去找找吧",
+              image: "../img/conversation/精灵/精灵.png", // 另一张图片
+            },
+            {
+              text: "祝你好运",
+              image: "../img/conversation/精灵/精灵.png", // 另一张图片
+            },
+          ],
+        };
+
         let currentDialogue = 0;
         let charIndex = 0;
         const typingSpeed = 1; // 每个字符的打印速度（毫秒）
@@ -530,6 +567,12 @@ class Player {
         dialogText.style.color = "#FFFFFF"; // 字体颜色
         dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
         dialogText.style.lineHeight = "1.5"; // 行高
+
+        // 创建选项按钮容器
+        const optionsContainer = document.createElement("div");
+        optionsContainer.id = "options";
+        dialogBox.appendChild(optionsContainer);
+
         function typeDialogue() {
           if (charIndex < dialogues[currentDialogue].text.length) {
             dialogText.innerText +=
@@ -537,8 +580,13 @@ class Player {
             charIndex++;
             setTimeout(typeDialogue, typingSpeed);
           } else {
-            currentDialogue++;
-            charIndex = 0;
+            if (dialogues[currentDialogue].options) {
+              showOptions(dialogues[currentDialogue].options);
+              charIndex = -1;
+            } else {
+              currentDialogue++;
+              charIndex = 0;
+            }
           }
         }
 
@@ -549,19 +597,59 @@ class Player {
             self.isconversation = 1;
             dialogText.innerText = "";
             lailaImage.src = dialogues[currentDialogue].image;
+            optionsContainer.innerHTML = ""; // 清空选项按钮
+
             typeDialogue();
           } else {
             self.isconversation = 0;
             document.body.removeChild(dialogBox);
+            self.visit = 1;
             document.getElementById("gameCanvas").style.display = "block";
             requestAnimationFrame(mainLoop);
           }
         }
 
+        function showOptions(options) {
+          options.forEach((option) => {
+            const button = document.createElement("div"); // 使用 div 而不是 button
+            button.className = "option-text";
+            button.innerText = option;
+            button.style.cursor = "pointer"; // 鼠标悬停时显示为指针
+            button.style.margin = "10px 0"; // 上下间距
+            button.style.color = "#FFFFFF"; // 字体颜色设置为白色
+            button.style.fontSize = "24px"; // 字体大小
+            button.style.fontFamily = "Arial, sans-serif"; // 字体设置为 Arial
+            button.style.textShadow = "1px 1px 2px #000000"; // 添加文本阴影
+            button.style.transition = "background-color 0.3s, color 0.3s"; // 添加过渡效果
+
+            // 添加鼠标悬停效果
+            button.onmouseover = () => {
+              button.style.backgroundColor = "#444444"; // 鼠标悬停时的背景色
+              button.style.color = "#FFD700"; // 鼠标悬停时的字体颜色
+            };
+            button.onmouseout = () => {
+              button.style.backgroundColor = ""; // 恢复原背景色
+              button.style.color = "#FFFFFF"; // 恢复原字体颜色
+            };
+
+            button.onclick = () => handleOption(option);
+            optionsContainer.appendChild(button);
+          });
+        }
+
+        function handleOption(option) {
+          if (option === "回到上一层->") {
+            dialogues.push(...choiceDialogues.cooperate);
+          } else if (option === "我相信我可以在这里找到->") {
+            dialogues.push(...choiceDialogues.abandon);
+          }
+          currentDialogue++;
+
+          showNextDialogue();
+        }
+
         document.addEventListener("click", showNextDialogue);
         showNextDialogue();
-
-        collisionMap[interactY][interactX] = 1000;
       }
       enemyTurn();
     };
@@ -625,7 +713,7 @@ class Player {
           document.body.removeChild(battleContainer);
           const dialogues = [
             {
-              text: "不可思议...你的梦境技术已经变得如此高超...不...",
+              text: "不不可思议...你的梦境技术已经变得如此高超...不...",
               image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
             },
             {
@@ -773,6 +861,10 @@ class Player {
               text: "上层梦境说不定还有我们遗漏的东西...",
               image: "../img/conversation/莱拉/莱拉.png", // 精灵
             },
+            {
+              text: "回到上层梦境有特殊的方法，试试同时按住back吧...",
+              image: "../img/conversation/莱拉/莱拉.png", // 精灵
+            },
           ];
           let currentDialogue = 0;
           let charIndex = 0;
@@ -825,7 +917,6 @@ class Player {
             } else {
               self.isconversation = 0;
               document.body.removeChild(dialogBox);
-              window.location.href = "../html/chapter3_without_intro.html";
               document.getElementById("gameCanvas").style.display = "block";
               requestAnimationFrame(mainLoop);
             }
@@ -1486,6 +1577,22 @@ class Player {
           text: "如果你想靠自己完成整个任务，你需要格外留心每一句话，每一个细节...",
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
+        {
+          text: "因为你已经进入梦境深层，这里的梦境信息已经非常混乱了，一切都需要靠你自己找了",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "四处探索吧，不用担心，你走近它们会有提示的，你已经具备足够的智慧和勇气了",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "最后说一句...你们不能在这一层停留过多时间...梦境会逐渐崩塌的",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "如果你已经发现你已经几乎无法移动、或者梦境颜色不再改变，你只能按下P重新刷新梦境开始任务...",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
       ];
       let currentDialogue = 0;
       let charIndex = 0;
@@ -1573,6 +1680,10 @@ class Player {
         },
         {
           text: "等等，你有注意到水池上方左边雕塑的变化吗...",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
+        {
+          text: "还有隔壁那个门...我等等应该过去看看",
           image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
         },
       ];

@@ -70,6 +70,17 @@ function update(deltatime) {
   if (keysPressed["m"] || keysPressed["M"]) {
     window.player.mapp();
   }
+  if (keysPressed["p"] || keysPressed["P"]) {
+    window.location.href = "../html/chapter4.html";
+  }
+  if (
+    (keysPressed["b"] || keysPressed["B"]) &&
+    (keysPressed["a"] || keysPressed["A"]) &&
+    (keysPressed["c"] || keysPressed["C"]) &&
+    (keysPressed["k"] || keysPressed["K"])
+  ) {
+    window.location.href = "../html/chapter3_without_intro.html";
+  }
 }
 
 function draw(ctx) {
