@@ -722,8 +722,8 @@ class Player {
       messageElement.style.opacity = 0;
       setTimeout(() => {
         document.body.removeChild(messageElement);
-      }, 200); // 等待0.2秒以完成淡出效果
-    }, 200); // 0.2秒后开始淡出
+      }, 1000); // 等待0.2秒以完成淡出效果
+    }, 500); // 0.2秒后开始淡出
   }
 }
 
