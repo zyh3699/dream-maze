@@ -10,6 +10,7 @@ class Player {
     this.frameDelay = 0; // 帧间隔计时器
     this.frameInterval = 50; // 每隔多少次update切换一次帧
     this.direction = "down"; // 默认方向
+    this.isdialogue = 0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -253,14 +254,16 @@ updateAdjacentPieces(x, y) {
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
       
-      
+      const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isdialogue = 1;
           dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
           currentDialogue++;
         } else {
+          self.isdialogue = 0;
           document.body.removeChild(dialogBox);
           document.getElementById("gameCanvas").style.display = "block";
           requestAnimationFrame(mainLoop);
@@ -384,11 +387,13 @@ updateAdjacentPieces(x, y) {
         const self = this;
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
+            self.isdialogue = 1;
             dialogText.innerText = "";
             lailaImage.src = dialogues[currentDialogue].image;
             optionsContainer.innerHTML = ""; // 清空选项按钮
             typeDialogue();
           } else {
+            self.isdialogue = 0;
             document.body.removeChild(dialogBox);
             self.showPasswordPrompt();
             self.visit = 1;
@@ -535,8 +540,6 @@ function createDialogueBox(dialogues) {
   dialogText.id = "dialogueText";
   dialogBox.appendChild(dialogText);
   document.body.appendChild(dialogBox);
-
-  
 
   function showNextDialogue() {
     if (currentDialogue < dialogues.length) {
