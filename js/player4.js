@@ -240,6 +240,10 @@ class Player {
             document.body.removeChild(passwordContainer);
             const dialogues = [
               {
+                text: "1",
+                image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+              },
+              {
                 text: "欢迎你，尊贵的1289组织成员",
                 image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
               },
@@ -300,26 +304,16 @@ class Player {
             dialogText.style.color = "#FFFFFF"; // 字体颜色
             dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
             dialogText.style.lineHeight = "1.5"; // 行高
-            function typeDialogue() {
-              if (charIndex < dialogues[currentDialogue].text.length) {
-                dialogText.innerText +=
-                  dialogues[currentDialogue].text.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeDialogue, typingSpeed);
-              } else {
-                currentDialogue++;
-                charIndex = 0;
-              }
-            }
+            
 
             const self = this;
 
             function showNextDialogue() {
               if (currentDialogue < dialogues.length) {
                 self.isconversation = 1;
-                dialogText.innerText = "";
+                dialogText.innerText = dialogues[currentDialogue].text;
                 lailaImage.src = dialogues[currentDialogue].image;
-                typeDialogue();
+                currentDialogue++;
               } else {
                 self.isconversation = 0;
                 document.body.removeChild(dialogBox);
@@ -713,7 +707,15 @@ class Player {
           document.body.removeChild(battleContainer);
           const dialogues = [
             {
-              text: "不不可思议...你的梦境技术已经变得如此高超...不...",
+              text: "1",
+              image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+            },
+            {
+              text: "不可思议...你居然能够如此熟练地使用意识重现...",
+              image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+            },
+            {
+              text: "相信你也能看到我潜意识里的秘密了",
               image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
             },
             {
@@ -730,7 +732,7 @@ class Player {
             },
             {
               text: "组织的秘密再也藏不住了...",
-              image: "../img/conversation/精灵/精灵.png.png", // 精灵
+              image: "../img/conversation/精灵/精灵.png", // 精灵
             },
             {
               text: "组织？难道真的是那个组织吗",
@@ -769,26 +771,16 @@ class Player {
           dialogText.style.color = "#FFFFFF"; // 字体颜色
           dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
           dialogText.style.lineHeight = "1.5"; // 行高
-          function typeDialogue() {
-            if (charIndex < dialogues[currentDialogue].text.length) {
-              dialogText.innerText +=
-                dialogues[currentDialogue].text.charAt(charIndex);
-              charIndex++;
-              setTimeout(typeDialogue, typingSpeed);
-            } else {
-              currentDialogue++;
-              charIndex = 0;
-            }
-          }
+          
 
           const self = this;
 
           function showNextDialogue() {
             if (currentDialogue < dialogues.length) {
               self.isconversation = 1;
-              dialogText.innerText = "";
+              dialogText.innerText = dialogues[currentDialogue].text;
               lailaImage.src = dialogues[currentDialogue].image;
-              typeDialogue();
+              currentDialogue++;
             } else {
               self.isconversation = 0;
               self.key = 1;
@@ -837,6 +829,10 @@ class Player {
           alert("你的梦境和潜意识崩溃！");
           document.body.removeChild(battleContainer);
           const dialogues = [
+            {
+              text: "1",
+              image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+            },
             {
               text: "放弃吧，更多梦境守卫已经赶过来了",
               image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
@@ -894,26 +890,16 @@ class Player {
           dialogText.style.color = "#FFFFFF"; // 字体颜色
           dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
           dialogText.style.lineHeight = "1.5"; // 行高
-          function typeDialogue() {
-            if (charIndex < dialogues[currentDialogue].text.length) {
-              dialogText.innerText +=
-                dialogues[currentDialogue].text.charAt(charIndex);
-              charIndex++;
-              setTimeout(typeDialogue, typingSpeed);
-            } else {
-              currentDialogue++;
-              charIndex = 0;
-            }
-          }
+          
 
           const self = this;
 
           function showNextDialogue() {
             if (currentDialogue < dialogues.length) {
               self.isconversation = 1;
-              dialogText.innerText = "";
+              dialogText.innerText = dialogues[currentDialogue].text;
               lailaImage.src = dialogues[currentDialogue].image;
-              typeDialogue();
+              currentDialogue++;
             } else {
               self.isconversation = 0;
               document.body.removeChild(dialogBox);
@@ -1105,26 +1091,16 @@ class Player {
         dialogText.style.color = "#FFFFFF"; // 字体颜色
         dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
         dialogText.style.lineHeight = "1.5"; // 行高
-        function typeDialogue() {
-          if (charIndex < dialogues[currentDialogue].text.length) {
-            dialogText.innerText +=
-              dialogues[currentDialogue].text.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeDialogue, typingSpeed);
-          } else {
-            currentDialogue++;
-            charIndex = 0;
-          }
-        }
+        
 
         const self = this;
 
         function showNextDialogue() {
           self.isconversation = 1;
           if (currentDialogue < dialogues.length) {
-            dialogText.innerText = "";
+            dialogText.innerText = dialogues[currentDialogue].text;
             lailaImage.src = dialogues[currentDialogue].image;
-            typeDialogue();
+            currentDialogue++;
           } else {
             self.isconversation = 0;
             document.body.removeChild(dialogBox);
@@ -1192,26 +1168,16 @@ class Player {
         dialogText.style.color = "#FFFFFF"; // 字体颜色
         dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
         dialogText.style.lineHeight = "1.5"; // 行高
-        function typeDialogue() {
-          if (charIndex < dialogues[currentDialogue].text.length) {
-            dialogText.innerText +=
-              dialogues[currentDialogue].text.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeDialogue, typingSpeed);
-          } else {
-            currentDialogue++;
-            charIndex = 0;
-          }
-        }
+        
 
         const self = this;
 
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
             self.isconversation = 1;
-            dialogText.innerText = "";
+            dialogText.innerText = dialogues[currentDialogue].text;
             lailaImage.src = dialogues[currentDialogue].image;
-            typeDialogue();
+            currentDialogue++;
           } else {
             self.isconversation = 0;
             document.body.removeChild(dialogBox);
@@ -1270,26 +1236,16 @@ class Player {
         dialogText.style.color = "#FFFFFF"; // 字体颜色
         dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
         dialogText.style.lineHeight = "1.5"; // 行高
-        function typeDialogue() {
-          if (charIndex < dialogues[currentDialogue].text.length) {
-            dialogText.innerText +=
-              dialogues[currentDialogue].text.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeDialogue, typingSpeed);
-          } else {
-            currentDialogue++;
-            charIndex = 0;
-          }
-        }
+        
 
         const self = this;
 
         function showNextDialogue() {
           if (currentDialogue < dialogues.length) {
             self.isconversation = 1;
-            dialogText.innerText = "";
+            dialogText.innerText = dialogues[currentDialogue].text;
             lailaImage.src = dialogues[currentDialogue].image;
-            typeDialogue();
+            currentDialogue++;
           } else {
             self.isconversation = 0;
             document.body.removeChild(dialogBox);
@@ -1560,26 +1516,16 @@ class Player {
       dialogText.style.color = "#FFFFFF"; // 字体颜色
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
-      function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText +=
-            dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
+      
       
       const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isconversation = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isconversation = 0;
           document.body.removeChild(dialogBox);
@@ -1698,26 +1644,16 @@ class Player {
       dialogText.style.color = "#FFFFFF"; // 字体颜色
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
-      function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText +=
-            dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
+      
 
       const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isconversation = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isconversation = 0;
           self.dialogue = 1;
@@ -1791,26 +1727,16 @@ class Player {
       dialogText.style.color = "#FFFFFF"; // 字体颜色
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
-      function typeDialogue() {
-        if (charIndex < dialogues[currentDialogue].text.length) {
-          dialogText.innerText +=
-            dialogues[currentDialogue].text.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeDialogue, typingSpeed);
-        } else {
-          currentDialogue++;
-          charIndex = 0;
-        }
-      }
+      
 
       const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
           self.isconversation = 1;
-          dialogText.innerText = "";
+          dialogText.innerText = dialogues[currentDialogue].text;
           lailaImage.src = dialogues[currentDialogue].image;
-          typeDialogue();
+          currentDialogue++;
         } else {
           self.isconversation = 0;
           self.waterSecret = 1;
