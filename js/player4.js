@@ -625,7 +625,7 @@ class Player {
           document.body.removeChild(battleContainer);
           const dialogues = [
             {
-              text: "不可思议...你的梦境技术已经变得如此高超...不...",
+              text: "不不可思议...你的梦境技术已经变得如此高超...不...",
               image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
             },
             {
