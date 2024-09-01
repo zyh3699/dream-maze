@@ -917,72 +917,67 @@ window.player = player;
 //   dialogBox.addEventListener("click", showNextDialogue);
 //   showNextDialogue();
 // }
+
 function createDialogueBox(dialogues) {
   let currentDialogue = 0;
+  let charIndex = 0;
+  const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
   // 添加CSS样式
-  if (!document.getElementById("dialogue-style")) {
-    const style = document.createElement("style");
-    style.id = "dialogue-style";
-    style.innerHTML = `
-      #dialogue {
-          background: rgba(0, 0, 0, 0.7);
-          padding: 20px;
-          border-radius: 10px;
-          width: 80%;
-          height: 100px;
-          text-align: center;
-          position: fixed;
-          bottom: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          color: white;
-          font-size: 24px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          box-sizing: border-box;
-      }
-      #dialogue img {
-          position: absolute;
-          top: -100px;
-          left: 10px;
-          width: 100px;
-          height: 100px;
-      }`;
-    document.head.appendChild(style);
-  }
+  const style = document.createElement("style");
+  document.head.appendChild(style);
 
   // 创建对话框元素
   const dialogBox = document.createElement("div");
   dialogBox.id = "dialogue";
 
-  // 创建图片元素
-  const charImage = document.createElement("img");
-  charImage.alt = "Character Image";
-  dialogBox.appendChild(charImage);
+  // 插入莱拉的图片
+  const lailaImage = document.createElement("img");
+  lailaImage.style.width = "100px"; // 将宽度设置为200像素
+  lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+  dialogBox.appendChild(lailaImage);
 
   // 创建对话文本元素
   const dialogText = document.createElement("span");
   dialogText.id = "dialogueText";
   dialogBox.appendChild(dialogText);
   document.body.appendChild(dialogBox);
-
-  function showNextDialogue() {
-    if (currentDialogue < dialogues.length) {
-      // 更新图片和文本内容
-      charImage.src = dialogues[currentDialogue].image;
-      dialogText.innerText = dialogues[currentDialogue].text; // 直接显示整个文本
-      currentDialogue++;
+  dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+  dialogText.style.fontSize = "20px"; // 字体大小
+  dialogText.style.color = "#FFFFFF"; // 字体颜色
+  dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+  dialogText.style.lineHeight = "1.5"; // 行高
+  function typeDialogue() {
+    if (charIndex < dialogues[currentDialogue].text.length) {
+      dialogText.innerText +=
+        dialogues[currentDialogue].text.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeDialogue, typingSpeed);
     } else {
-      document.body.removeChild(dialogBox);
-      document.getElementById("gameCanvas").style.display = "block";
-      requestAnimationFrame(mainLoop); // 继续游戏主循环
+      currentDialogue++;
+      charIndex = 0;
     }
   }
 
-  dialogBox.addEventListener("click", showNextDialogue);
+  const self = this;
+
+  function showNextDialogue() {
+    self.isconversation = 1;
+    if (currentDialogue < dialogues.length) {
+      dialogText.innerText = "";
+      lailaImage.src = dialogues[currentDialogue].image;
+      typeDialogue();
+    } else {
+      self.isconversation = 0;
+      document.body.removeChild(dialogBox);
+      document.getElementById("gameCanvas").style.display = "block";
+      requestAnimationFrame(mainLoop);
+    }
+  }
+
+  document.addEventListener("click", showNextDialogue);
   showNextDialogue();
+
 }
 
 // 任务栏

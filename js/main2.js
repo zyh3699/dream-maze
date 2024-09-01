@@ -29,7 +29,7 @@ document.addEventListener("keyup", handleKeyUp);
 function update(deltatime) {
   const moveSpeed = 200;
   const moveAmount = (moveSpeed * deltatime) / 1000;
-
+  // if (window.player.isdialogue==0) {
   if (keysPressed["ArrowUp"] || keysPressed["w"] || keysPressed["W"]) {
     window.player.move(0, -moveAmount, collisionMap);
     player.updateImage("up");
@@ -45,7 +45,8 @@ function update(deltatime) {
   if (keysPressed["ArrowRight"] || keysPressed["d"] || keysPressed["D"]) {
     window.player.move(moveAmount, 0, collisionMap);
     player.updateImage("right");
-  }
+  // }
+}
   if (keysPressed["e"] || keysPressed["E"]) {
     window.player.interact(collisionMap);
     }
