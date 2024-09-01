@@ -1224,7 +1224,83 @@ class Player {
         showNextDialogue();
         collisionMap[interactY][interactX] = 0;
       } else if (this.bug >= 5 && window.map.index == 2 && this.map == 1) {
-        this.fadeOutAndRedirect();
+        const dialogues = [
+          {
+            text: "恭喜你，你即将进入阿尔法梦境核心",
+            image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
+          },
+          {
+            text: "但在这之前，你还需要通过记忆力的考验",
+            image: "../img/conversation/精灵/精灵.png", // 另一张图片
+          },
+          {
+            text: "想进入梦境核心，一定要保留在此之前的所有记忆",
+            image: "../img/conversation/精灵/精灵.png", // 精灵
+          },
+          {
+            text: "否则你们会永远困在梦境之中...",
+            image: "../img/conversation/精灵/精灵.png", // 精灵
+          },
+        ];
+        let currentDialogue = 0;
+        let charIndex = 0;
+        const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+        // 添加CSS样式
+        const style = document.createElement("style");
+        document.head.appendChild(style);
+
+        // 创建对话框元素
+        const dialogBox = document.createElement("div");
+        dialogBox.id = "dialogue";
+
+        // 插入莱拉的图片
+        const lailaImage = document.createElement("img");
+        lailaImage.style.width = "100px"; // 将宽度设置为200像素
+        lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+        dialogBox.appendChild(lailaImage);
+
+        // 创建对话文本元素
+        const dialogText = document.createElement("span");
+        dialogText.id = "dialogueText";
+        dialogBox.appendChild(dialogText);
+        document.body.appendChild(dialogBox);
+        dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+        dialogText.style.fontSize = "20px"; // 字体大小
+        dialogText.style.color = "#FFFFFF"; // 字体颜色
+        dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+        dialogText.style.lineHeight = "1.5"; // 行高
+        function typeDialogue() {
+          if (charIndex < dialogues[currentDialogue].text.length) {
+            dialogText.innerText +=
+              dialogues[currentDialogue].text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeDialogue, typingSpeed);
+          } else {
+            currentDialogue++;
+            charIndex = 0;
+          }
+        }
+
+        const self = this;
+
+        function showNextDialogue() {
+          if (currentDialogue < dialogues.length) {
+            self.isconversation = 1;
+            dialogText.innerText = "";
+            lailaImage.src = dialogues[currentDialogue].image;
+            typeDialogue();
+          } else {
+            self.isconversation = 0;
+            document.body.removeChild(dialogBox);
+            self.fadeOutAndRedirect();
+            document.getElementById("gameCanvas").style.display = "block";
+            requestAnimationFrame(mainLoop);
+          }
+        }
+
+        document.addEventListener("click", showNextDialogue);
+        showNextDialogue();
         collisionMap[interactY][interactX] = 0;
       }
     }
