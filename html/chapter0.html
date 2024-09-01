@@ -122,7 +122,7 @@
   left: 850px;
   cursor: pointer;
   font-size: 20px;
-  color: #888;
+  color: red;
 }
     .progressBarWrapper {
       margin-bottom: 10px;
@@ -157,7 +157,7 @@
       <button id="menuButton" onclick="toggleMenu()">菜单</button>
   <div class="menu" id="menu">
     <button onclick="save()">存档</button>
-    <button onclick="settings()">设置</button>
+    <button onclick="settings('按WASD或者上下左右键移动角色，按E键交互')">游戏玩法</button>
     <button onclick="tips()">提示</button>
   </div>
   <div id="intro">
@@ -194,12 +194,14 @@
     const dialogues = [
       "梦境迷途，欢迎你进入这片神秘而未知的领域。这里是“钢铁都市”，一个由冷冽的钢铁和科技感十足的建筑构成的梦境。",
       "因为梦境的影响，让你的视觉出现混乱，有些地图会变得模糊。",
+      "另外，在梦境中，你有时无法控制自己的移动速度",
       "高楼林立，电子屏幕上闪烁着模糊的记忆片段。危险在每个角落潜伏，稍不留神便会被无情的梦境卷走。",
       "你扮演的莱拉，一位被称为“编梦者”的角色，拥有进入他人梦境并操控梦境结构的能力。",
       "你的任务是从这些梦境中获取隐藏的机密信息，同时揭开一场潜伏在意识深处的巨大阴谋。",
       "你可以通过键盘控制角色移动，使用E键与物体或人物互动",
       "与你共同进入梦境的是艾德里安·赫尔特，你需要在一座塔下找到他，从而获取一份关键文件。",
-      "据说它隐藏着关于全球经济秩序的秘密..."
+      "据说它隐藏着关于全球经济秩序的秘密...",
+      "如果感到困难可以点开菜单查看提示与进度！"
     ];
     let currentDialogue = 0;
     let charIndex = 0;
@@ -261,7 +263,29 @@
         progressContainer.style.display = "none";
       }
     }
+    function settings(message) {
+      const messageElement = document.createElement("div");
+    messageElement.id = "message";
+    messageElement.style.position = "absolute";
+    messageElement.style.top = "20px";
+    messageElement.style.left = "50%";
+    messageElement.style.transform = "translateX(-50%)";
+    messageElement.style.background = "rgba(0, 0, 0, 0.7)";
+    messageElement.style.color = "red";
+    messageElement.style.padding = "10px 20px";
+    messageElement.style.borderRadius = "5px";
+    messageElement.style.opacity = 1;
+    messageElement.style.transition = "opacity 1s ease-out";
+    messageElement.innerText = message;
+    document.body.appendChild(messageElement);
 
+    setTimeout(() => {
+      messageElement.style.opacity = 0;
+      setTimeout(() => {
+        document.body.removeChild(messageElement);
+      }, 1000); // 等待1秒以完成淡出效果
+    }, 1000); // 1秒后开始淡出
+    }
     document.addEventListener('DOMContentLoaded', (event) => {
       typeDialogue();
       document.addEventListener('click', showNextDialogue);

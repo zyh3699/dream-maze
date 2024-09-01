@@ -12,7 +12,7 @@ class Player {
     this.dialoguep=0;
     this.frameIndex = 0; // 当前帧索引
     this.frameDelay = 0; // 帧间隔计时器
-    this.frameInterval = 15; // 每隔多少次update切换一次帧
+    this.frameInterval = 30; // 每隔多少次update切换一次帧
     this.direction = "down"; // 默认方向
     // 预加载所有的帧图像
     this.images = {
@@ -134,27 +134,27 @@ class Player {
             image.style.height = '900px'; // Set the height
             image.style.border = '15px solid white'; // Set border size, style, and color
             document.body.appendChild(image);
-            let closeButton = document.createElement('button');
-            closeButton.innerHTML = 'X';
-            closeButton.style.position = 'absolute';
-            closeButton.style.top = '10px';
-            closeButton.style.right = '240px';
-            closeButton.style.backgroundColor = 'red';
-            closeButton.style.color = 'white';
-            closeButton.style.border = 'none';
-            closeButton.style.padding = '5px 10px';
-            closeButton.style.cursor = 'pointer';
-            closeButton.style.fontSize = '16px';
-            closeButton.style.zIndex = '1001'; // Ensure it appears above the image
+            // let closeButton = document.createElement('button');
+            // closeButton.innerHTML = 'X';
+            // closeButton.style.position = 'absolute';
+            // closeButton.style.top = '10px';
+            // closeButton.style.right = '240px';
+            // closeButton.style.backgroundColor = 'red';
+            // closeButton.style.color = 'white';
+            // closeButton.style.border = 'none';
+            // closeButton.style.padding = '5px 10px';
+            // closeButton.style.cursor = 'pointer';
+            // closeButton.style.fontSize = '16px';
+            // closeButton.style.zIndex = '1001'; // Ensure it appears above the image
         
             // Append the button to the image's parent (body)
-            document.body.appendChild(closeButton);
+            // document.body.appendChild(closeButton);
         
             // Add event listener to close the image on button click
-            closeButton.addEventListener('click', function () {
-                image.style.display = 'none';
-                closeButton.style.display = 'none';
-            });
+            // closeButton.addEventListener('click', function () {
+            //     image.style.display = 'none';
+            //     closeButton.style.display = 'none';
+            // });
         } else {
             image.style.display = 'block';
         }
@@ -274,7 +274,7 @@ class Player {
           requestAnimationFrame(mainLoop);
         }
       }
-      dialogBox.addEventListener("click", showNextDialogue);
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
       this.updateAdjacentPieces(interactX, interactY);
         }
@@ -337,7 +337,7 @@ class Player {
            requestAnimationFrame(mainLoop);
          }
        }
-       dialogBox.addEventListener("click", showNextDialogue);
+       document.addEventListener("click", showNextDialogue);
        showNextDialogue();
        this.updateAdjacentPieces(interactX, interactY);
          }
@@ -400,7 +400,7 @@ class Player {
            requestAnimationFrame(mainLoop);
          }
        }
-       dialogBox.addEventListener("click", showNextDialogue);
+       document.addEventListener("click", showNextDialogue);
        showNextDialogue();
        this.updateAdjacentPieces(interactX, interactY);
          }
@@ -481,7 +481,7 @@ class Player {
             }
           }
     
-          dialogBox.addEventListener("click", showNextDialogue);
+          document.addEventListener("click", showNextDialogue);
           showNextDialogue();
     
           this.updateAdjacentPieces(interactX, interactY);
@@ -496,13 +496,17 @@ class Player {
     //   this.showMessage("你捡到了4块拼图，一共有16块！");
      
     // }
-    if(collisionMap[interactY][interactX] === 7){
-      if(this.ai===1){
+    if (collisionMap[interactY][interactX] === 7) {
+      if(this.map===1){
+        this.showMessage("你已经得到了藏宝图，快去找拼图吧!记得按M键打开藏宝图。");
+        this.updateAdjacentPieces(interactX, interactY);
+      }
+      else if(this.ai===1){
         this.map=1;
         this.decrypt++;
         const dialogues = [
           {
-            text:"莱拉来到一座被雾气笼罩的大厦前。大厦门口的电子屏幕上闪烁着企业家的记忆片段。",
+            text:"莱拉来到一座大厦前。大厦门口的电子屏幕上闪烁着企业家的记忆片段。",
             image: "../img/conversation/精灵/精灵.png", // 另一张图片
           },
           {
@@ -518,7 +522,7 @@ class Player {
               image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
           },
           {
-            text:"重要提示：有的建筑物有门，记得从门进去获得拼图！",
+            text:"提示：有的建筑物有门，记得从门进去获得拼图！",
             image: "../img/conversation/精灵/精灵.png", // 另一张图片
           }
           
@@ -574,19 +578,16 @@ class Player {
           document.getElementById("gameCanvas").style.display = "block";
           requestAnimationFrame(mainLoop);
         }
-      }
-
-      dialogBox.addEventListener("click", showNextDialogue);
+        }
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
-      this.updateAdjacentPieces(interactX, interactY);
-    
+        this.updateAdjacentPieces(interactX, interactY);
       
     }
       if(this.ai===0)
         {
         
         this.showMessage("你需要先找到艾德里安，才能看到机密文件的指示！");
-        this.updateAdjacentPieces(interactX, interactY);
       }
     }
     if (collisionMap[interactY][interactX] === 6) {
@@ -623,7 +624,7 @@ class Player {
            image: "../img/conversation/艾德里安/艾德里安.png", // 另一张图片
         },
         {
-          text: "你需要找的文件是16块拼图，它们平均分散在四个地方，地图左上角的电子屏幕和右下角去往下一层的入口有藏宝图",
+          text: "你需要找到16块拼图，它们平均分散在四个地方，地图左上角的电子屏幕和右下角的通道入口都有藏宝图",
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
         {
@@ -685,7 +686,7 @@ class Player {
         }
       }
 
-      dialogBox.addEventListener("click", showNextDialogue);
+      document.addEventListener("click", showNextDialogue);
       showNextDialogue();
 
       this.updateAdjacentPieces(interactX, interactY);
@@ -721,8 +722,8 @@ class Player {
       messageElement.style.opacity = 0;
       setTimeout(() => {
         document.body.removeChild(messageElement);
-      }, 1000); // 等待1秒以完成淡出效果
-    }, 2000); // 2秒后开始淡出
+      }, 200); // 等待0.2秒以完成淡出效果
+    }, 200); // 0.2秒后开始淡出
   }
 }
 
@@ -805,6 +806,6 @@ function createDialogueBox(dialogues) {
     }
   }
 
-  dialogBox.addEventListener("click", showNextDialogue);
+  document.addEventListener("click", showNextDialogue);
   showNextDialogue();
 }
