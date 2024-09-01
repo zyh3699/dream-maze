@@ -151,7 +151,7 @@
     }
      .closeButton {
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 10px;
     background-color: #ff4d4d;
     color: white;
@@ -232,6 +232,7 @@
     <div id="statusText"></div>
   <div id="timeControl" style="display: none;">
   <input type="range" id="timeSlider" min="0" max="10" step="1" value="0" oninput="if (window.map.status === 1) { window.map.move(0, Math.floor(Math.random() * 201) - 100); }">
+  <span class="closeButton" onclick="document.getElementById('timeControl').style.display = 'none';">&times;</span>
 </div>
 <script>
   document.querySelector('#progressContainer .closeButton').addEventListener('click', function() {
