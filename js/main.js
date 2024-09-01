@@ -53,7 +53,7 @@ function update(deltatime) {
     player.updateImage("right");
   }
   if ((keysPressed["e"] || keysPressed["E"])&&
-    window.player.isdialogue ==0) {
+    window.player.isdialogue == 0) {
     window.player.interact(collisionMap);
   }
   if (keysPressed["m"] || keysPressed["M"]) {
