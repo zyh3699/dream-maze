@@ -72,27 +72,32 @@
       background-color: #34495e;
     }
     .menu {
-      display: none; /* 初始隐藏 */
-      position: fixed; /* 固定位置 */
-      top: 60px; /* 距离顶部 */
-      left: 20px; /* 距离左侧 */
-      background-color: #333; /* 菜单背景颜色 */
-      border-radius: 5px; /* 圆角边框 */
-      padding: 10px; /* 内边距 */
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      z-index: 100000;
+      background: linear-gradient(135deg, #e0f7fa, #a5ccd6);
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      gap: 15px;
     }
     .menu button {
       display: block; /* 块级元素 */
       width: 100%; /* 宽度100% */
-      margin: 5px 0; /* 按钮间距 */
-      padding: 10px; /* 按钮内边距 */
-      background-color: #4CAF50; /* 按钮背景颜色 */
+      margin: 10px 0; /* 按钮间距 */
+      padding: 12px; /* 按钮内边距 */
+      background-color: #4581a9;
       color: white; /* 按钮文字颜色 */
       border: none; /* 移除边框 */
-      border-radius: 5px; /* 圆角边框 */
+      border-radius: 8px; /* 圆角边框 */
       cursor: pointer; /* 鼠标悬停时显示手型 */
+      transition: background-color 0.3s ease;
     }
     .menu button:hover {
-      background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+      background-color: #2980b9;
     }
     #progressContainer {
       display: none; /* 初始隐藏进度条容器 */
