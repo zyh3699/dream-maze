@@ -160,7 +160,7 @@ class Player {
 
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 4) {
-      this.showMessage("你现在还不可以进去");
+      this.showMessage("你现在还不可以进去，等你进入核心之后再看看吧");
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 11) {
@@ -1577,6 +1577,22 @@ class Player {
           text: "如果你想靠自己完成整个任务，你需要格外留心每一句话，每一个细节...",
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
+        {
+          text: "因为你已经进入梦境深层，这里的梦境信息已经非常混乱了，一切都需要靠你自己找了",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "四处探索吧，不用担心，你走近它们会有提示的，你已经具备足够的智慧和勇气了",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "最后说一句...你们不能在这一层停留过多时间...梦境会逐渐崩塌的",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
+        {
+          text: "如果你已经发现你已经几乎无法移动、或者梦境颜色不再改变，你只能按下P重新刷新梦境开始任务...",
+          image: "../img/conversation/精灵/精灵.png", // 另一张图片
+        },
       ];
       let currentDialogue = 0;
       let charIndex = 0;
@@ -1664,6 +1680,10 @@ class Player {
         },
         {
           text: "等等，你有注意到水池上方左边雕塑的变化吗...",
+          image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+        },
+        {
+          text: "还有隔壁那个门...我等等应该过去看看",
           image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
         },
       ];
