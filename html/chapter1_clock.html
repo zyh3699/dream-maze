@@ -142,7 +142,7 @@
     <button class="return-button">返回</button>
     <div class="textbox">
         <h1>使用说明</h1>
-        <p>1、这个时钟控制梦境的核心，时针与分针的旋转逻辑不同于普通的时钟。</p>
+        <p>1、这个时钟控制梦境的核心，时针与分针的旋转逻辑不同于普通的时钟，你只能按住时针，但是实际移动的可能是分针。</p>
         <p>2、长的为分针，短的为时针，你可以用鼠标来旋转指针。</p>
         <p>3、你只需要使最后时钟呈现的时间与谜底相同即可，当你调整好时间，请点击“确定”。若是答案正确，将为你打开逃离梦境的大门。</p>
         <p>4、由于时钟年久失修，神秘组织放宽了判定标准，时针分针的位置可以存在误差。</p>
@@ -190,7 +190,7 @@
             }
         });
         confirmButton.addEventListener('click', () => {
-            if(hourAngle.toFixed(2)>=75&&hourAngle.toFixed(2)<=105&&minuteAngle.toFixed(2)%360>=270&&minuteAngle.toFixed(2)%360<=300)
+            if(hourAngle.toFixed(2)>=60&&hourAngle.toFixed(2)<=120&&minuteAngle.toFixed(2)%360>=255&&minuteAngle.toFixed(2)%360<=315)
         {
              alert('恭喜你，答对了！你将逃离梦境！');
              setTimeout(() => {

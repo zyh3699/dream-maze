@@ -16,7 +16,8 @@ def generate_collision_map(image_path):
  (2 if (r == 0 and g == 0 and b == 0) else 
   (3 if (r >= 235 and r<=240 and g >= 53 and g<=57 and b >= 57 and b<=60)  else
    (6 if (r == 0   and g >= 80 and g <= 82 and b >= 185 and b <= 187 ) else 
-     (7 if (r >= 250 and g <= 220 and b <= 50 ) else 0)))))
+     (7 if (r >= 250 and g <= 220 and b <= 50 ) else 
+      (20 if (r == 255 and g == 242 and b == 0) else 0))))))
         collision_map.append(row)
 
     return collision_map, image
