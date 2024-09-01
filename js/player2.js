@@ -170,7 +170,11 @@ class Player {
       
     }
     if (collisionMap[interactY][interactX] === 12) {
-      this.showMessage("一阵浓郁的药草香，但是你感觉真的很好闻，清新中带着一股纯真");
+      this.showMessage("一阵浓郁的药草香，但是你感觉真的很好闻，清新中带着一股纯真，你脑中有了个大胆的想法：进去和这个人对话（按E）");
+      
+    }
+    if (collisionMap[interactY][interactX] === 24&&this.dialogDoorghost===0) {
+      this.showMessage("按E和左边的小幽灵说话");
       
     }
   }
@@ -925,10 +929,74 @@ window.player = player;
 //   showNextDialogue();
 // }
 
+// function createDialogueBox(dialogues) {
+//   let currentDialogue = 0;
+//   let charIndex = 0;
+//   const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+
+//   // 添加CSS样式
+//   const style = document.createElement("style");
+//   document.head.appendChild(style);
+
+//   // 创建对话框元素
+//   const dialogBox = document.createElement("div");
+//   dialogBox.id = "dialogue";
+
+//   // 插入莱拉的图片
+//   const lailaImage = document.createElement("img");
+//   lailaImage.style.width = "100px"; // 将宽度设置为200像素
+//   lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
+//   dialogBox.appendChild(lailaImage);
+
+//   // 创建对话文本元素
+//   const dialogText = document.createElement("span");
+//   dialogText.id = "dialogueText";
+//   dialogBox.appendChild(dialogText);
+//   document.body.appendChild(dialogBox);
+//   dialogText.style.fontFamily = "Arial, sans-serif"; // 字体
+//   dialogText.style.fontSize = "20px"; // 字体大小
+//   dialogText.style.color = "#FFFFFF"; // 字体颜色
+//   dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
+//   dialogText.style.lineHeight = "1.5"; // 行高
+//   function typeDialogue() {
+//     if (charIndex < dialogues[currentDialogue].text.length) {
+//       dialogText.innerText +=
+//         dialogues[currentDialogue].text.charAt(charIndex);
+//       charIndex++;
+//       setTimeout(typeDialogue, typingSpeed);
+//     } else {
+//       currentDialogue++;
+//       charIndex = 0;
+//     }
+//   }
+
+//   const self = this;
+
+//   function showNextDialogue() {
+//     self.isconversation = 1;
+//     player.isconversation=1;
+//     Player.isconversation=1;
+//     if (currentDialogue < dialogues.length) {
+//       dialogText.innerText = "";
+//       lailaImage.src = dialogues[currentDialogue].image;
+//       typeDialogue();
+//     } else {
+//       self.isconversation = 0;
+//       player.isconversation=0;
+//       Player.isconversation=0;
+//       document.body.removeChild(dialogBox);
+//       document.getElementById("gameCanvas").style.display = "block";
+//       requestAnimationFrame(mainLoop);
+//     }
+//   }
+
+//   document.addEventListener("click", showNextDialogue);
+//   showNextDialogue();
+
+// }
+
 function createDialogueBox(dialogues) {
   let currentDialogue = 0;
-  let charIndex = 0;
-  const typingSpeed = 1; // 每个字符的打印速度（毫秒）
 
   // 添加CSS样式
   const style = document.createElement("style");
@@ -940,7 +1008,7 @@ function createDialogueBox(dialogues) {
 
   // 插入莱拉的图片
   const lailaImage = document.createElement("img");
-  lailaImage.style.width = "100px"; // 将宽度设置为200像素
+  lailaImage.style.width = "100px"; // 将宽度设置为100像素
   lailaImage.style.height = "auto"; // 自动调整高度以保持图片比例
   dialogBox.appendChild(lailaImage);
 
@@ -954,32 +1022,21 @@ function createDialogueBox(dialogues) {
   dialogText.style.color = "#FFFFFF"; // 字体颜色
   dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
   dialogText.style.lineHeight = "1.5"; // 行高
-  function typeDialogue() {
-    if (charIndex < dialogues[currentDialogue].text.length) {
-      dialogText.innerText +=
-        dialogues[currentDialogue].text.charAt(charIndex);
-      charIndex++;
-      setTimeout(typeDialogue, typingSpeed);
-    } else {
-      currentDialogue++;
-      charIndex = 0;
-    }
-  }
 
   const self = this;
 
   function showNextDialogue() {
     self.isconversation = 1;
-    player.isconversation=1;
-    Player.isconversation=1;
+    player.isconversation = 1;
+    Player.isconversation = 1;
     if (currentDialogue < dialogues.length) {
-      dialogText.innerText = "";
+      dialogText.innerText = dialogues[currentDialogue].text;
       lailaImage.src = dialogues[currentDialogue].image;
-      typeDialogue();
+      currentDialogue++;
     } else {
       self.isconversation = 0;
-      player.isconversation=0;
-      Player.isconversation=0;
+      player.isconversation = 0;
+      Player.isconversation = 0;
       document.body.removeChild(dialogBox);
       document.getElementById("gameCanvas").style.display = "block";
       requestAnimationFrame(mainLoop);
@@ -988,8 +1045,8 @@ function createDialogueBox(dialogues) {
 
   document.addEventListener("click", showNextDialogue);
   showNextDialogue();
-
 }
+
 
 // 任务栏
 const select=document.querySelector(".select")
