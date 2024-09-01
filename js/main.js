@@ -30,23 +30,30 @@ function update(deltatime) {
   const moveSpeed = 150;
   const moveAmount = (moveSpeed * deltatime) / 1000;
 
-  if (keysPressed["ArrowUp"] || keysPressed["w"] || keysPressed["W"]) {
+  if (
+    (keysPressed["ArrowUp"] || keysPressed["w"] || keysPressed["W"]) &&
+    window.player.isdialogue == 0
+  ) {
     window.player.move(0, -moveAmount, collisionMap);
     player.updateImage("up");
   }
-  if (keysPressed["ArrowDown"] || keysPressed["s"] || keysPressed["S"]) {
+  if ((keysPressed["ArrowDown"] || keysPressed["s"] || keysPressed["S"])&&
+    window.player.isdialogue==0) {
     window.player.move(0, moveAmount, collisionMap);
     player.updateImage("down");
   }
-  if (keysPressed["ArrowLeft"] || keysPressed["a"] || keysPressed["A"]) {
+  if ((keysPressed["ArrowLeft"] || keysPressed["a"] || keysPressed["A"])&&
+    window.player.isdialogue ==0){
     window.player.move(-moveAmount, 0, collisionMap);
     player.updateImage("left");
   }
-  if (keysPressed["ArrowRight"] || keysPressed["d"] || keysPressed["D"]) {
+  if ((keysPressed["ArrowRight"] || keysPressed["d"] || keysPressed["D"])&&
+    window.player.isdialogue ==0) {
     window.player.move(moveAmount, 0, collisionMap);
     player.updateImage("right");
   }
-  if (keysPressed["e"] || keysPressed["E"]) {
+  if ((keysPressed["e"] || keysPressed["E"])&&
+    window.player.isdialogue ==0) {
     window.player.interact(collisionMap);
   }
   if (keysPressed["m"] || keysPressed["M"]) {

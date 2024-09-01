@@ -14,6 +14,7 @@ class Player {
     this.frameDelay = 0; // 帧间隔计时器
     this.frameInterval = 30; // 每隔多少次update切换一次帧
     this.direction = "down"; // 默认方向
+    this.isdialogue = 0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -262,13 +263,16 @@ class Player {
           charIndex = 0;
         }
       }
+      const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isdialogue = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isdialogue = 0;
           document.body.removeChild(dialogBox);
           document.getElementById("gameCanvas").style.display = "block";
           requestAnimationFrame(mainLoop);
@@ -325,13 +329,16 @@ class Player {
            charIndex = 0;
          }
        }
+       const self = this;
  
        function showNextDialogue() {
          if (currentDialogue < dialogues.length) {
+            self.isdialogue = 1;
            dialogText.innerText = "";
            lailaImage.src = dialogues[currentDialogue].image;
            typeDialogue();
          } else {
+            self.isdialogue = 0;
            document.body.removeChild(dialogBox);
            document.getElementById("gameCanvas").style.display = "block";
            requestAnimationFrame(mainLoop);
@@ -388,13 +395,16 @@ class Player {
            charIndex = 0;
          }
        }
+        const self = this;
  
        function showNextDialogue() {
          if (currentDialogue < dialogues.length) {
+            self.isdialogue = 1;
            dialogText.innerText = "";
            lailaImage.src = dialogues[currentDialogue].image;
            typeDialogue();
          } else {
+            self.isdialogue = 0;
            document.body.removeChild(dialogBox);
            document.getElementById("gameCanvas").style.display = "block";
            requestAnimationFrame(mainLoop);
@@ -468,13 +478,16 @@ class Player {
               charIndex = 0;
             }
           }
+          const self = this;
     
           function showNextDialogue() {
             if (currentDialogue < dialogues.length) {
+              self.isdialogue = 1;
               dialogText.innerText = "";
               lailaImage.src = dialogues[currentDialogue].image;
               typeDialogue();
             } else {
+              self.isdialogue = 0;
               document.body.removeChild(dialogBox);
               document.getElementById("gameCanvas").style.display = "block";
               requestAnimationFrame(mainLoop);
@@ -566,14 +579,18 @@ class Player {
           currentDialogue++;
           charIndex = 0;
         }
-      }
+        }
+        
+        const self = this;
 
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isdialogue = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isdialogue = 0;
           document.body.removeChild(dialogBox);
           document.getElementById("gameCanvas").style.display = "block";
           requestAnimationFrame(mainLoop);
@@ -674,12 +691,16 @@ class Player {
         }
       }
 
+      const self = this;
+
       function showNextDialogue() {
         if (currentDialogue < dialogues.length) {
+          self.isdialogue = 1;
           dialogText.innerText = "";
           lailaImage.src = dialogues[currentDialogue].image;
           typeDialogue();
         } else {
+          self.isdialogue = 0;
           document.body.removeChild(dialogBox);
           document.getElementById("gameCanvas").style.display = "block";
           requestAnimationFrame(mainLoop);
