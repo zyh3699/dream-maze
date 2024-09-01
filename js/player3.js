@@ -783,7 +783,6 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 17 && this.dialogGhost===0) {
-      this.dialogGhost=1;
       const dialogues = [
         {
           text: "“她曾想知道真相，但是，却还是选择了将其遗忘。”",
@@ -950,6 +949,7 @@ class Player {
           document.getElementById('ghost').style.textDecoration = 'line-through';    
           function chuansong() {
             player.move(-350, 0, collisionMap);
+            self.dialogGhost=1;
             document.removeEventListener("click", chuansong);
           }    
         } else if (option === "当然，我会陪你的->") {
