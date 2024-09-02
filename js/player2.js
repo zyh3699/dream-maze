@@ -554,6 +554,7 @@ class Player {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 13 && this.dialogFrog===1 && this.dialogFazhen===0) {
+    // if (collisionMap[interactY][interactX] === 13) {
       document.getElementById('cases').style.display = 'block';
       document.getElementById('fazhen').style.textDecoration = 'line-through';  
       const dialogues = [
@@ -746,7 +747,8 @@ class Player {
             var array = JSON.parse(window.localStorage.userArr);
             array[index].achi11 = 5; //achi2代表第二个成就，自行设定判定条件
             window.localStorage.userArr = JSON.stringify(array);
-           alert("获得成就！");
+          //  alert("获得成就！");
+          showAchievement();
           }
           if (option === "那会让你分不清梦境和现实->") {
             dialogues.push(...choiceDialogues.cooperate);
@@ -1081,3 +1083,24 @@ option.addEventListener("click",()=>{
   select.querySelector(".fa-angle-up").classList.toggle("fa-angle-up")
 })
 })
+
+// 成就
+function showAchievement() {
+  const achievementBox = document.getElementById('achievement');
+  achievementBox.classList.remove('hidden');
+
+  // Make the box gradually appear
+  setTimeout(() => {
+      achievementBox.style.opacity = 1;
+  }, 100);
+
+  // Automatically hide the box after 2 seconds
+  setTimeout(() => {
+      achievementBox.style.opacity = 0;
+
+      // Hide the box completely after the fade-out transition
+      setTimeout(() => {
+          achievementBox.classList.add('hidden');
+      }, 1000);
+  }, 3500);
+}
