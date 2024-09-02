@@ -75,7 +75,7 @@ class Player {
       if (!image) {
         image = document.createElement("img");
         image.id = "mapImage";
-        image.src = "../map/secret.jpg"; // replace with the actual path to your image
+        image.src = "../map/secret.png"; // replace with the actual path to your image
         image.style.position = "fixed";
         image.style.top = "50%";
         image.style.left = "50%";
