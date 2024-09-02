@@ -198,20 +198,60 @@
 }
 
    function settings() {
-      const statusText = document.getElementById('statusText');
-      console.log('settings function called'); // 调试信息
-      console.log('window.map.status:', window.map.status); // 调试信息
-      if (statusText.style.display === 'none' || statusText.style.display === '') {
-        if (window.map.status === 0) {
-          statusText.innerText = '现实';
-        } else if (window.map.status === 1) {
-          statusText.innerText = '梦境';
-        }
-        statusText.style.display = 'block';
-      } else {
-        statusText.style.display = 'none';
-      }
+    const statusText = document.getElementById('statusText');
+    let imageContainer = document.getElementById('imageContainer');
+
+    if (imageContainer) {
+      // 如果图片容器已经存在，则移除它
+      document.body.removeChild(imageContainer);
+      toggleMenu();
+    } else {
+      // 创建图片容器和图片元素
+      imageContainer = document.createElement('div');
+      imageContainer.id = 'imageContainer'; // 设置ID以便后续查找
+      const image = document.createElement('img');
+
+      // 设置图片路径
+      if(window.map.status === 0){
+      image.src = '../img/item/mirror.png';}
+      else if(window.map.status === 1){
+      image.src = '../img/item/mirror1.png';}
+      image.alt = 'Image Description';
+
+      image.style.width = '100%';
+    image.style.height = '100%';
+    image.style.objectFit = 'contain'; // 确保图片按比例缩放并填充容器
+
+      // 设置图片容器样式
+      imageContainer.style.position = 'fixed';
+      imageContainer.style.top = '50%';
+      imageContainer.style.left = '50%';
+      imageContainer.style.transform = 'translate(-50%, -50%)';
+      imageContainer.style.zIndex = '1000';
+      imageContainer.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+      imageContainer.style.padding = '10px';
+      imageContainer.style.borderRadius = '5px';
+
+      imageContainer.style.width = '70%'; // 例如，将宽度设置为原来的50%
+      imageContainer.style.height = '70%'; // 例如，将高度设置为原来的50%
+
+      const closeButton = document.createElement('span');
+      closeButton.className = 'closeButton';
+      closeButton.innerHTML = '&times;';
+      closeButton.onclick = function() {
+        document.body.removeChild(imageContainer);
+        toggleMenu();
+      };
+
+      // 添加图片到容器
+       imageContainer.appendChild(closeButton);
+      imageContainer.appendChild(image);
+
+      // 将图片容器添加到body
+      document.body.appendChild(imageContainer);
     }
+  }
+
   </script>
     </head>
     <body>
