@@ -173,7 +173,7 @@
      <button id="menuButton" onclick="toggleMenu()">菜单</button>
   <div class="menu" id="menu">
     <button onclick="save()">存档</button>
-    <button onclick="settings()">设置</button>
+    <button onclick="settings()">返回主页</button>
     <button onclick="tips()">任务进度</button>
   </div>
   <div id="intro">
@@ -331,7 +331,9 @@
         menu.style.display = 'none';
       }
     }
-
+   function settings() {
+      window.location.href = "../register/next_page.html";
+    }
    
   </script>
 </body>

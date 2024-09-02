@@ -1,6 +1,6 @@
 let totalDifferences = 7; // 总的不同处
 let foundDifferences = 0; // 已经找到的不同处
-let timerDuration = 20; // 初始总时间
+let timerDuration = 30; // 初始总时间
 let timeRemaining = timerDuration; // 剩余时间
 let timerBar = document.getElementById('timer-bar');
 let countdownTimer = document.getElementById('countdown-timer');
