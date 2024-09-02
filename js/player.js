@@ -313,7 +313,7 @@ class Player {
        function showNextDialogue() {
          if (currentDialogue < dialogues.length) {
             self.isdialogue = 1;
-           dialogText.innerText = "";
+           dialogText.innerText = dialogues[currentDialogue].text;
            lailaImage.src = dialogues[currentDialogue].image;
            currentDialogue++;
          } else {
