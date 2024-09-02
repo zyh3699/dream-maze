@@ -4,17 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录页面</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
     <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
     <style>
         div {
-            text-align:center;
+            text-align: center;
         }
         h2 {
             font-family: 仿宋;
             font-size: xx-large;
             font-weight: bolder;
-			color:aqua;
+            color: aqua;
+        }
+        .error {
+            color: red;
+        }
+		body {
+            font-family: Arial, sans-serif;
+            background-image: url('../img/menuBox/main_page.jpg'); /* 背景图片 */
+            background-size: cover; /* 图片大小覆盖整个页面 */
+            background-position: center; /* 图片居中对齐 */
+            background-repeat: no-repeat; /* 图片不重复 */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景，使内容易读 */
+            background-image: url('../img/menuBox/menu_backgroud.png'); /* 背景图片 */
+            background-position: center; /* 图片居中对齐 */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            width: 90%;
+        }
+
+        .container a {
+            width: 80%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-family: 仿宋;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px auto;
+            display: block;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 100px 1fr; /* 设置标签和输入框的网格布局 */
+            gap: 10px; /* 设置标签与输入框之间的间距 */
+            margin-bottom: 15px;
+            align-items: center; /* 垂直对齐 */
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .form .inputBox {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .checkip .inputText {
+            width: 100%;
+            height: 100%;
+            margin-top: 20px;
+            color: #ffffff;
+        }
+
+        .form .inputBox input {
+            width: 100%;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            border: none;
+            border-radius: 30px;
+            grid-template-columns: 100px 1fr;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .checkip .inputText input {
+            position: absolute;
+            width: 55%;
+            right: 20%;
+            bottom: 50%;
+            background: rgba(255, 255, 255, 0);
+            outline: none;
+            border: 1px solid rgba(255, 255, 255, 0);
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #00aaff;
+        }
+
+        .form .inputBox input::placeholder {
+            color: #ffffff;
+            opacity: 1;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ffffff;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        label {
+            margin-right: 10px;
+            white-space: nowrap;
+            text-align: right;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        button, .form .inputBox input[type="reset"] {
+            padding: 15px;
+            width: 100%;
+            background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+            color: #0dd7ff;
+            border: 2px solid #0dd7ff;
+            border-radius: 15px;
+            font-size: 18px;
+            font-family: '仿宋', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 7px auto 3px auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(13, 215, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover, .form .inputBox input[type="reset"]:hover {
+            color: #fff;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            box-shadow: 0 0 20px #0dd7ff, 0 0 30px #0dd7ff, 0 0 40px #0dd7ff;
+        }
+
+        button:active, .form .inputBox input[type="reset"]:active {
+            background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+            box-shadow: 0 2px 5px rgba(13, 215, 255, 0.5);
+            transform: translateY(2px);
+        }
+
+        #registerBtn {
+            background-color: #28a745;
         }
     </style>
     <script type="text/javascript">
