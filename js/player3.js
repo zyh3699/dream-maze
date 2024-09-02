@@ -681,7 +681,7 @@ class Player {
           image: "../img/conversation/其他人物/fish.png",
         },  
         {
-          text: "（后期，这些对话加一下神秘组织的故事）",
+          text: "神秘组织？不过沧海一粟。长老说过，任何背叛alpha...咳咳，话多了。",
           image: "../img/conversation/其他人物/fish.png",
         },  
         {
