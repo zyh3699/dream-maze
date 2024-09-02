@@ -46,25 +46,7 @@
             margin: 5px auto;
             display: block;
         }
-        @media (min-width: 1200px) {
-    .container {
-        width: 70%; /* 更大的屏幕使用较大的宽度 */
-    }
-}
 
-/* 适用于宽度在768px到1199px之间的屏幕 */
-@media (min-width: 768px) and (max-width: 1199px) {
-    .container {
-        width: 85%; /* 中等屏幕使用适中的宽度 */
-    }
-}
-
-/* 适用于宽度小于768px的屏幕 */
-@media (max-width: 767px) {
-    .container {
-        width: 95%; /* 较小的屏幕使用更宽的布局 */
-    }
-}
         .input-group {
             display: grid;
             grid-template-columns: 100px 1fr; /* 设置标签和输入框的网格布局 */
@@ -196,28 +178,40 @@
             margin-top: 10px;
         }
 
-       
-        /* 适用于宽度大于1200px的屏幕 */
-@media (min-width: 1200px) {
-    .container {
-        width: 70%; /* 更大的屏幕使用较大的宽度 */
-    }
-}
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
 
-/* 适用于宽度在768px到1199px之间的屏幕 */
-@media (min-width: 768px) and (max-width: 1199px) {
-    .container {
-        width: 85%; /* 中等屏幕使用适中的宽度 */
-    }
-}
+            .inputBox input {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
 
-/* 适用于宽度小于768px的屏幕 */
-@media (max-width: 767px) {
-    .container {
-        width: 95%; /* 较小的屏幕使用更宽的布局 */
-    }
-}
-        
+            button {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .inputBox input {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+
         .error {
             color: red;
         }
