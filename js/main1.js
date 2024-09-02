@@ -27,7 +27,7 @@ document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
 
 function update(deltatime) {
-  const moveSpeed = 150;
+  const moveSpeed = 100;
   const moveAmount = (moveSpeed * deltatime) / 1000;
 
   if (
