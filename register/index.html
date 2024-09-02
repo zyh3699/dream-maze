@@ -21,17 +21,39 @@
             height: 100vh;
         }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景，使内容易读 */
-            background-image: url('../img/menuBox/menu_backgroud.png'); /* 背景图片 */
-            background-position: center; /* 图片居中对齐 */
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            margin: 0 auto;
-            max-width: 80rem
-        }
+		.container {
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景，使内容易读 */
+    background-image: url('../img/menuBox/menu_backgroud.png'); /* 背景图片 */
+    background-position: center; /* 图片居中对齐 */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: 90%;
+    margin: 0 auto; /* 容器水平居中 */
+}
+
+/* 适用于宽度大于1200px的屏幕 */
+@media (min-width: 1200px) {
+    .container {
+        width: 70%; /* 更大的屏幕使用较大的宽度 */
+    }
+}
+
+/* 适用于宽度在768px到1199px之间的屏幕 */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .container {
+        width: 85%; /* 中等屏幕使用适中的宽度 */
+    }
+}
+
+/* 适用于宽度小于768px的屏幕 */
+@media (max-width: 767px) {
+    .container {
+        width: 95%; /* 较小的屏幕使用更宽的布局 */
+    }
+}
+
 
         h2 {
             font-family: '仿宋', sans-serif;
