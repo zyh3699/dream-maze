@@ -223,6 +223,8 @@
     <button onclick="settings()">背包</button>
     <button onclick="tips()">时间调整</button>
     <button onclick="clues()">任务提示</button>
+    <button onclick="back()">返回主页</button>
+    <button onclick="skip()">跳过此章</button>
   </div>
   <div id="intro">
     <div id="dialogue">
@@ -311,6 +313,13 @@
   }
 };
 
+function back(){
+  window.location.href = '../register/next_page.html';
+}
+
+function skip(){
+  window.location.href = '../html/ending.html';
+}
     
 
      function toggleMenu() {
