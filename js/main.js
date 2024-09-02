@@ -37,17 +37,17 @@ function update(deltatime) {
     window.player.move(0, -moveAmount, collisionMap);
     player.updateImage("up");
   }
-  if ((keysPressed["ArrowDown"] || keysPressed["s"] || keysPressed["S"])&&
+  else if ((keysPressed["ArrowDown"] || keysPressed["s"] || keysPressed["S"])&&
     window.player.isdialogue==0) {
     window.player.move(0, moveAmount, collisionMap);
     player.updateImage("down");
   }
-  if ((keysPressed["ArrowLeft"] || keysPressed["a"] || keysPressed["A"])&&
+  else if ((keysPressed["ArrowLeft"] || keysPressed["a"] || keysPressed["A"])&&
     window.player.isdialogue ==0){
     window.player.move(-moveAmount, 0, collisionMap);
     player.updateImage("left");
   }
-  if ((keysPressed["ArrowRight"] || keysPressed["d"] || keysPressed["D"])&&
+  else if ((keysPressed["ArrowRight"] || keysPressed["d"] || keysPressed["D"])&&
     window.player.isdialogue ==0) {
     window.player.move(moveAmount, 0, collisionMap);
     player.updateImage("right");
