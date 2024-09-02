@@ -953,6 +953,15 @@ class Player {
 
       function handleOption(option) {
         if (option === "不，我现在没有空->") {
+          // 成就
+            var index = window.localStorage.userid;
+            var array = JSON.parse(window.localStorage.userArr);
+            array[index].achi12 = 5; //achi2代表第二个成就，自行设定判定条件
+            window.localStorage.userArr = JSON.stringify(array);
+           alert("获得成就！");
+
+        }
+        if (option === "不，我现在没有空->") {
           dialogues.push(...choiceDialogues.cooperate);
           // player.move(-200,0,collisionMap);
           document.addEventListener("click", chuansong);
