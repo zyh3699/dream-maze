@@ -69,9 +69,12 @@ const countdownInterval = setInterval(() => {
         progressBar.style.width = `${progressWidth}%`;
     } else {
         clearInterval(countdownInterval);
-        alert('Time is up! Game over!');
-        alert("获得成就“梦境守卫者”");
-        window.location.href = 'smoke2/demo.html';
+        // alert('Time is up! Game over!');
+        // 成就
+        // alert("获得成就“梦境守卫者”");
+        showAchievement();
+
+        // window.location.href = 'smoke2/demo.html';
         clearInterval(countdownInterval);
 
         var index = window.localStorage.userid;
@@ -153,7 +156,8 @@ document.addEventListener('keydown', (e) => {
             const fogY = newTop + player.clientHeight / 2;
             if (newTop >= targetArea.top && newTop <= targetArea.top + targetArea.height &&
                 newLeft >= targetArea.left && newLeft <= targetArea.left + targetArea.width) {
-             alert('获得成就“迷宫大师”');
+                  showAchievement2();
+            //  alert('获得成就“迷宫大师”');
                 clearInterval(countdownInterval);
                     var index = window.localStorage.userid;
 					var array = JSON.parse(window.localStorage.userArr);
@@ -163,7 +167,7 @@ console.log('array:', array);  // 确认array是否被正确解析
 console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
               console.log('array[index].achi2:', array[index].achi2); 
               window.localStorage.userArr = JSON.stringify(array);
-                window.location.href = "../../html/chapter2.html"; // 跳转到下一个页面
+                // window.location.href = "../../html/chapter2.html"; // 跳转到下一个页面
                 }
                 if(getPixelColor2(centerX, centerY) >= 249){
                     timeminus=2;
@@ -308,3 +312,45 @@ console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
     }
 });
 });
+		// 成就
+		function showAchievement() {
+			const achievementBox = document.getElementById('achievement');
+			achievementBox.classList.remove('hidden');
+		  
+			// Make the box gradually appear
+			setTimeout(() => {
+				achievementBox.style.opacity = 1;
+			}, 100);
+		  
+			// Automatically hide the box after 2 seconds
+			setTimeout(() => {
+				achievementBox.style.opacity = 0;
+				// Hide the box completely after the fade-out transition
+				setTimeout(() => {
+					achievementBox.classList.add('hidden');
+					// Redirect to index.html after the fade-out transition
+					window.location.href = 'smoke2/demo.html';
+				}, 1000);
+			}, 3500);
+		}		  
+    // ../../html/chapter2.html
+    function showAchievement2() {
+			const achievementBox = document.getElementById('achievement2');
+			achievementBox.classList.remove('hidden');
+		  
+			// Make the box gradually appear
+			setTimeout(() => {
+				achievementBox.style.opacity = 1;
+			}, 100);
+		  
+			// Automatically hide the box after 2 seconds
+			setTimeout(() => {
+				achievementBox.style.opacity = 0;
+				// Hide the box completely after the fade-out transition
+				setTimeout(() => {
+					achievementBox.classList.add('hidden');
+					// Redirect to index.html after the fade-out transition
+					window.location.href = '../../html/chapter2.html';
+				}, 1000);
+			}, 3500);
+		}		  
