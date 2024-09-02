@@ -58,6 +58,11 @@ class Player {
       this.showMessage("按E键交互 ");
     // 碰撞检测
     if (collisionMap[newY][newX] === 9)  this.showMessage("请前往右侧灰色按钮处，按E键开启谜题");
+    if (collisionMap[newY][newX] === 10)  this.showMessage("为什么这个池子里的水没有结冰？");
+    if (collisionMap[newY][newX] === 11)  this.showMessage("房子上画着些奇怪的符文。");
+    if (collisionMap[newY][newX] === 12)  this.showMessage("这是什么？雪地里竟然如此茂盛。");
+    if (collisionMap[newY][newX] === 13)  this.showMessage("这么大的果实……不对，这是房子的一部分！");
+    
     if (collisionMap[newY][newX] === 1) {
       return true; // 碰撞检测
     }
