@@ -141,7 +141,7 @@ class Player {
           image: "../img/conversation/精灵/精灵.png", // 另一张图片
         },
         {
-          text: "快#看***《。背包",
+          text: "快#看***《。背包，你还￥记得-=那面魔镜吗，它可以帮助你判断现在是梦境还是现实",
           image: "../img/conversation/精灵/精灵.png", // 精灵
         },
         {
