@@ -1,7 +1,7 @@
 * {
 	padding: 0;
 	margin: 0;
-	font-family: sans-serif;
+	font-family: FangSong;
 }
 body {
 	width: 100%;
@@ -47,36 +47,36 @@ body {
 	font-weight: 900;
 	padding: 0 0.2em;
 	transform: rotateY(90deg);
-	animation: move 1s forwards;
+	animation: move 0.5s forwards;
 	/*forwards向前*/
 }
 .mask span:nth-child(1) {
-	animation-delay: 9s;
+	animation-delay: 4.5s;
 	/*动画延迟*/
 }
 .mask span:nth-child(2) {
-	animation-delay: 8s;
-}
-.mask span:nth-child(3) {
-	animation-delay: 7s;
-}
-.mask span:nth-child(4) {
-	animation-delay: 6s;
-}
-.mask span:nth-child(5) {
-	animation-delay: 5s;
-}
-.mask span:nth-child(6) {
 	animation-delay: 4s;
 }
-.mask span:nth-child(7) {
+.mask span:nth-child(3) {
+	animation-delay: 3.5s;
+}
+.mask span:nth-child(4) {
 	animation-delay: 3s;
 }
-.mask span:nth-child(8) {
+.mask span:nth-child(5) {
+	animation-delay: 2.5s;
+}
+.mask span:nth-child(6) {
 	animation-delay: 2s;
 }
-.mask span:nth-child(9) {
+.mask span:nth-child(7) {
+	animation-delay: 1.5s;
+}
+.mask span:nth-child(8) {
 	animation-delay: 1s;
+}
+.mask span:nth-child(9) {
+	animation-delay: 0.5s;
 }
 
 @keyframes move {
