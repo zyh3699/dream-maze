@@ -15,7 +15,6 @@
     canvas {
       display: block;
     }
-    
     #intro {
       position: absolute;
       top: 0;
@@ -174,7 +173,7 @@
      <button id="menuButton" onclick="toggleMenu()">菜单</button>
   <div class="menu" id="menu">
     <button onclick="save()">存档</button>
-    <button onclick="settings()">设置</button>
+    <button onclick="settings()">返回主页</button>
     <button onclick="tips()">任务进度</button>
   </div>
   <div id="intro">
@@ -232,7 +231,7 @@
             image: "../img/conversation/莱拉/莱拉.png", // 对应的图片路径
           },
           {
-            text:"莱拉决定去找艾德里安，寻求他的帮助和意见。",
+            text:"莱拉决定去找一棵树下寻找艾德里安，寻求他的帮助和意见。",
             image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
           }
         ];
@@ -332,7 +331,9 @@
         menu.style.display = 'none';
       }
     }
-
+   function settings() {
+      window.location.href = "../register/next_page.html";
+    }
    
   </script>
 </body>

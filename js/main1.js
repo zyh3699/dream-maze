@@ -27,7 +27,7 @@ document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
 
 function update(deltatime) {
-  const moveSpeed = 150;
+  const moveSpeed = 100;
   const moveAmount = (moveSpeed * deltatime) / 1000;
 
   if (
@@ -37,21 +37,21 @@ function update(deltatime) {
     window.player.move(0, -moveAmount, collisionMap);
     player.updateImage("up");
   }
-  if (
+  else if (
     (keysPressed["ArrowDown"] || keysPressed["s"] || keysPressed["S"]) &&
     window.player.isdialogue == 0
   ) {
     window.player.move(0, moveAmount, collisionMap);
     player.updateImage("down");
   }
-  if (
+  else if (
     (keysPressed["ArrowLeft"] || keysPressed["a"] || keysPressed["A"]) &&
     window.player.isdialogue == 0
   ) {
     window.player.move(-moveAmount, 0, collisionMap);
     player.updateImage("left");
   }
-  if (
+  else if (
     (keysPressed["ArrowRight"] || keysPressed["d"] || keysPressed["D"]) &&
     window.player.isdialogue == 0
   ) {

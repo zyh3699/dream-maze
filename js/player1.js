@@ -124,8 +124,10 @@ updateAdjacentPieces(x, y) {
     
     }
     if(collisionMap[interactY][interactX] === 7){
-      this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。按k键收起");
 
+      this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。你可以按k键收起。当你破解了谜题，请前往上方黄色时钟处。");
+      
+        
         // Create or select the image element
         let image = document.getElementById('mapImage');
         if (!image) {
@@ -146,8 +148,8 @@ updateAdjacentPieces(x, y) {
 
             // 保留位置相关的样式
             closeButton.style.position = "absolute";
-            closeButton.style.top = "150px";
-            closeButton.style.right = "450px";
+            closeButton.style.top = "19%" ;
+            closeButton.style.right = "24%";
 
             // 添加 closeButton 类
             closeButton.classList.add("closeButton");
@@ -160,8 +162,10 @@ updateAdjacentPieces(x, y) {
 
             // 添加事件监听器，在按钮点击时关闭图像
             closeButton.addEventListener("click", function () {
+             
               image.style.display = "none";
               closeButton.style.display = "none";
+             
             });
         } else {
           image.style.display = 'block';
@@ -170,9 +174,12 @@ updateAdjacentPieces(x, y) {
         // Add an event listener to hide the image when K is pressed
         document.addEventListener('keydown', function (e) {
             if (e.key === 'k' || e.key === 'K') {
-                image.style.display = 'none';
+             
+              image.style.display = 'none';
+                
             }
         });
+       
     }
     if (collisionMap[interactY][interactX] === 2) {
       const dialogues = [
@@ -209,7 +216,7 @@ updateAdjacentPieces(x, y) {
           image: "../img/conversation/前成员/Shane_Winter.png",
         },
         {
-          text: "你需要把这个时钟调到一个特定的时间，只有那一个时间，才能逃离这个梦境，也才能阻止他们的计划。",
+          text: "调整时钟时间不同寻常，这需要你自己探索。你需要把这个时钟调到一个特定的时间，只有那一个时间，才能逃离这个梦境，也才能阻止他们的计划。",
           image: "../img/conversation/前成员/Shane_Winter.png",
         },
         {
@@ -342,7 +349,7 @@ updateAdjacentPieces(x, y) {
         // 添加CSS样式
         let currentDialogue = 0;
         let charIndex = 0;
-        const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+        const typingSpeed = 0.01; // 每个字符的打印速度（毫秒）
         // 添加CSS样式
         const style = document.createElement("style");
         document.head.appendChild(style);
