@@ -12,7 +12,7 @@
 				padding: 20px;
 				position: fixed;
 				text-align: center;
-				background-image: url(/img/achieani/12.png);
+				background-image: url(/img/achieani/6.png);
 				background-size: cover;
 				font-size: 50px;
 				border-radius: 10px;
@@ -30,6 +30,31 @@
 				color: #000000;
 				margin: 20px;
 			  }
+              #achievement2 {
+				width: 300px;
+				height: 300px;
+				padding: 20px;
+				position: fixed;
+				text-align: center;
+				background-image: url(/img/achieani/7.png);
+				background-size: cover;
+				font-size: 50px;
+				border-radius: 10px;
+				top: 50%;
+				left: 50%;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+				opacity: 0;
+				transition: opacity 1s ease-in-out;
+				z-index: 999999;
+				transform: translate(-50%, -50%);
+			  }
+			  #achievement2 p {
+				font-size: larger;
+				text-align: center;
+				color: #000000;
+				margin: 20px;
+			  }
+
 			  .hidden {
 				display: none;
 			  }
@@ -857,9 +882,9 @@
 		function judgeSub0(chess,chess1){
 			if (chess1 == null) {
 				if (chess == 1) {
-					alert("白棋赢了");
-					alert("获得成就“意志的陨落”");
-
+					alert("你输了......你未能破解艾德里安的心灵陷阱......");
+					//alert("获得成就“意志的陨落”");
+					showAchievement2();
         var index = window.localStorage.userid;
         var array = JSON.parse(window.localStorage.userArr);
         array[index].achi7 = 2;
@@ -869,11 +894,11 @@
         console.log("array[index].achi7:", array[index].achi7);
 
         window.localStorage.userArr = JSON.stringify(array);
-		window.location.href = '../../html/chapter3_branch1.html';
+		//window.location.href = '../../html/chapter3_branch1.html';
 				}
 				else {
-					alert("黑棋赢了，按确定键跳转下一层梦境");
-					alert("获得成就“心灵棋士”");
+					alert("你赢啦！！！在心灵的对弈中，你和卡尔一起战胜了艾德里安！");
+					//alert("获得成就“心灵棋士”");
 
         var index = window.localStorage.userid;
         var array = JSON.parse(window.localStorage.userArr);
@@ -1017,6 +1042,27 @@
 				}, 1000);
 			}, 3500);
 		}		  
+		function showAchievement2() {
+			const achievementBox = document.getElementById('achievement2');
+			achievementBox.classList.remove('hidden');
+		  
+			// Make the box gradually appear
+			setTimeout(() => {
+				achievementBox.style.opacity = 1;
+			}, 100);
+		  
+			// Automatically hide the box after 2 seconds
+			setTimeout(() => {
+				achievementBox.style.opacity = 0;
+				// Hide the box completely after the fade-out transition
+				setTimeout(() => {
+					achievementBox.classList.add('hidden');
+					// Redirect to index.html after the fade-out transition
+					window.location.href = '../../html/chapter3_branch1.html';
+				}, 1000);
+			}, 3500);
+		}		  
+
     </script>
 </head>
 <body onload="loadDown()">
@@ -1036,6 +1082,7 @@
     </div> -->
   <!-- 成就 -->
   <div id="achievement" class="hidden"></div>
+  <div id="achievement2" class="hidden"></div>
 <!-- 成就 -->
 
     <div>

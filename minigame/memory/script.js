@@ -89,7 +89,8 @@ const startGame = () => {
                 </span>
             `;
             clearInterval(state.loop);
-            alert("获得成就“虚无的囚徒”");
+            // alert("获得成就“虚无的囚徒”");
+            showAchievement();
 
             var index = window.localStorage.userid;
             var array = JSON.parse(window.localStorage.userArr);
@@ -100,9 +101,9 @@ const startGame = () => {
             console.log("array[index].achi9:", array[index].achi9);
 
             window.localStorage.userArr = JSON.stringify(array);
-          setTimeout(() => {
-            window.location.href = "../../html/chapter4_branch1.html"; // 将 'main.js' 替换为你想跳转的页面路径
-          }, 4000); // 等待2秒后跳转
+        //   setTimeout(() => {
+        //     // window.location.href = "../../html/chapter4_branch1.html"; // 将 'main.js' 替换为你想跳转的页面路径
+        //   }, 4000); // 等待2秒后跳转
         }
     }, 1000)
 }
@@ -150,8 +151,8 @@ const flipCard = card => {
                 </span>
             `;
             clearInterval(state.loop);
-            alert("获得成就“梦境修复者”");
-
+            // alert("获得成就“梦境修复者”");
+            showAchievement2();
             var index = window.localStorage.userid;
             var array = JSON.parse(window.localStorage.userArr);
             array[index].achi8 = 1;
@@ -161,9 +162,9 @@ const flipCard = card => {
             console.log("array[index].achi8:", array[index].achi8);
 
             window.localStorage.userArr = JSON.stringify(array);
-          setTimeout(() => {
-            window.location.href = "../../html/final.html"; // 将 'main.js' 替换为你想跳转的页面路径
-          }, 4000); // 等待2秒后跳转
+        //   setTimeout(() => {
+        //     window.location.href = "../../html/final.html"; // 将 'main.js' 替换为你想跳转的页面路径
+        //   }, 4000); // 等待2秒后跳转
         }, 1000)
     }
 }
@@ -184,3 +185,45 @@ const attachEventListeners = () => {
 generateGame()
 attachEventListeners()
 
+// 成就
+function showAchievement() {
+    const achievementBox = document.getElementById('achievement');
+    achievementBox.classList.remove('hidden');
+    
+    // Make the box gradually appear
+    setTimeout(() => {
+        achievementBox.style.opacity = 1;
+    }, 100);
+    
+    // Automatically hide the box after 2 seconds
+    setTimeout(() => {
+        achievementBox.style.opacity = 0;
+        // Hide the box completely after the fade-out transition
+        setTimeout(() => {
+            achievementBox.classList.add('hidden');
+            // Redirect to index.html after the fade-out transition
+            window.location.href = '../../html/chapter4_branch1.html';
+        }, 1000);
+    }, 3500);
+}		  
+// ../../html/chapter2.html
+function showAchievement2() {
+    const achievementBox = document.getElementById('achievement2');
+    achievementBox.classList.remove('hidden');
+    
+    // Make the box gradually appear
+    setTimeout(() => {
+        achievementBox.style.opacity = 1;
+    }, 100);
+    
+    // Automatically hide the box after 2 seconds
+    setTimeout(() => {
+        achievementBox.style.opacity = 0;
+        // Hide the box completely after the fade-out transition
+        setTimeout(() => {
+            achievementBox.classList.add('hidden');
+            // Redirect to index.html after the fade-out transition
+            window.location.href = '../../html/final.html';
+        }, 1000);
+    }, 3500);
+}		  
