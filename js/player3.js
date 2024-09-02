@@ -361,7 +361,7 @@ class Player {
         },  
         {
           text: "（警惕地）艾德里安……你怎么会在这里？",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉4.png",
         },  
         {
           text: "哦，莱拉，我当然会在这里。这里的一切都是我的设计。我就是这个梦境的主人。",
@@ -383,7 +383,7 @@ class Player {
         abandon: [
           {
             text: "你不该这样做......",
-            image: "../img/conversation/莱拉/莱拉.png", // 另一张图片
+            image: "../img/conversation/莱拉/莱拉3.png", // 另一张图片
           },
           {
             text: "我们不会让你得逞的，艾德里安。我们会阻止你，阻止组织的所有阴谋！",
@@ -670,7 +670,7 @@ class Player {
         },  
         {
           text: "（心存诸多疑虑，但你不得不快速许了一个愿望）我想拯救alpha梦境。",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },  
         {
           text: "现在，从我右边那个柱子正右侧开始，往下走到底，再向右走一小步，你就会走到虚空法阵里。",
@@ -732,7 +732,7 @@ class Player {
         },  
         {
           text: "卡尔？？？卡尔一定在附近！",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },  
         {
           text: "探索这个地图，找到卡尔吧！",
@@ -746,7 +746,7 @@ class Player {
       const dialogues = [
         {
           text: "啊，这个地方是我们当时说话的残影...",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },  
         {
           text: "不可思议的梦境",
@@ -770,7 +770,7 @@ class Player {
         },  
         {
           text: "？",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉4.png",
         },  
         {
           text: "来吧，去跟我们的长老对话吧",
@@ -1013,7 +1013,7 @@ class Player {
       const dialogues = [
         {
           text: "（激动地）卡尔！我终于找到你了！你没事吧？",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },  
         {
           text: "（微笑）我很好，莱拉。其实，我故意让自己被困在这里，为的是收集更多关于组织的情报，并找到阻止他们的办法。",
@@ -1021,11 +1021,11 @@ class Player {
         },  
         {
           text: "（疑惑）组织？你是说艾德里安所在的那个组织？",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉2.png",
         },  
         {
           text: "（点头）是的，莱拉。这个组织已经不再是简单的阴谋集团。他们掌握了一种能够控制全球梦境的技术——“阿尔法梦境”。",
-          image: "../img/conversation/卡尔/卡尔.png",
+          image: "../img/conversation/卡尔/卡尔3.png",
         }, 
         {
           text: "阿尔法梦境是一种终极的梦境技术，它能够潜入任何人的潜意识，改变他们的记忆和行为，从而影响整个世界的未来。",
@@ -1033,7 +1033,7 @@ class Player {
         },  
         {
           text: "（震惊）如果他们成功启动了阿尔法梦境，那岂不是整个世界都要陷入他们的掌控之中？",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉4.png",
         },  
         {
           text: "（严肃）没错。这也是我为什么必须留下来的原因。我需要更多的信息来破坏他们的计划。",
@@ -1044,8 +1044,8 @@ class Player {
           image: "../img/conversation/莱拉/莱拉.png",
         },  
         {
-          text: "我们必须知道那个组织的暗号。这也是我在这里的原因。",
-          image: "../img/conversation/卡尔/卡尔.png",
+          text: "我们必须知道那个组织的暗号。",
+          image: "../img/conversation/卡尔/卡尔3.png",
         },  
         {
           text: "这张地图上有很多组织的前成员。他们的形态和性格各异。",
@@ -1053,7 +1053,7 @@ class Player {
         },  
         {
           text: "尊重他们。他们会告诉你我们想要的东西。",
-          image: "../img/conversation/卡尔/卡尔.png",
+          image: "../img/conversation/卡尔/卡尔3.png",
         },  
         {
           text: "一旦知道了密码，去揭穿艾德里安的密谋！",
@@ -1068,7 +1068,7 @@ class Player {
       const dialogues = [
         {
           text: "卡尔...",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },  
         {
           text: "莱拉，不必担心我了，我现在在这里很好。",
@@ -1076,7 +1076,7 @@ class Player {
         },  
         {
           text: "快去探寻一下这个地图上的异常地方。",
-          image: "../img/conversation/卡尔/卡尔.png",
+          image: "../img/conversation/卡尔/卡尔3.png",
         },  
         {
           text: "那只传说之鱼，很关键。",
@@ -1092,7 +1092,7 @@ class Player {
         },  
         {
           text: "去找传说之鱼吧",
-          image: "../img/conversation/卡尔/卡尔.png",
+          image: "../img/conversation/卡尔/卡尔2.png",
         },  
       ];
       createDialogueBox(dialogues);
