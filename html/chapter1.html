@@ -182,15 +182,15 @@
   <div id="progressContainer">
     <span class="closeButton">&times;</span>
     <div class="progressBarWrapper">
-      <span class="progressLabel">修复漏洞</span>
+      <span class="progressLabel">对话</span>
       <div class="progressBar"><div id="bugProgress"></div></div>
     </div>
     <div class="progressBarWrapper">
-      <span class="progressLabel">解密</span>
+      <span class="progressLabel">图片解谜</span>
       <div class="progressBar"><div id="decryptProgress"></div></div>
     </div>
     <div class="progressBarWrapper">
-      <span class="progressLabel">对话</span>
+      <span class="progressLabel">时钟谜题</span>
       <div class="progressBar"><div id="dialogueProgress"></div></div>
     </div>
   </div>
@@ -309,9 +309,9 @@
         const decryptCount = window.player.decrypt; // 获取解密数
         const dialogueCount = window.player.dialogue; // 获取对话数
 
-        const totalBugs = 5; // 总漏洞数
-        const totalDecrypts = 3; // 总解密数
-        const totalDialogues = 4; // 总对话数
+        const totalBugs = 2; // 总漏洞数
+        const totalDecrypts = 1; // 总解密数
+        const totalDialogues = 1; // 总对话数
 
         bugProgress.style.width = (bugCount / totalBugs) * 100 + "%";
         decryptProgress.style.width = (decryptCount / totalDecrypts) * 100 + "%";

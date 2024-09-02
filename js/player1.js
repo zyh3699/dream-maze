@@ -11,6 +11,9 @@ class Player {
     this.frameInterval = 50; // 每隔多少次update切换一次帧
     this.direction = "down"; // 默认方向
     this.isdialogue = 0;
+    this.bug=0;
+    this.decrypt=0;
+    this.dialoguep=0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -127,7 +130,7 @@ updateAdjacentPieces(x, y) {
 
       this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。你可以按k键收起。当你破解了谜题，请前往上方黄色时钟处。");
       
-        
+        this.decrypt = 1;
         // Create or select the image element
         let image = document.getElementById('mapImage');
         if (!image) {
@@ -182,6 +185,7 @@ updateAdjacentPieces(x, y) {
        
     }
     if (collisionMap[interactY][interactX] === 2) {
+      this.bug++;
       const dialogues = [
         {
           text: "这个梦境真是奇怪，时间流逝得如此之快……",
@@ -287,6 +291,7 @@ updateAdjacentPieces(x, y) {
       collisionMap[interactY][interactX] = 0;
       }
       if (collisionMap[interactY][interactX] === 6) {
+        this.bug++;
         const dialogues = [
           {
             text: "艾德里安！我找到了些关于那个神秘组织的信息，我们需要谈谈。",
