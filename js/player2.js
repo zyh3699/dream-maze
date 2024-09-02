@@ -741,6 +741,12 @@ class Player {
         function handleOption(option) {
           if (option === "那会让你分不清梦境和现实->") {
             self.dialogFazhen=1;
+            // 成就
+            var index = window.localStorage.userid;
+            var array = JSON.parse(window.localStorage.userArr);
+            array[index].achi11 = 5; //achi2代表第二个成就，自行设定判定条件
+            window.localStorage.userArr = JSON.stringify(array);
+           alert("获得成就！");
           }
           if (option === "那会让你分不清梦境和现实->") {
             dialogues.push(...choiceDialogues.cooperate);

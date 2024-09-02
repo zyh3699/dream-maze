@@ -84,14 +84,14 @@ console.log('array[index].achi3:', array[index].achi3);
                 if (i == 1) {
                     var tmp = document.getElementById('8');
                     tmp.setAttribute('style', 'width: calc(20% - 2rem); margin: 1rem;cursor: pointer; filter:brightness(2);');
-                    document.getElementById('p81').innerHTML = "洞察一切";
+                    document.getElementById('p81').innerHTML = "失落漫游者";
                     document.getElementById('p82').innerHTML = "gal真爱"
                 }
                 var i = array[index].achi9;
                 if (i == 1) {
                     var tmp = document.getElementById('9');
                     tmp.setAttribute('style', 'width: calc(20% - 2rem); margin: 1rem;cursor: pointer; filter:brightness(2);');
-                    document.getElementById('p91').innerHTML = "洞察一切";
+                    document.getElementById('p91').innerHTML = "命运织者";
                     document.getElementById('p92').innerHTML = "gal真爱"
                 }
                 var i = array[index].achi1 + array[index].achi2 + array[index].achi3 + array[index].achi4;
@@ -101,6 +101,21 @@ console.log('array[index].achi3:', array[index].achi3);
                     document.getElementById('p101').innerHTML = "洞察一切";
                     document.getElementById('p102').innerHTML = "gal真爱"
                 }
+                var i = array[index].achi11;
+                if (i == 5) {
+                    var tmp = document.getElementById('11');
+                    tmp.setAttribute('style', 'width: calc(20% - 2rem); margin: 1rem;cursor: pointer; filter:brightness(2);');
+                    document.getElementById('p111').innerHTML = "符文解密者";
+                    document.getElementById('p112').innerHTML = "识破法阵的问题"
+                }
+                var i = array[index].achi12;
+                if (i == 5) {
+                    var tmp = document.getElementById('12');
+                    tmp.setAttribute('style', 'width: calc(20% - 2rem); margin: 1rem;cursor: pointer; filter:brightness(2);');
+                    document.getElementById('p121').innerHTML = "迷踪之钥";
+                    document.getElementById('p122').innerHTML = "得到幽灵长老的信任"
+                }
+
             }
         </script>
         <div class="cols">
@@ -255,6 +270,38 @@ console.log('array[index].achi3:', array[index].achi3);
                     <div class="back">
                         <div class="inner">
                             <p id=p102 class="backstyle">到达最终选择</p>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id=11 class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(../img/achievem/1.jpg)">
+                        <div class="inner">
+                            <p id=p111>Locked</p>
+                            <span>符文解密者</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p id=p112 class="backstyle">识破法阵的问题</p>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id=12 class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(../img/achievem/1.jpg)">
+                        <div class="inner">
+                            <p id=p121>Locked</p>
+                            <span>迷踪之钥</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p id=p122 class="backstyle">获得幽灵长老的信任</p>
                            
                         </div>
                     </div>
