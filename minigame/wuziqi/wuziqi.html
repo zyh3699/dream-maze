@@ -5,6 +5,36 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <style type="text/css">
+		    /*成就*/
+			#achievement {
+				width: 300px;
+				height: 300px;
+				padding: 20px;
+				position: fixed;
+				text-align: center;
+				background-image: url(/img/achieani/12.png);
+				background-size: cover;
+				font-size: 50px;
+				border-radius: 10px;
+				top: 50%;
+				left: 50%;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+				opacity: 0;
+				transition: opacity 1s ease-in-out;
+				z-index: 999999;
+				transform: translate(-50%, -50%);
+			  }
+			  #achievement p {
+				font-size: larger;
+				text-align: center;
+				color: #000000;
+				margin: 20px;
+			  }
+			  .hidden {
+				display: none;
+			  }
+			  /*成就*/
+		  
         body{
             background-image: url(bg1.jpg);
             background-repeat: no-repeat;
@@ -854,7 +884,10 @@
         console.log("array[index].achi6:", array[index].achi6);
 
         window.localStorage.userArr = JSON.stringify(array);
-					window.location.href = '../../../html/chapter4.html';
+
+		showAchievement();
+					// window.location.href = '../../../html/chapter4.html';
+
 				}
 				gameOver = true;//设置该局棋盘已经赢了，不可以再走了
 			}
@@ -963,6 +996,27 @@
 			interactive = interactiveTemp;
 			computerIsWhite = computerIsWhiteTemp;
 		}
+		// 成就
+		function showAchievement() {
+			const achievementBox = document.getElementById('achievement');
+			achievementBox.classList.remove('hidden');
+		  
+			// Make the box gradually appear
+			setTimeout(() => {
+				achievementBox.style.opacity = 1;
+			}, 100);
+		  
+			// Automatically hide the box after 2 seconds
+			setTimeout(() => {
+				achievementBox.style.opacity = 0;
+				// Hide the box completely after the fade-out transition
+				setTimeout(() => {
+					achievementBox.classList.add('hidden');
+					// Redirect to index.html after the fade-out transition
+					window.location.href = '../../../html/chapter4.html';
+				}, 1000);
+			}, 3500);
+		}		  
     </script>
 </head>
 <body onload="loadDown()">
@@ -980,6 +1034,9 @@
     <!-- <div class="button2">  
         <button type="button" onClick="toggleControlPanel()">关闭/打开菜单栏</button>
     </div> -->
+  <!-- 成就 -->
+  <div id="achievement" class="hidden"></div>
+<!-- 成就 -->
 
     <div>
         <canvas id="canvas" onmousedown="play(event)" height="2000"  width="2000" style = "position:absolute;z-index:8000;top:140px;left:30%;">你的浏览器不支持HTML5 canvas  ，请使用 google chrome 浏览器 打开.</canvas>
