@@ -491,6 +491,16 @@ class Player {
     const bodyElement = document.body;
     bodyElement.style.transition = "opacity 1s ease-out";
     bodyElement.style.opacity = 0;
+    alert("你已解锁成就");
+    var index = window.localStorage.userid;
+    var array = JSON.parse(window.localStorage.userArr);
+    array[index].achi10 = 1;
+    console.log("index:", index); // 确认index的值
+    console.log("array:", array); // 确认array是否被正确解析
+    console.log("array[index]:", array[index]); // 确认 array[index] 是否有效
+    console.log("array[index].achi10:", array[index].achi10);
+
+    window.localStorage.userArr = JSON.stringify(array);
     setTimeout(() => {
       window.location.href = "../html/ending.html";
     }, 1000); // 等待1秒以完成淡出效果
