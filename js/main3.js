@@ -58,13 +58,13 @@ function update(deltatime) {
     window.player.move(moveAmount, 0, collisionMap);
     player.updateImage("right");
   }
-  else if (
-    (keysPressed["ArrowRight"] || keysPressed["d"] || keysPressed["D"])&&(keysPressed["ArrowUp"] || keysPressed["w"] || keysPressed["W"]) &&
-    window.player.isconversation == 0
-  ) {
-    window.player.move(moveAmount, 0, collisionMap);
-    player.updateImage("right");
-  }
+  // else if (
+  //   (keysPressed["ArrowRight"] || keysPressed["d"] || keysPressed["D"])&&(keysPressed["ArrowUp"] || keysPressed["w"] || keysPressed["W"]) &&
+  //   window.player.isconversation == 0
+  // ) {
+  //   window.player.move(moveAmount, 0, collisionMap);
+  //   player.updateImage("right");
+  // }
   if (
     (keysPressed["e"] || keysPressed["E"]) &&
     window.player.isconversation == 0
