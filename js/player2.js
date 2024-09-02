@@ -209,7 +209,7 @@ class Player {
         },
         {
           text: "你，你是？？？",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉4.png",
         },
         {
           text: "如你所见，现在是个幽灵(你察觉到指向不明的愤怒)",
@@ -233,7 +233,7 @@ class Player {
         } ,       
         {
           text: "（着急）把握住什么？先生？先生？",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉4.png",
         },
         {
           text: "（幽灵缓缓闭上眼，若有若无的身躯似乎比之前散发出更多的寒意。看样子不会再跟你多说些什么了。）",
@@ -272,7 +272,7 @@ class Player {
         },
         {
           text: "（未及思索，你的眼前便浮现出一幕一幕回忆。）",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },
         {
           text: " （神情凝重）艾德里安，我们得到的信息越来越奇怪。这个组织想掌控的不只是财富和权力，他们的目标似乎是更深层的东西……控制人类的集体潜意识，改变未来？",
@@ -288,11 +288,11 @@ class Player {
         },
         {
           text: "（惊讶地）艾德里安，你不觉得……你对这些梦境的了解太多了吗？有时候，我感觉你甚至比我还清楚接下来会发生什么。",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉4.png",
         },
         {
           text: "（略显迟疑）嗯……可能是因为我有些经验吧。毕竟，我一直在研究这些东西……",
-          image: "../img/conversation/艾德里安/艾德里安.png",
+          image: "../img/conversation/艾德里安/艾德里安2.png",
         },
         {
           text: "（艾德里安的行为变得有些不自然，他的目光闪烁，似乎在隐藏着什么。）",
@@ -335,11 +335,11 @@ class Player {
       const dialogues = [
         {
           text: "（透过镜子，你看到了什么？）",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },
         {
           text: "当你凝视深渊的时候，深渊也在凝视着你。",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },
         {
           text: "（一幕场景在镜子里浮现...）",
@@ -363,15 +363,15 @@ class Player {
         },
         {
           text: "莱拉！莱拉！",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉4.png",
         },  
         {
           text: "（画面渐渐消失...你听到小魔在跟你说话，猛然回神）嗯嗯？",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },
         {
           text: "有人告诉我，你能够帮我们逃离这个梦境！请救救我们！",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },
         {
           text: "我只知道这些！你刚刚找过布谷了，还有谁...对，去找神秘电话吧！",
@@ -389,11 +389,11 @@ class Player {
       const dialogues = [
         {
           text: "当你凝视深渊的时候，深渊也在凝视着你。",
-          image: "../img/conversation/其他人物/ghost.png",
+          image: "../img/conversation/莱拉/莱拉.png",
         },
         {
           text: "有人告诉我，你能够帮我们逃离这个梦境！请救救我们！",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },
         {
           text: "我只知道这些了。去找神秘电话机吧。",
@@ -418,7 +418,7 @@ class Player {
         },
         {
           text: "（后退一步）电话先生？附魔镜...不对，小魔让我来找你。",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉4.png",
         },
         {
           text: "莱拉。你是莱拉。卡尔先生告诉我你一定会来的。他为你留下了一通留言。接吧，孩子。",
@@ -426,7 +426,7 @@ class Player {
         },
         {
           text: "卡尔？！（嘟嘟嘟嘟...你上前接起了听筒）",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },
         {
           text: "（传来卡尔虚弱的声音）莱拉...我的时间不多了...如你所见，这个房间封印着许多曾经伟大的巫师。咳咳...",
@@ -434,7 +434,7 @@ class Player {
         },
         {
           text: "艾德里安跟你一起吗，小心他。",
-          image: "../img/conversation/卡尔/卡尔.png",
+          image: "../img/conversation/卡尔/卡尔3.png",
         },
         {
           text: "如果我还活着，他们会告诉你我在哪里...千万小心，那个组织...",
@@ -450,7 +450,7 @@ class Player {
         },
         {
           text: "（惊）又是这句话！那个组织真的存在！这个梦境！",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉4.png",
         },            
         {
           text: "难，蜀道难，也不过如此。去找青蛙王子吧，邪恶的巫术，他曾经多么俊朗......",
@@ -489,7 +489,7 @@ class Player {
         },
         {
           text: "你是青蛙王子？电话先生让我来找你。卡尔！你知道卡尔对吧！",
-          image: "../img/conversation/莱拉/莱拉.png",
+          image: "../img/conversation/莱拉/莱拉3.png",
         },
         {
           text: "（沉思）不要怕。你是莱拉。对，只有莱拉才能得到幽灵的答复。",
@@ -571,7 +571,7 @@ class Player {
             },
             {
               text: "什么？",
-              image: "../img/conversation/莱拉/莱拉.png",
+              image: "../img/conversation/莱拉/莱拉4.png",
             },
             {
               text: "我是附在法阵上的魂灵。卡尔...被他们抓走了...",
@@ -591,7 +591,7 @@ class Player {
             },
             {
               text: "（低头）我该怎么办？",
-              image: "../img/conversation/莱拉/莱拉.png",
+              image: "../img/conversation/莱拉/莱拉3.png",
             },
             {
               text: "我的力量是无穷的，我是个传送法阵...但被封印住了，又有什么用呢？",
@@ -773,7 +773,7 @@ class Player {
           },
           {
             text: "（艾德里安？？？但是为什么看起来这么年轻？）",
-            image: "../img/conversation/莱拉/莱拉.png",
+            image: "../img/conversation/莱拉/莱拉3.png",
           },
           {
             text: "需要帮忙吗？",
@@ -793,7 +793,7 @@ class Player {
           }, 
           {
             text: "(原来，艾德里安曾经是这样有志气的巫师...只不过，现在的艾德里安，还是这样的吗？)",
-            image: "../img/conversation/莱拉/莱拉.png",
+            image: "../img/conversation/莱拉/莱拉3.png",
           },
           {
             text: "（担忧）看来这里也是幻象了......",
