@@ -66,6 +66,10 @@ class Player {
 
   showPasswordModal() {
     // 创建一个容器来放置输入框和按钮
+    this.isconversation=1;
+    self.isconversation = 1;
+    player.isconversation = 1;
+    Player.isconversation = 1;
     const container = document.createElement('div');
     container.style.position = 'absolute';
     container.style.top = '50%';
@@ -99,6 +103,10 @@ class Player {
 
     // 提交按钮点击事件
     submitButton.onclick = () => {
+      this.isconversation=0;
+      self.isconversation = 0;
+      player.isconversation = 0;
+      Player.isconversation = 0;  
         if (passwordInput.value === 'dreammaze') {
           document.getElementById('ade').style.textDecoration = 'line-through';
           document.getElementById('star').style.display = 'block';
@@ -176,12 +184,20 @@ class Player {
         
           function showNextDialogue() {
             self.isconversation = 1;
+            this.isconversation=1;
+            self.isconversation = 1;
+            player.isconversation = 1;
+            Player.isconversation = 1;        
             if (currentDialogue < dialogues.length) {
               dialogText.innerText = "";
               lailaImage.src = dialogues[currentDialogue].image;
               typeDialogue();
             } else {
               // 
+              this.isconversation=0;
+              self.isconversation = 0;
+              player.isconversation = 0;
+              Player.isconversation = 0;          
               const bodyElement = document.body;
               bodyElement.style.transition = "opacity 1s ease-out";
               bodyElement.style.opacity = 0;
@@ -201,6 +217,10 @@ class Player {
 
 
         } else {
+          this.isconversation=0;
+          self.isconversation = 0;
+          player.isconversation = 0;
+          Player.isconversation = 0;      
             errorMessage.textContent = '暗号错误，艾德里安奇怪的看了你一眼。';
             errorMessage.style.display = 'block';  // 显示错误提示
         }
@@ -208,6 +228,9 @@ class Player {
 
     // 取消按钮点击事件
     cancelButton.onclick = () => {
+      self.isconversation = 0;
+      player.isconversation = 0;
+      Player.isconversation = 0;  
         container.remove(); // 移除输入框和按钮
     };
 
