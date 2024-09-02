@@ -81,6 +81,7 @@ form {
     letter-spacing: 1px;
     color: #666;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    /* margin-top: 5px; */
 }
 
 /*
@@ -116,19 +117,13 @@ form {
 }
  
 .form .inputBox input::placeholder {
-    color: #666;
+    color:  #ffffff;
+    opacity: 1;
 }
- 
+
 /* 登录按钮样式 */
  
-.form .inputBox input[type="reset"] {
-    background: #fff;
-    color: #666;
-    max-width: 100px;
-    margin-bottom: 20px;
-    font-weight: 600;
-    cursor: pointer;
-}
+
  
 input {
     width: 100%; /* 输入框宽度100%填充网格 */
@@ -144,24 +139,42 @@ label {
     font-weight: bold;
     font-size: large;
 }
-button {
-  
-    padding: 10px;
+/* 统一按钮样式 */
+/* 科幻风格按钮样式 */
+/* 科幻风格按钮样式 */
+button, .form .inputBox input[type="reset"] {
+    padding: 15px;
     width: 100%;
-    background-color:  #28a745;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 20px;
-    font-family: 仿宋;
+    background: linear-gradient(145deg, #0d0d0d, #1a1a1a); /* 科幻风格背景渐变 */
+    color: #0dd7ff; /* 按钮文本颜色 */
+    border: 2px solid #0dd7ff; /* 按钮边框颜色 */
+    border-radius: 15px;
+    font-size: 18px;
+    font-family: '仿宋', sans-serif;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5px auto;
+    transition: all 0.3s ease; /* 过渡效果 */
+    margin: 7px auto 3px auto;    
     display: block;
+    box-shadow: 0 4px 15px rgba(13, 215, 255, 0.4); /* 按钮阴影 */
+    position: relative; /* 相对定位 */
+    overflow: hidden; /* 隐藏超出内容 */
 }
-button:hover {
-    background-color: #0056b3;
+
+button:hover, .form .inputBox input[type="reset"]:hover {
+    color: #fff; /* 鼠标悬停时文本颜色 */
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d); /* 悬停时背景渐变反转 */
+    box-shadow: 0 0 20px #0dd7ff, 0 0 30px #0dd7ff, 0 0 40px #0dd7ff; /* 鼠标悬停时发光效果 */
 }
+
+/* 按钮点击时的样式 */
+button:active, .form .inputBox input[type="reset"]:active {
+    background: linear-gradient(145deg, #0d0d0d, #1a1a1a); /* 按钮点击时的背景色 */
+    box-shadow: 0 2px 5px rgba(13, 215, 255, 0.5); /* 按钮点击时的阴影效果 */
+    transform: translateY(2px); /* 按钮点击时的动画效果 */
+}
+
+
+
 #registerBtn {
     background-color: #28a745;
 }
