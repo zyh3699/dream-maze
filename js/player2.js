@@ -381,6 +381,10 @@ class Player {
           text: "请找到房间内的神秘电话机。",
           image: "../img/conversation/精灵/精灵.png",
         },
+        {
+          text: "哦对了，作为最忠实的随从，从此之后，在最关键的时候，小魔会告诉你，你在梦境里还是现实中",
+          image: "../img/conversation/精灵/精灵.png",
+        },
       ];
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
@@ -401,6 +405,10 @@ class Player {
         },            
         {
           text: "请找到房间内的神秘电话机。",
+          image: "../img/conversation/精灵/精灵.png",
+        },
+        {
+          text: "哦对了，作为最忠实的随从，从此之后，在最关键的时候，小魔会告诉你，你在梦境里还是现实中",
           image: "../img/conversation/精灵/精灵.png",
         },
       ];
