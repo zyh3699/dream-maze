@@ -175,6 +175,8 @@
     <button onclick="save()">存档</button>
     <button onclick="settings()">线索</button>
     <button onclick="tips()">任务进度</button>
+    <button onclick="back()">返回主页</button>
+    <button onclick="skip()">跳过此章</button>
   </div>
   <div id="intro">
     <div id="dialogue">
@@ -349,6 +351,14 @@ function settings() {
       } else {
         menu.style.display = 'none';
       }
+    }
+
+    function skip(){
+  window.location.href = '../html/final.html';
+}
+
+    function back(){
+      window.location.href = "../register/next_page.html";
     }
 
     document.addEventListener('DOMContentLoaded', (event) => {
