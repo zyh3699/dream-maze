@@ -13,7 +13,7 @@ body {
     background-repeat: no-repeat;
 }
 .mescontainer{
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.501);
     border-radius: 40px;
     width:200px;
     margin: 10px;text-align: center;
@@ -23,8 +23,8 @@ body {
 }
 h2 {
     margin-bottom: 20px;
-    color:rgb(254, 224, 247);
-    font-weight: lighter;
+    color:rgb(1, 1, 1);
+    font-weight: bold;
 }
 
 #puzzle-container {
