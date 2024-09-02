@@ -146,8 +146,8 @@ updateAdjacentPieces(x, y) {
 
             // 保留位置相关的样式
             closeButton.style.position = "absolute";
-            closeButton.style.top = "150px";
-            closeButton.style.right = "450px";
+            closeButton.style.top = "19%" ;
+            closeButton.style.right = "24%";
 
             // 添加 closeButton 类
             closeButton.classList.add("closeButton");
@@ -342,7 +342,7 @@ updateAdjacentPieces(x, y) {
         // 添加CSS样式
         let currentDialogue = 0;
         let charIndex = 0;
-        const typingSpeed = 1; // 每个字符的打印速度（毫秒）
+        const typingSpeed = 0.01; // 每个字符的打印速度（毫秒）
         // 添加CSS样式
         const style = document.createElement("style");
         document.head.appendChild(style);
