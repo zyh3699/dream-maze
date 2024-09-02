@@ -19,6 +19,8 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: 90%;
 }
 .container a {
     width: 80%;
@@ -45,7 +47,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-form {
+.form {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
@@ -59,7 +61,8 @@ form {
 .checkip .inputText {
     width: 100%;
 	height:100%;
-    margin-top: 20px;
+    margin-top: 20px;rgb(255, 255, 255)
+    color: #ffffff;
 }
 
 /* 输入框样式 */
@@ -68,7 +71,7 @@ form {
     
     width: 100%;
     padding: 10px 20px;
-    background: rgba(101, 205, 109, 0.2);
+    background: rgba(255, 255, 255, 0.2);
     outline: none;
     border: none;
     border-radius: 30px;
@@ -79,7 +82,7 @@ form {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 16px;
     letter-spacing: 1px;
-    color: #666;
+    color: #ffffff;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     /* margin-top: 5px; */
 }
@@ -128,7 +131,7 @@ form {
 input {
     width: 100%; /* 输入框宽度100%填充网格 */
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #ffffff;
     border-radius: 3px;
     box-sizing: border-box; /* 确保输入框包括内边距和边框的宽度 */  
 }
@@ -189,3 +192,38 @@ p {
     margin-top: 10px;
 }
 
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .inputBox input {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+
+/* 媒体查询 - 针对超小屏幕设备 */
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .inputBox input {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
