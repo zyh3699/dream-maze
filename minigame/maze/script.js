@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // // 设置每隔 3 秒切换一次背景图片
     // setInterval(changeFogImage, 200);
  // 将迷宫图片绘制到 canvas 上
- let timeLeft = 120; // 总时间，单位为秒
+ let timeLeft = 150; // 总时间，单位为秒
  let timeminus=1;
 const totalTime = timeLeft; // 用于计算进度条的初始宽度
 
