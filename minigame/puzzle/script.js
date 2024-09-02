@@ -111,8 +111,9 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("array[index].achi1:", array[index].achi1);
 
         window.localStorage.userArr = JSON.stringify(array);
-        alert("你已解锁成就");
-        window.location.href = "../../html/chapter1.html"; // 跳转到上级目录的上级目录中的chapter1.html
+        // alert("你已解锁成就");
+        showAchievement();
+        // window.location.href = "../../html/chapter1.html"; // 跳转到上级目录的上级目录中的chapter1.html
       });
     }
   }
@@ -153,3 +154,24 @@ function shufflePieces() {
 }
 
 });
+
+function showAchievement() {
+  const achievementBox = document.getElementById('achievement');
+  achievementBox.classList.remove('hidden');
+  
+  // Make the box gradually appear
+  setTimeout(() => {
+    achievementBox.style.opacity = 1;
+  }, 100);
+  
+  // Automatically hide the box after 2 seconds
+  setTimeout(() => {
+    achievementBox.style.opacity = 0;
+    // Hide the box completely after the fade-out transition
+    setTimeout(() => {
+      achievementBox.classList.add('hidden');
+      // Redirect to index.html after the fade-out transition
+      window.location.href = '../../html/chapter1.html';
+    }, 1000);
+  }, 3500);
+}		  

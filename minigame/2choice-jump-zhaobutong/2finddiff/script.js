@@ -197,8 +197,8 @@ function gameOver(won) {
     // 实现游戏结束逻辑，比如显示结果、禁用进一步点击等
     clearInterval(timer); // 停止计时器
     if (won) {
-        alert("获得成就“虚假现实的觉醒”");
-
+        // alert("获得成就“虚假现实的觉醒”");
+        showAchievement();
         var index = window.localStorage.userid;
         var array = JSON.parse(window.localStorage.userArr);
         array[index].achi4 = 1;
@@ -209,11 +209,11 @@ function gameOver(won) {
 
         window.localStorage.userArr = JSON.stringify(array);
         // alert('恭喜你找到所有不同处！按确认自动跳转。');
-        window.location.href = '../../../html/chapter3.html';
+        // window.location.href = '../../../html/chapter3.html';
     } else {
         alert('游戏结束，你没有找到所有不同处。你迷失在梦境之中。');
-        alert("获得成就“迷失的现实”");
-
+        // alert("获得成就“迷失的现实”");
+        showAchievement2();
         var index = window.localStorage.userid;
         var array = JSON.parse(window.localStorage.userArr);
         array[index].achi5 = 1;
@@ -223,8 +223,51 @@ function gameOver(won) {
         console.log("array[index].achi5:", array[index].achi5);
 
         window.localStorage.userArr = JSON.stringify(array);
-        window.location.href = "../../../html/chapter2_branch1.html";
+        // window.location.href = "../../../html/chapter2_branch1.html";
     }
 }
 
 startTimer();
+
+// 成就
+function showAchievement() {
+    const achievementBox = document.getElementById('achievement');
+    achievementBox.classList.remove('hidden');
+    
+    // Make the box gradually appear
+    setTimeout(() => {
+        achievementBox.style.opacity = 1;
+    }, 100);
+    
+    // Automatically hide the box after 2 seconds
+    setTimeout(() => {
+        achievementBox.style.opacity = 0;
+        // Hide the box completely after the fade-out transition
+        setTimeout(() => {
+            achievementBox.classList.add('hidden');
+            // Redirect to index.html after the fade-out transition
+            window.location.href = '../../../html/chapter3.html';
+        }, 1000);
+    }, 3500);
+}		  
+// ../../html/chapter2.html
+function showAchievement2() {
+    const achievementBox = document.getElementById('achievement2');
+    achievementBox.classList.remove('hidden');
+    
+    // Make the box gradually appear
+    setTimeout(() => {
+        achievementBox.style.opacity = 1;
+    }, 100);
+    
+    // Automatically hide the box after 2 seconds
+    setTimeout(() => {
+        achievementBox.style.opacity = 0;
+        // Hide the box completely after the fade-out transition
+        setTimeout(() => {
+            achievementBox.classList.add('hidden');
+            // Redirect to index.html after the fade-out transition
+            window.location.href = '../../../html/chapter2_branch1.html';
+        }, 1000);
+    }, 3500);
+}		  

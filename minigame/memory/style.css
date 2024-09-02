@@ -1,3 +1,58 @@
+/*成就*/
+#achievement {
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    position: fixed;
+    text-align: center;
+    background-image: url(/img/achieani/8.png);
+    background-size: cover;
+    font-size: 50px;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+    }
+    #achievement p {
+    font-size: larger;
+    text-align: center;
+    color: #000000;
+    margin: 20px;
+    }
+    #achievement2 {
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    position: fixed;
+    text-align: center;
+    background-image: url(/img/achieani/9.png);
+    background-size: cover;
+    font-size: 50px;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+    }
+    #achievement2 p {
+    font-size: larger;
+    text-align: center;
+    color: #000000;
+    margin: 20px;
+    }
+
+    .hidden {
+    display: none;
+    }
+    /*成就*/
+
 html {
     width: 100%;
     height: 100%;
