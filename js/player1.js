@@ -21,9 +21,9 @@ class Player {
       up: [],
       down: [],
       left: [],
-      right: []
+      right: [],
     };
-    
+
     for (let i = 0; i < 4; i++) {
       this.images.up[i] = new Image();
       this.images.up[i].src = `../img/charactor/莱拉1/up${i}.png`;
@@ -56,15 +56,25 @@ class Player {
 
     const newX = Math.floor(playerCenterX + offsetX + dx);
     const newY = Math.floor(playerCenterY + offsetY + dy);
-    if (collisionMap[newY][newX] === 6 || collisionMap[newY][newX] === 7 || collisionMap[newY][newX] === 8 || collisionMap[newY][newX] === 2) 
+    if (
+      collisionMap[newY][newX] === 6 ||
+      collisionMap[newY][newX] === 7 ||
+      collisionMap[newY][newX] === 8 ||
+      collisionMap[newY][newX] === 2
+    )
       this.showMessage("按E键交互 ");
     // 碰撞检测
-    if (collisionMap[newY][newX] === 9)  this.showMessage("请前往右侧灰色按钮处，按E键开启谜题");
-    if (collisionMap[newY][newX] === 10)  this.showMessage("为什么这个池子里的水没有结冰？");
-    if (collisionMap[newY][newX] === 11)  this.showMessage("房子上画着些奇怪的符文。");
-    if (collisionMap[newY][newX] === 12)  this.showMessage("这是什么？雪地里竟然如此茂盛。");
-    if (collisionMap[newY][newX] === 13)  this.showMessage("这么大的果实……不对，这是房子的一部分！");
-    
+    if (collisionMap[newY][newX] === 9)
+      this.showMessage("请前往右侧灰色按钮处，按E键开启谜题");
+    if (collisionMap[newY][newX] === 10)
+      this.showMessage("为什么这个池子里的水没有结冰？");
+    if (collisionMap[newY][newX] === 11)
+      this.showMessage("房子上画着些奇怪的符文。");
+    if (collisionMap[newY][newX] === 12)
+      this.showMessage("这是什么？雪地里竟然如此茂盛。");
+    if (collisionMap[newY][newX] === 13)
+      this.showMessage("这么大的果实……不对，这是房子的一部分！");
+
     if (collisionMap[newY][newX] === 1) {
       return true; // 碰撞检测
     }
@@ -78,26 +88,35 @@ class Player {
       this.frameIndex = 0;
       this.frameDelay = 0;
     }
-  
+
     // 每次调用 updateImage 函数时增加帧间隔计时器
     this.frameDelay++;
-  
+
     // 如果帧间隔计时器达到指定的帧间隔，就更新帧索引
     if (this.frameDelay >= this.frameInterval) {
       this.frameDelay = 0;
       this.frameIndex = (this.frameIndex + 1) % 4; // 循环切换四帧
     }
-  
+
     this.image = this.images[direction][this.frameIndex];
   }
-updateAdjacentPieces(x, y) {
+  updateAdjacentPieces(x, y) {
     // 检查边界条件
-    if (x < 0 || y < 0 || x >= collisionMap[0].length || y >= collisionMap.length) {
+    if (
+      x < 0 ||
+      y < 0 ||
+      x >= collisionMap[0].length ||
+      y >= collisionMap.length
+    ) {
       return;
     }
 
     // 如果当前位置是3，则将其更新为100
-    if (collisionMap[y][x] === 3||collisionMap[y][x] === 6||collisionMap[y][x] === 2) {
+    if (
+      collisionMap[y][x] === 3 ||
+      collisionMap[y][x] === 6 ||
+      collisionMap[y][x] === 2
+    ) {
       collisionMap[y][x] = 100;
 
       // 递归更新相邻的格子
@@ -105,8 +124,9 @@ updateAdjacentPieces(x, y) {
       this.updateAdjacentPieces(x - 1, y);
       this.updateAdjacentPieces(x, y + 1);
       this.updateAdjacentPieces(x, y - 1);
+    } else {
+      return;
     }
-    else { return; }
   }
   interact(collisionMap) {
     const playerCenterX = map.image.width / 2;
@@ -124,17 +144,15 @@ updateAdjacentPieces(x, y) {
       collisionMap[interactY][interactX] = 0;
     }
     if (collisionMap[interactY][interactX] === 8) {
-    
       const bodyElement = document.body;
       bodyElement.style.transition = "opacity 1s ease-out";
       bodyElement.style.opacity = 0;
       setTimeout(() => {
         window.location.href = "../html/chapter1_clock.html";
       }, 1000); // 等待1秒以完成淡出效果
-    
     }
     if(collisionMap[interactY][interactX] === 7){
-      if(this.pre==1){
+
       this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。你可以按k键收起。当你破解了谜题，请前往上方黄色时钟处。");
       
         this.decrypt = 1;
@@ -156,30 +174,28 @@ updateAdjacentPieces(x, y) {
             let closeButton = document.createElement("button");
             closeButton.innerHTML = "X";
 
-            // 保留位置相关的样式
-            closeButton.style.position = "absolute";
-            closeButton.style.top = "19%" ;
-            closeButton.style.right = "24%";
+        // 保留位置相关的样式
+        closeButton.style.position = "absolute";
+        closeButton.style.top = "19%";
+        closeButton.style.right = "24%";
 
-            // 添加 closeButton 类
-            closeButton.classList.add("closeButton");
+        // 添加 closeButton 类
+        closeButton.classList.add("closeButton");
 
-            // 设置按钮的 z-index 确保其在最上层
-            closeButton.style.zIndex = "1001";
+        // 设置按钮的 z-index 确保其在最上层
+        closeButton.style.zIndex = "1001";
 
-            // 将按钮添加到图像的父元素（body）
-            document.body.appendChild(closeButton);
+        // 将按钮添加到图像的父元素（body）
+        document.body.appendChild(closeButton);
 
-            // 添加事件监听器，在按钮点击时关闭图像
-            closeButton.addEventListener("click", function () {
-             
-              image.style.display = "none";
-              closeButton.style.display = "none";
-             
-            });
-        } else {
-          image.style.display = 'block';
-        }
+        // 添加事件监听器，在按钮点击时关闭图像
+        closeButton.addEventListener("click", function () {
+          image.style.display = "none";
+          closeButton.style.display = "none";
+        });
+      } else {
+        image.style.display = "block";
+      }
 
         // Add an event listener to hide the image when K is pressed
         document.addEventListener('keydown', function (e) {
@@ -189,10 +205,7 @@ updateAdjacentPieces(x, y) {
                 
             }
         });
-      }
-      if(this.pre==0){
-        this.showMessage("你需要先找到前成员开启谜题！");
-      }
+       
     }
     if (collisionMap[interactY][interactX] === 2) {
       if(this.ai==1)
@@ -241,6 +254,10 @@ updateAdjacentPieces(x, y) {
           image: "../img/conversation/前成员/Shane_Winter.png",
         },
         {
+          text: "关于这个谜题...梦境中的时间是会错位的",
+          image: "../img/conversation/前成员/Shane_Winter.png",
+        },
+        {
           text: "我只知道这么多，之后只能靠你们自己了。祝你们好运。",
           image: "../img/conversation/前成员/Shane_Winter.png",
         },
@@ -277,7 +294,7 @@ updateAdjacentPieces(x, y) {
       dialogText.style.color = "#FFFFFF"; // 字体颜色
       dialogText.style.textShadow = "2px 2px 4px #000000"; // 文本阴影
       dialogText.style.lineHeight = "1.5"; // 行高
-      
+
       const self = this;
 
       function showNextDialogue() {
@@ -308,7 +325,6 @@ updateAdjacentPieces(x, y) {
       collisionMap[interactY][interactX] = 0;
       }
       if (collisionMap[interactY][interactX] === 6) {
-        this.ai=1;
         this.bug++;
         const dialogues = [
           {
@@ -444,42 +460,40 @@ updateAdjacentPieces(x, y) {
             button.style.textShadow = "1px 1px 2px #000000"; // 添加文本阴影
             button.style.transition = "background-color 0.3s, color 0.3s"; // 添加过渡效果
 
-            // 添加鼠标悬停效果
-            button.onmouseover = () => {
-              button.style.backgroundColor = "#444444"; // 鼠标悬停时的背景色
-              button.style.color = "#FFD700"; // 鼠标悬停时的字体颜色
-            };
-            button.onmouseout = () => {
-              button.style.backgroundColor = ""; // 恢复原背景色
-              button.style.color = "#FFFFFF"; // 恢复原字体颜色
-            };
+          // 添加鼠标悬停效果
+          button.onmouseover = () => {
+            button.style.backgroundColor = "#444444"; // 鼠标悬停时的背景色
+            button.style.color = "#FFD700"; // 鼠标悬停时的字体颜色
+          };
+          button.onmouseout = () => {
+            button.style.backgroundColor = ""; // 恢复原背景色
+            button.style.color = "#FFFFFF"; // 恢复原字体颜色
+          };
 
-            button.onclick = () => handleOption(option);
-            optionsContainer.appendChild(button);
-          });
-        }
-        function handleOption(option) {
-          var index = window.localStorage.userid;
-var array = JSON.parse(window.localStorage.userArr);
-          if (option === "与艾德里安合作->") {array[index].choose1 = 2;
-            dialogues.push(...choiceDialogues.cooperate);
-          } else if (option === "独自前行->") {
-            dialogues.push(...choiceDialogues.abandon);
-            array[index].choose1 = 3;
-          }
-         window.localStorage.userArr = JSON.stringify(array);
-          currentDialogue++;          
-          showNextDialogue();
-        }
-
-        document.addEventListener("click", showNextDialogue);
-        showNextDialogue();
-       
-        this.updateAdjacentPieces(interactX, interactY);
+          button.onclick = () => handleOption(option);
+          optionsContainer.appendChild(button);
+        });
       }
-          
-     
-      
+      function handleOption(option) {
+        var index = window.localStorage.userid;
+        var array = JSON.parse(window.localStorage.userArr);
+        if (option === "与艾德里安合作->") {
+          array[index].choose1 = 2;
+          dialogues.push(...choiceDialogues.cooperate);
+        } else if (option === "独自前行->") {
+          dialogues.push(...choiceDialogues.abandon);
+          array[index].choose1 = 3;
+        }
+        window.localStorage.userArr = JSON.stringify(array);
+        currentDialogue++;
+        showNextDialogue();
+      }
+
+      document.addEventListener("click", showNextDialogue);
+      showNextDialogue();
+
+      this.updateAdjacentPieces(interactX, interactY);
+    }
   }
   fadeOutAndRedirect() {
     const bodyElement = document.body;
@@ -512,6 +526,30 @@ var array = JSON.parse(window.localStorage.userArr);
         document.body.removeChild(messageElement);
       }, 1000); // 等待1秒以完成淡出效果
     }, 500); // 2秒后开始淡出
+  }
+
+  showMessage1(message) {
+    const messageElement = document.createElement("div");
+    messageElement.id = "message";
+    messageElement.style.position = "absolute";
+    messageElement.style.top = "20px";
+    messageElement.style.left = "50%";
+    messageElement.style.transform = "translateX(-50%)";
+    messageElement.style.background = "rgba(0, 0, 0, 0.7)";
+    messageElement.style.color = "white";
+    messageElement.style.padding = "10px 20px";
+    messageElement.style.borderRadius = "5px";
+    messageElement.style.opacity = 1;
+    messageElement.style.transition = "opacity 1s ease-out";
+    messageElement.innerText = message;
+    document.body.appendChild(messageElement);
+
+    setTimeout(() => {
+      messageElement.style.opacity = 0;
+      setTimeout(() => {
+        document.body.removeChild(messageElement);
+      }, 5000); // 等待1秒以完成淡出效果
+    }, 4000); // 2秒后开始淡出
   }
 }
 
