@@ -152,7 +152,7 @@ class Player {
       }, 1000); // 等待1秒以完成淡出效果
     }
     if(collisionMap[interactY][interactX] === 7){
-
+      if(this.pre==1){
       this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。你可以按k键收起。当你破解了谜题，请前往上方黄色时钟处。");
       
         this.decrypt = 1;
@@ -205,7 +205,10 @@ class Player {
                 
             }
         });
-       
+      }
+      if(this.pre==0){
+        this.showMessage("你需要先找到前成员！");
+      }
     }
     if (collisionMap[interactY][interactX] === 2) {
       if(this.ai==1)
@@ -326,6 +329,7 @@ class Player {
       }
       if (collisionMap[interactY][interactX] === 6) {
         this.bug++;
+        this.ai=1;
         const dialogues = [
           {
             text: "艾德里安！我找到了些关于那个神秘组织的信息，我们需要谈谈。",
