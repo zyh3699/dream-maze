@@ -14,6 +14,8 @@ class Player {
     this.bug=0;
     this.decrypt=0;
     this.dialoguep=0;
+    this.ai=0;
+    this.pre=0;
     // 预加载所有的帧图像
     this.images = {
       up: [],
@@ -132,7 +134,7 @@ updateAdjacentPieces(x, y) {
     
     }
     if(collisionMap[interactY][interactX] === 7){
-
+      if(this.pre==1){
       this.showMessage("你开启了谜题！谜底是四个数字，代表特定的时间。你可以按k键收起。当你破解了谜题，请前往上方黄色时钟处。");
       
         this.decrypt = 1;
@@ -187,10 +189,16 @@ updateAdjacentPieces(x, y) {
                 
             }
         });
-       
+      }
+      if(this.pre==0){
+        this.showMessage("你需要先找到前成员开启谜题！");
+      }
     }
     if (collisionMap[interactY][interactX] === 2) {
+      if(this.ai==1)
+      {
       this.bug++;
+      this.pre=1;
       const dialogues = [
         {
           text: "这个梦境真是奇怪，时间流逝得如此之快……",
@@ -291,11 +299,16 @@ updateAdjacentPieces(x, y) {
 
       this.updateAdjacentPieces(interactX, interactY);
     }
+    if(this.ai==0){
+      this.showMessage("你需要先找到艾德里安！");
+    }
+  }
     if (collisionMap[interactY][interactX] === 3) {
       this.showMessage("你捡到了一个物品！");
       collisionMap[interactY][interactX] = 0;
       }
       if (collisionMap[interactY][interactX] === 6) {
+        this.ai=1;
         this.bug++;
         const dialogues = [
           {
