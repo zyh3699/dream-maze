@@ -138,11 +138,7 @@ class Player {
     const interactX = Math.floor(playerCenterX + offsetX);
     const interactY = Math.floor(playerCenterY + offsetY);
 
-    // 检测是否有物品
-    if (collisionMap[interactY][interactX] === 9) {
-      this.fadeOutAndRedirect();
-      collisionMap[interactY][interactX] = 0;
-    }
+    
     if (collisionMap[interactY][interactX] === 8) {
       const bodyElement = document.body;
       bodyElement.style.transition = "opacity 1s ease-out";
