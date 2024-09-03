@@ -172,8 +172,8 @@ class Player {
 
         // 保留位置相关的样式
         closeButton.style.position = "absolute";
-        closeButton.style.top = "19%";
-        closeButton.style.right = "24%";
+        closeButton.style.top = "22%";
+        closeButton.style.right = "28%";
 
         // 添加 closeButton 类
         closeButton.classList.add("closeButton");
