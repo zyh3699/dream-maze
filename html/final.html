@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Move and Fill</title>
   <style>
+        /*成就*/
+        #achievement {
+          width: 400px;
+          height: 400px;
+          padding: 20px;
+          position: fixed;
+          text-align: center;
+          background-image: url(../img/achieani/10.png);
+          background-size: cover;
+          font-size: 50px;
+          border-radius: 10px;
+          top: 50%;
+          left: 50%;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+          z-index: 999999;
+          transform: translate(-50%, -50%);
+        }
+        #achievement p {
+          font-size: larger;
+          text-align: center;
+          color: #000000;
+          margin: 20px;
+        }
+        .hidden {
+          display: none;
+        }
+        /*成就*/
+    
     body, html {
       margin: 0;
       padding: 0;
@@ -266,6 +296,10 @@
     <button onclick="back()">返回主页</button>
     <button onclick="skip()">跳过此章</button>
   </div>
+    <!-- 成就 -->
+    <div id="achievement" class="hidden"></div>
+    <!-- 成就 -->
+    
   <div id="intro">
     <div id="dialogue">
       <img src="../img/conversation/莱拉/莱拉.png" alt="Image Description"> <!-- 插入图片 -->
