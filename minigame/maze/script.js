@@ -232,7 +232,7 @@ console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
                         }
                       }
                 
-                      dialogBox.addEventListener("click", showNextDialogue);
+                     
                       showNextDialogue();
                 
                       this.updateAdjacentPieces(interactX, interactY);
@@ -301,7 +301,7 @@ console.log('array[index]:', array[index]);  // 确认 array[index] 是否有效
                         }
                       }
                 
-                      dialogBox.addEventListener("click", showNextDialogue);
+                      
                       showNextDialogue();
                 
                       this.updateAdjacentPieces(interactX, interactY);
