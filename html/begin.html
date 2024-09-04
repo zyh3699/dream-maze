@@ -39,16 +39,34 @@
         vertical-align: baseline;
         z-index: -2;
       }
+        .alert-box {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 600px;
+  background-color: rgba(0, 0, 0, 0.8); /* 设置黑色背景的透明度 */
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px; /* 添加圆角 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+  z-index: 1000;
+  display: none; /* 初始隐藏 */
+}
 
     </style>
 </head>
 <body>
     <div class="canvaszz"></div>
+     <div class="alert-box" id="alertBox">  按空格键进入游戏</div>
     <canvas id="canvas" class="canvas"></canvas>
 
     <script>
          window.onload = function() {
-            alert('按空格键进入游戏。');
+             var alertBox = document.getElementById('alertBox');
+             alertBox.style.display = 'block'; // 显示提示框
         };
         document.addEventListener('keydown', function(event) {
             if (event.code === 'Space') {
