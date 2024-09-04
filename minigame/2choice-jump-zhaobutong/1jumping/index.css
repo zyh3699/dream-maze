@@ -29,7 +29,7 @@ body {
   padding: 1px;
   text-align: center;
   position: fixed;
-  top: 0;
+  top: 0px;
   left: 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: left;
@@ -40,6 +40,10 @@ body {
   font-size: 18px;
   font-family: sans-serif;
 }
+.navbar p {
+  margin: 6px;
+}
+
 .icon {
   -webkit-user-select: none;
   user-select: none;
