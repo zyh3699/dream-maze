@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Dream Maze</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>begin</title>
     <style>
-      body {
-        background-image: url(../img/menuBox/main_page.jpg);
-        margin: 0;
-        overflow: hidden;
-      }
-
-      .canvaszz {
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('../img/bgr/begin.png'); /* 替换为你的背景图路径 */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+        }
+        .canvaszz {
         position: absolute;
-        background-image: url(../img/menuBox/main_page.jpg);
+        background-image: url(../img/bgr/begin.png);
         background-size: 100%;
         width: 100%;
         height: 100%;
@@ -29,68 +39,41 @@
         vertical-align: baseline;
         z-index: -2;
       }
+        .alert-box {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 600px;
+  background-color: rgba(0, 0, 0, 0.8); /* 设置黑色背景的透明度 */
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px; /* 添加圆角 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+  z-index: 1000;
+  display: none; /* 初始隐藏 */
+}
 
-      .menu {
-        position: absolute;
-        background-image: url(../img/menuBox/menu_backgroud.png);
-        background-position: center;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0, 0, 0, 0.7);
-        border-radius: 15px;
-        padding: 30px;
-        width: 300px;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-        text-align: center;
-        font-family: "Arial", sans-serif;
-      }
-
-      .menu h2 {
-        color: #fff;
-        margin-bottom: 20px;
-        font-size: 24px;
-      }
-
-      .menu a {
-        display: block;
-        padding: 15px;
-        margin: 10px 0;
-        background-color: rgba(255, 255, 255, 0.1);
-        color: #fff;
-        text-decoration: none;
-        border-radius: 10px;
-        font-size: 18px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-
-      .menu a:hover {
-        background-color: #00ffd5;
-        color: #000;
-      }
-
-      .menu a:active {
-        background-color: #00ddff;
-        color: #000;
-      }
     </style>
-  </head>
-  <body>
-      <!-- 播放bgm -->
-    <audio src="./music/sound/index.mp3" loop autoplay></audio>
+</head>
+<body>
     <div class="canvaszz"></div>
+     <div class="alert-box" id="alertBox">  按空格键进入游戏</div>
     <canvas id="canvas" class="canvas"></canvas>
 
-    <div class="menu">
-      <h2>梦境迷途</h2>
-      <a href="./register/index.html">登录 / 注册</a>
-      <!--<a href="./achievement/achievement.html">成就</a>-->
-      <a href="./about/index.html">关于我们</a>
-      <a href="#">退出登录</a>
-    </div>
-
     <script>
-      drawStars();
+         window.onload = function() {
+             var alertBox = document.getElementById('alertBox');
+             alertBox.style.display = 'block'; // 显示提示框
+        };
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space') {
+                window.location.href = './html/main.html';  // 替换为你的下一个页面路径
+            }
+        });
+        drawStars();
       //画星空背景
       function drawStars() {
         var canvas = document.getElementById("canvas"),
@@ -198,9 +181,9 @@
 
           window.requestAnimationFrame(animation);
         }
-
+        
         animation();
       }
     </script>
-  </body>
+</body>
 </html>
