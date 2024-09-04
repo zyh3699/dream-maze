@@ -15,6 +15,14 @@ let map = {
     "../img/bgr/chapter4_background_change3.png",
     "../img/bgr/chapter4_background_change4.png",
   ],
+  backgroundColors: [
+    "#175268",
+    "#262626",
+    "#020302",
+    "#2d364f",
+    "#c6cdd1",
+    "#3f240b",
+  ],
   currentBackgroundIndex: 0,
   draw: function (ctx, alpha = 1) {
     ctx.globalAlpha = alpha;
@@ -75,6 +83,7 @@ let map = {
         this.image = newImage;
         this.startX = (this.image.width - this.width / 3) / 2 + this.offsetX;
         this.startY = (this.image.height - this.height / 3) / 2 + this.offsetY;
+        document.body.parentElement.style.backgroundColor = this.backgroundColors[this.currentBackgroundIndex];
         this.fadeIn(ctx);
       });
     };
