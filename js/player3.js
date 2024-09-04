@@ -107,7 +107,7 @@ class Player {
       self.isconversation = 0;
       player.isconversation = 0;
       Player.isconversation = 0;  
-        if (passwordInput.value === 'dreammaze') {
+        if (passwordInput.value === 'right') {
           document.getElementById('ade').style.textDecoration = 'line-through';
           document.getElementById('star').style.display = 'block';
           const dialogues = [
@@ -847,7 +847,7 @@ class Player {
             image: "../img/conversation/其他人物/ghost.png",
           },
           {
-            text: "组织的暗号：dreammaze",
+            text: "组织的暗号：right",
             image: "../img/conversation/其他人物/ghost.png",
           },  
           {
@@ -1033,7 +1033,7 @@ class Player {
           image: "../img/conversation/其他人物/ghostangry.png",
         },  
         {
-          text: "走吧走吧，我相信你，暗号是dreammaze",
+          text: "走吧走吧，我相信你，记住，暗号：right",
           image: "../img/conversation/其他人物/ghost.png",
         },  
         {
