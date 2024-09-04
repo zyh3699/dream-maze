@@ -237,6 +237,14 @@ class Player {
           image: "../img/conversation/前成员/Shane_Winter.png",
         },
         {
+          text: "还记得你在上一层梦境中遇到的企业家吗？他就是他们的受害者之一。他们利用梦境技术植入了他的潜意识，删掉了他很多天的记忆，只剩下那四天的了，我怀疑这四天的记忆隐藏着巨大的秘密。",
+          image: "../img/conversation/前成员/Shane_Winter.png",
+        },
+        {
+          text: "（沉思）嗯...",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },
+        {
           text: "（皱眉）这正是我们需要阻止的。你既然曾经是他们的一员，一定知道他们的弱点。告诉我们，如何破解他们的计划？",
           image: "../img/conversation/莱拉/莱拉.png",
         },

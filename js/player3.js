@@ -299,7 +299,7 @@ class Player {
     // 检测是否有物品
     if (collisionMap[interactY][interactX] === 7) {
       this.showMessage(
-        "这就是legend fish？传说之鱼，行于地，栖于冥。Sigh ... 好危险 ... 它会说话？按E试试 "
+        "这就是legend fish？传说之鱼，行于地，栖于冥。Sigh ... 2 ... 好危险 ... 它会说话？按E试试 "
       );
     }
     if (collisionMap[interactY][interactX] === 6) {
@@ -309,7 +309,7 @@ class Player {
     }
     if (collisionMap[interactY][interactX] === 9) {
       this.showMessage(
-        "小恐龙吗？从来没有见过，看起来好可爱呀...（^pet^pet^）啊！怎么会喷火？？？"
+        "小恐龙吗？从来没有见过，看起来好可爱呀...（9^^pet^pet^9）啊！怎么会喷火？？？"
       );
     }
     if (collisionMap[interactY][interactX] === 10) {
@@ -326,7 +326,7 @@ class Player {
       }
     }
     if (collisionMap[interactY][interactX] === 8) {
-      this.showMessage("Ghost: ～你要跟我对话吗～o.o.o.");
+      this.showMessage("Ghost: ～你要跟我对话吗～o.o.o.8.8");
     }
     if (collisionMap[interactY][interactX] === 14) {
       this.showMessage("这边好像过不去哎");
@@ -420,7 +420,7 @@ class Player {
       const choiceDialogues = {
         cooperate: [
           {
-            text: "艾德里安，你知道这串数字意味着什么吗？",
+            text: "艾德里安，你知道这串英文意味着什么吗？",
             image: "../img/conversation/莱拉/莱拉.png",
           },
         ],
@@ -563,7 +563,7 @@ class Player {
       const choiceDialogues = {
         cooperate: [
           {
-            text: "艾德里安，你知道这串数字意味着什么吗？",
+            text: "艾德里安，你知道这串英文意味着什么吗？",
             image: "../img/conversation/莱拉/莱拉.png",
           },
         ],
@@ -809,7 +809,7 @@ class Player {
           image: "../img/conversation/其他人物/fazhen.png",
         },
         {
-          text: "我是虚空法阵。",
+          text: "我是虚空法阵829。",
           image: "../img/conversation/其他人物/fazhen.png",
         },
         {
@@ -884,7 +884,7 @@ class Player {
             image: "../img/conversation/其他人物/ghostangry.png",
           },
           {
-            text: "“她曾想知道真相，但是，却还是选择了将其遗忘。”",
+            text: "“她曾想知道真相，但是，却还是选择了将其遗忘。她只有那四天的记忆了...”",
             image: "../img/conversation/其他人物/ghost.png",
           },
           {

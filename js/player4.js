@@ -244,7 +244,7 @@ class Player {
                 image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
               },
               {
-                text: "欢迎你，尊贵的1289组织成员",
+                text: "欢迎你，尊贵的组织成员",
                 image: "../img/conversation/精灵/精灵.png", // 对应的图片路径
               },
               {
@@ -1295,7 +1295,7 @@ class Player {
             
           },
           {
-            text: "之前艾德里安总是提到过一个组织，组织名称好像是一串数字...",
+            text: "在前三层梦境有四个数字一直在反复出现...组织好像从来都只会保留目标者这几天的记忆...",
             image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
             options: ["记得->", "不记得->"], // 添加选项
           },
@@ -1330,7 +1330,7 @@ class Player {
           ],
           next: [
             {
-              text: "无条件相信你，来吧莱拉。时间确实不多了，我们只能放手一搏",
+              text: "无条件相信你，来吧莱拉。时间确实不多了，我们只能放手一搏。一定要把他们从小到大排...",
               image: "../img/conversation/卡尔/Elliott.png", // 另一张图片
             },
           ],

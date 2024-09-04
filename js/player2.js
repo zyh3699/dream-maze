@@ -228,7 +228,7 @@ class Player {
           image: "../img/conversation/莱拉/莱拉.png",
         },
         {
-          text: "去找布谷钟吧...莱拉，把握住...咳咳咳...千万别，沦为囚徒...囚禁，我的宿命...",
+          text: "去找布谷钟吧...莱拉，把握住...咳咳咳...千万别，沦为囚徒...囚禁，我的宿命...我的记忆...只剩下那四天了",
           image: "../img/conversation/其他人物/ghost.png",
         } ,       
         {
@@ -271,7 +271,7 @@ class Player {
           image: "../img/conversation/其他人物/cuckoo.png",
         },
         {
-          text: "（未及思索，你的眼前便浮现出一幕一幕回忆。）",
+          text: "（未及思索，你的眼前便浮现出一幕一幕回忆。昨天，前天...上周某两天...）",
           image: "../img/conversation/莱拉/莱拉3.png",
         },
         {
@@ -421,7 +421,7 @@ class Player {
       this.dialogPhone=1;
       const dialogues = [
         {
-          text: "（惊恐）别过来！！！",
+          text: "（惊恐）别过来！！！898989！！！",
           image: "../img/conversation/其他人物/phone.png",
         },
         {
@@ -496,6 +496,10 @@ class Player {
           image: "../img/conversation/其他人物/frog.png",
         },
         {
+          text: "这个房间怎么这么多奇怪的东西...到处都写满了数字...1,8...",
+          image: "../img/conversation/莱拉/莱拉.png",
+        },
+        {
           text: "你是青蛙王子？电话先生让我来找你。卡尔！你知道卡尔对吧！",
           image: "../img/conversation/莱拉/莱拉3.png",
         },
@@ -522,11 +526,11 @@ class Player {
         {
           text: "卡尔，我来救你了...",
           image: "../img/conversation/莱拉/莱拉.png",
-        },  
+        },
         {
           text: "当前任务：找到法阵，见到卡尔",
           image: "../img/conversation/精灵/精灵.png",
-        },  
+        },
       ];
       createDialogueBox(dialogues);
       collisionMap[interactY][interactX] = 0;
