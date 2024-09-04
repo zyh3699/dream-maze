@@ -71,6 +71,12 @@ function update(deltatime) {
   ) {
     window.player.interact(collisionMap);
   }
+  if (
+    (keysPressed["g"] || keysPressed["G"]) &&
+    (keysPressed["o"] || keysPressed["O"]) 
+  ) {
+    window.location.href = "../html/chapter4.html";
+  }
   window.player.show(collisionMap);
 }
 

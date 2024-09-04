@@ -79,7 +79,8 @@ function update(deltatime) {
     (keysPressed["c"] || keysPressed["C"]) &&
     (keysPressed["k"] || keysPressed["K"])
   ) {
-    window.location.href = "../html/chapter3_without_intro.html";
+    localStorage.setItem("chapter4", "true");
+    window.location.href = "../html/chapter3.html";
   }
 }
 
